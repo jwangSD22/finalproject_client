@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+// Set token to the header
+const token = localStorage.getItem('jwt');
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+
 const SignupPage = () => {
   const [profilePhoto,setProfilePhoto] = useState(null)
   const [formData, setFormData] = useState({
@@ -10,23 +15,26 @@ const SignupPage = () => {
     email: '',
     dateOfBirth: '',
     aboutMe: '',
-    profilePhotoUrl: ''
+    profilePhotoKey: ''
   });
   
   const[tempImageUrl,setTempImageUrl] = useState(null)
 
+
+//handles display of image after selection, and also sending to s3 bucket
   async function handleProfilePhotoChange (event) {
     const file = event.target.files[0]
     const fileName = file.name
     setProfilePhoto(file);
     setTempImageUrl(URL.createObjectURL(file))
 
-    const formData = new FormData();
-    formData.append('profilePhoto', file);
+    const imgFormData = new FormData();
+    imgFormData.append('profilePhoto', file);
 
     try{
-      const response = await axios.post('/api/users/imageUpload',formData);
-      console.log(response.data)
+        const response = await axios.post('/api/users/imageUpload',imgFormData)
+        setFormData({...formData,profilePhotoKey:response.data.objectKey})
+
     }
     catch(error){
       console.error(error)
@@ -35,43 +43,23 @@ const SignupPage = () => {
   }
 
 
-
-  async function handleProfilePhotoUpload() {
-    const formData = new FormData();
-    formData.append('profilePhoto', profilePhoto);
-
-    try {
-      const response = await axios.post('/api/users/imageUpload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      console.log('Profile photo uploaded:', response.data);
-      // Update state or trigger some other action upon successful upload
-    } catch (error) {
-      console.error('Error uploading profile photo:', error);
-      // Handle error, e.g. display error message to user
-    }
-  }
-
-  
-
-
-
+//handles all input changes in INPUT fields
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
+
+
+//handles logic for submitting to mongoDB
   const handleSubmit = (event) => {
     event.preventDefault();
-
     console.log('submission')
 
     axios.post('/api/users', formData)
     .then(response=>{
-      console.log(response.status)
+      console.log(response.data.token)
+      localStorage.setItem('jwt',response.data.token)
     })
     .catch(error=>{
       if(error.response.status === 400){
@@ -148,12 +136,20 @@ const SignupPage = () => {
 
       <div >
       <input type="file" onChange={handleProfilePhotoChange} />
-  {tempImageUrl && <img src={tempImageUrl} alt="Profile" style={{ maxWidth: '200px', maxHeight: '200px' }} />} {/* show selected photo */}
-  {/* ...other form inputs */}
+
+     {tempImageUrl && <img src={tempImageUrl} alt="Profile" style={{ maxWidth: '200px', maxHeight: '200px' }} />} {/* show selected photo */}
+ 
       </div>
+
+      {/* <div>
+        <button onClick={()=>console.log(formData)}>
+          CHECK FORM DATA
+        </button>
+      </div> */}
 
       <button type="submit">Sign Up</button>
     </form>
+    
   );
 };
 
