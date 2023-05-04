@@ -71,7 +71,7 @@ const SignupPage = () => {
   };
 
   return (
-
+  <div>
     <form onSubmit={handleSubmit}>
       <label htmlFor="fullName">Full Name:</label>
       <input
@@ -149,7 +149,7 @@ const SignupPage = () => {
 
       <button type="submit">Sign Up</button>
     </form>
-    
+    </div>
   );
 };
 

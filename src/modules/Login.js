@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+const token = localStorage.getItem('jwt');
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -29,9 +32,28 @@ const Login = () => {
         setPassword(null);
         localStorage.removeItem('jwt')
       }
+
+    const getUsers = async () => {
+        try{
+            let response = await axios.get('api/users')
+            console.log(response.data)
+        }
+        catch(err){
+            console.log(err)
+        }
+
+
+    }
   
+
     return (
-user?<><div>welcome back {user}</div>
+
+        
+user?<><div>welcome back {user}
+<br />
+<br />
+<button onClick={getUsers}>GET USERS</button>
+</div>
 <br />
 <br />
 <button onClick={handleLogout}>LOGOUT</button></>:
