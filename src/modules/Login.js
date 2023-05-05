@@ -21,8 +21,13 @@ const Login = () => {
             }
             
         }
-        catch (error){
-            console.log(error)
+        // 401 error found on catch
+        //err.response.status === 401
+        //err.response.data is JSON
+        
+        catch (err){
+
+            console.log(err.response.data)
         }
     };
 
@@ -33,6 +38,9 @@ const Login = () => {
         localStorage.removeItem('jwt')
       }
 
+
+
+    // testing GET /api/users  --> gets all users
     const getUsers = async () => {
         try{
             let response = await axios.get('api/users')
@@ -41,8 +49,16 @@ const Login = () => {
         catch(err){
             console.log(err)
         }
+    }
 
 
+    //decodes JSON web token PAYLOAD after LOGIN
+    const decodePayload = () => {
+        const token = localStorage.getItem('jwt')
+        const [header,payload,signature]=token.split('.')
+        const decoded = JSON.parse(atob(payload));
+
+        console.log(decoded)
     }
   
 
@@ -53,6 +69,7 @@ user?<><div>welcome back {user}
 <br />
 <br />
 <button onClick={getUsers}>GET USERS</button>
+<button onClick={decodePayload}>DECODE PAYLOAD</button>
 </div>
 <br />
 <br />
