@@ -37,7 +37,6 @@ function NewPost() {
   };
 
   const handleImageChange = async (event) => {
-    console.log(event.target.files);
     const fileArray = event.target.files;
     setImages(fileArray);
     let tempArray = [];
@@ -63,24 +62,22 @@ function NewPost() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+try{
+    const upload = await uploadPhotosToServer();
 
-    try {
-      await uploadPhotosToServer();
-    } catch (err) {
-      console.log(err);
-    }
+    if(upload){
+        const response = await axios.post("/api/posts", {
+      author: user,
+      postMessage: body,
+      imageKeyArray: upload,
+    });
+}}
+catch(err){
+    console.log(err)
+}
 
-    try {
-      const response = await axios.post("/api/posts", {
-        author: user,
-        postMessage: body,
-        imageKeyArray: finalPostKeys,
-      });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
   };
+
 
   const uploadPhotosToServer = async () => {
     const photoFormData = new FormData();
@@ -95,6 +92,7 @@ function NewPost() {
         photoFormData
       );
       setFinalPostKeys(response.data.finalObjectKeys);
+      return response.data.finalObjectKeys;
     } catch (error) {
       console.error(error);
     }
