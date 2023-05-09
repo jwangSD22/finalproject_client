@@ -34,6 +34,7 @@ function NewPost() {
 
   const handleBodyChange = (event) => {
     setBody(event.target.value);
+    console.log(body)
   };
 
   const handleImageChange = async (event) => {
@@ -60,20 +61,31 @@ function NewPost() {
     });
   };
 
+
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
-try{
-    const upload = await uploadPhotosToServer();
-
-    if(upload){
-        const response = await axios.post("/api/posts", {
+    const uploadContent = {
       author: user,
-      postMessage: body,
-      imageKeyArray: upload,
-    });
-}}
+      postMessage: body
+    }
+
+
+  if(images){
+    const upload = await uploadPhotosToServer();
+    uploadContent.imagekeyArray=upload
+  }
+
+
+
+
+try{
+  console.log(uploadContent)
+  const response = await axios.post("/api/posts", uploadContent)
+  console.log(response)
+}
 catch(err){
-    console.log(err)
+  console.log(err)
 }
 
   };

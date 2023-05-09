@@ -1,7 +1,6 @@
 import './App.css';
 import SignupPage from './modules/SignupPage';
 import Login from './modules/Login'
-import NewPost from './modules/NewPost'
 
 function App() {
   return (
