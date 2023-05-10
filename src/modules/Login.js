@@ -5,7 +5,7 @@ const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [emailOrUsername, setEmailOrUsername] = useState('');
     const [password, setPassword] = useState('');
     const [user,setUser] = useState(null)
     const [isLoggedIn,setIsLoggedIn] = useState(false)
@@ -28,7 +28,7 @@ const Login = () => {
 
       //axios the submission, if verfiied, then server will send back something and then use react to set USER
         try{
-            const response = await axios.post('/api/users/login',{email,password})
+            const response = await axios.post('/api/users/login',{emailOrUsername,password})
             if(response.status===200){
                 console.log(response)
                 localStorage.setItem('jwt',response.data.token)
@@ -50,7 +50,7 @@ const Login = () => {
 
     const handleLogout = () => {
         setIsLoggedIn(false)
-        setEmail(null);
+        setEmailOrUsername(null);
         setPassword(null);
         localStorage.removeItem('jwt')
         window.location.reload();
@@ -99,7 +99,7 @@ isLoggedIn?<>
 :
 <div>
 <form onSubmit={handleSubmit}>
-<input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+<input type="text" value={emailOrUsername} onChange={e => setEmailOrUsername(e.target.value)} />
 <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
 <button type="submit">Login</button>
 </form>
