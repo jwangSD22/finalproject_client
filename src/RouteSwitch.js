@@ -2,6 +2,7 @@ import React from 'react'
 import {Routes, Route, BrowserRouter} from 'react-router-dom'
 import App from './App'
 import NewPost from './modules/NewPost'
+import ChatRoom from './modules/ChatRoom'
 
 
 function RouteSwitch() {
@@ -11,9 +12,8 @@ function RouteSwitch() {
     <Routes>
       <Route path ="/" element={<App />} />
 
-  
-
       <Route path ="/createpost" element = {<NewPost />} />
+      <Route path='/chatroom/' element = {<ChatRoom />} />
 
     </Routes>
     </BrowserRouter>
