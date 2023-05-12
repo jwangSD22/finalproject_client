@@ -12,6 +12,7 @@ const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [socket, setSocket] = useState(null);
+  const [roomID,setRoomID] = useState(null)
 
   //from my login component// 
   const [user,setUser] = useState(null)
@@ -22,8 +23,6 @@ const ChatRoom = () => {
     const checkLogin = async () => {
       try {
         let response = await axios.get("/api/users/loginstatus");
-        console.log(response);
-
         if (response.status === 200) {
           setUser(response.data.user.jwtusername);
           setUsername1(response.data.user.jwtusername);
@@ -38,14 +37,14 @@ const ChatRoom = () => {
     checkLogin();
   }, []);
 
-  useEffect(() => {
-    // Connect to the Socket.io server
-    const newSocket = io("http://localhost:3001");
-    setSocket(newSocket);
+  // useEffect(() => {
+  //   // Connect to the Socket.io server
+  //   const newSocket = io("http://localhost:3000");
+  //   setSocket(newSocket);
 
-    // Disconnect the socket when the component unmounts
-    return () => newSocket.disconnect();
-  }, []);
+  //   // Disconnect the socket when the component unmounts
+  //   return () => newSocket.disconnect();
+  // }, []);
 
   // useEffect(() => {
   //   // Axios all messages from the database and update the state
@@ -67,11 +66,34 @@ const ChatRoom = () => {
     }
   }, [socket]);
 
-  const handleConnectClick = () => {
-    // Connect to the chat room using the two usernames
-    if (username1 && username2) {
-      socket.emit("connectToRoom", { username1, username2 });
+  const handleConnectClick = async () => {
+    // Get UUID of chat room using the two usernames
+    try{
+      if (username1 && username2) {
+        let response = await axios.post('http://localhost:3000/api/chats',
+          {username2}
+        )
+        console.log(response.data)
+        setRoomID(response.data.chatid)
+      }
     }
+    catch(err){
+      console.log(err)
+    }
+
+    //Connect to that private room using the ID
+    try{
+      const socket = io('http://localhost:3000/',{
+        path:'/socketio'
+      });
+      setSocket(socket);
+      console.log(socket)
+      socket.emit('join-room',roomID)
+    }
+    catch(err){
+      console.log(err)
+    }
+
   };
 
   const handleSubmit = (event) => {
@@ -104,6 +126,8 @@ const ChatRoom = () => {
           onChange={(event) => setUsername2(event.target.value)}
         />
         <button onClick={handleConnectClick}>Connect</button>
+        <button onClick={()=>{socket.disconnect();console.log('disconnected from socketio')}}>Disconnect</button>
+
       </div>
       <div>
         {messages.map((message) => (
