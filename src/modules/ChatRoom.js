@@ -1,10 +1,9 @@
-import React, { useState,useEffect } from 'react';
-import {useNavigate} from 'react-router-dom'
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import io from "socket.io-client";
-const token = localStorage.getItem('jwt');
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
+const token = localStorage.getItem("jwt");
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 const ChatRoom = () => {
   const [username1, setUsername1] = useState("");
@@ -12,12 +11,13 @@ const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [socket, setSocket] = useState(null);
-  const [roomID,setRoomID] = useState(null)
+  const [roomID, setRoomID] = useState(null);
 
-  //from my login component// 
-  const [user,setUser] = useState(null)
-  const [isLoggedIn,setIsLoggedIn] = useState(false)
-  const navigate = useNavigate()
+  //from my login component//
+  const [user, setUser] = useState(null);
+  const [userID, setUserID] = useState(null)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -25,6 +25,7 @@ const ChatRoom = () => {
         let response = await axios.get("/api/users/loginstatus");
         if (response.status === 200) {
           setUser(response.data.user.jwtusername);
+          setUserID(response.data.user.jwtid)
           setUsername1(response.data.user.jwtusername);
           setIsLoggedIn(true);
           return true;
@@ -66,34 +67,51 @@ const ChatRoom = () => {
     }
   }, [socket]);
 
-  const handleConnectClick = async () => {
-    // Get UUID of chat room using the two usernames
-    try{
+  // Get UUID of chat room using the two usernames
+  const findRoom = async () => {
+    try {
       if (username1 && username2) {
-        let response = await axios.post('http://localhost:3000/api/chats',
-          {username2}
-        )
-        console.log(response.data)
-        setRoomID(response.data.chatid)
+        let response = await axios.post("http://localhost:3000/api/chats", {
+          username2,
+        });
+        console.log(response.data);
+        setRoomID(response.data.chatid);
+        return response.data.chatid;
+      }
+    } catch (err) {
+      if (err.response.status === 400) {
+        return false;
       }
     }
-    catch(err){
-      console.log(err)
+  };
+
+  //Connect to that private room using the ID from findRoom()
+  const handleConnectClick = async () => {
+    try {
+      const room = await findRoom();
+
+      if (room === false) {
+        return console.log("join room failed");
+
+      } else {
+        const socket = io("http://localhost:3000/", {
+          path: "/socketio"
+        });
+        setSocket(socket);
+        console.log(socket);
+        socket.emit("join-room", room);
+      }
+    } catch (err) {
+      console.log(err);
     }
 
-    //Connect to that private room using the ID
+    //load messages into the message container
     try{
-      const socket = io('http://localhost:3000/',{
-        path:'/socketio'
-      });
-      setSocket(socket);
-      console.log(socket)
-      socket.emit('join-room',roomID)
+      
     }
     catch(err){
       console.log(err)
     }
-
   };
 
   const handleSubmit = (event) => {
@@ -101,7 +119,7 @@ const ChatRoom = () => {
 
     // Send the new message to the server and update the state
     if (newMessage) {
-      socket.emit("sendMessage", { text: newMessage });
+      socket.emit("sendMessage", { author:userID, text: newMessage });
       setNewMessage("");
     }
   };
@@ -125,9 +143,21 @@ const ChatRoom = () => {
           value={username2}
           onChange={(event) => setUsername2(event.target.value)}
         />
-        <button onClick={handleConnectClick}>Connect</button>
-        <button onClick={()=>{socket.disconnect();console.log('disconnected from socketio')}}>Disconnect</button>
-
+        <button disabled={!!socket} onClick={handleConnectClick}>Connect</button>
+        <button disabled={!socket}
+          onClick={() => {
+            if(!socket){
+             return console.log('currently not connected')
+            }
+            //disconnect and remove socket to stop the connection from frontend
+            //disconnect accepts a parameter as a message to the backend
+            socket.disconnect();
+            setSocket(null)
+            console.log("disconnected from socketio");
+          }}
+        >
+          Disconnect
+        </button>
       </div>
       <div>
         {messages.map((message) => (
