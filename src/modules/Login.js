@@ -92,6 +92,8 @@ isLoggedIn?<>
 <button onClick={getUsers}>GET USERS</button>
 <button onClick={decodePayload}>DECODE PAYLOAD</button>
 <button onClick={()=>{navigate('/createpost')}}>CREATE POST</button>
+<button onClick={()=>{navigate('/chatroom')}}>GO TO CHAT</button>
+
 </div>
 <br />
 <br />
