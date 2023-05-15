@@ -62,6 +62,7 @@ const ChatRoom = () => {
     if (socket) {
       // Listen for new messages from the server and update the state
       socket.on("newMessage", (message) => {
+        console.log(message)
         setMessages((prevMessages) => [...prevMessages, message]);
       });
     }
@@ -80,16 +81,18 @@ const ChatRoom = () => {
       }
     } catch (err) {
       if (err.response.status === 400) {
-        return false;
+        return null;
       }
     }
   };
 
   //Connect to that private room using the ID from findRoom()
   const handleConnectClick = async () => {
+    let temproomID = null
     try {
       const room = await findRoom();
-
+      temproomID = room
+      setRoomID(room)
       if (room === false) {
         return console.log("join room failed");
 
@@ -98,7 +101,6 @@ const ChatRoom = () => {
           path: "/socketio"
         });
         setSocket(socket);
-        console.log(socket);
         socket.emit("join-room", room);
       }
     } catch (err) {
@@ -107,6 +109,10 @@ const ChatRoom = () => {
 
     //load messages into the message container
     try{
+      const messageData = await axios.get(`/api/chats/${temproomID}/messages`)
+      //axios GET the convo with a body including the roomid
+      setMessages(messageData.data)
+      console.log(messageData.data)
       
     }
     catch(err){
@@ -119,7 +125,7 @@ const ChatRoom = () => {
 
     // Send the new message to the server and update the state
     if (newMessage) {
-      socket.emit("sendMessage", { author:userID, text: newMessage });
+      socket.emit("sendMessage", { roomID: roomID, userid:userID, username:username1, text: newMessage });
       setNewMessage("");
     }
   };
@@ -144,6 +150,7 @@ const ChatRoom = () => {
           onChange={(event) => setUsername2(event.target.value)}
         />
         <button disabled={!!socket} onClick={handleConnectClick}>Connect</button>
+
         <button disabled={!socket}
           onClick={() => {
             if(!socket){
@@ -153,6 +160,7 @@ const ChatRoom = () => {
             //disconnect accepts a parameter as a message to the backend
             socket.disconnect();
             setSocket(null)
+            setMessages([])
             console.log("disconnected from socketio");
           }}
         >
@@ -160,8 +168,8 @@ const ChatRoom = () => {
         </button>
       </div>
       <div>
-        {messages.map((message) => (
-          <div key={message._id}>
+        {(messages).map((message) => (
+          <div key={message.messageID}>
             <strong>{message.username}:</strong> {message.text}
           </div>
         ))}
