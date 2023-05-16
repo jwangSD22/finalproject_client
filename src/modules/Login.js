@@ -89,10 +89,11 @@ isLoggedIn?<>
 <div>welcome back {user}
 <br />
 <br />
-<button onClick={getUsers}>GET USERS</button>
+<button onClick={()=>{navigate('/users')}}>SEE USERS</button>
 <button onClick={decodePayload}>DECODE PAYLOAD</button>
 <button onClick={()=>{navigate('/createpost')}}>CREATE POST</button>
 <button onClick={()=>{navigate('/chatroom')}}>GO TO CHAT</button>
+
 
 </div>
 <br />

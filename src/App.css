@@ -41,3 +41,10 @@
   width: 200px;
   height: 200px;
 }
+
+.users {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10%;
+}

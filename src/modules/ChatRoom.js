@@ -102,6 +102,7 @@ const ChatRoom = () => {
         });
         setSocket(socket);
         socket.emit("join-room", room);
+        console.log(socket)
       }
     } catch (err) {
       console.log(err);
