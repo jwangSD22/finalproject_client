@@ -2,9 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function Public({thisUser, publicUsers,thisUserFriends,toggle,setToggle}) {
+function Public({thisUser, publicUsers, thisUserPending, thisUserFriends,toggle,setToggle}) {
 
-  let hash = {}
 
   useEffect(() => {
     const getUsers = async () => {
@@ -37,16 +36,48 @@ function Public({thisUser, publicUsers,thisUserFriends,toggle,setToggle}) {
 
   }
 
-  const buildAllUsers = () => publicUsers.map(user => {
-    if(user.username!==thisUser){
-return <div style={{padding:"7px"}} key={user._id}>{user.fullName}
-{/*user.profilePhotoURL will be the URL */}
-<div><button id ={user._id} onClick={(event)=>{handleSendFriendRequest(event.target.id)}}>Send Friend Request</button></div>
-</div>
-    }
-      
-  }
-    )
+  const buildAllUsers = () => {
+    // Convert thisUserFriends and thisUserPending to lookup tables
+    const friendsSet = new Set(thisUserFriends.map((friend) => friend._id));
+    const pendingSet = new Set(thisUserPending.map((pending) => pending._id));
+  
+    return publicUsers.map((user) => {
+      if (user.username !== thisUser) {
+        const isFriend = friendsSet.has(user._id);
+        const isPending = pendingSet.has(user._id);
+  
+        if (isFriend) {
+          return (
+            <div style={{ padding: '7px' }} key={user._id}>
+              {user.fullName} - Friends
+            </div>
+          );
+        } else if (isPending) {
+          return (
+            <div style={{ padding: '7px' }} key={user._id}>
+              {user.fullName} - Pending Request
+              <div>
+                <button disabled>Pending</button>
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div style={{ padding: '7px' }} key={user._id}>
+              {user.fullName}
+              {/* user.profilePhotoURL will be the URL */}
+              <div>
+                <button id={user._id} onClick={(event) => { handleSendFriendRequest(event.target.id) }}>
+                  Send Friend Request
+                </button>
+              </div>
+            </div>
+          );
+        }
+      }
+      return null;
+    });
+  };
 
 
   return <div> <div> <h2>PUBLIC USERS</h2></div>

@@ -67,7 +67,7 @@ function Users() {
 
   return (
     <div className='users'>
-    <Public  thisUser = {thisUser} publicUsers = {publicUsers} thisUserFriends={thisUserFriends} setToggle={setToggle} toggle={toggle} />
+    <Public  thisUser = {thisUser} publicUsers = {publicUsers} thisUserPending={thisUserPending} thisUserFriends={thisUserFriends} setToggle={setToggle} toggle={toggle} />
     <Friends thisUser = {thisUser} publicUsers = {publicUsers} thisUserFriends={thisUserFriends} setToggle={setToggle} toggle={toggle}/>
     <Pending thisUser = {thisUser} publicUsers = {publicUsers} handleRemovePending={handleRemovePending} thisUserPending={thisUserPending} setToggle={setToggle} toggle={toggle}/></div>
   )
