@@ -1,9 +1,31 @@
-import React from 'react'
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-function Friends() {
+function Friends({thisUser,thisUserFriends}) {
+
+
+  
+
+  const buildFriends = () => thisUserFriends.map(user => {
+return <div style={{padding:"7px"}} key={user._id}>{user.fullName}
+{/*user.profilePhotoURL will be the URL */}
+<div><button id ={user._id} onClick={(event)=>{removeFriend(event.target.id)}}>Remove Friend</button></div>
+</div>
+    })
+
+  const removeFriend = () => {
+
+  }
+
+
   return (
-    <div>Friends</div>
+    <div> <div> <h2>FRIENDS</h2></div>
+    <div>{buildFriends()}
+    </div>
+    </div>
   )
+
 }
 
 export default Friends

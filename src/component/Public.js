@@ -2,33 +2,42 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function Public({username}) {
-  const [thisUser,setThisUser] = useState(null)  
-  const [users, setUsers] = useState([]);
+function Public({thisUser, publicUsers,thisUserFriends,toggle,setToggle}) {
+
+  let hash = {}
 
   useEffect(() => {
     const getUsers = async () => {
       try {
-        let response = await axios.get("api/users");
-        setUsers(response.data);
+
       } catch (err) {
         console.log(err.response);
       }
     };
-    setThisUser(username)
     getUsers();
+    
+    
   }, []);
 
   const handleSendFriendRequest = async (userid) => {
     const usernameOrigin = thisUser
-    const useridDest = userid
+    const userIDEnd = userid
 
     //axios info to backend to handle logic for adding friend requests      
 
+    const response = await axios.post('/api/user/friendrequest',{
+      usernameOrigin:usernameOrigin,
+      userIDEnd: userIDEnd
+    })
+
+    console.log(usernameOrigin)
+    console.log(userIDEnd)
+
+    setToggle(!toggle)
 
   }
 
-  const buildAllUsers = () => users.map(user => {
+  const buildAllUsers = () => publicUsers.map(user => {
     if(user.username!==thisUser){
 return <div style={{padding:"7px"}} key={user._id}>{user.fullName}
 {/*user.profilePhotoURL will be the URL */}

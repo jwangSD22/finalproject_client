@@ -14,16 +14,40 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 function Users() {
   const navigate = useNavigate();
-  const [user,setUser] = useState(null)
+  const [thisUser,setThisUser] = useState(null)
   const [isLoggedIn,setIsLoggedIn] = useState(false)
+  const [publicUsers, setPublicUsers] = useState([]);
+  const [thisUserFriends, setThisUserFriends] = useState([]);
+  const [thisUserPending,setThisUserPending] = useState([])
+  const [toggle,setToggle] = useState(true)
+
+  const handleRemovePending = (userid) => {
+    // Remove the item with the specified userid from thisUserPending
+    const updatedPending = thisUserPending.filter((item) => item._id !== userid);
+    setThisUserPending(updatedPending);
+  };
+
 
   useEffect(() => {
     const checkLogin = async () => {
       try {
         let response = await axios.get("/api/users/loginstatus");
         if (response.status === 200) {
-          setUser(response.data.user.jwtusername);
           setIsLoggedIn(true);
+
+          const user = response.data.user.jwtusername
+          setThisUser(response.data.user.jwtusername);
+
+          let getPublicUsersResponse = await axios.get("api/users");
+          setPublicUsers(getPublicUsersResponse.data);
+
+          let getFriendsResponse = await axios.get(`api/user/friends`)
+          setThisUserFriends(getFriendsResponse.data)
+
+          let getPendingResponse = await axios.get('api/user/pending')
+          setThisUserPending(getPendingResponse.data)
+        
+
           return true;
         }
       } catch (err) {
@@ -32,7 +56,7 @@ function Users() {
       }
     };
     checkLogin();
-  }, []);
+  }, [toggle]);
 
 
 
@@ -42,7 +66,10 @@ function Users() {
     
 
   return (
-    <div className='users'><Public username = {user} /><Friends thisUser = {user}/><Pending thisUser = {user}/></div>
+    <div className='users'>
+    <Public  thisUser = {thisUser} publicUsers = {publicUsers} thisUserFriends={thisUserFriends} setToggle={setToggle} toggle={toggle} />
+    <Friends thisUser = {thisUser} publicUsers = {publicUsers} thisUserFriends={thisUserFriends} setToggle={setToggle} toggle={toggle}/>
+    <Pending thisUser = {thisUser} publicUsers = {publicUsers} handleRemovePending={handleRemovePending} thisUserPending={thisUserPending} setToggle={setToggle} toggle={toggle}/></div>
   )
 }
 
