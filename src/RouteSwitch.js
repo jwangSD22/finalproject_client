@@ -12,13 +12,9 @@ function RouteSwitch() {
     <BrowserRouter>
     <Routes>
       <Route path ="/" element={<App />} />
-
       <Route path ="/createpost" element = {<NewPost />} />
       <Route path='/chatroom/' element = {<ChatRoom />} />
       <Route path='/users/' element = {<Users />} />
-
-
-
     </Routes>
     </BrowserRouter>
   )

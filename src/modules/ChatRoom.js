@@ -38,25 +38,6 @@ const ChatRoom = () => {
     checkLogin();
   }, []);
 
-  // useEffect(() => {
-  //   // Connect to the Socket.io server
-  //   const newSocket = io("http://localhost:3000");
-  //   setSocket(newSocket);
-
-  //   // Disconnect the socket when the component unmounts
-  //   return () => newSocket.disconnect();
-  // }, []);
-
-  // useEffect(() => {
-  //   // Axios all messages from the database and update the state
-  //   const fetchMessages = async () => {
-  //     const response = await fetch("/api/messages");
-  //     const data = await response.json();
-  //     setMessages(data);
-  //   };
-
-  //   fetchMessages();
-  // }, []);
 
   useEffect(() => {
     if (socket) {
@@ -113,7 +94,6 @@ const ChatRoom = () => {
       const messageData = await axios.get(`/api/chats/${temproomID}/messages`)
       //axios GET the convo with a body including the roomid
       setMessages(messageData.data)
-      console.log(messageData.data)
       
     }
     catch(err){

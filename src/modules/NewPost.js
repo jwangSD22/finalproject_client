@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import MiniCarousel from "../component/MiniCarousel";
+import MiniCarousel from "../components/MiniCarousel";
 
 function NewPost() {
   const navigate = useNavigate();
