@@ -1,5 +1,8 @@
 import React from 'react'
 import {Routes, Route, BrowserRouter} from 'react-router-dom'
+import Login from './pages/Login'
+
+//all of the below were used in backend testing//
 import App from './App'
 import NewPost from './modules/NewPost'
 import ChatRoom from './modules/ChatRoom'
@@ -11,10 +14,29 @@ function RouteSwitch() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path ="/" element={<App />} />
+      {/*Login Route with included component for registration */}
+      <Route path = "/login" /> 
+
+      {/*Root will display all friends' posts and have suggested contacts and contacts*/}      
+      <Route path = "/" element={<Login />}/> 
+
+      {/*Profile Route will display all of your personal posts */}      
+      <Route path = "/profile" /> 
+
+      {/*Friend Route will display all friends and pending requests */}      
+      <Route path = "/friends" /> 
+
+
+
+      <Route path ="/app" element={<App />} /> 
       <Route path ="/createpost" element = {<NewPost />} />
       <Route path='/chatroom/' element = {<ChatRoom />} />
       <Route path='/users/' element = {<Users />} />
+
+
+
+
+
     </Routes>
     </BrowserRouter>
   )
