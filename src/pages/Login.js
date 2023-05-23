@@ -2,6 +2,7 @@ import Footer from '../components/footer/Footer';
 import React, { useState,useEffect } from 'react';import './Login.css';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import Registration from '../components/registration/Registration';
 const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
@@ -12,6 +13,8 @@ const Login = () => {
   const [user,setUser] = useState(null);
   const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null)
+  const [showRegistration, setShowRegistration] = useState(false)
+  
   const navigate = useNavigate();
 
 
@@ -62,7 +65,10 @@ const Login = () => {
 
     return (
         <div>
-        
+
+        {showRegistration && <div className="overlay" />}
+        {showRegistration&&<Registration showRegistration={showRegistration} setShowRegistration={setShowRegistration} />}
+
       <div className="login-page">
         <div className="container">
           <div className="row">
@@ -89,7 +95,7 @@ const Login = () => {
                 <button type="button" className="btn btn-secondary ">Login with Demo User</button>
                 <hr className="my-3" />
 
-                <button type="button" className="btn btn-success mb-2 newuser" onClick={()=>{console.log(error)}}>Register New User</button>
+                <button type="button" className="btn btn-success mb-2 newuser" onClick={()=>{setShowRegistration(!showRegistration)}}>Register New User</button>
                 
                 
               </form>
@@ -98,7 +104,7 @@ const Login = () => {
         </div>
         
       </div>
-      <footer className="footer d-flex justify-content-center">Your App Name &copy; {new Date().getFullYear()}</footer>
+      <Footer />
       </div>
     );
   };
