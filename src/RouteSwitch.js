@@ -1,6 +1,7 @@
 import React from 'react'
 import {Routes, Route, BrowserRouter} from 'react-router-dom'
 import Login from './pages/Login'
+import Home from './pages/Home'
 
 //all of the below were used in backend testing//
 import App from './App'
@@ -14,11 +15,12 @@ function RouteSwitch() {
   return (
     <BrowserRouter>
     <Routes>
-      {/*Login Route with included component for registration */}
-      <Route path = "/login" /> 
 
-      {/*Root will display all friends' posts and have suggested contacts and contacts*/}      
+      {/**/}      
       <Route path = "/" element={<Login />}/> 
+
+      {/*Home will display all friends' posts and have suggested contacts and contacts */}
+      <Route path = "/home" element={<Home />}/> 
 
       {/*Profile Route will display all of your personal posts */}      
       <Route path = "/profile" /> 

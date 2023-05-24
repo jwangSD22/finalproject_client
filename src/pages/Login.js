@@ -20,12 +20,20 @@ const Login = () => {
 
   useEffect(()=>{
     const checkLogin = async () => {
-     let response = await axios.get('/api/users/loginstatus')
-     console.log('checking logged in status')
-     if(response.status){
-         setUser(response.data.user.jwtusername)
-         setIsLoggedIn(true)
-     }
+      try{
+        let response = await axios.get('/api/users/loginstatus')
+        if(response.status){
+            setUser(response.data.user.jwtusername)
+            setIsLoggedIn(true)
+            navigate('/home')
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
+
+
+
  }
     checkLogin()
  },[])
@@ -36,23 +44,18 @@ const Login = () => {
   //axios the submission, if verfiied, then server will send back something and then use react to set USER
     try{
         const response = await axios.post('/api/users/login',{emailOrUsername,password})
-        console.log(response)
         if(response.status===200){
-            console.log(response)
             localStorage.setItem('jwt',response.data.token)
             setUser(response.data.jwtusername)
         }
 
-        //REDIRECT TO MAIN
 
-        // window.location.reload();
+//force reload to trigger useEffect auto navigate logged-in users to /home
+        window.location.reload();
 
         
     }
 
-    // 401 error found on catch
-    //err.response.status === 401
-    //err.response.data is JSON
     
     catch (err){
       if(err.response.status===401){
@@ -61,6 +64,7 @@ const Login = () => {
         setError(`${err.response.data.error}`)
       }
     }
+
 };
 
     return (
