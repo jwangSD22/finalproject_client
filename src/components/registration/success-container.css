@@ -1,0 +1,10 @@
+.success-container{
+    position:absolute;
+    height:25vh;
+    width:10%;
+    top:30%;
+    padding:10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    z-index: 101;
+}
