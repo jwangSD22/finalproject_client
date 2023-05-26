@@ -5,7 +5,7 @@ import Navbar from '../components/navbar/Navbar.js'
 const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-function Home() {
+function Friends() {
     const [user,setUser] = useState(null)
     const [isLoggedIn,setIsLoggedIn] = useState(false)
     const [data,setData] = useState(null)
@@ -40,4 +40,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Friends

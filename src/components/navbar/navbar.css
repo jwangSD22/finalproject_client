@@ -1,31 +1,43 @@
-@media (max-width: 576px) {
-    .navCenter {
-        display:none;
-    }
-  }
-
-.myNav {
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-  
-.navCenter{
-    display:flex;
-    justify-self: center;
-    
-}
-
-.navEnd{
-    justify-self: end;
-}
-
-input{
-    border-radius: 3px;
-    border: solid 1px black;
+.home-icon{
+    color:black;
+    font-size:40px;
+    border-bottom:solid 4px rgba(0, 0, 255, 0);
     transition: all 0.5s
+
 }
 
-input:hover{
-    
-    box-shadow: 0 0 10px rgba(8, 206, 255, 1);
+.friends-icon{
+    font-size:40px;
+    border-bottom:solid 4px rgba(0, 0, 255, 0);
+    transition: all 0.5s
+
+
+}
+.messenger-icon{
+    font-size:40px;
+    border-bottom:solid 4px rgba(0, 0, 255, 0);
+    transition: all 0.5s
+
+
+}
+
+.home-icon:hover{
+    color:rgb(0, 68, 255);
+    border-bottom:solid 4px rgba(0, 68, 255);
+}
+
+.friends-icon:hover{
+    color:rgb(0, 68, 255);
+    border-bottom:solid 4px rgba(0, 68, 255);
+}
+
+.messenger-icon:hover{
+    color:rgb(0, 68, 255);
+    border-bottom:solid 4px rgba(0, 68, 255);
+}
+
+.current-path{
+    font-size:40px;
+    color:rgb(0, 68, 255);
+    border-bottom:solid 4px rgba(0, 68, 255);
 }

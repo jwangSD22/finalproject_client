@@ -2,6 +2,7 @@ import React from 'react'
 import {Routes, Route, BrowserRouter} from 'react-router-dom'
 import Login from './pages/Login'
 import Home from './pages/Home'
+import Friends from './pages/Friends'
 
 //all of the below were used in backend testing//
 import App from './App'
@@ -27,7 +28,7 @@ function RouteSwitch() {
       <Route path = "/profile" /> 
 
       {/*Friend Route will display all friends and pending requests */}      
-      <Route path = "/friends" /> 
+      <Route path = "/friends" element={<Friends />} /> 
 
 
 
