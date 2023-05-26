@@ -31,12 +31,26 @@ function Home() {
 
     
      }
-        checkLogin()
+
+     const retrieveData = async () => {
+        try{
+            let response = await axios.get('/api/users')
+            setData(response.data)
+
+        }
+        catch(err){
+            console.log(Error)
+        }
+     }
+        checkLogin();
+        retrieveData();
+
+
      },[])
 
   return (
     
-<Navbar />
+<Navbar data={data} />
   )
 }
 

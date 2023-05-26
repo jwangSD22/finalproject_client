@@ -3,11 +3,11 @@ import './navbar.css'
 import avatar from '../../images/empty_avatar.png'
 import {Tooltip} from 'react-tooltip'
 import {HomeOutlined,MessageOutlined,TeamOutlined} from '@ant-design/icons'
+import Searchbar from './Searchbar'
 
 
-const Navbar = () => {
+const Navbar = ({data}) => {
  const [path,setPath] = useState(null)
- const [query,setQuery] = useState(null)
 
  //sets current path to alter css for center icons
   useEffect(()=> {
@@ -15,12 +15,13 @@ const Navbar = () => {
   },[path])
 
 
+  console.log(data)
   return (
 
     <nav className='container-fluid d-flex justify-content-between bg-light'>
 
       {/* start-elements brand logo and search bar */}
-<div className="left-nav container d-flex justify-content-start">
+<div className="left-nav container d-flex justify-content-start" >
 <a className="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
             <img
               src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
@@ -31,36 +32,45 @@ const Navbar = () => {
             />
           </a>
           {/* Search form */}
-          <form className="input-group w-auto my-auto d-none d-sm-flex">
-            <input
-              autoComplete="off"
-              type="search"
-              className="form-control rounded"
-              placeholder="Search"
-              style={{ minWidth: '125px' }}
-            />
+          <Searchbar data={data} />
 
-          </form>
-</div>
+          
+          </div>
 
-      {/* CENTER NAVIGATION */}
-<div className="center-nav container d-flex justify-content-center align-items-end">
+          {/* CENTER NAVIGATION */}
+          <div className="center-nav container d-none d-sm-flex justify-content-center align-items-end">
           {/* home */}
-          <a className="navbar-brand me-2 mb-1 d-flex align-items-center" href="/home">
-          <HomeOutlined className={path==='/home'?'current-path mx-2':'friends-icon mx-2'}/>
-          </a>
+          <a className="center-nav-container mx-1 " href="/home" data-tooltip-id="my-tooltip" data-tooltip-content="Home" data-tooltip-place="bottom">
+          <div className='d-flex align-items-center'  >
+            
+            <HomeOutlined className={path==='/home'?'current-path mx-2':'friends-icon mx-2'}/>
+            </div>
+            </a>
+      
           {/* friends */}
-          <a className="navbar-brand me-2 mb-1 d-flex align-items-center" href="/friends">
-          <TeamOutlined className={path==='/friends'?'current-path mx-2':'friends-icon mx-2'} />
-          </a>
+          
+            <a className="d-flex align-items-center" href="/friends" data-tooltip-id="my-tooltip" data-tooltip-content="Friends" data-tooltip-place="bottom">
+            <div className="center-nav-container mx-1">
+            <TeamOutlined className={path==='/friends'?'current-path mx-2':'friends-icon mx-2'} />
+            </div>
+            </a>
+       
           {/* messenger */}
-          <a className="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
-          <MessageOutlined className='messenger-icon mx-2' />
-          </a>
+          <a className="d-flex align-items-center" href="#" data-tooltip-id="my-tooltip" data-tooltip-content="Messenger" data-tooltip-place="bottom">
+          <div className="center-nav-container mx-1">
+            
+            <MessageOutlined className='messenger-icon mx-2' />
+            </div>
+            </a>
+        
 </div>
 
       {/* settings menu and profile page */}
 <div className="end-nav container d-flex justify-content-end">RIGHT</div>
+
+      {/*tooltip styling*/}
+<Tooltip style={{fontSize:'11px', paddingTop:'3px', paddingBottom:'3px', opacity:'80%'}} noArrow='true' id="my-tooltip" />
+
     </nav>
 
 

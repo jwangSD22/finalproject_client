@@ -1,21 +1,18 @@
 .home-icon{
     color:black;
-    font-size:40px;
-    border-bottom:solid 4px rgba(0, 0, 255, 0);
+    font-size:30px;
     transition: all 0.5s
 
 }
 
 .friends-icon{
-    font-size:40px;
-    border-bottom:solid 4px rgba(0, 0, 255, 0);
+    font-size:30px;
     transition: all 0.5s
 
 
 }
 .messenger-icon{
-    font-size:40px;
-    border-bottom:solid 4px rgba(0, 0, 255, 0);
+    font-size:30px;
     transition: all 0.5s
 
 
@@ -23,21 +20,37 @@
 
 .home-icon:hover{
     color:rgb(0, 68, 255);
-    border-bottom:solid 4px rgba(0, 68, 255);
 }
 
 .friends-icon:hover{
     color:rgb(0, 68, 255);
-    border-bottom:solid 4px rgba(0, 68, 255);
 }
 
 .messenger-icon:hover{
     color:rgb(0, 68, 255);
-    border-bottom:solid 4px rgba(0, 68, 255);
 }
 
 .current-path{
-    font-size:40px;
+    font-size:30px;
     color:rgb(0, 68, 255);
-    border-bottom:solid 4px rgba(0, 68, 255);
 }
+
+.center-nav-container {
+    display:flex;
+    background-color: red;
+    align-items:end;
+    justify-content: center;
+    height:45px;
+    width:100px;
+    transition-duration: 0.3s;
+    border-bottom:solid 4px rgba(0, 68, 255,0);
+
+
+}
+
+.center-nav-container:hover{
+    background-color: rgb(217, 255, 0);
+    border-radius: 8px 8px 0px 0px;
+
+}
+
