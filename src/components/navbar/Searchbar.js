@@ -1,5 +1,5 @@
 import './searchbar.css'
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import { AudioOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
 import QueryResults from './QueryResults';
@@ -24,6 +24,21 @@ const [focus,setFocus] = useState(false)
 const [searchValue,setSearchValue] = useState('')
 const [queryResults, setQueryResults] = useState(null)
 
+const divRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (divRef.current && !divRef.current.contains(event.target)) {
+        setFocus(false)
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
 const getQueryResults = () => {
 
     return (
@@ -32,6 +47,7 @@ const getQueryResults = () => {
             key={item._id} 
             fullName = {item.fullName} 
             profilePhotoURL={item.profilePhotoURL}
+            username = {item.username}
             />)
             :
             <div><p>Start typing to find friends!</p></div>
@@ -59,14 +75,14 @@ else{
 
 
   return (
-    <div className="container-fluid" style={{position:'relative'}}>
+    <div ref={divRef} className="container-fluid" style={{position:'relative'}}>
     <Search
       className='search-field'  
       placeholder="input search text"
       value={searchValue}
       onChange={searchHandler}
       onFocus={()=>setFocus(true)}
-      onBlur={()=>setFocus(false)}
+    //   onBlur={()=>setFocus(false)}
       style={focus?{width: 250}:{width: 200}}
      />
      {focus&&<div className='resultBox animate__animated animate__fadeIn'>{getQueryResults()}</div>}
