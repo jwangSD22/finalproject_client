@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import Navbar from '../components/navbar/Navbar.js'
 const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
@@ -33,7 +34,8 @@ function Home() {
      },[])
 
   return (
-    <div>TESTING HOME HERE</div>
+    
+<Navbar />
   )
 }
 

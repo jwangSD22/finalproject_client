@@ -1,0 +1,31 @@
+@media (max-width: 576px) {
+    .navCenter {
+        display:none;
+    }
+  }
+
+.myNav {
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+  
+.navCenter{
+    display:flex;
+    justify-self: center;
+    
+}
+
+.navEnd{
+    justify-self: end;
+}
+
+input{
+    border-radius: 3px;
+    border: solid 1px black;
+    transition: all 0.5s
+}
+
+input:hover{
+    
+    box-shadow: 0 0 10px rgba(8, 206, 255, 1);
+}
