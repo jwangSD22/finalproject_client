@@ -68,6 +68,14 @@ const Navbar = ({data}) => {
       {/* settings menu and profile page */}
 <div className="end-nav container d-flex justify-content-end">RIGHT</div>
 
+{/* MAKE A DIV THAT ONLY APPEARS WITH A MEDIA QUERY WHENEVER ITS GREATER THAN A MIN WIDTH*/}
+
+
+{/* MAKE A DIV THAT ONLY APPEARS WITH A MEDIA QUERY WHENEVER ITS BELOW A MAXIMUM WIDTH THIS IS THE COLLAPSIBLE MENU*/}
+
+
+
+
       {/*tooltip styling*/}
 <Tooltip style={{fontSize:'11px', paddingTop:'3px', paddingBottom:'3px', opacity:'80%'}} noArrow='true' id="my-tooltip" />
 
