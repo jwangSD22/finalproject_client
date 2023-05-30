@@ -46,11 +46,11 @@ const photoURL = '';
 
   return (
     <div className="dropleft show" >
-    <a className="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" data-offset="50,50" aria-haspopup="true" aria-expanded="false" data-tooltip-id="right-tooltip" data-tooltip-content="Your profile" data-tooltip-place="bottom">
+    <a className="btn dropdown-toggle animate__animated animate__fadeInRight" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false" data-tooltip-id="right-tooltip" data-tooltip-content="Your profile" data-tooltip-place="bottom">
     <img  src={photoURL} width="40px" height="40px" style={{borderRadius:'50%',border:'solid 2px black'}}></img>
     </a>
   
-    <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <div className="dropdown-menu"  aria-labelledby="dropdownMenuLink">
 
       <div className="right-nav-drop  dropdown-item d-flex" >
       <img  src={photoURL} width="30px" height="30px" style={{borderRadius:'50%',border:'solid 1px black'}}></img>

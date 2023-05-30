@@ -53,7 +53,7 @@ let nonFriendsList = nonFriends&&nonFriends.map(user=>
 
 
   return (
-    <div className='youMayKnow d-flex flex-column mt-4'>
+    <div className='youMayKnow d-none d-sm-flex flex-column mt-4'>
 <div> People you may know</div>
 <div>{nonFriendsList}</div>
     </div>
