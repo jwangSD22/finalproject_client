@@ -1,57 +1,71 @@
-import React, { useState,useEffect } from 'react';
-import {useNavigate} from 'react-router-dom'
-import axios from 'axios';
-import Navbar from '../components/navbar/Navbar.js'
-const token = localStorage.getItem('jwt');
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Navbar from "../components/navbar/Navbar.js";
+import YouMayKnow from "../components/home/YouMayKnow.js";
+import HomePosts from "../components/home/HomePosts.js";
+
+const token = localStorage.getItem("jwt");
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 function Home() {
-    const [user,setUser] = useState(null)
-    const [isLoggedIn,setIsLoggedIn] = useState(false)
-    const [data,setData] = useState(null)
-    const navigate = useNavigate()
+  const [username, setUsername] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [data, setData] = useState(null);
+  const [friends,setFriends] = useState(null)
+  const navigate = useNavigate();
 
-
-    useEffect(()=>{
-        const checkLogin = async () => {
-            try{
-                let response = await axios.get('/api/users/loginstatus')
-                console.log('checking logged in status')
-                if(response.status){
-                    setUser(response.data.user.jwtusername)
-                    setIsLoggedIn(true)
-                }
-            }
-            catch(err)
-            {
-                if(err.response.status===401){
-                    navigate('/')
-                }
-            }
-
-    
-     }
-
-     const retrieveData = async () => {
-        try{
-            let response = await axios.get('/api/users')
-            setData(response.data)
-
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        let response = await axios.get("/api/users/loginstatus");
+        if (response.status) {
+          setUsername(response.data.user.jwtusername);
+          setIsLoggedIn(true);
         }
-        catch(err){
-            console.log(Error)
+      } catch (err) {
+        if (err.response.status === 401) {
+          navigate("/");
         }
-     }
-        checkLogin();
-        retrieveData();
+      }
+    };
+
+    const retrieveData = async () => {
+      try {
+        let response = await axios.get("/api/users");
+
+        setData(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const retrieveFriends = async () => {
+      try{
+        let response = await axios.get('/api/user/friends')
+        setFriends(response.data)
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
 
 
-     },[])
 
-  return (
-    
-<Navbar data={data} />
-  )
+    checkLogin();
+    retrieveData();
+    retrieveFriends()
+  }, []);
+
+
+  return <>
+  <Navbar data={data} username={username} />
+  <div className="container-fluid d-flex flex-row justify-content-between">
+<YouMayKnow data={data} friends={friends} username={username} />
+<HomePosts  />
+<div className="div">Friends</div>
+  </div>
+  </>;
 }
 
-export default Home
+export default Home;

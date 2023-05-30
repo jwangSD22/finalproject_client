@@ -1,56 +1,78 @@
-.home-icon{
-    color:black;
-    font-size:30px;
-    transition: all 0.5s
+.home-icon {
+    font-size: 30px;
 
+  transition: all 0.5s;
 }
 
-.friends-icon{
-    font-size:30px;
-    transition: all 0.5s
+.friends-icon {
+    font-size: 30px;
 
-
+  transition: all 0.5s;
 }
-.messenger-icon{
-    font-size:30px;
-    transition: all 0.5s
+.messenger-icon {
+    font-size: 30px;
 
-
+  transition: all 0.5s;
 }
 
-.home-icon:hover{
-    color:rgb(0, 68, 255);
-}
 
-.friends-icon:hover{
-    color:rgb(0, 68, 255);
-}
-
-.messenger-icon:hover{
-    color:rgb(0, 68, 255);
-}
-
-.current-path{
-    font-size:30px;
-    color:rgb(0, 68, 255);
+.current-path {
+    display: flex;
+    font-size: 30px;
+    color: rgb(0, 68, 255);
+    align-items: end;
+    justify-content: center;
+    height: 45px;
+    width: 100px;
+    border-bottom: solid 4px rgba(0, 68, 255, 100);
 }
 
 .center-nav-container {
-    display:flex;
-    background-color: red;
-    align-items:end;
-    justify-content: center;
-    height:45px;
-    width:100px;
-    transition-duration: 0.3s;
-    border-bottom:solid 4px rgba(0, 68, 255,0);
-
-
+  display: flex;
+  font-size: 30px;
+  color: rgb(0, 0, 0);
+  align-items: end;
+  justify-content: center;
+  height: 45px;
+  width: 100px;
+  transition-duration: 0.3s;
+  border-bottom: solid 4px rgba(0, 68, 255, 0);
 }
 
-.center-nav-container:hover{
-    background-color: rgb(217, 255, 0);
-    border-radius: 8px 8px 0px 0px;
-
+.center-nav-container:hover {
+  background-color: rgb(211, 211, 211);
+  border-radius: 8px 8px 0px 0px;
 }
 
+
+/* all right-nav CSS */
+@media (max-width: 768px) {
+  .collapseFalse {
+    display: none;
+  }
+  .collapseTrue {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .collapseTrue {
+    display: none;
+  }
+  .collapseFalse {
+    display: block;
+  }
+}
+
+.right-nav-drop:hover {
+cursor:pointer;
+}
+
+.dropdown-menu {
+  width:300px;
+}
+
+.dropdown-item{
+    border:solid 1px red;
+    margin: 7px;
+}

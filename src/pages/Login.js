@@ -87,11 +87,11 @@ const Login = () => {
  
               <form onSubmit={handleSubmit}>
                 <div className="form-group mb-2">
-                  <input type="text" id="username" className="form-control" placeholder='Username or Email'
+                  <input type="text" id="username" className="form-control" placeholder='Username or Email' autoComplete='username'
                   value={emailOrUsername} onChange={e => setEmailOrUsername(e.target.value)}/>
                 </div>
                 <div className="form-group mb-2">
-                  <input type="password" id="password" className="form-control" placeholder='Password'
+                  <input type="password" id="password" className="form-control" placeholder='Password' autoComplete='current-password'
                   value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
                 {error&&<div display="none" className='text-danger  mb-2'><em>{error}</em></div>}
