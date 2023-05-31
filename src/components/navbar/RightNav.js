@@ -4,6 +4,7 @@ import {Tooltip} from 'react-tooltip'
 import axios from 'axios'
 import { HomeOutlined,MessageOutlined,TeamOutlined,LogoutOutlined, SettingOutlined } from '@ant-design/icons'
 import GenerateAvatar from '../../helper/GenerateAvatar'
+import './rightnav.css'
 
 
 function RightNav({username, collapseState}) {

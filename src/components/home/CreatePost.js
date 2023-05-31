@@ -18,6 +18,8 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost }) => {
     try {
       const response = await axios.post("/api/posts/imageupload", imgFormData);
       setImgObjKey(response.data.s3key);
+
+
     } catch (error) {
       console.error(error);
     }

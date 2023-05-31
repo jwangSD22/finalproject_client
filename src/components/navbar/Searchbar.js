@@ -75,7 +75,7 @@ else{
 
 
   return (
-    <div ref={divRef} className="container-fluid" style={{position:'relative'}}>
+    <div ref={divRef} className="container" style={{position:'relative'}}>
     <Search
       className='search-field'  
       placeholder="input search text"
