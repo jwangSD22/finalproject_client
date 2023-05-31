@@ -14,9 +14,10 @@ const Navbar = ({ data, username }) => {
   }, [path]);
 
   return (
-    <nav className="container-fluid d-flex justify-content-between bg-light">
+    <nav className="container-fluid  bg-light">
+      <div className="row">
       {/* start-elements brand logo and search bar */}
-      <div className="left-nav container d-flex justify-content-start align-items-center">
+      <div className="left-nav col-4 container d-flex justify-content-start align-items-center">
         <div
           className="navbar-brand me-2 mb-1 d-flex align-items-center"
           href="#"
@@ -34,7 +35,7 @@ const Navbar = ({ data, username }) => {
       </div>
 
       {/* CENTER NAVIGATION */}
-      <div className="center-nav container d-none d-md-flex justify-content-center align-items-end">
+      <div className="center-nav  col-4 container d-none d-md-flex justify-content-center align-items-end">
         {/* home */}
         <a
           className={
@@ -84,10 +85,11 @@ const Navbar = ({ data, username }) => {
             <MessageOutlined className="messenger-icon mx-2" />
           </div>
         </div>
+        
       </div>
 
       {/* settings menu and profile page */}
-      <div className="end-nav container d-flex justify-content-end">
+      <div className="end-nav  col-4 container d-flex justify-content-end">
 
         {/* uses media queries here to determine screen size to generate the appropriate RightNav version with boolean prop */}
         <div className="collapseTrue">
@@ -106,6 +108,7 @@ const Navbar = ({ data, username }) => {
         noArrow="true"
         id="my-tooltip"
       />
+      </div>
     </nav>
   );
 };
