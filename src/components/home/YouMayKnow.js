@@ -39,11 +39,11 @@ function YouMayKnow({ data, friends, username }) {
       <div
         key={user._id}
         className=" d-flex"
-        onClick={() => {
-          linkHandler(user.username);
-        }}
+
       >
-        <div className="ymk-listItem box-styling d-flex my-1">
+        <div className ="ymk-listItem box-styling d-flex my-1"         onClick={() => {
+          linkHandler(user.username);
+        }}>
           <GenerateAvatar url={user.profilePhotoURL} />
           <div className="mx-2">{user.fullName}</div>
         </div>

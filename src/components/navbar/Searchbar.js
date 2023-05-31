@@ -82,7 +82,6 @@ else{
       value={searchValue}
       onChange={searchHandler}
       onFocus={()=>setFocus(true)}
-    //   onBlur={()=>setFocus(false)}
       style={focus?{width: 250}:{width: 200}}
      />
      {focus&&<div className='resultBox animate__animated animate__fadeIn'>{getQueryResults()}</div>}

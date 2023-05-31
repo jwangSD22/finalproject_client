@@ -54,7 +54,10 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost }) => {
   };
 
   return (
-    <div className="container my-4">
+    <div className="create-post">
+
+
+    <div className="container-fluid my-4">
       <div className="card">
         <div className="card-header d-flex align-items-center justify-content-between">
           <h5 className="mb-0">Create Post</h5>
@@ -128,6 +131,7 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost }) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

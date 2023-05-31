@@ -34,7 +34,7 @@ const newPost = <div className="container box-styling d-flex align-items-center 
   </div>
 
   return (
-    <div className="container mt-4 ">
+    <div className="container col-10 mt-4 ">
       {toggleNewPost && <div className="overlay" />}
       {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} />}
 
