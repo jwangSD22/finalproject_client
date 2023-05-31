@@ -1,9 +1,9 @@
 import React, {useState,useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import emptyAvatar from '../../images/empty_avatar.png'
 import {Tooltip} from 'react-tooltip'
 import axios from 'axios'
 import { HomeOutlined,MessageOutlined,TeamOutlined,LogoutOutlined, SettingOutlined } from '@ant-design/icons'
+import GenerateAvatar from '../../helper/GenerateAvatar'
 
 
 function RightNav({username, collapseState}) {
@@ -47,13 +47,13 @@ const photoURL = '';
   return (
     <div className="dropleft show" >
     <a className="btn dropdown-toggle animate__animated animate__fadeInRight" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false" data-tooltip-id="right-tooltip" data-tooltip-content="Your profile" data-tooltip-place="bottom">
-    <img  src={photoURL} width="40px" height="40px" style={{borderRadius:'50%',border:'solid 2px black'}}></img>
+    <GenerateAvatar url={thisUser.profilePhotoURL} />    
     </a>
   
     <div className="dropdown-menu"  aria-labelledby="dropdownMenuLink">
 
       <div className="right-nav-drop  dropdown-item d-flex" >
-      <img  src={photoURL} width="30px" height="30px" style={{borderRadius:'50%',border:'solid 1px black'}}></img>
+      <GenerateAvatar url={thisUser.profilePhotoURL} />    
 <div className="mx-2">{thisUser.fullName}</div></div>
 
 

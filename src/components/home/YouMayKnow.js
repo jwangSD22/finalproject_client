@@ -19,6 +19,8 @@ for(let friend of friends){
 }
 //add self to be filtered out
 hash.add(username)
+
+//get first 10 results to display on main page 
 let friendsFiltered = data.filter(user => !hash.has(user.username)).slice(0,10)
 setNonFriends(friendsFiltered)
 }

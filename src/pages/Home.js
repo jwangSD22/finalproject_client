@@ -62,8 +62,7 @@ function Home() {
   <Navbar data={data} username={username} />
   <div className="container-fluid d-flex flex-row justify-content-between">
 <YouMayKnow data={data} friends={friends} username={username} />
-<HomePosts  />
-<div className="div">Friends</div>
+<HomePosts username={username} />
   </div>
   </>;
 }
