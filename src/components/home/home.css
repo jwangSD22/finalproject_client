@@ -1,3 +1,13 @@
-.youMayKnow{
+.ymk{
     max-width: 100%;
+}
+
+
+.ymk-listItem:hover{
+    max-width: 100%;
+}
+
+.ymk-listItem:hover {
+    cursor:pointer;
+    background: rgb(211, 211, 211);
 }

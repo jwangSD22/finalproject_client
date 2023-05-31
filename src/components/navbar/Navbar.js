@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./navbar.css";
-import avatar from "../../images/empty_avatar.png";
 import { Tooltip } from "react-tooltip";
 import { HomeOutlined, MessageOutlined, TeamOutlined } from "@ant-design/icons";
 import Searchbar from "./Searchbar";
@@ -18,7 +17,7 @@ const Navbar = ({ data, username }) => {
     <nav className="container-fluid d-flex justify-content-between bg-light">
       {/* start-elements brand logo and search bar */}
       <div className="left-nav container d-flex justify-content-start align-items-center">
-        <a
+        <div
           className="navbar-brand me-2 mb-1 d-flex align-items-center"
           href="#"
         >
@@ -29,7 +28,7 @@ const Navbar = ({ data, username }) => {
             loading="lazy"
             style={{ marginTop: "2px" }}
           />
-        </a>
+        </div>
         {/* Search form */}
         <Searchbar data={data} />
       </div>
@@ -76,16 +75,15 @@ const Navbar = ({ data, username }) => {
         </a>
 
         {/* messenger */}
-        <a
+        <div
           className="d-flex align-items-center"
-          href="#"
           data-tooltip-id="my-tooltip"
           data-tooltip-content="Messenger"
         >
           <div className="center-nav-container mx-1">
             <MessageOutlined className="messenger-icon mx-2" />
           </div>
-        </a>
+        </div>
       </div>
 
       {/* settings menu and profile page */}
