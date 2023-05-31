@@ -44,7 +44,7 @@ const Navbar = ({ data, username }) => {
               : "center-nav-container mx-1"
           }
           href="/home"
-          data-tooltip-id="my-tooltip"
+          data-tooltip-id="right-tooltip"
           data-tooltip-content="Home"
         >
           <div className="d-flex align-items-center">
@@ -61,7 +61,7 @@ const Navbar = ({ data, username }) => {
         <a
           className="d-flex align-items-center"
           href="/friends"
-          data-tooltip-id="my-tooltip"
+          data-tooltip-id="right-tooltip"
           data-tooltip-content="Friends"
         >
           <div
@@ -71,14 +71,14 @@ const Navbar = ({ data, username }) => {
                 : "center-nav-container mx-1"
             }
           >
-            <TeamOutlined />
+            <a></a><TeamOutlined />
           </div>
         </a>
 
         {/* messenger */}
         <div
           className="d-flex align-items-center"
-          data-tooltip-id="my-tooltip"
+          data-tooltip-id="right-tooltip"
           data-tooltip-content="Messenger"
         >
           <div className="center-nav-container mx-1">
@@ -101,13 +101,9 @@ const Navbar = ({ data, username }) => {
         </div>
       </div>
 
-      {/*tooltip styling*/}
-      <Tooltip
-        style={{ fontSize: "11px", paddingTop: "3px", paddingBottom: "3px" }}
-        delayShow="400"
-        noArrow="true"
-        id="my-tooltip"
-      />
+      {/*tooltip styling - refer to rightnav where tooltip component settings are*/}
+      
+
       </div>
     </nav>
   );
