@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react'
-import emptyAvatar from '../../images/empty_avatar.png'
 import {useNavigate} from 'react-router-dom'
+
 import './home.css'
+import GenerateAvatar from '../../helper/GenerateAvatar'
 
 function YouMayKnow({data,friends,username}) {
 
@@ -26,11 +27,7 @@ setNonFriends(friendsFiltered)
 }
 }, [data,friends,username])
 
-let inlineImgStyling = {
-    width:"30px",
-    height:"30px",
-    borderRadius:"50%"
-}
+
 
 const linkHandler = (username) => {
 
@@ -41,7 +38,9 @@ const linkHandler = (username) => {
 //generate each line 
 let nonFriendsList = nonFriends&&nonFriends.map(user=>
 <div key={user._id} className='ymk-listItem d-flex my-3' onClick={()=>{linkHandler(user.username)}}>
-    <div className='mx-2'><img style={inlineImgStyling} src={user.profilePhotoURL==='NO PROFILE PHOTO'?emptyAvatar:user.profilePhotoURL} alt="profilePhoto"></img></div>
+<GenerateAvatar url={user.profilePhotoURL} />    
+   
+  
     <div>{user.fullName}</div>
     </div>
 )

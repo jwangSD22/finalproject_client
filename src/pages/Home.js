@@ -60,9 +60,16 @@ function Home() {
 
   return <>
   <Navbar data={data} username={username} />
-  <div className="container-fluid d-flex flex-row justify-content-between">
-<YouMayKnow data={data} friends={friends} username={username} />
-<HomePosts username={username} />
+  <div className="container-fluid">
+    <div className="row">
+      <div className="col-md-3 d-none d-md-block">
+        <YouMayKnow data={data} friends={friends} username={username} />
+      </div>
+<div className="col-lg-6">
+  <HomePosts  username={username} />
+</div>
+</div>
+
   </div>
   </>;
 }
