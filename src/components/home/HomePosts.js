@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react'
 import axios from 'axios'
 import GenerateAvatar from '../../helper/GenerateAvatar'
 import CreatePost from './CreatePost'
+import PostComponent from './PostComponent'
 
 
 
@@ -11,6 +12,8 @@ import CreatePost from './CreatePost'
 function HomePosts({username}) {
 const [thisUser,setThisUser] = useState(null)
 const [toggleNewPost, setToggleNewPost] = useState(false)
+const [posts, setPosts] = useState([]);
+
 
 useEffect(()=>{
   const getThisUser = async () => {
@@ -43,7 +46,7 @@ const newPost = <div className="container box-styling d-flex align-items-center 
         <div className='container'>{newPost}</div>
  
 
-        <div> LIST OF ALL POSTS</div>
+        <div> <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} /> </div>
       </div>
 
     </div>
