@@ -3,9 +3,9 @@ import axios from 'axios';
 
 
 
-const PostComponent = ({thisUser}) => {
-    const [posts, setPosts] = useState([]);
+const PostComponent = ({thisUser,posts,setPosts}) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [maxPage,setMaxPage] = useState(null)
     const [loading, setLoading] = useState(false);
   
     useEffect(() => {
@@ -19,6 +19,9 @@ const PostComponent = ({thisUser}) => {
             }
           });
           const { data } = response;
+          if(!maxPage){
+            setMaxPage(data.totalPages)
+          }
           setPosts((prevPosts) => [...prevPosts, ...data.posts]);
           setLoading(false);
         } catch (error) {
@@ -32,9 +35,12 @@ const PostComponent = ({thisUser}) => {
   
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-      if (scrollHeight - scrollTop === clientHeight && !loading) {
-        setCurrentPage((prevPage) => prevPage + 1);
-      }
+     
+        if(currentPage!==maxPage){
+            if (scrollHeight - scrollTop === clientHeight && !loading) {
+            setCurrentPage((prevPage) => prevPage + 1);
+        }
+    }
     };
   
     useEffect(() => {
@@ -50,6 +56,19 @@ const PostComponent = ({thisUser}) => {
         {posts.map((post) => (
           <div key={post._id}>
             <h3>{post.author}</h3>
+            <h3>{post.author}</h3>
+
+            <h3>{post.author}</h3>
+
+            <h3>{post.author}</h3>
+
+            <h3>{post.author}</h3>
+
+            <h3>{post.author}</h3>
+
+            <h3>{post.author}</h3>
+
+
  
             <p>{post.postMessage}</p>
             {/* Render other post details */}

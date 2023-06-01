@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GenerateAvatar from "../../helper/GenerateAvatar";
 import axios from "axios";
 
-const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost }) => {
+const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts }) => {
   const [tempImageURL, setTempImageURL] = useState("");
   const [postContent, setPostContent] = useState("");
   const [imgObjKey, setImgObjKey] = useState(null);
@@ -43,7 +43,9 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost }) => {
 
 
     let response = await axios.post("/api/posts/", postObject);
-    console.log(response.data)
+
+    let temp = await axios.get(`/api/posts/${response.data}`)
+    setPosts([temp.data,...posts])
     setToggleNewPost(!toggleNewPost);
 };
 

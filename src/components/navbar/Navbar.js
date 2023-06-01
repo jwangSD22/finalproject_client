@@ -72,7 +72,7 @@ const Navbar = ({ data, username }) => {
                 : "center-nav-container mx-1"
             }
           >
-            <a></a><TeamOutlined />
+           <TeamOutlined />
           </div>
         </a>
 

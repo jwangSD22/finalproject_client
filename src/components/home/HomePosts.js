@@ -13,6 +13,7 @@ function HomePosts({username}) {
 const [thisUser,setThisUser] = useState(null)
 const [toggleNewPost, setToggleNewPost] = useState(false)
 const [posts, setPosts] = useState([]);
+const [triggerPostDataRefresh, setTriggerPostDataRefresh] = useState(false)
 
 
 useEffect(()=>{
@@ -39,14 +40,14 @@ const newPost = <div className="container box-styling d-flex align-items-center 
   return (
     <div className="container mt-4 ">
       {toggleNewPost && <div className="overlay" />}
-      {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} />}
+      {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} posts={posts} setPosts={setPosts} />}
 
       <div className="row">
    
         <div className='container'>{newPost}</div>
  
 
-        <div> <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} /> </div>
+        <div> <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh}/> </div>
       </div>
 
     </div>
