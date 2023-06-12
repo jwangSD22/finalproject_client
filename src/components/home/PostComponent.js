@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import GeneratePost from '../../helper/GeneratePost';
 
 
 
@@ -19,6 +20,7 @@ const PostComponent = ({thisUser,posts,setPosts}) => {
             }
           });
           const { data } = response;
+
           if(!maxPage){
             setMaxPage(data.totalPages)
           }
@@ -42,6 +44,8 @@ const PostComponent = ({thisUser,posts,setPosts}) => {
         }
     }
     };
+
+
   
     useEffect(() => {
       window.addEventListener('scroll', handleScroll);
@@ -51,28 +55,9 @@ const PostComponent = ({thisUser,posts,setPosts}) => {
     }, []);
   
     return (
-      <div>
-        <h1>Posts</h1>
-        {posts.map((post) => (
-          <div key={post._id}>
-            <h3>{post.author}</h3>
-            <h3>{post.author}</h3>
-
-            <h3>{post.author}</h3>
-
-            <h3>{post.author}</h3>
-
-            <h3>{post.author}</h3>
-
-            <h3>{post.author}</h3>
-
-            <h3>{post.author}</h3>
-
-
- 
-            <p>{post.postMessage}</p>
-            {/* Render other post details */}
-          </div>
+      <div className='container '>
+        {posts.map((data) => (
+<GeneratePost key={data._id} data={data}/>
         ))}
         {loading && <p>Loading...</p>}
       </div>

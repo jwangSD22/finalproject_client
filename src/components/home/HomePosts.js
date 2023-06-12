@@ -44,10 +44,10 @@ const newPost = <div className="container box-styling d-flex align-items-center 
 
       <div className="row">
    
-        <div className='container'>{newPost}</div>
+        <div className='container text-center'>{newPost}</div>
  
 
-        <div> <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh}/> </div>
+        <div className='container text-center'> <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh}/> </div>
       </div>
 
     </div>
