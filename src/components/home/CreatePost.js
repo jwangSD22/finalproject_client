@@ -59,10 +59,8 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
 
   return (
     <div className="create-post">
-
-
     <div className="container-fluid my-4">
-      <div className="card">
+      <div className="bg-white rounded p-2">
         <div className="card-header d-flex align-items-center justify-content-between">
           <h5 className="mb-0">Create Post</h5>
           <button

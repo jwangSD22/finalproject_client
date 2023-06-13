@@ -3,6 +3,7 @@ import axios from 'axios'
 import GenerateAvatar from '../../helper/GenerateAvatar'
 import CreatePost from './CreatePost'
 import PostComponent from './PostComponent'
+import './home.css'
 
 
 
@@ -32,22 +33,22 @@ setToggleNewPost(!toggleNewPost)
 
 
 
-const newPost = <div className="container box-styling d-flex align-items-center justify-content-center p-2">
+const newPost = <div className="container box-styling d-flex  align-items-center justify-content-center p-2">
     {thisUser&&<GenerateAvatar url={thisUser.profilePhotoURL} />}
-  <div className='inputBox box-styling' onClick={formClickHandler}> What's on your mind? </div>
+  <div className='inputBox box-styling flex-grow-1' onClick={formClickHandler}> What's on your mind? </div>
   </div>
 
   return (
-    <div className="container mt-4 ">
+    <div className="mt-4 ">
       {toggleNewPost && <div className="overlay" />}
       {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} posts={posts} setPosts={setPosts} />}
 
       <div className="row">
    
-        <div className='container text-center'>{newPost}</div>
+        <div className='container-fluid text-center'>{newPost}</div>
  
 
-        <div className='container text-center'> <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh}/> </div>
+       <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh}/> 
       </div>
 
     </div>

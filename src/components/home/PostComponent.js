@@ -55,9 +55,9 @@ const PostComponent = ({thisUser,posts,setPosts}) => {
     }, []);
   
     return (
-      <div className='container '>
+      <div className='container-fluid '>
         {posts.map((data) => (
-<GeneratePost key={data._id} data={data}/>
+<GeneratePost key={data._id} data={data} thisUser={thisUser}/>
         ))}
         {loading && <p>Loading...</p>}
       </div>

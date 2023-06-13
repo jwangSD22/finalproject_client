@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "../components/navbar/Navbar.js";
 import YouMayKnow from "../components/home/YouMayKnow.js";
 import HomePosts from "../components/home/HomePosts.js";
+import './Home.css'
 
 const token = localStorage.getItem("jwt");
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -65,7 +66,7 @@ function Home() {
       <div className="col-md-3 d-none d-md-block">
         <YouMayKnow data={data} friends={friends} username={username} />
       </div>
-<div className="col-lg-6">
+<div className="col-lg-6 home-post-container">
   <HomePosts  username={username} />
 </div>
 </div>
