@@ -4,7 +4,7 @@ import GeneratePost from '../../helper/GeneratePost';
 
 
 
-const PostComponent = ({thisUser,posts,setPosts}) => {
+const PostComponent = ({thisUser,posts,setPosts,allUsers}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [maxPage,setMaxPage] = useState(null)
     const [loading, setLoading] = useState(false);
@@ -59,7 +59,7 @@ const PostComponent = ({thisUser,posts,setPosts}) => {
     return (
       <div className='container-fluid '>
         {posts.map((data) => (
-<GeneratePost key={data._id} data={data} thisUser={thisUser}/>
+<GeneratePost key={data._id} data={data} thisUser={thisUser} allUsers={allUsers}/>
         ))}
         {loading && <p>Loading...</p>}
       </div>

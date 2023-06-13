@@ -67,7 +67,7 @@ function Home() {
         <YouMayKnow data={data} friends={friends} username={username} />
       </div>
 <div className="col-lg-6 home-post-container">
-  <HomePosts  username={username} />
+  <HomePosts  username={username} allUsers={data}/>
 </div>
 </div>
 

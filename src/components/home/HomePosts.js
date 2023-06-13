@@ -10,7 +10,7 @@ import './home.css'
 
 
 
-function HomePosts({username}) {
+function HomePosts({username,allUsers}) {
 const [thisUser,setThisUser] = useState(null)
 const [toggleNewPost, setToggleNewPost] = useState(false)
 const [posts, setPosts] = useState([]);
@@ -24,7 +24,7 @@ useEffect(()=>{
   }
 
   username&&getThisUser()
-  
+
 },[username])
 
 
@@ -50,7 +50,7 @@ const newPost = <div className="container box-styling d-flex  align-items-center
         <div className='container-fluid text-center'>{newPost}</div>
  
 
-       <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh}/> 
+       <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh} allUsers={allUsers}/> 
       </div>
 
     </div>
