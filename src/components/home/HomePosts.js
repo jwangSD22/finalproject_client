@@ -22,7 +22,9 @@ useEffect(()=>{
     let response = await axios.get(`/api/users/${username}`)
     setThisUser(response.data)
   }
-  getThisUser()
+
+  username&&getThisUser()
+  
 },[username])
 
 

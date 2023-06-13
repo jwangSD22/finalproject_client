@@ -32,7 +32,9 @@ const PostComponent = ({thisUser,posts,setPosts}) => {
         }
       };
   
-      fetchPosts();
+      if(thisUser!==null){
+        fetchPosts()}
+
     }, [thisUser,currentPage]);
   
     const handleScroll = () => {
