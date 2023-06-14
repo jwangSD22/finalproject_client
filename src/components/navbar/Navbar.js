@@ -19,7 +19,7 @@ const Navbar = ({ data, username }) => {
       {/* start-elements brand logo and search bar */}
       <div className="left-nav col-6 col-md-4 d-flex justify-content-start align-items-center">
         <div
-          className="navbar-brand me-2 mb-1 d-flex align-items-center"
+          className="navbar-brand me-2 mb-1 d-none d-sm-flex align-items-center"
 >
           <img
             src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"

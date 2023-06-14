@@ -1,6 +1,6 @@
 import React, {useEffect,useState } from 'react'
 import axios from 'axios'
-import GenerateAvatarFromID from './GenerateAvatarFromID'
+import GenerateAvatarFromID from '../../helper/GenerateAvatarFromID'
 
 function GenerateComment({commentID}) {
 

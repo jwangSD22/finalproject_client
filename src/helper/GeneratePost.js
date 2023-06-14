@@ -3,7 +3,7 @@ import axios from "axios";
 import GenerateAvatar from "./GenerateAvatar";
 import { LikeOutlined, LikeFilled,SendOutlined } from "@ant-design/icons";
 import "./generatePost.css";
-import GenerateComment from "./GenerateComment";
+import GenerateComment from "../components/comments/GenerateComment";
 
 function GeneratePost({ data, thisUser, allUsers }) {
   const [post, setPost] = useState(null);
@@ -52,8 +52,8 @@ function GeneratePost({ data, thisUser, allUsers }) {
     const response = axios.put(`/api/posts/${post._id}/togglelike`);
     setUserLiked(!userLiked);
 
-    if (post.likes[0] === thisUser._id) {
-      post.likes.shift();
+    if (post.likes.indexOf(thisUser._id)>-1) {
+      post.likes.splice(post.likes.indexOf(thisUser._id),1)
       post.numberOfLikes--
     } else {
       post.likes.unshift(thisUser._id);
