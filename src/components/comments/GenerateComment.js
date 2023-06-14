@@ -30,10 +30,14 @@ const getCommentData = async () => {
 
 
   return (
-    data&&<div>
+    data&&<div className='d-flex bg-white my-1 border'>
 
 {<GenerateAvatarFromID userID={data.author._id} />}
-{data.message}
+<div className='d-flex flex-column'>
+  <div><small>{data.author.fullName}</small></div>
+  <div><h3>{data.message}</h3></div>
+  <div><small>Like</small></div>
+</div>
     </div>
   )
 }

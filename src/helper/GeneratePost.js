@@ -1,21 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import GenerateAvatar from "./GenerateAvatar";
-import { LikeOutlined, LikeFilled,SendOutlined } from "@ant-design/icons";
+import { LikeOutlined, LikeFilled, SendOutlined } from "@ant-design/icons";
 import "./generatePost.css";
 import GenerateComment from "../components/comments/GenerateComment";
 
 function GeneratePost({ data, thisUser, allUsers }) {
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState('');
   const [message, setMessage] = useState("");
   const [editComment, setEditComment] = useState(false);
   const [toggleCommentList, setToggleCommentList] = useState(false);
   const [userLiked, setUserLiked] = useState(false);
   const [imageURLs, setImageURLs] = useState([]);
   const [likesList, setLikesList] = useState([]);
-  const [comments,setComments] = useState([])
+  const [comments, setComments] = useState([]);
   const textareaRef = useRef(null);
   const divRef = useRef(null);
+  const postRef = useRef(null)
 
   useEffect(() => {
     const getPostData = async () => {
@@ -40,9 +41,14 @@ function GeneratePost({ data, thisUser, allUsers }) {
     }
   }, [post]);
 
-  useEffect(()=>{
-    post&&setComments([...post.comments].reverse().map(item=><GenerateComment commentID={item}/>))
-  },[post,post.comments])
+  useEffect(() => {
+    post &&
+      setComments(
+        [...post.comments]
+          .reverse()
+          .map((item) => <GenerateComment commentID={item} />)
+      );
+  }, [post,post.comments]);
 
   const handleChange = (event) => {
     setMessage(event.target.value);
@@ -52,42 +58,72 @@ function GeneratePost({ data, thisUser, allUsers }) {
     const response = axios.put(`/api/posts/${post._id}/togglelike`);
     setUserLiked(!userLiked);
 
-    if (post.likes.indexOf(thisUser._id)>-1) {
-      post.likes.splice(post.likes.indexOf(thisUser._id),1)
-      post.numberOfLikes--
+    if (post.likes.indexOf(thisUser._id) > -1) {
+      post.likes.splice(post.likes.indexOf(thisUser._id), 1);
+      post.numberOfLikes--;
     } else {
       post.likes.unshift(thisUser._id);
-      post.numberOfLikes++
+      post.numberOfLikes++;
     }
   };
 
   const commentSubmitHandler = async () => {
-    if(message.length>0){
-      const response = await axios.post(`/api/posts/${post._id}/newcomment`,{message:message})
-      setMessage('')
-      post.numberOfComments++
-      post.comments=[...post.comments,response.data._id]
-    }
-
-
-  }
-
-  const handleKeyDown = async (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault(); 
-      if(message.length>0){
-        const response = await axios.post(`/api/posts/${post._id}/newcomment`,{message:message})
-        setMessage('')
-        post.numberOfComments++
-        post.comments=[...post.comments,response.data._id]
-      }
-  
+    if (message.length > 0) {
+      const response = await axios.post(`/api/posts/${post._id}/newcomment`, {
+        message: message,
+      });
+      setMessage("");
+      post.numberOfComments++;
+      post.comments = [...post.comments, response.data._id];
     }
   };
 
-  const toggleCommentListHandler = () => {
-    setToggleCommentList(!toggleCommentList)
+  const handleKeyDown = async (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (message.length > 0) {
+        const response = await axios.post(`/api/posts/${post._id}/newcomment`, {
+          message: message,
+        });
+        setMessage("");
+        post.numberOfComments++;
+        post.comments = [...post.comments, response.data._id];
+      }
+    }
+  };
+
+  const editCommentHandler = () => {
+    setEditComment(!editComment)
+
+    if(editComment===false){
+      const windowHeight = window.innerHeight;
+      const divBottomPosition = postRef.current.getBoundingClientRect().bottom;
+      const scrollOffset = divBottomPosition - windowHeight / 2;
+  
+      window.scrollTo({
+        top: window.scrollY + scrollOffset,
+        behavior: 'smooth'
+      });  
+    }
+
   }
+
+  const toggleCommentListHandler = () => {
+    setToggleCommentList(!toggleCommentList);
+
+    if(toggleCommentList===false){
+      setEditComment(true);
+      setTimeout(()=>{ const windowHeight = window.innerHeight;
+        const divBottomPosition = postRef.current.getBoundingClientRect().bottom;
+        const scrollOffset = divBottomPosition - windowHeight / 2;
+    
+        window.scrollTo({
+          top: window.scrollY + scrollOffset,
+          behavior: 'smooth'
+        });  },500)
+     
+    }
+  };
 
   const generateLikeSnippet = (param) => {
     const likesHash = {};
@@ -126,16 +162,13 @@ function GeneratePost({ data, thisUser, allUsers }) {
     if (textarea && div) {
       textarea.style.height = "auto"; // Reset the height to calculate the new height
       textarea.style.height = `${textarea.scrollHeight}px`; // Set the new height of the textarea
-      div.style.height = `${textarea.scrollHeight+15}px`; // Set the height of the surrounding div
+      div.style.height = `${textarea.scrollHeight + 15}px`; // Set the height of the surrounding div
     }
   }, [message]);
 
-
-
-
   return (
     post && (
-      <div className="container-fluid bg-light my-4 p-2 rounded shadow-sm">
+      <div ref={postRef} className="container-fluid bg-light my-4 p-2 rounded shadow-sm">
         {/*post header*/}
         <div className="header d-flex">
           <div>
@@ -186,7 +219,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
           </div>
 
           <div>
-            <button onClick={() => setEditComment(!editComment)}>
+            <button onClick={editCommentHandler}>
               {" "}
               Comment{" "}
             </button>
@@ -194,22 +227,15 @@ function GeneratePost({ data, thisUser, allUsers }) {
         </div>
         <hr className="hr" />
 
-        {post.comments.length>1&&<div onClick={toggleCommentListHandler}>{toggleCommentList?'Close comment list':`View previous ${post.numberOfComments-1} comments`}</div>}
+        {post.comments.length > 1 && (
+          <div onClick={()=>{toggleCommentListHandler()}}>
+            {toggleCommentList
+              ? "Close comment list"
+              : `View previous ${post.numberOfComments - 1} comments`}
+          </div>
+        )}
 
-
-
-
-
-
-        <div>{toggleCommentList?comments:comments[0]}</div>
-
-
-
-
-
-
-
-
+        <div>{toggleCommentList ? comments : comments[0]}</div>
 
         {editComment && (
           <div className="d-flex align-items-center animate__animated animate__fadeIn">
@@ -223,11 +249,18 @@ function GeneratePost({ data, thisUser, allUsers }) {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
               ></textarea>
-             
             </div>
             <div className="arrowOutline">
-            <SendOutlined className="mx-2" onClick={commentSubmitHandler} style={{color:'black',fontSize:'30px',borderRadius:'15px'}}/>
-              </div>
+              <SendOutlined
+                className="mx-2"
+                onClick={commentSubmitHandler}
+                style={{
+                  color: "black",
+                  fontSize: "30px",
+                  borderRadius: "15px",
+                }}
+              />
+            </div>
           </div>
         )}
 
