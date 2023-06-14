@@ -3,6 +3,7 @@ import axios from "axios";
 import GenerateAvatar from "./GenerateAvatar";
 import { LikeOutlined, LikeFilled,SendOutlined } from "@ant-design/icons";
 import "./generatePost.css";
+import GenerateComment from "./GenerateComment";
 
 function GeneratePost({ data, thisUser, allUsers }) {
   const [post, setPost] = useState(null);
@@ -12,6 +13,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
   const [userLiked, setUserLiked] = useState(false);
   const [imageURLs, setImageURLs] = useState([]);
   const [likesList, setLikesList] = useState([]);
+  const [comments,setComments] = useState([])
   const textareaRef = useRef(null);
   const divRef = useRef(null);
 
@@ -37,6 +39,10 @@ function GeneratePost({ data, thisUser, allUsers }) {
       setUserLiked(false);
     }
   }, [post]);
+
+  useEffect(()=>{
+    post&&setComments([...post.comments].reverse().map(item=><GenerateComment commentID={item}/>))
+  },[post])
 
   const handleChange = (event) => {
     setMessage(event.target.value);
@@ -179,7 +185,19 @@ function GeneratePost({ data, thisUser, allUsers }) {
 
         {post.comments.length>1&&<div onClick={toggleCommentListHandler}>{toggleCommentList?'Close comment list':`View previous ${post.numberOfComments-1} comments`}</div>}
 
-        <div>{toggleCommentList?[...post.comments].reverse().map(item=><div>{item}</div>):post.comments[post.comments.length-1]}</div>
+
+
+
+
+
+        <div>{toggleCommentList?comments:comments[0]}</div>
+
+
+
+
+
+
+
 
 
         {editComment && (
