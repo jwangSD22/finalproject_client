@@ -42,7 +42,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
 
   useEffect(()=>{
     post&&setComments([...post.comments].reverse().map(item=><GenerateComment commentID={item}/>))
-  },[post])
+  },[post,post.comments])
 
   const handleChange = (event) => {
     setMessage(event.target.value);
@@ -66,13 +66,24 @@ function GeneratePost({ data, thisUser, allUsers }) {
       const response = await axios.post(`/api/posts/${post._id}/newcomment`,{message:message})
       setMessage('')
       post.numberOfComments++
-      console.log(post)
-      console.log(response.data)
       post.comments=[...post.comments,response.data._id]
     }
 
 
   }
+
+  const handleKeyDown = async (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+      if(message.length>0){
+        const response = await axios.post(`/api/posts/${post._id}/newcomment`,{message:message})
+        setMessage('')
+        post.numberOfComments++
+        post.comments=[...post.comments,response.data._id]
+      }
+  
+    }
+  };
 
   const toggleCommentListHandler = () => {
     setToggleCommentList(!toggleCommentList)
@@ -210,6 +221,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
                 placeholder="Write a comment..."
                 value={message}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
               ></textarea>
              
             </div>
