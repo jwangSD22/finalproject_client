@@ -66,7 +66,8 @@ function Home() {
       <div className="col-md-3 d-none d-md-block">
         <YouMayKnow data={data} friends={friends} username={username} />
       </div>
-<div className="col-lg-6 home-post-container">
+      <div className=" d-none d-xl-flex col-xl-1"></div>
+<div className="col-md-8 col-lg-6 col-xxl-4 home-post-container">
   <HomePosts  username={username} allUsers={data}/>
 </div>
 </div>

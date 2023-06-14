@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import GenerateAvatar from "./GenerateAvatar";
-import { LikeOutlined, LikeFilled } from "@ant-design/icons";
+import { LikeOutlined, LikeFilled,SendOutlined } from "@ant-design/icons";
 import "./generatePost.css";
 
 function GeneratePost({ data, thisUser, allUsers }) {
@@ -55,6 +55,23 @@ function GeneratePost({ data, thisUser, allUsers }) {
     }
   };
 
+  const commentSubmitHandler = async () => {
+    if(message.length>0){
+      const response = await axios.post(`/api/posts/${post._id}/newcomment`,{message:message})
+      setMessage('')
+      post.numberOfComments++
+      console.log(post)
+      console.log(response.data)
+      post.comments=[...post.comments,response.data._id]
+    }
+
+
+  }
+
+  const toggleCommentListHandler = () => {
+    setToggleCommentList(!toggleCommentList)
+  }
+
   const generateLikeSnippet = (param) => {
     const likesHash = {};
     for (let item of post.likes) {
@@ -92,9 +109,11 @@ function GeneratePost({ data, thisUser, allUsers }) {
     if (textarea && div) {
       textarea.style.height = "auto"; // Reset the height to calculate the new height
       textarea.style.height = `${textarea.scrollHeight}px`; // Set the new height of the textarea
-      div.style.height = `${textarea.scrollHeight}px`; // Set the height of the surrounding div
+      div.style.height = `${textarea.scrollHeight+15}px`; // Set the height of the surrounding div
     }
   }, [message]);
+
+
 
 
   return (
@@ -157,10 +176,14 @@ function GeneratePost({ data, thisUser, allUsers }) {
           </div>
         </div>
         <hr className="hr" />
-        <div>BUTTON TO OPEN AND CLOSE REST OF COMMENTS</div>
-        <p> COMMENTS MAP GOES HERE </p>
+
+        {post.comments.length>1&&<div onClick={toggleCommentListHandler}>{toggleCommentList?'Close comment list':`View previous ${post.numberOfComments-1} comments`}</div>}
+
+        <div>{toggleCommentList?[...post.comments].reverse().map(item=><div>{item}</div>):post.comments[post.comments.length-1]}</div>
+
+
         {editComment && (
-          <div className="d-flex ">
+          <div className="d-flex align-items-center animate__animated animate__fadeIn">
             <GenerateAvatar url={thisUser.profilePhotoURL} />
             <div ref={divRef} className="bubble flex-grow-1">
               <textarea
@@ -170,7 +193,11 @@ function GeneratePost({ data, thisUser, allUsers }) {
                 value={message}
                 onChange={handleChange}
               ></textarea>
+             
             </div>
+            <div className="arrowOutline">
+            <SendOutlined className="mx-2" onClick={commentSubmitHandler} style={{color:'black',fontSize:'30px',borderRadius:'15px'}}/>
+              </div>
           </div>
         )}
 
