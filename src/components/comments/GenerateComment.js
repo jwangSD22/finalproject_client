@@ -21,11 +21,6 @@ useEffect(()=>{
 
 },[commentID])
 
-const getCommentData = async () => {
-  const response = await axios.get(`/api/comments/${commentID}`)
-  console.log(response)
-  setData(response.data)
-}
 
 
 
