@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import GenerateAvatar from "./GenerateAvatar";
 import { LikeOutlined, LikeFilled, SendOutlined } from "@ant-design/icons";
+import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
 import "./generatePost.css";
 import GenerateComment from "../components/comments/GenerateComment";
 
@@ -14,6 +16,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
   const [imageURLs, setImageURLs] = useState([]);
   const [likesList, setLikesList] = useState([]);
   const [comments, setComments] = useState([]);
+  const [date,setDate] = useState('')
   const textareaRef = useRef(null);
   const divRef = useRef(null);
   const postRef = useRef(null)
@@ -28,6 +31,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
       if (response.data.likes.indexOf(thisUser._id) > -1) {
         setUserLiked(true);
       }
+      setDate(format(parseISO(response.data.timestamp),`MMMM d, yyyy 'at' hh:mm a`))
     };
 
     getPostData();
@@ -176,7 +180,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
           </div>
           <div className="d-flex flex-column">
             <div>{post.fullName}</div>
-            <div>{post.timestamp}</div>
+            <div><small className="text-muted">{date}</small></div>
           </div>
         </div>
 
@@ -187,13 +191,13 @@ function GeneratePost({ data, thisUser, allUsers }) {
         </div>
 
         {/*post image conditionally rendered*/}
-        <div className="d-flex justify-content-center">
+        <div className="image-container d-flex justify-content-center" >
           {imageURLs.length > 0 &&
             imageURLs.map((data) => (
               <img
                 key={data}
                 src={data}
-                style={{ width: "auto", objectFit: "contain" }}
+                style={{ maxWidth:"500px", width: "100%", objectFit: "contain" }}
               ></img>
             ))}
         </div>
@@ -201,9 +205,9 @@ function GeneratePost({ data, thisUser, allUsers }) {
         {/*LIKE COUNT AND COMMENT COUNT */}
 
         <div className="d-flex justify-content-between">
-          <div> {post.likes.length && generateLikeSnippet()}</div>
+          <div className="d-flex align-items-center"> {post.likes.length&&<LikeFilled style={{ fontSize: "15px", color: "pink" }} />}<small className="mx-2">{post.likes.length &&generateLikeSnippet()}</small></div>
 
-          <div>{post.numberOfComments} Comments </div>
+          <div><small>{post.numberOfComments} Comments </small></div>
         </div>
 
         {/*like/comment section*/}

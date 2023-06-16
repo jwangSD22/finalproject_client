@@ -1,7 +1,7 @@
 var format = require('date-fns/format');
 var formatDistanceToNow = require ('date-fns/formatDistanceToNow')
 
-const time = new Date('2022-02-01T00:02:23.603+00:00')
+const time = new Date('2023-06-01T00:02:23.603+00:00')
 
 console.log(format(time,`MMMM d, yyyy 'at' hh:mm a`))
 
