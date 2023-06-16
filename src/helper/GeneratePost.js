@@ -14,7 +14,6 @@ function GeneratePost({ data, thisUser, allUsers }) {
   const [toggleCommentList, setToggleCommentList] = useState(false);
   const [userLiked, setUserLiked] = useState(false);
   const [imageURLs, setImageURLs] = useState([]);
-  const [likesList, setLikesList] = useState([]);
   const [comments, setComments] = useState([]);
   const [date,setDate] = useState('')
   const textareaRef = useRef(null);

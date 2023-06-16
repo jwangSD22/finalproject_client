@@ -43,7 +43,7 @@ function Home() {
 
     const retrieveFriends = async () => {
       try{
-        let response = await axios.get('/api/user/friends')
+        let response = await axios.get(`/api/user/friends/${username}`)
         setFriends(response.data)
       }
       catch(err){
