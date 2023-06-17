@@ -78,22 +78,39 @@ function User() {
     retrieveFriends()
   }, []);
 
+  const pattern = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 500">
+  <defs>
+    <pattern id="pattern" width="50" height="50" patternUnits="userSpaceOnUse">
+      <circle cx="25" cy="25" r="10" fill="#3498db" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#pattern)" />
+</svg>
+
 
 
   return (
-    <div className="container-fluid">
+    <>
       <Navbar data={allData} username={thisUsername} />
-      <div className="container">
-      <img src={profilePhotoURL||emptyAvatar} width='auto' height='100%'></img>
+      <div className="top-container">
+      <div className="background-container container" style={{width:'1250px',height:'500px'}}>
+      {profilePhotoURL?<img src={profilePhotoURL}></img>:pattern}
+              </div>
 
-        BG PIC</div>
-      <div  className="container d-flex" >
-        <div style={{height:"250px"}}>
+      <div  className="container d-flex flex-column-sm" >
+        <div className="col-2" style={{height:"100px"}}>
         <img src={profilePhotoURL||emptyAvatar} width='auto' height='100%'></img>
-        <div className="pfp-offset">OFFSET INFO</div>
+        {thisUserSameProfile&&<div className="pfp-offset">OFFSET INFO</div>}
         </div>
-        <div> USER pic, name, # of friends, and friend icons     IF NOT THSI USER FRIEND STATUS and SEND FRIEND REQ</div>
+        <div className="col-8 d-flex flex-column mt-auto"> 
+        <div>{data.fullName}</div>
+        <div>{data.friends.length} Friends</div>
+        <div>FRIEND ICON GENERATOR TOP 10</div>
         </div>
+        <div className="col-2 mt-auto">FRIEND BUTTONS</div>
+        </div>
+      </div>
+
       <div  className="container">MINI NAV BAR</div>
       <div  className="container">CONTAINER FOR MAIN 
       <div  className="container">stickY friends div</div>
@@ -107,7 +124,7 @@ function User() {
 
       </div>
 
-      </div>
+      </>
   )
 }
 

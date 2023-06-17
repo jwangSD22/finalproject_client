@@ -6,3 +6,16 @@
     height: 50px; /* Replace with your desired height */
     background-color: red;
 }
+
+.flex-column-sm{
+    position:relative;
+    bottom:25px;
+}
+
+@media (max-width: 576px) {
+    .flex-column-sm {
+        
+      flex-direction: column !important;
+      align-items: center;
+    }
+  }
