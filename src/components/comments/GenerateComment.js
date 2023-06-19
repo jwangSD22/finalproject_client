@@ -4,7 +4,7 @@ import GenerateAvatarFromID from '../../helper/GenerateAvatarFromID'
 import { formatDistanceToNow } from 'date-fns'
 
 
-function GenerateComment({commentID}) {
+function GenerateComment({commentID,pfpHash,setPfpHash}) {
 
 const [data,setData] = useState(null)
 const [date,setDate] = useState('')
@@ -36,7 +36,7 @@ useEffect(()=>{
   return (
     data&&<div className='d-flex bg-white my-1 border'>
 
-{<GenerateAvatarFromID userID={data.author._id} />}
+{<GenerateAvatarFromID userID={data.author._id} pfpHash={pfpHash} setPfpHash={setPfpHash}/>}
 <div className='d-flex flex-column'>
   <div><small>{data.author.fullName}</small></div>
   <div><h3>{data.message}</h3></div>

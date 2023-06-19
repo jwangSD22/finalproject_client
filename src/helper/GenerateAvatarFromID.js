@@ -3,40 +3,60 @@ import axios from 'axios'
 import emptyAvatar from '../images/empty_avatar.png'
 
 
-function GenerateAvatarFromID({userID}) {
+function GenerateAvatarFromID({userID,pfpHash,setPfpHash}) {
 
     const [data,setData] = useState(null)
+    const [activeURL, setActiveURL] = useState(null)
+    
 
     useEffect(()=>{
         
-        const getURL = async () => {
-            const response = await axios.get(`/api/users/pfp/${userID}`)
-            setData(response.data)
+
+
+        const hash = async () => {
+            try{
+                if(!pfpHash[userID]){
+                    const response = await axios.get(`/api/users/pfp/${userID}`)
+                    setPfpHash({...pfpHash,userID:response.data.profilePhotoURL})
+                    setData(response.data.profilePhotoURL)
+                }
+                else{
+                    setData(pfpHash[userID])
+                }
+            }
+            catch(err){
+                console.log(err)
+            }
         }
 
-        getURL()
 
+        hash();
     },[userID])
 
-    if(data){
-        let url = data.profilePhotoURL
-        let activeURL = null
-        if(url!=='NO PROFILE PHOTO'){
-        activeURL=url
-        }
+    useEffect(()=>{ 
+            let url = data
+            if(url!=='NO PROFILE PHOTO'){
+            setActiveURL(url)
+            }      
         
-        let style = {
-            border:'solid 1px black',
-            width:'35px',
-            height:'35px',
-            borderRadius:'50%'
-        }
-        
-        
-          return (
-        <img className="mx-2" style={style} src={activeURL||emptyAvatar} />  )
-    }    
+    },[data])
 
+
+
+
+
+    let style = {
+        border:'solid 1px black',
+        width:'35px',
+        height:'35px',
+        borderRadius:'50%'
+    }
+
+
+
+
+    return (
+        <img className="mx-2" style={style} src={activeURL||emptyAvatar} />  )
 
         
     }

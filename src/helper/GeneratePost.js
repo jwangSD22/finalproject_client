@@ -16,6 +16,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
   const [imageURLs, setImageURLs] = useState([]);
   const [comments, setComments] = useState([]);
   const [date,setDate] = useState('')
+  const [pfpHash, setPfpHash] = useState({})
   const textareaRef = useRef(null);
   const divRef = useRef(null);
   const postRef = useRef(null)
@@ -49,7 +50,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
       setComments(
         [...post.comments]
           .reverse()
-          .map((item) => <GenerateComment commentID={item} />)
+          .map((item) => <GenerateComment key={item} commentID={item} pfpHash={pfpHash} setPfpHash={setPfpHash} />)
       );
   }, [post,post.comments]);
 
@@ -68,6 +69,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
       post.likes.unshift(thisUser._id);
       post.numberOfLikes++;
     }
+
   };
 
   const commentSubmitHandler = async () => {
