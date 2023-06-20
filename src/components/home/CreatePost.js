@@ -25,6 +25,8 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
     }
   }
 
+
+  
   const handleImageRemove = () => {
     setTempImageURL("");
   };

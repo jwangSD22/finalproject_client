@@ -1,16 +1,16 @@
 import './queryresults.css'
-
-import React from 'react'
+import React,{useState} from 'react'
 import emptyAvatar from '../../images/empty_avatar.png'
 import {useNavigate} from 'react-router-dom'
 
 
-function QueryResults({id,fullName,profilePhotoURL,username}) {
+function QueryResults({id,fullName,profilePhotoURL,username,setSearchValue,setFocus}) {
   const navigate = useNavigate();
 
   const onClickHandler = () => {
-    console.log('clicked...')
     navigate(`/user/${username}`)
+    setSearchValue('')
+    setFocus(false)
   }
 
 

@@ -40,6 +40,10 @@ const handleLogout = () => {
 
   }
 
+const handleUserNav = () => {
+  navigate(`/user/${thisUser.username}`)
+}
+
 const photoURL = '';
 
 // thisUser.profilePhotoURL==='NO PROFILE PHOTO'?emptyAvatar:thisUser.profilePhotoURL
@@ -53,7 +57,7 @@ const photoURL = '';
   
     <div className="dropdown-menu"  aria-labelledby="dropdownMenuLink">
 
-      <div className="right-nav-drop  dropdown-item d-flex" >
+      <div className="right-nav-drop  dropdown-item d-flex" onClick={handleUserNav}>
       <GenerateAvatar url={thisUser.profilePhotoURL} />    
 <div className="mx-2">{thisUser.fullName}</div></div>
 

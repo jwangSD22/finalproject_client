@@ -15,12 +15,13 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 function User() {
   const [thisUsername, setThisUsername ] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState('');
   const [allData,setAllData] = useState(null)
   const [friends,setFriends] = useState(null)
   const [viewFriendsToggle,setViewFriendsToggle] = useState(false)
   const [thisUserSameProfile,setThisuserSameProfile] = useState(false)
   const [profilePhotoURL,setProfilePhotoURL] = useState(null)
+  const [bgURL, setBgURL] = useState(null)
   const navigate = useNavigate();
   const {username} = useParams()
 
@@ -34,7 +35,7 @@ function User() {
           setThisuserSameProfile(response.data.user.jwtusername===username)
         }
       } catch (err) {
-        if (err.response.status === 401) {
+        if (err) {
           navigate("/");
         }
       }
@@ -55,6 +56,7 @@ function User() {
         let response = await axios.get(`/api/users/${username}`);
         setData(response.data);
         setProfilePhotoURL(response.data.profilePhotoURL)
+        setBgURL(response.data.bgPhotoURL)
       } catch (err) {
         console.log(err);
       }
@@ -63,7 +65,6 @@ function User() {
     const retrieveFriends = async () => {
       try{
         let response = await axios.get(`/api/user/friends/${username}`)
-        console.log(response.data)
         setFriends(response.data)
       }
       catch(err){
@@ -72,11 +73,11 @@ function User() {
     }
 
 
-
+    retrieveAllData();
     checkLogin();
     retrieveData();
     retrieveFriends()
-  }, []);
+  }, [username]);
 
   const pattern = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 500">
   <defs>
@@ -87,27 +88,121 @@ function User() {
   <rect width="100%" height="100%" fill="url(#pattern)" />
 </svg>
 
+const updatePFP = async (event) => {
+
+  const file = event.target.files[0]
+  const imgFormData = new FormData();
+  imgFormData.append("profilePhoto",file)
+
+      //upload to server to get object key
+  const response = await axios.post(`/api/users/imageUpload`,imgFormData);
+  const key = response.data.objectKey
+
+
+    // update user in mongodb with new objectkey
+
+  const updateResponse = await axios.put(`/api/users/${thisUsername}`,{pfpKey:key})
+
+
+      // get new URL to display on page
+
+if(updateResponse.status===200){
+
+  const getPFP = await axios.get(`/api/users/pfp/${data._id}`)
+  console.log(getPFP)
+  setProfilePhotoURL(getPFP.data.profilePhotoURL)
+}
+
+
+
+  
+
+}
+
+const updateBG = async (event) => {
+ 
+  const file = event.target.files[0]
+  const imgFormData = new FormData();
+  imgFormData.append("bgPhoto",file)
+
+      //upload to server to get object key
+  const response = await axios.post(`/api/users/bgUpload`,imgFormData);
+  const key = response.data.objectKey
+
+
+    // update user in mongodb with new objectkey
+
+  const updateResponse = await axios.put(`/api/users/${thisUsername}`,{bgKey:key})
+
+
+      // get new URL to display on page
+
+if(updateResponse.status===200){
+
+  const getBG = await axios.get(`/api/users/bg/${data._id}`)
+  setBgURL(getBG.data.bgPhotoURL)
+}
+
+
+
+  
+}
+
+const handlePFPupdateClick = () => {
+  document.getElementById('pfp-upload').click();
+};
+
+const handleBGupdateClick = () => {
+  document.getElementById('bg-upload').click();
+};
+
+
+
 
 
   return (
     <>
       <Navbar data={allData} username={thisUsername} />
+
       <div className="top-container">
+
+        {/*BG BANNER CONTAINER */}
       <div className="background-container container" style={{width:'1250px',height:'500px'}}>
-      {profilePhotoURL?<img src={profilePhotoURL}></img>:pattern}
+      <img src={bgURL||emptyAvatar} height='100%'></img>
+      {thisUserSameProfile&&<><label htmlFor="bg-upload" className="file-upload-label" /><div>
+      <input id="bg-upload" type="file" style={{ display: 'none' }} onChange={updateBG} />
+      <button className="icon-button bg-offset" onClick={handleBGupdateClick}>
+        <i className="fas fa-upload"></i> Upload
+      </button>
+      </div>
+      </>}
               </div>
+
+        {/*PFP CONTAINER */}
 
       <div  className="container d-flex flex-column-sm" >
         <div className="col-2" style={{height:"100px"}}>
         <img src={profilePhotoURL||emptyAvatar} width='auto' height='100%'></img>
-        {thisUserSameProfile&&<div className="pfp-offset">OFFSET INFO</div>}
+        {thisUserSameProfile&&<><label htmlFor="pfp-upload" className="file-upload-label" /><div>
+      <input id="pfp-upload" type="file" style={{ display: 'none' }} onChange={updatePFP} />
+      <button className="icon-button pfp-offset" onClick={handlePFPupdateClick}>
+        <i className="fas fa-upload"></i> Upload
+      </button>
+      </div>
+      </>}
         </div>
+
+{/*USER INFO */}
+
         <div className="col-8 d-flex flex-column mt-auto"> 
-        <div>{data.fullName}</div>
-        <div>{data.friends.length} Friends</div>
+        <div>{data?.fullName}</div>
+        <div>{data?`${data.friends.length} Friends`:'0 Friends'}</div>
         <div>FRIEND ICON GENERATOR TOP 10</div>
         </div>
-        <div className="col-2 mt-auto">FRIEND BUTTONS</div>
+
+        {/*Friend Req INFO */}
+
+        {thisUserSameProfile?<div>NO BUTTONS HERE</div>:<div className="col-2 mt-auto">FRIEND BUTTONS</div>}
         </div>
       </div>
 

@@ -37,7 +37,7 @@ const divRef = useRef(null);
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [focus]);
 
 const getQueryResults = () => {
 
@@ -48,6 +48,8 @@ const getQueryResults = () => {
             fullName = {item.fullName} 
             profilePhotoURL={item.profilePhotoURL}
             username = {item.username}
+            setSearchValue = {setSearchValue}
+            setFocus = {setFocus}
             />)
             :
             <div><p>Start typing to find friends!</p></div>
