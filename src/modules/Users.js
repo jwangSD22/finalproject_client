@@ -41,7 +41,8 @@ function Users() {
           let getPublicUsersResponse = await axios.get("api/users");
           setPublicUsers(getPublicUsersResponse.data);
 
-          let getFriendsResponse = await axios.get(`api/user/friends`)
+          let getFriendsResponse = await axios.get(`api/user/friends/${user.username}`)
+          console.log(getFriendsResponse.data)
           setThisUserFriends(getFriendsResponse.data)
 
           let getPendingResponse = await axios.get('api/user/pending')
@@ -52,11 +53,10 @@ function Users() {
         }
       } catch (err) {
         console.log(err);
-        return navigate("/");
       }
     };
     checkLogin();
-  }, [toggle]);
+  }, [toggle,thisUser]);
 
 
 
