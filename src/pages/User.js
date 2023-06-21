@@ -21,7 +21,7 @@ function User() {
   const [myFriends, setMyFriends] = useState({});
   const [theirFriends, setTheirFriends] = useState({});
   const [viewFriendsToggle, setViewFriendsToggle] = useState(false);
-  const [thisUserSameProfile, setThisuserSameProfile] = useState(null);
+  const [thisUserSameProfile, setThisuserSameProfile] = useState(false);
   const [profilePhotoURL, setProfilePhotoURL] = useState(null);
   const [bgURL, setBgURL] = useState(null);
   const navigate = useNavigate();
@@ -84,12 +84,11 @@ function User() {
   useEffect(() => {
     const getMyInfo = async () => {
       const response = await axios.get(`/api/users/${thisUsername}`);
-      console.log('triggered')
       setMyData(response.data);
     };
 
     !thisUserSameProfile&&thisUsername&&getMyInfo();
-  }, [thisUserSameProfile]);
+  }, [thisUserSameProfile,username]);
 
   useEffect(() => {
     if (!thisUserSameProfile && myData) {
@@ -108,14 +107,25 @@ function User() {
           theirHash[data.friends[i].friend] = data.friends[i].status;
         }
       }
+      
+      let myID = myData._id
 
 
       setMyFriends(myHash);
       setTheirFriends(theirHash);
+
+      if(theirHash.hasOwnProperty(myID)){
+        setFriendStatus(theirHash[myID])
+      }
+      else{
+        setFriendStatus('')
+      }
+
+
+
     }
+  }, [myData,username]);
 
-
-  }, [myData]);
 
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
 
@@ -262,7 +272,7 @@ function User() {
 
           {/*Friend Req INFO */}
 
-<FriendReqBtns   thisUserSameProfile = {thisUserSameProfile} friendStatus={friendStatus}/>
+{!thisUserSameProfile&&<FriendReqBtns friendStatus={friendStatus} thisUsername={thisUsername} data={data} setFriendStatus={setFriendStatus}/>}
         </div>
       </div>
 
