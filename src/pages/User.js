@@ -64,6 +64,9 @@ function User() {
       }
     };
 
+    console.log('is this loading? 1')
+
+
     // const retrieveFriends = async () => {
     //   try {
     //     let response = await axios.get(`/api/user/friends/${username}`);
@@ -83,16 +86,16 @@ function User() {
 
   useEffect(() => {
     const getMyInfo = async () => {
+
       const response = await axios.get(`/api/users/${thisUsername}`);
       setMyData(response.data);
     };
 
     !thisUserSameProfile&&thisUsername&&getMyInfo();
-  }, [thisUserSameProfile,username]);
+  }, [thisUsername,username]);
 
   useEffect(() => {
     if (!thisUserSameProfile && myData) {
-      console.log('NOT THE SAME PROFILE')
       let myHash = {};
       let theirHash = {}
 
@@ -101,10 +104,20 @@ function User() {
           myHash[myData.friends[i].friend] = myData.friends[i].status;
         }
       }
+      for (let i = 0; i < myData.friendRequests.length; i++) {
+        if (!myFriends[myData.friendRequests[i].friend]) {
+          myHash[myData.friendRequests[i].friend] = myData.friendRequests[i].status;
+        }
+      }
 
       for (let i = 0; i < data.friends.length; i++) {
         if (!theirHash[data.friends[i].friend]) {
           theirHash[data.friends[i].friend] = data.friends[i].status;
+        }
+      }
+      for (let i = 0; i < data.friendRequests.length; i++) {
+        if (!theirHash[data.friendRequests[i].friend]) {
+          theirHash[data.friendRequests[i].friend] = data.friendRequests[i].status;
         }
       }
       
@@ -116,8 +129,10 @@ function User() {
 
       if(theirHash.hasOwnProperty(myID)){
         setFriendStatus(theirHash[myID])
+        console.log(theirHash[myID])
       }
       else{
+
         setFriendStatus('')
       }
 
