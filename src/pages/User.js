@@ -98,14 +98,14 @@ function User() {
       let theirHash = {}
 
       for (let i = 0; i < myData.friends.length; i++) {
-        if (!myFriends[myData.friends[i]._id]) {
-          myHash[myData.friends[i]._id] = myData.friends[i].status;
+        if (!myFriends[myData.friends[i].friend]) {
+          myHash[myData.friends[i].friend] = myData.friends[i].status;
         }
       }
 
       for (let i = 0; i < data.friends.length; i++) {
-        if (!theirHash[data.friends[i]._id]) {
-          theirHash[data.friends[i]._id] = data.friends[i].status;
+        if (!theirHash[data.friends[i].friend]) {
+          theirHash[data.friends[i].friend] = data.friends[i].status;
         }
       }
 
