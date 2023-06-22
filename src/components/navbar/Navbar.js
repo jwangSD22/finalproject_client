@@ -14,7 +14,7 @@ const Navbar = ({ data, username }) => {
   }, [path]);
 
   return (
-    <nav className="container-fluid bg-light vw-100 ">
+    <nav className="top-navbar container-fluid bg-light vw-100 sticky-top">
       <div className="row">
       {/* start-elements brand logo and search bar */}
       <div className="left-nav col-6 col-md-4 d-flex justify-content-start align-items-center">

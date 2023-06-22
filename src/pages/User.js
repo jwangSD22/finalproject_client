@@ -151,16 +151,16 @@ function User() {
     <>
       <Navbar data={allData} username={thisUsername} />
 
-      <div className="container-fluid top-container">
+      <div className="container top-container">
       <TopBanner thisUserSameProfile={thisUserSameProfile} data={data} thisUsername={thisUsername} friendStatus={friendStatus} setFriendStatus={setFriendStatus}/>
       </div>
 
-      <div className="container-fluid">MINI NAV BAR</div>
+      <div className="container">MINI NAV BAR</div>
 
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
-        <div className="container col-lg-5">stickY friends div</div>
-        <div className="container col-lg-7">
+        <div className="container d-none d-lg-flex col-lg-5">stickY f</div>
+        <div className="container-fluid col-lg-7">
           <UserPosts thisUsername={thisUsername} allData={allData}/>
         </div>
         </div>

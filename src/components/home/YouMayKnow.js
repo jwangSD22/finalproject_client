@@ -6,6 +6,8 @@ import GenerateAvatar from "../../helper/GenerateAvatar";
 
 function YouMayKnow({ data, friends, username }) {
   const [nonFriends, setNonFriends] = useState(null);
+  const [height, setHeight] = useState(0);
+
 
   const navigate = useNavigate();
 
@@ -20,6 +22,7 @@ function YouMayKnow({ data, friends, username }) {
       //add self to be filtered out
       hash.add(username);
 
+
       //get first 10 results to display on main page
       let friendsFiltered = data
         .filter((user) => !hash.has(user.username))
@@ -28,31 +31,41 @@ function YouMayKnow({ data, friends, username }) {
     }
   }, [data, friends, username]);
 
+  useEffect(() => {
+    const element = document.querySelector(".top-navbar");
+    if (element) {
+      setHeight(element.scrollHeight);
+    }
+  }, []);
+
   const linkHandler = (username) => {
     navigate(`/user/${username}`);
   };
+
+
 
   //generate each line
   let nonFriendsList =
     nonFriends &&
     nonFriends.map((user) => (
-      <div
-        key={user._id}
-        className=" d-flex"
-
-      >
-        <div className ="ymk-listItem box-styling d-flex my-1"         onClick={() => {
-          linkHandler(user.username);
-        }}>
+      <div key={user._id} className=" d-flex">
+        <div
+          className="ymk-listItem box-styling d-flex my-1"
+          onClick={() => {
+            linkHandler(user.username);
+          }}
+        >
           <GenerateAvatar url={user.profilePhotoURL} />
           <div className="mx-2">{user.fullName}</div>
         </div>
       </div>
     ));
 
+    
+
   return (
-    <div className="ymk d-none d-sm-flex flex-column mt-4">
-      <div> People you may know</div>
+    <div className="ymk d-none d-sm-flex flex-column mt-4" style={{top:`${height}px`}}>
+      <div > People you may know</div>
       <div>{nonFriendsList}</div>
     </div>
   );

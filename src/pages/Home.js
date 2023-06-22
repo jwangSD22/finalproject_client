@@ -16,6 +16,7 @@ function Home() {
   const [friends,setFriends] = useState(null)
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const checkLogin = async () => {
       try {
@@ -41,22 +42,30 @@ function Home() {
       }
     };
 
+
+
+
+
+    checkLogin();
+    retrieveData();
+    
+  }, []);
+
+  useEffect(()=>{
     const retrieveFriends = async () => {
       try{
         let response = await axios.get(`/api/user/friends/${username}`)
+        console.log(response.data)
         setFriends(response.data)
       }
       catch(err){
         console.log(err)
       }
     }
+    retrieveFriends();
+  },[username])
 
 
-
-    checkLogin();
-    retrieveData();
-    retrieveFriends()
-  }, []);
 
 
   return <>
@@ -64,7 +73,9 @@ function Home() {
   <div className="container-fluid">
     <div className="row">
       <div className="col-md-3 d-none d-md-block">
+ 
         <YouMayKnow data={data} friends={friends} username={username} />
+     
       </div>
       <div className=" d-none d-xl-flex col-xl-1"></div>
 <div className="col-md-8 col-lg-6 col-xxl-4 home-post-container">
