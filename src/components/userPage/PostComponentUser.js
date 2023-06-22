@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GeneratePost from '../../helper/GeneratePost';
+import { useParams } from 'react-router-dom';
 
 
 
-const PostComponent = ({thisUser,posts,setPosts,allUsers}) => {
+function PostComponentUser({thisUser,posts,setPosts,allData}) {
     const [currentPage, setCurrentPage] = useState(1);
     const [maxPage,setMaxPage] = useState(null)
     const [loading, setLoading] = useState(false);
     const [pfpHash, setPfpHash] = useState(new Map())
+
+    const { username } = useParams();
 
   
     useEffect(() => {
       const fetchPosts = async () => {
         try {
           setLoading(true);
-          const response = await axios.get(`/api/users/${thisUser.username}/homeposts`, {
+          const response = await axios.get(`/api/users/${username}/posts`, {
+            //have to use params for this from react router dom
             params: {
               page: currentPage,
               limit: 10
@@ -61,11 +65,11 @@ const PostComponent = ({thisUser,posts,setPosts,allUsers}) => {
     return (
       <div className='container-fluid '>
         {posts.map((data) => (
-<GeneratePost key={data._id} data={data} thisUser={thisUser} allUsers={allUsers} pfpHash={pfpHash} setPfpHash={setPfpHash}/>
+<GeneratePost key={data._id} data={data} thisUser={thisUser} allUsers={allData} pfpHash={pfpHash} setPfpHash={setPfpHash}/>
         ))}
         {loading && <p>Loading...</p>}
       </div>
     );
-  };
-  
-  export default PostComponent;
+}
+
+export default PostComponentUser

@@ -16,12 +16,16 @@ function GenerateAvatarFromID({userID,pfpHash,setPfpHash}) {
         const hash = async () => {
             try{
                 if(!pfpHash.get(userID)){
+                    console.log('triggered to pull from api')
+        
+
                     const response = await axios.get(`/api/users/pfp/${userID}`)
-                    setPfpHash(map=> new Map(map.set(userID,response.data.profilePhotoURL)))
+                    setPfpHash(pfpHash.set(userID,response.data.profilePhotoURL))
                     setData(response.data.profilePhotoURL)
                 }
                 else{
-                    console.log(pfpHash)
+                    console.log('trigger to obtain from map')
+
                     setData(pfpHash.get(userID))
                 }
             }
@@ -57,7 +61,9 @@ function GenerateAvatarFromID({userID,pfpHash,setPfpHash}) {
 
 
     return (
-        <img className="mx-2" style={style} src={activeURL||emptyAvatar} />  )
+        <img className="mx-2" style={style} src={activeURL||emptyAvatar} /> 
+
+        )
 
         
     }

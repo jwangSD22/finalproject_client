@@ -7,7 +7,7 @@ import parseISO from "date-fns/parseISO";
 import "./generatePost.css";
 import GenerateComment from "../components/comments/GenerateComment";
 
-function GeneratePost({ data, thisUser, allUsers }) {
+function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
   const [post, setPost] = useState('');
   const [message, setMessage] = useState("");
   const [editComment, setEditComment] = useState(false);
@@ -16,7 +16,6 @@ function GeneratePost({ data, thisUser, allUsers }) {
   const [imageURLs, setImageURLs] = useState([]);
   const [comments, setComments] = useState([]);
   const [date,setDate] = useState('')
-  const [pfpHash, setPfpHash] = useState(new Map())
   const textareaRef = useRef(null);
   const divRef = useRef(null);
   const postRef = useRef(null)
@@ -186,7 +185,6 @@ function GeneratePost({ data, thisUser, allUsers }) {
         </div>
 
         {/*post message*/}
-
         <div className="d-flex">
           <div>{post.postMessage}</div>
         </div>
