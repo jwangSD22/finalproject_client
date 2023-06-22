@@ -15,13 +15,14 @@ function GenerateAvatarFromID({userID,pfpHash,setPfpHash}) {
 
         const hash = async () => {
             try{
-                if(!pfpHash[userID]){
+                if(!pfpHash.get(userID)){
                     const response = await axios.get(`/api/users/pfp/${userID}`)
-                    setPfpHash({...pfpHash,userID:response.data.profilePhotoURL})
+                    setPfpHash(map=> new Map(map.set(userID,response.data.profilePhotoURL)))
                     setData(response.data.profilePhotoURL)
                 }
                 else{
-                    setData(pfpHash[userID])
+                    console.log(pfpHash)
+                    setData(pfpHash.get(userID))
                 }
             }
             catch(err){

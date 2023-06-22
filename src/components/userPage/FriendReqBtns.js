@@ -29,7 +29,7 @@ function FriendReqBtns({
 
   const handleSendFriendRequest = async () => {
     try{
-      const response = await axios.post(`/api/user/friendrequest`,{userIDEnd:data._id})
+      const response = await axios.post(`/api/user/friendrequest`,{endUserID:data._id})
       setFriendStatus('pending')
     }
     catch(err)
@@ -41,7 +41,18 @@ function FriendReqBtns({
 
   const handleRemoveFriendRequest = async () => {
     try{
-      const response = await axios.post(`/api/user/removefriendrequest`,{userIDEnd:data._id})
+      const response = await axios.post(`/api/user/removefriendrequest`,{endUserID:data._id})
+      setFriendStatus('')
+    }
+    catch(err)
+    {
+      console.log(err.response.data)
+    }
+  }
+
+  const handleDeleteFriend = async () => {
+    try{
+      const response = await axios.post(`/api/user/removefriend`,{endUserID:data._id})
       setFriendStatus('')
     }
     catch(err)
@@ -56,7 +67,7 @@ function FriendReqBtns({
       return (
         <>
           <button className="btn btn-primary">Already friends</button>
-          <button>Option to unfriend</button>
+          <button onClick={handleDeleteFriend}>Option to unfriend</button>
         </>
       )}
     if (friendStatus === "pending") {

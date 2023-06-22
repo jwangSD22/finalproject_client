@@ -12,7 +12,7 @@ function Pending({thisUserPending,handleRemovePending,setToggle,toggle}) {
 
     const handlePendingAction = async (param) => {
 
-      const response = await axios.post('/api/user/handlerequest',{param:param,userid:userid})
+      const response = await axios.post('/api/user/handlerequest',{param:param,endUserID:userid})
 
 
       if (param === 'reject') {

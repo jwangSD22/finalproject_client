@@ -16,7 +16,7 @@ function GeneratePost({ data, thisUser, allUsers }) {
   const [imageURLs, setImageURLs] = useState([]);
   const [comments, setComments] = useState([]);
   const [date,setDate] = useState('')
-  const [pfpHash, setPfpHash] = useState({})
+  const [pfpHash, setPfpHash] = useState(new Map())
   const textareaRef = useRef(null);
   const divRef = useRef(null);
   const postRef = useRef(null)
