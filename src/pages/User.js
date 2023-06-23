@@ -22,6 +22,8 @@ function User() {
   const [theirFriends, setTheirFriends] = useState({});
   const [viewFriendsToggle, setViewFriendsToggle] = useState(false);
   const [thisUserSameProfile, setThisUserSameProfile] = useState(false);
+  const [navbarOffset,setNavbarOffset] = useState(0)
+  const [miniOffset,setMiniOffset] = useState(0)
 
   const navigate = useNavigate();
   const { username } = useParams();
@@ -142,6 +144,28 @@ function User() {
     </svg>
   );
 
+  useEffect(()=>{
+
+    const navbar = document.querySelector(".top-navbar")
+    
+    if(navbar){
+      setNavbarOffset(navbar.scrollHeight)
+
+    }
+
+  
+
+    const mininav = document.querySelector('.mini-nav')
+
+    if(mininav){
+      setMiniOffset(navbar.scrollHeight+mininav.scrollHeight)
+
+    }
+
+  
+
+  },[])
+
 
 
 
@@ -150,19 +174,25 @@ function User() {
   return (
     <>
       <Navbar data={allData} username={thisUsername} />
-
+  
       <div className="container top-container">
-      <TopBanner thisUserSameProfile={thisUserSameProfile} data={data} thisUsername={thisUsername} friendStatus={friendStatus} setFriendStatus={setFriendStatus}/>
+        <TopBanner thisUserSameProfile={thisUserSameProfile} data={data} thisUsername={thisUsername} friendStatus={friendStatus} setFriendStatus={setFriendStatus}/>
       </div>
 
-      <div className="container">MINI NAV BAR</div>
 
+      <div className="mini-nav sticky-top" style={{top: `${navbarOffset}px`}}>
+        NAVIGATION HERE
+      </div>
+
+  
       <div className="container">
         <div className="row">
-        <div className="container d-none d-lg-flex col-lg-5">stickY f</div>
-        <div className="container-fluid col-lg-7">
-          <UserPosts thisUsername={thisUsername} allData={allData}/>
-        </div>
+          <div className="col-lg-5 d-none d-lg-block">
+            <div className="sticky-top" style={{top: `${miniOffset}px`}}>STICKY CONTENT</div>
+          </div>
+          <div className="col-lg-7">
+            <UserPosts thisUsername={thisUsername} allData={allData}/>
+          </div>
         </div>
       </div>
     </>
