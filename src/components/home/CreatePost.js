@@ -45,10 +45,13 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
 
 
     let response = await axios.post("/api/posts/", postObject);
+    
+    if(response.data){
+      let temp = await axios.get(`/api/posts/${response.data}`)
+      setPosts([temp.data,...posts])
+      setToggleNewPost(!toggleNewPost);
+    }
 
-    let temp = await axios.get(`/api/posts/${response.data}`)
-    setPosts([temp.data,...posts])
-    setToggleNewPost(!toggleNewPost);
 };
 
   const tempImgStyling = {

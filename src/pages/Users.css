@@ -4,12 +4,29 @@
     align-items: center;
     justify-content: center;
     bottom: 0px; /* Adjust the offset from the bottom as needed */
-    left: 100px; /* Adjust the offset from the right as needed */
-    width: 50px; /* Replace with your desired width */
-    height: 50px; /* Replace with your desired height */
-    background-color: rgb(211, 211, 211);
+    left: 150px; /* Adjust the offset from the right as needed */
+    width: 40px; /* Replace with your desired width */
+    height: 40px; /* Replace with your desired height */
+    background-color: rgb(240, 240, 240);
     border-radius: 50%;
     border:none;
+}
+
+
+
+@media (max-width: 576px) {
+  .pfp-offset {
+    top:125px;
+    left:260px;
+  }
+}
+
+@media (max-width: 576px) {
+  .flex-column-sm {
+      
+    flex-direction: column !important;
+    align-items: center;
+  }
 }
 
 .bg-offset{
@@ -17,18 +34,23 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  bottom: 50px; /* Adjust the offset from the bottom as needed */
+  bottom: 0px; /* Adjust the offset from the bottom as needed */
   right: 0px; /* Adjust the offset from the right as needed */
-  width: 50px; /* Replace with your desired width */
-  height: 50px; /* Replace with your desired height */
-  background-color: rgb(211, 211, 211);
+  width: 40px; /* Replace with your desired width */
+  height: 40px; /* Replace with your desired height */
+  background-color:  rgb(240, 240, 240);
   border-radius: 50%;
   border:none;
-
+  z-index: 1;
 }
 
 .bg-offset:hover{
-  background-color: rgb(168, 168, 168);
+  background-color: rgb(200, 200, 200);
+
+}
+
+.pfp-offset:hover{
+  background-color: rgb(200, 200, 200);
 
 }
 
@@ -69,4 +91,11 @@
       background-color: white;
       border:solid 4px white;
       
+    }
+    .pfp-button{
+      width:175px;
+      height:175px;
+      border-radius: 50%;
+      background-color: white;
+      border:none;
     }

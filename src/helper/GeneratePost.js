@@ -196,7 +196,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
               <img
                 key={data}
                 src={data}
-                style={{ maxWidth:"500px", width: "100%", objectFit: "contain" }}
+                style={{ maxWidth:"100%", width: "100%", objectFit: "contain" }}
               ></img>
             ))}
         </div>

@@ -70,7 +70,12 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
       };
 
       const handlePFPupdateClick = () => {
-        document.getElementById("pfp-upload").click();
+        if(thisUserSameProfile){
+          document.getElementById("pfp-upload").click();
+        }
+        else{
+          return
+        }
       };
     
       const handleBGupdateClick = () => {
@@ -78,7 +83,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
       };
 
       const iconStyle = {
-        fontSize:'24px'
+        fontSize:'24px',
       }
     
 
@@ -90,9 +95,9 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
             <div style={{height:'500px'}}>
                 <img className="background-image" src={bgURL || emptyAvatar}></img>
                 {thisUserSameProfile && 
-                  <>
+                  (<>
                     <label htmlFor="bg-upload" className="file-upload-label" />
-                    <div>
+                    <div onClick={handleBGupdateClick} >
                       <input
                         id="bg-upload"
                         type="file"
@@ -101,12 +106,12 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
                       />
                       <button
                         className="icon-button bg-offset"
-                        onClick={handleBGupdateClick}
+                        
                       >
                         <CameraOutlined style={iconStyle} />
                       </button>
                     </div>
-                  </>
+                  </>)
                 }
             </div>
           </div>
@@ -115,10 +120,13 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
   
           <div className="container d-flex flex-column-sm">
             <div className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2" style={{ height: "175px" }}>
+              <button onClick={handlePFPupdateClick} className="pfp-button">
               <img
                 src={profilePhotoURL || emptyAvatar}
                 className="pfp"     
               ></img>
+              </button>
+
               {thisUserSameProfile && (
                 <>
                   <label htmlFor="pfp-upload" className="file-upload-label" />

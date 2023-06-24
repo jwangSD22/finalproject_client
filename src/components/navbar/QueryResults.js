@@ -11,6 +11,7 @@ function QueryResults({id,fullName,profilePhotoURL,username,setSearchValue,setFo
     navigate(`/user/${username}`)
     setSearchValue('')
     setFocus(false)
+    window.location.reload();
   }
 
 
