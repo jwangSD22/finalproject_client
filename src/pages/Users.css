@@ -1,19 +1,35 @@
 .pfp-offset{
-    position:relative;
-    bottom: 60px; /* Adjust the offset from the bottom as needed */
+    position:absolute;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0px; /* Adjust the offset from the bottom as needed */
     left: 100px; /* Adjust the offset from the right as needed */
     width: 50px; /* Replace with your desired width */
     height: 50px; /* Replace with your desired height */
-    background-color: red;
+    background-color: rgb(211, 211, 211);
+    border-radius: 50%;
+    border:none;
 }
 
 .bg-offset{
-  position:relative;
-  bottom: 60px; /* Adjust the offset from the bottom as needed */
-  left: 100px; /* Adjust the offset from the right as needed */
+  position:absolute;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 50px; /* Adjust the offset from the bottom as needed */
+  right: 0px; /* Adjust the offset from the right as needed */
   width: 50px; /* Replace with your desired width */
   height: 50px; /* Replace with your desired height */
-  background-color: red;
+  background-color: rgb(211, 211, 211);
+  border-radius: 50%;
+  border:none;
+
+}
+
+.bg-offset:hover{
+  background-color: rgb(168, 168, 168);
+
 }
 
 
@@ -29,3 +45,28 @@
       align-items: center;
     }
   }
+
+  .background-container{
+    position:relative;
+    background-color: blanchedalmond;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;  }
+
+
+    .background-image{
+      /* width:100%;
+      height:100%; */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .pfp{
+      width:auto;
+      height:100%;
+      border-radius: 50%;
+      background-color: white;
+      border:solid 4px white;
+      
+    }

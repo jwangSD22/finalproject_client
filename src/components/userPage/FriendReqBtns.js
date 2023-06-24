@@ -92,7 +92,7 @@ function FriendReqBtns({
   };
 
   return (
-    <div className="col-2 mt-auto">
+    <div className="col-6 col-sm-2 mt-auto">
      {generateButtons(friendStatus)}
     </div>
   );

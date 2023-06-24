@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import FriendReqBtns from "./FriendReqBtns"
 import emptyAvatar from '../../images/empty_avatar.png'
 import axios from "axios";
+import { CameraOutlined } from "@ant-design/icons";
+
 
 
 function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriendStatus}) {
@@ -74,44 +76,48 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
       const handleBGupdateClick = () => {
         document.getElementById("bg-upload").click();
       };
+
+      const iconStyle = {
+        fontSize:'24px'
+      }
     
 
   return (<>
             {/*BG BANNER CONTAINER */}
             <div
             className="background-container container"
-            style={{ width: "1250px", height: "500px" }}
-          >
-            <img src={bgURL || emptyAvatar} height="100%"></img>
-            {thisUserSameProfile && (
-              <>
-                <label htmlFor="bg-upload" className="file-upload-label" />
-                <div>
-                  <input
-                    id="bg-upload"
-                    type="file"
-                    style={{ display: "none" }}
-                    onChange={updateBG}
-                  />
-                  <button
-                    className="icon-button bg-offset"
-                    onClick={handleBGupdateClick}
-                  >
-                    <i className="fas fa-upload"></i> Upload
-                  </button>
-                </div>
-              </>
-            )}
+            >
+            <div style={{height:'500px'}}>
+                <img className="background-image" src={bgURL || emptyAvatar}></img>
+                {thisUserSameProfile && 
+                  <>
+                    <label htmlFor="bg-upload" className="file-upload-label" />
+                    <div>
+                      <input
+                        id="bg-upload"
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={updateBG}
+                      />
+                      <button
+                        className="icon-button bg-offset"
+                        onClick={handleBGupdateClick}
+                      >
+                        <CameraOutlined style={iconStyle} />
+                      </button>
+                    </div>
+                  </>
+                }
+            </div>
           </div>
   
           {/*PFP CONTAINER */}
   
           <div className="container d-flex flex-column-sm">
-            <div className="col-2" style={{ height: "100px" }}>
+            <div className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2" style={{ height: "175px" }}>
               <img
                 src={profilePhotoURL || emptyAvatar}
-                width="auto"
-                height="100%"
+                className="pfp"     
               ></img>
               {thisUserSameProfile && (
                 <>
@@ -127,7 +133,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
                       className="icon-button pfp-offset"
                       onClick={handlePFPupdateClick}
                     >
-                      <i className="fas fa-upload"></i> Upload
+                        <CameraOutlined style={iconStyle} />
                     </button>
                   </div>
                 </>
@@ -136,7 +142,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
   
             {/*USER INFO */}
   
-            <div className="col-8 d-flex flex-column mt-auto">
+            <div className="col-md-6 col-lg-6 col-xl-8 d-flex flex-column mt-auto">
               <div>{data?.fullName}</div>
               <div>{data ? `${data.friends.length} Friends` : "0 Friends"}</div>
               <div>FRIEND ICON GENERATOR TOP 10</div>
