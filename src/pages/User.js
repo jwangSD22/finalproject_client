@@ -191,10 +191,10 @@ NAV HERE
       </div>
 
     {!viewFriendsToggle?
-          <div className="container">
+          <div className="container" >
           <div className="row">
-            <div className="col-lg-5 d-none d-lg-block">
-              <div className="sticky-top" style={{top: `${miniOffset}px`}}><MiniFriendContainer /></div>
+            <div className="col-lg-5 d-none d-lg-block" style={{zIndex:'1'}}>
+              <div className="sticky-top" style={{top: `${miniOffset}px`}}><MiniFriendContainer allData={allData} data={data} viewFriendsToggle={viewFriendsToggle} setViewFriendsToggle={setViewFriendsToggle}/></div>
             </div>
             <div className="col-lg-7">
               <UserPosts thisUsername={thisUsername} allData={allData}/>

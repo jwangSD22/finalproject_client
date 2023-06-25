@@ -1,0 +1,47 @@
+.mini-friend-container{
+    cursor:pointer;
+    background-color: black;
+    width:145px;
+    height:145px;
+    border-radius: 9%;
+    border: solid 1px black;
+    z-index: 1;
+
+}
+
+.mini-friend-container-img:hover{
+    opacity: 90%;
+}
+
+.mini-friend-container-img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 8%;
+
+}
+
+
+
+.mini-friend-name{
+    color:black;
+}
+
+.mini-friend-name:hover{
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+.see-all-friends{
+    color:blue;
+    transition: all 0.3s;
+    border-radius: 7%;
+    padding:5px;
+}
+
+.see-all-friends:hover{
+    cursor:pointer;
+    background-color: aliceblue;
+}
+
+
