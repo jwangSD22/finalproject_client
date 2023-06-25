@@ -6,6 +6,8 @@ import emptyAvatar from "../images/empty_avatar.png";
 import "./Users.css";
 import UserPosts from "../components/userPage/UserPosts.js";
 import TopBanner from "../components/userPage/TopBanner.js";
+import MiniFriendContainer from "../components/userPage/MiniFriendContainer.js";
+import FriendContainer from "../components/userPage/FriendContainer.js";
 
 const token = localStorage.getItem("jwt");
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -178,23 +180,33 @@ function User() {
       <div className="container top-container">
         <TopBanner thisUserSameProfile={thisUserSameProfile} data={data} thisUsername={thisUsername} friendStatus={friendStatus} setFriendStatus={setFriendStatus}/>
       </div>
+      
+<div className="container">   <hr /></div>
+ 
+      <div className="mini-nav sticky-top " style={{top: `${navbarOffset}px`}}>
+
+NAV HERE
 
 
-      <div className="mini-nav sticky-top" style={{top: `${navbarOffset}px`}}>
-        NAVIGATION HERE
       </div>
 
-  
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-5 d-none d-lg-block">
-            <div className="sticky-top" style={{top: `${miniOffset}px`}}>STICKY CONTENT</div>
+    {!viewFriendsToggle?
+          <div className="container">
+          <div className="row">
+            <div className="col-lg-5 d-none d-lg-block">
+              <div className="sticky-top" style={{top: `${miniOffset}px`}}><MiniFriendContainer /></div>
+            </div>
+            <div className="col-lg-7">
+              <UserPosts thisUsername={thisUsername} allData={allData}/>
+            </div>
           </div>
-          <div className="col-lg-7">
-            <UserPosts thisUsername={thisUsername} allData={allData}/>
-          </div>
-        </div>
-      </div>
+        </div>:
+        <FriendContainer />
+  }
+
+
+
+
     </>
   );
 }
