@@ -19,6 +19,8 @@ function User() {
   const [data, setData] = useState("");
   const [myData, setMyData] = useState(null);
   const [allData, setAllData] = useState(null);
+  const [thisUserFriends, setThisUserFriends] = useState([])
+  const [friends,setFriends] = useState([])
   const [friendStatus,setFriendStatus] = useState('')
   const [myFriends, setMyFriends] = useState({});
   const [theirFriends, setTheirFriends] = useState({});
@@ -51,6 +53,7 @@ function User() {
       try {
         let response = await axios.get(`/api/users/`);
         setAllData(response.data);
+        console.log(response.data)
       } catch (err) {
         console.log(err);
       }
@@ -117,15 +120,25 @@ function User() {
 
       if(theirHash.hasOwnProperty(myID)){
         setFriendStatus(theirHash[myID])
-        console.log(theirHash[myID])
       }
       else{
 
         setFriendStatus('')
       }
-
     }
   }, [myData,username]);
+
+  useEffect(()=>{
+
+    const retrieveFriends = async () => {
+      const response = await axios.get(`/api/user/friends/${data.username}`)
+      setFriends(response.data)
+
+    }
+
+    retrieveFriends();
+
+  },[data])
 
 
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
@@ -172,7 +185,6 @@ function User() {
 
 
 
-
   return (
     <>
       <Navbar data={allData} username={thisUsername} />
@@ -181,11 +193,19 @@ function User() {
         <TopBanner thisUserSameProfile={thisUserSameProfile} data={data} thisUsername={thisUsername} friendStatus={friendStatus} setFriendStatus={setFriendStatus}/>
       </div>
       
-<div className="container">   <hr /></div>
+<div className="container ">   <hr /></div>
  
-      <div className="mini-nav sticky-top " style={{top: `${navbarOffset}px`}}>
+      <div className="mini-nav sticky-top" style={{top:`${navbarOffset}px`}}>
+        <div className="container ">
+          <div className="row " style={{zIndex:'0'}}>
+          <div className="mini-nav-link col-2 col-md-1 mx-2 bg-success">LINK TO Posts</div>
+          <div className="mini-nav-link col-2 col-md-1 mx-2 bg-danger">LINK TO FRIENDS</div>
+          </div>
 
-NAV HERE
+
+        </div>
+
+
 
 
       </div>
@@ -194,14 +214,19 @@ NAV HERE
           <div className="container" >
           <div className="row">
             <div className="col-lg-5 d-none d-lg-block" style={{zIndex:'1'}}>
-              <div className="sticky-top" style={{top: `${miniOffset}px`}}><MiniFriendContainer allData={allData} data={data} viewFriendsToggle={viewFriendsToggle} setViewFriendsToggle={setViewFriendsToggle}/></div>
+              <div className="sticky-top" style={{top:`${miniOffset}px`}}><MiniFriendContainer allData={allData} data={data} viewFriendsToggle={viewFriendsToggle} setViewFriendsToggle={setViewFriendsToggle} friends={friends} setFriends={setFriends}/></div>
             </div>
             <div className="col-lg-7">
               <UserPosts thisUsername={thisUsername} allData={allData}/>
             </div>
           </div>
         </div>:
-        <FriendContainer />
+        <div className="container">
+          <div className="row"> 
+                 <FriendContainer />
+          </div>
+        </div>
+
   }
 
 

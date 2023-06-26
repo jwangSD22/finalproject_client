@@ -4,24 +4,14 @@ import emptyAvatar from '../../images/empty_avatar.png'
 import './minifriendcontainer.css'
 import { useNavigate } from "react-router-dom";
 
-function MiniFriendContainer({allData, data}) {
+function MiniFriendContainer({allData, data,viewFriendsToggle,setViewFriendsToggle,friends,setFriends}) {
 
-  const [friends,setFriends] = useState([])
   const navigate = useNavigate()
-
-  // router.get('/user/friends/:username',verifyToken,friend_controller.get_user_friends)
-
-  const handleNav = (username) => {
-    navigate(`/user/${username}`);window.location.reload()
-  }
-
+  const [friendsDiv,setFriendsDiv] = useState([])
 
   useEffect(()=>{
-
-    const retrieveFriends = async () => {
-      const response = await axios.get(`/api/user/friends/${data.username}`)
-      const array = response.data.slice(0,9)
-      console.log(array)
+    if(friends){
+      const array = friends.slice(0,9)
 
       const finalArray = array.map(item => 
       <div className="col-lg-6 col-xl-4 d-flex flex-column my-2" key={item._id}>
@@ -30,33 +20,41 @@ function MiniFriendContainer({allData, data}) {
           </div>
         <div className="mini-friend-name"onClick={()=>{handleNav(item.username)}}>{item.fullName}</div>
       </div>)
-
-      setFriends(finalArray)
+  
+    setFriendsDiv(finalArray)
     }
 
-    retrieveFriends();
+    
+  },[friends])
 
-  },[data])
+  // router.get('/user/friends/:username',verifyToken,friend_controller.get_user_friends)
+
+  const handleNav = (username) => {
+    navigate(`/user/${username}`);window.location.reload()
+  }
+
+
+
 
 
 
 
 
   return (
-    <div className="container">
+    <div className="container rounded border my-4">
       <div className="row">
         <div className="d-flex justify-content-between">
           <div>
             <div><h2>Friends</h2></div>
             <div>{`${friends.length} friends`}</div>
           </div>
-          <div><div className="see-all-friends">See all friends</div></div>
+          <div><div className="see-all-friends" onClick={()=>{setViewFriendsToggle(true)}}>See all friends</div></div>
         </div>
         <div className="container">
 
 <div className="friend-container row">
     
-{friends}
+{friendsDiv}
     
 
 

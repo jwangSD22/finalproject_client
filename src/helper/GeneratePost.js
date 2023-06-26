@@ -172,7 +172,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
 
   return (
     post && (
-      <div ref={postRef} className="container-fluid bg-light my-4 p-2 rounded shadow-sm">
+      <div ref={postRef} className="container-fluid bg-light my-4 p-2 rounded shadow-sm border">
         {/*post header*/}
         <div className="header d-flex">
           <div>

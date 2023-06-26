@@ -56,7 +56,7 @@ function UserPosts({thisUsername,allData}) {
     
           <div className="row">
        
-            <div className='container-fluid text-center'>{sameUser&&newPost}</div>
+            <div className='container-fluid text-center border rounded shadow-sm'>{sameUser&&newPost}</div>
      
     
            <PostComponentUser thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh} allData={allData}/> 

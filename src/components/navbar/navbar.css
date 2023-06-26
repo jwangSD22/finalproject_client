@@ -76,3 +76,8 @@ cursor:pointer;
     border:solid 1px red;
     margin: 7px;
 }
+
+nav{
+  box-shadow:  0 5px 5px -5px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}

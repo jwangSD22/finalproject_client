@@ -10,6 +10,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
 
     const [profilePhotoURL, setProfilePhotoURL] = useState(null);
     const [bgURL, setBgURL] = useState(null);
+    const [icons, setIcons] = useState([])
 
     useEffect(()=>{
         if(data){
