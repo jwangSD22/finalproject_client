@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/navbar/Navbar.js";
 import emptyAvatar from "../images/empty_avatar.png";
 import "./Users.css";
 import UserPosts from "../components/userPage/UserPosts.js";
 import TopBanner from "../components/userPage/TopBanner.js";
+import MiniNav from "../components/userPage/MiniNav.js";
 import MiniFriendContainer from "../components/userPage/MiniFriendContainer.js";
 import FriendContainer from "../components/userPage/FriendContainer.js";
 
@@ -19,19 +20,18 @@ function User() {
   const [data, setData] = useState("");
   const [myData, setMyData] = useState(null);
   const [allData, setAllData] = useState(null);
-  const [thisUserFriends, setThisUserFriends] = useState([])
-  const [friends,setFriends] = useState([])
-  const [friendStatus,setFriendStatus] = useState('')
+  const [thisUserFriends, setThisUserFriends] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [friendStatus, setFriendStatus] = useState("");
   const [myFriends, setMyFriends] = useState({});
   const [theirFriends, setTheirFriends] = useState({});
   const [viewFriendsToggle, setViewFriendsToggle] = useState(false);
   const [thisUserSameProfile, setThisUserSameProfile] = useState(false);
-  const [navbarOffset,setNavbarOffset] = useState(0)
-  const [miniOffset,setMiniOffset] = useState(0)
+  const [navbarOffset, setNavbarOffset] = useState(0);
+  const [miniOffset, setMiniOffset] = useState(0);
 
   const navigate = useNavigate();
   const { username } = useParams();
-
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -53,7 +53,6 @@ function User() {
       try {
         let response = await axios.get(`/api/users/`);
         setAllData(response.data);
-        console.log(response.data)
       } catch (err) {
         console.log(err);
       }
@@ -63,12 +62,10 @@ function User() {
       try {
         let response = await axios.get(`/api/users/${username}`);
         setData(response.data);
-
       } catch (err) {
         console.log(err);
       }
     };
-
 
     retrieveAllData();
     checkLogin();
@@ -77,18 +74,17 @@ function User() {
 
   useEffect(() => {
     const getMyInfo = async () => {
-
       const response = await axios.get(`/api/users/${thisUsername}`);
       setMyData(response.data);
     };
 
-    !thisUserSameProfile&&thisUsername&&getMyInfo();
-  }, [thisUsername,username]);
+    !thisUserSameProfile && thisUsername && getMyInfo();
+  }, [thisUsername, username]);
 
   useEffect(() => {
     if (!thisUserSameProfile && myData) {
       let myHash = {};
-      let theirHash = {}
+      let theirHash = {};
 
       for (let i = 0; i < myData.friends.length; i++) {
         if (!myFriends[myData.friends[i].friend]) {
@@ -97,7 +93,8 @@ function User() {
       }
       for (let i = 0; i < myData.friendRequests.length; i++) {
         if (!myFriends[myData.friendRequests[i].friend]) {
-          myHash[myData.friendRequests[i].friend] = myData.friendRequests[i].status;
+          myHash[myData.friendRequests[i].friend] =
+            myData.friendRequests[i].status;
         }
       }
 
@@ -108,38 +105,33 @@ function User() {
       }
       for (let i = 0; i < data.friendRequests.length; i++) {
         if (!theirHash[data.friendRequests[i].friend]) {
-          theirHash[data.friendRequests[i].friend] = data.friendRequests[i].status;
+          theirHash[data.friendRequests[i].friend] =
+            data.friendRequests[i].status;
         }
       }
-      
-      let myID = myData._id
 
+      let myID = myData._id;
 
+      console.log(myHash)
       setMyFriends(myHash);
       setTheirFriends(theirHash);
 
-      if(theirHash.hasOwnProperty(myID)){
-        setFriendStatus(theirHash[myID])
-      }
-      else{
-
-        setFriendStatus('')
+      if (theirHash.hasOwnProperty(myID)) {
+        setFriendStatus(theirHash[myID]);
+      } else {
+        setFriendStatus("");
       }
     }
-  }, [myData,username]);
+  }, [myData, username]);
 
-  useEffect(()=>{
-
+  useEffect(() => {
     const retrieveFriends = async () => {
-      const response = await axios.get(`/api/user/friends/${data.username}`)
-      setFriends(response.data)
-
-    }
+      const response = await axios.get(`/api/user/friends/${data.username}`);
+      setFriends(response.data);
+    };
 
     retrieveFriends();
-
-  },[data])
-
+  }, [data]);
 
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
 
@@ -159,79 +151,72 @@ function User() {
     </svg>
   );
 
-  useEffect(()=>{
+  useEffect(() => {
+    const navbar = document.querySelector(".top-navbar");
 
-    const navbar = document.querySelector(".top-navbar")
-    
-    if(navbar){
-      setNavbarOffset(navbar.scrollHeight)
-
+    if (navbar) {
+      setNavbarOffset(navbar.scrollHeight);
     }
 
-  
+    const mininav = document.querySelector(".mini-nav");
 
-    const mininav = document.querySelector('.mini-nav')
-
-    if(mininav){
-      setMiniOffset(navbar.scrollHeight+mininav.scrollHeight)
-
+    if (mininav) {
+      setMiniOffset(navbar.scrollHeight + mininav.scrollHeight);
     }
-
-  
-
-  },[])
-
-
-
-
+  }, []);
 
   return (
     <>
+    
       <Navbar data={allData} username={thisUsername} />
-  
+
       <div className="container top-container">
-        <TopBanner thisUserSameProfile={thisUserSameProfile} data={data} thisUsername={thisUsername} friendStatus={friendStatus} setFriendStatus={setFriendStatus}/>
-      </div>
-      
-<div className="container ">   <hr /></div>
- 
-      <div className="mini-nav sticky-top" style={{top:`${navbarOffset}px`}}>
-        <div className="container ">
-          <div className="row " style={{zIndex:'0'}}>
-          <div className="mini-nav-link col-2 col-md-1 mx-2 bg-success">LINK TO Posts</div>
-          <div className="mini-nav-link col-2 col-md-1 mx-2 bg-danger">LINK TO FRIENDS</div>
-          </div>
-
-
-        </div>
-
-
-
-
+        <TopBanner
+          thisUserSameProfile={thisUserSameProfile}
+          data={data}
+          thisUsername={thisUsername}
+          friendStatus={friendStatus}
+          setFriendStatus={setFriendStatus}
+        />
       </div>
 
-    {!viewFriendsToggle?
-          <div className="container" >
+      <div className="container ">
+        <hr />
+      </div>
+
+      <div className="mini-nav sticky-top" style={{ top: `${navbarOffset}px` }}>
+        <MiniNav
+          viewFriendsToggle={viewFriendsToggle}
+          setViewFriendsToggle={setViewFriendsToggle}
+        />
+      </div>
+
+      {!viewFriendsToggle ? (
+        <div className="container">
           <div className="row">
-            <div className="col-lg-5 d-none d-lg-block" style={{zIndex:'1'}}>
-              <div className="sticky-top" style={{top:`${miniOffset}px`}}><MiniFriendContainer allData={allData} data={data} viewFriendsToggle={viewFriendsToggle} setViewFriendsToggle={setViewFriendsToggle} friends={friends} setFriends={setFriends}/></div>
+            <div className="col-lg-5 d-none d-lg-block" style={{ zIndex: "0" }}>
+              <div className="sticky-top" style={{ top: `${miniOffset}px` }}>
+                <MiniFriendContainer
+                  allData={allData}
+                  data={data}
+                  viewFriendsToggle={viewFriendsToggle}
+                  setViewFriendsToggle={setViewFriendsToggle}
+                  friends={friends}
+                  setFriends={setFriends}
+                />
+              </div>
+              <Outlet />
             </div>
             <div className="col-lg-7">
-              <UserPosts thisUsername={thisUsername} allData={allData}/>
+              <UserPosts thisUsername={thisUsername} allData={allData} />
             </div>
           </div>
-        </div>:
-        <div className="container">
-          <div className="row"> 
-                 <FriendContainer />
-          </div>
         </div>
+      ) : (
 
-  }
+            <FriendContainer />
 
-
-
-
+      )}
     </>
   );
 }

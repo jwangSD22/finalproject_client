@@ -31,7 +31,14 @@ function RouteSwitch() {
       {/*Friend Route will display all friends and pending requests */}      
       <Route path = "/friends" element={<Friends />} /> 
 
-      <Route path = "/user/:username" element = {<User />} />
+      <Route path = "/user/:username" element = {<User />}>
+      
+
+      
+
+      {/* use outlet from react router dom to handle nav between posts and friends? */}
+
+        </Route>
 
 
 
