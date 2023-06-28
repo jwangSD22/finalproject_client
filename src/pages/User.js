@@ -204,7 +204,6 @@ function User() {
                   setFriends={setFriends}
                 />
               </div>
-              <Outlet />
             </div>
             <div className="col-lg-7">
               <UserPosts thisUsername={thisUsername} allData={allData} />
