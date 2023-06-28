@@ -28,8 +28,9 @@ function UserPosts({thisUsername,allData}) {
         }
       }
 
-    
-      thisUsername&&getThisUser()&&setPosts([])
+      thisUsername&&getThisUser()
+
+      setPosts([])
 
     
     },[thisUsername,username])

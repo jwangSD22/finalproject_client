@@ -13,6 +13,7 @@ function PostComponentUser({thisUser,posts,setPosts,allData}) {
 
     const { username } = useParams();
 
+ 
   
     useEffect(() => {
       const fetchPosts = async () => {

@@ -112,7 +112,6 @@ function User() {
 
       let myID = myData._id;
 
-      console.log(myHash)
       setMyFriends(myHash);
       setTheirFriends(theirHash);
 
@@ -214,7 +213,7 @@ function User() {
         </div>
       ) : (
 
-            <FriendContainer />
+            <FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends}/>
 
       )}
     </>

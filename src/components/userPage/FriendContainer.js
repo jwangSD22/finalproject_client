@@ -25,8 +25,7 @@ function FriendContainer({friends,myFriends,theirFriends}) {
 
   <div className="row">
 
-    {/* map of all friends here  */}
-
+  {friends.map(item=><div key={item._id}>{item.fullName}</div>)}
 
   </div>
 </div>

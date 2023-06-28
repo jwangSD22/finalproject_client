@@ -14,7 +14,7 @@ function MiniFriendContainer({allData, data,viewFriendsToggle,setViewFriendsTogg
       const array = friends.slice(0,9)
 
       const finalArray = array.map(item => 
-      <div className="col-lg-6 col-xl-4 d-flex flex-column my-2" key={item._id}>
+      <div className="col-lg-6 col-xxl-4 d-flex flex-column my-2" key={item._id}>
         <div className="mini-friend-container" onClick={()=>{handleNav(item.username)}}>
           <img className="mini-friend-container-img" src={item.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:item.friendPhotoURL}/>
           </div>
