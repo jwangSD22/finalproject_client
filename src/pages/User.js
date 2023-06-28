@@ -211,7 +211,7 @@ function User() {
           </div>
         </div>
       ) : (
-<div className="container">
+<div className="container border rounded">
 <FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends}/>
 
 </div>

@@ -4,6 +4,7 @@ import GenerateAvatar from '../../helper/GenerateAvatar'
 import CreatePost from '../home/CreatePost'
 import PostComponentUser from './PostComponentUser'
 import { useParams } from 'react-router-dom'
+import './userposts.css'
 
 function UserPosts({thisUsername,allData}) {
   {
@@ -44,7 +45,7 @@ function UserPosts({thisUsername,allData}) {
     
     
     const newPost = <div className="container box-styling d-flex  align-items-center justify-content-center p-2">
-        {thisUser&&<GenerateAvatar url={thisUser.profilePhotoURL} />}
+        {thisUser&&<GenerateAvatar cssClassIdentifier={`user-post-pfp mx-2`} url={thisUser.profilePhotoURL} />}
       <div className='inputBox box-styling flex-grow-1' onClick={formClickHandler}> What's on your mind? </div>
       </div>
     

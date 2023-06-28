@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import './friendcontainer.css'
+import GenerateAvatar from '../../helper/GenerateAvatar'
 //need to add logic to calculate mutual friends 
 
 //state of myFriends will be a dictionary to calculate mutual friends.
@@ -19,7 +20,7 @@ import './friendcontainer.css'
 
 function FriendContainer({friends,myFriends,theirFriends}) {
   return (
-<div className='container border rounded m-4'>
+<>
 
   <div className="header my-2"><h2>ALL FRIENDS</h2></div>
 
@@ -27,19 +28,20 @@ function FriendContainer({friends,myFriends,theirFriends}) {
 
   {friends.map(item=>
   
-  <div key={item._id} className='col-10 col-lg-5 container m-2 bg-light border'>
-    <div className="row">
-    <div className='responsive-pfp-img-cont col-2 my-2'>
-      <img className='responsive-pfp-img' src={item.friendPhotoURL} />
-    </div>
-    <div className='col-4 d-flex flex-column justify-content-center'>
-    <div>{item.fullName}</div>
-    <div>mutual friends</div>
-    </div>
-    <div className='hiddendiv col-3' />
-    <div className='status col-3 d-none d-md-flex align-items-center '>STATUS</div>
-
-
+  <div key={item._id} className='col-10 col-lg-6 container my-sm-3 my-1 '>
+    <div className='bg-light border'>
+      <div className="row">
+      <div className='responsive-pfp-img-cont col-2 my-2'>
+        {/* this component uses classname -> responsive-pfp-img */}
+        <GenerateAvatar cssClassIdentifier={'responsive-pfp-img'} url={item.friendPhotoURL} />
+      </div>
+      <div className='col-4 d-flex flex-column justify-content-center'>
+      <div>{item.fullName}</div>
+      <div>mutual friends</div>
+      </div>
+      <div className='hiddendiv col-3' />
+      <div className='status col-3 d-none d-md-flex align-items-center '>STATUS</div>
+      </div>
     </div>
 
 
@@ -50,7 +52,7 @@ function FriendContainer({friends,myFriends,theirFriends}) {
   )}
 
   </div>
-</div>
+</>
   )
 }
 

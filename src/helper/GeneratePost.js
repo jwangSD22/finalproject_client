@@ -176,7 +176,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
         {/*post header*/}
         <div className="header d-flex">
           <div>
-            <GenerateAvatar url={post.authorAvatar} />
+            <GenerateAvatar cssClassIdentifier={`gen-post-pfp mx-2`} url={post.authorAvatar} />
           </div>
           <div className="d-flex flex-column">
             <div>{post.fullName}</div>
@@ -196,7 +196,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
               <img
                 key={data}
                 src={data}
-                style={{ maxWidth:"100%", width: "100%", objectFit: "contain" }}
+                style={{ maxWidth:"100%", width: "100%", maxHeight:'500px',objectFit: "contain" }}
               ></img>
             ))}
         </div>
@@ -242,7 +242,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
 
         {editComment && (
           <div className="d-flex align-items-center animate__animated animate__fadeIn">
-            <GenerateAvatar url={thisUser.profilePhotoURL} />
+            <GenerateAvatar cssClassIdentifier={`gen-post-pfp mx-2`} url={thisUser.profilePhotoURL} />
             <div ref={divRef} className="bubble flex-grow-1">
               <textarea
                 ref={textareaRef}

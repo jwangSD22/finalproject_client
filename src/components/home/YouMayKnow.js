@@ -55,7 +55,7 @@ function YouMayKnow({ data, friends, username }) {
             linkHandler(user.username);
           }}
         >
-          <GenerateAvatar url={user.profilePhotoURL} />
+          <GenerateAvatar cssClassIdentifier={`create-post-pfp`} url={user.profilePhotoURL} />
           <div className="mx-2">{user.fullName}</div>
         </div>
       </div>

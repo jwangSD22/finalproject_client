@@ -4,7 +4,7 @@ import {Tooltip} from 'react-tooltip'
 import axios from 'axios'
 import { HomeOutlined,MessageOutlined,TeamOutlined,LogoutOutlined, SettingOutlined } from '@ant-design/icons'
 import GenerateAvatar from '../../helper/GenerateAvatar'
-import './rightnav.css'
+import './navbar.css'
 
 
 function RightNav({username, collapseState}) {
@@ -52,13 +52,13 @@ const photoURL = '';
   return (
     <div className="dropleft show" >
     <a className="btn dropdown-toggle animate__animated animate__fadeInRight" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false" data-tooltip-id="right-tooltip" data-tooltip-content="Your profile" data-tooltip-place="bottom">
-    <GenerateAvatar url={thisUser.profilePhotoURL} />    
+    <GenerateAvatar cssClassIdentifier={`nav-pfp`} url={thisUser.profilePhotoURL} />    
     </a>
   
     <div className="dropdown-menu"  aria-labelledby="dropdownMenuLink">
 
       <div className="right-nav-drop  dropdown-item d-flex" onClick={handleUserNav}>
-      <GenerateAvatar url={thisUser.profilePhotoURL} />    
+      <GenerateAvatar cssClassIdentifier={`nav-pfp`} url={thisUser.profilePhotoURL} />    
 <div className="mx-2">{thisUser.fullName}</div></div>
 
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GenerateAvatar from "../../helper/GenerateAvatar";
 import axios from "axios";
+import './home.css'
 
 const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts }) => {
   const [tempImageURL, setTempImageURL] = useState("");
@@ -78,7 +79,7 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
         </div>
         <div className="card-body">
           <div className="d-flex align-items-start">
-            {thisUser && <GenerateAvatar url={thisUser.profilePhotoURL} />}
+            {thisUser && <GenerateAvatar cssClassIdentifier={`create-post-pfp mx-2`} url={thisUser.profilePhotoURL} />}
             <div>
               <p className="mb-0">{`Posting as: ${
                 thisUser && thisUser.fullName

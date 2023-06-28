@@ -81,3 +81,22 @@ nav{
   box-shadow:  0 5px 5px -5px rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
+
+.nav-pfp{
+  border:solid 1px black;
+  width:35px;
+  height:35px;
+  border-radius: 50%;
+}
+
+
+
+  
+@media (max-width: 576px) {
+  .dropdown-menu {
+    width: 100vw;
+    left: 0 !important;
+    right: auto !important;
+    transform: none !important;
+  }
+}
