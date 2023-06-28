@@ -211,8 +211,10 @@ function User() {
           </div>
         </div>
       ) : (
+<div className="container">
+<FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends}/>
 
-            <FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends}/>
+</div>
 
       )}
     </>

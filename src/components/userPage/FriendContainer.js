@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-
+import './friendcontainer.css'
 //need to add logic to calculate mutual friends 
 
 //state of myFriends will be a dictionary to calculate mutual friends.
@@ -19,13 +19,35 @@ import React, {useState,useEffect} from 'react'
 
 function FriendContainer({friends,myFriends,theirFriends}) {
   return (
-<div className='container border rounded my-4'>
+<div className='container border rounded m-4'>
 
   <div className="header my-2"><h2>ALL FRIENDS</h2></div>
 
-  <div className="row">
+  <div className="row ">
 
-  {friends.map(item=><div key={item._id}>{item.fullName}</div>)}
+  {friends.map(item=>
+  
+  <div key={item._id} className='col-10 col-lg-5 container m-2 bg-light border'>
+    <div className="row">
+    <div className='responsive-pfp-img-cont col-2 my-2'>
+      <img className='responsive-pfp-img' src={item.friendPhotoURL} />
+    </div>
+    <div className='col-4 d-flex flex-column justify-content-center'>
+    <div>{item.fullName}</div>
+    <div>mutual friends</div>
+    </div>
+    <div className='hiddendiv col-3' />
+    <div className='status col-3 d-none d-md-flex align-items-center '>STATUS</div>
+
+
+    </div>
+
+
+
+  </div>
+  
+  
+  )}
 
   </div>
 </div>
