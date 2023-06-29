@@ -1,0 +1,7 @@
+.mini-nav-link{
+    display:flex;
+    justify-content: center;
+    align-items: end;
+    height:40px;
+
+}

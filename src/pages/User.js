@@ -76,27 +76,34 @@ function User() {
     const getMyInfo = async () => {
       const response = await axios.get(`/api/users/${thisUsername}`);
       setMyData(response.data);
+
+      let myHash = {};
+      for (let i = 0; i < response.data.friendRequests.length; i++) {
+        if (!myFriends[response.data.friendRequests[i].friend]) {
+          myHash[response.data.friendRequests[i].friend] =
+          response.data.friendRequests[i].status;
+        }
+      }
+
+      for (let i = 0; i < response.data.friends.length; i++) {
+        if (!myFriends[response.data.friends[i].friend]) {
+          myHash[response.data.friends[i].friend] = response.data.friends[i].status;
+        }
+      }
+      
+      setMyFriends(myHash);
+
     };
 
-    !thisUserSameProfile && thisUsername && getMyInfo();
+    thisUsername && getMyInfo();
   }, [thisUsername, username]);
 
   useEffect(() => {
-    if (!thisUserSameProfile && myData) {
-      let myHash = {};
-      let theirHash = {};
 
-      for (let i = 0; i < myData.friends.length; i++) {
-        if (!myFriends[myData.friends[i].friend]) {
-          myHash[myData.friends[i].friend] = myData.friends[i].status;
-        }
-      }
-      for (let i = 0; i < myData.friendRequests.length; i++) {
-        if (!myFriends[myData.friendRequests[i].friend]) {
-          myHash[myData.friendRequests[i].friend] =
-            myData.friendRequests[i].status;
-        }
-      }
+    if (!thisUserSameProfile&&myData) {
+
+      let theirHash = {};
+     
 
       for (let i = 0; i < data.friends.length; i++) {
         if (!theirHash[data.friends[i].friend]) {
@@ -112,15 +119,17 @@ function User() {
 
       let myID = myData._id;
 
-      setMyFriends(myHash);
-      setTheirFriends(theirHash);
 
       if (theirHash.hasOwnProperty(myID)) {
         setFriendStatus(theirHash[myID]);
       } else {
         setFriendStatus("");
       }
+      setTheirFriends(theirHash);
     }
+
+
+
   }, [myData, username]);
 
   useEffect(() => {
@@ -211,7 +220,7 @@ function User() {
           </div>
         </div>
       ) : (
-<div className="container border rounded">
+<div className="container border rounded my-4">
 <FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends}/>
 
 </div>
