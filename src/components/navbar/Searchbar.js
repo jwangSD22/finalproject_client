@@ -67,7 +67,7 @@ else{
         const nameLowerCase = item.fullName.toLowerCase();
         return nameLowerCase.includes(e.target.value.toLowerCase())})
     
-     setQueryResults(filteredResults)
+     setQueryResults(filteredResults.slice(0,9))
 }
 
 

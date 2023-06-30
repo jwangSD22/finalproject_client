@@ -43,6 +43,8 @@ const Login = () => {
 
   //axios the submission, if verfiied, then server will send back something and then use react to set USER
     try{
+
+        
         const response = await axios.post('/api/users/login',{emailOrUsername,password})
         if(response.status===200){
             localStorage.setItem('jwt',response.data.token)
