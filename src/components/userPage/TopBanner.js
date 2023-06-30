@@ -91,10 +91,10 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
   return (<>
             {/*BG BANNER CONTAINER */}
             <div
-            className="background-container container"
+            className="container"
             >
-            <div style={{height:'500px'}}>
-                <img className="background-image" src={bgURL || emptyAvatar}></img>
+            <div className='background-container' style={{height:'500px'}}>
+                <img className="background-image"  src={bgURL || emptyAvatar}></img>
                 {thisUserSameProfile && 
                   (<>
                     <label htmlFor="bg-upload" className="file-upload-label" />

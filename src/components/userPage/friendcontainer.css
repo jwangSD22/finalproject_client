@@ -4,7 +4,6 @@
 .responsive-pfp-img{
     width:75px;
     height:75px;
-
 }
 
 
@@ -13,4 +12,14 @@
         width:40px;
         height:40px;
     }
+  }
+
+
+  .responsive-pfp-img:hover{
+    cursor:pointer
+  }
+
+  .friend-container-username:hover{
+    cursor:pointer;
+    text-decoration: underline;
   }

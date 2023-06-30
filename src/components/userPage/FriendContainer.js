@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./friendcontainer.css";
 import GenerateAvatar from "../../helper/GenerateAvatar";
 import { useNavigate } from "react-router-dom";
+import FriendStatus from "./FriendStatus";
 //need to add logic to calculate mutual friends
 
 //state of myFriends will be a dictionary to calculate mutual friends.
@@ -15,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 // figure out the status of the relationship of my friends to their friends
 // generate their photo -- the URL link will be under friends."friendPhotoURL"
 
-function FriendContainer({ friends, myFriends, theirFriends }) {
+function FriendContainer({ friends, myFriends, theirFriends,myData}) {
   const navigate = useNavigate()
 
   const calculateMutual = (friendInMap) => {
@@ -69,7 +70,7 @@ function FriendContainer({ friends, myFriends, theirFriends }) {
                 </div>
                 <div className="hiddendiv col-3" />
                 <div className="status col-3 d-none d-md-flex align-items-center ">
-                  STATUS
+                  <FriendStatus friend={item} myFriends={myFriends} myData={myData}/>
                 </div>
               </div>
             </div>
