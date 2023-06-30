@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react'
+import { useParams } from 'react-router-dom'
 
 //friend represents the data of the individual friend inside a map of the parent component
 
@@ -16,16 +17,18 @@ import React, {useState,useEffect} from 'react'
 
 function FriendStatus({friend,myFriends,myData}) {
 
-    const [ID,setID] = useState('')
+    const { username } = useParams();
     const [display,setDisplay] = useState([])
 
-    useEffect(()=>{
-    setID(myData._id)        
-    },[myData])
+
 
     useEffect(()=>{
+
+        if(myData.username!==username){
+
+      
         //case 1
-        if(friend._id===ID){
+        if(friend._id===myData._id){
            return setDisplay([])
         }
         //case 2
@@ -47,7 +50,15 @@ function FriendStatus({friend,myFriends,myData}) {
         else{
             return setDisplay(<h2>error</h2>)
         }
-    },[ID])
+        }
+        
+        else{
+            return setDisplay (<h2>already friends</h2>)
+        }
+
+
+
+    },[])
 
 
 
