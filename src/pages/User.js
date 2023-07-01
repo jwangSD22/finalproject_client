@@ -192,7 +192,7 @@ function User() {
         <hr />
       </div>
 
-      <div className="mini-nav sticky-top" style={{ top: `${navbarOffset}px` }}>
+      <div className="mini-nav " style={{ top: `${navbarOffset}px` }}>
         <MiniNav
           viewFriendsToggle={viewFriendsToggle}
           setViewFriendsToggle={setViewFriendsToggle}

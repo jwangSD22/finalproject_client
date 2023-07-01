@@ -16,7 +16,7 @@ function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState(null);
   const [friends,setFriends] = useState(null)
-  const [messengerOn,setMessengerOn] = useState(true)
+  const [messengerOn,setMessengerOn] = useState(false)
   const navigate = useNavigate();
 
 
@@ -78,19 +78,20 @@ function Home() {
   }
 
   useEffect(()=>{
+    if(messengerOn){
+      const messengerDiv = document.querySelector('.hidden');
+      const postContainer = document.querySelector('.home-post-container');
+      
+      messengerDiv.addEventListener('touchstart', handleTouchStart,  { passive: true });
+      
+      postContainer.addEventListener('touchmove', handleTouchMove,  { passive: true })
     
-  const messengerDiv = document.querySelector('.hidden');
-  const postContainer = document.querySelector('.home-post-container');
-  
-  messengerDiv.addEventListener('touchstart', handleTouchStart,  { passive: true });
-  
-  postContainer.addEventListener('touchmove', handleTouchMove,  { passive: true })
-
-    return () => {
-      messengerDiv.removeEventListener('touchstart', handleTouchStart,  { passive: true });
-      postContainer.removeEventListener('touchmove', handleTouchMove,  { passive: true });
-    }
-  },[])
+        return () => {
+          messengerDiv.removeEventListener('touchstart', handleTouchStart,  { passive: true });
+          postContainer.removeEventListener('touchmove', handleTouchMove,  { passive: true });
+        }
+    } 
+  },[messengerOn])
 
 
 

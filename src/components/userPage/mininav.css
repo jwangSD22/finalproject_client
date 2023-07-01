@@ -1,7 +1,14 @@
 .mini-nav-link{
     display:flex;
+    position:relative;
     justify-content: center;
     align-items: end;
     height:40px;
+    z-index: 0;
 
+}
+
+.mini-nav {
+    position:sticky;
+    z-index:0
 }

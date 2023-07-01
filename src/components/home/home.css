@@ -31,8 +31,9 @@
 
 .create-post{
     position:absolute;
-    width:750px;
-    top:35vh;
+    width:700px;
+    min-width: 350px;
+    top: 40%;
     left:50vw;
     z-index:100;
     border-radius: 8px;
