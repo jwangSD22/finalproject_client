@@ -95,11 +95,11 @@ const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
 
         {/* uses media queries here to determine screen size to generate the appropriate RightNav version with boolean prop */}
         <div className="collapseTrue">
-          <RightNav username={username} data={data} collapseState={true} />
+          <RightNav username={username} data={data} collapseState={true} setMessengerOn={setMessengerOn}/>
         </div>
 
         <div className="collapseFalse">
-          <RightNav username={username} data={data} collapseState={false} />
+          <RightNav username={username} data={data} collapseState={false} setMessengerOn={setMessengerOn}/>
         </div>
       </div>
 

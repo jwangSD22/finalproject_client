@@ -7,7 +7,7 @@ import GenerateAvatar from '../../helper/GenerateAvatar'
 import './navbar.css'
 
 
-function RightNav({username, collapseState}) {
+function RightNav({username, collapseState,setMessengerOn}) {
 
     const navigate = useNavigate()
 
@@ -65,17 +65,18 @@ const photoURL = '';
       {/* this version of the module with collapState true will include more menu items */}
         {collapseState&&<>
 {/* Home */}
-<div className='right-nav-drop  dropdown-item d-flex align-items-center' >
+
+<div className='right-nav-drop  dropdown-item d-flex align-items-center' onClick={()=>{navigate('/home')}} >
       <HomeOutlined className='mx-2'/>  
         <div>Home</div>
       </div>
 {/* Friends */}
-<div className='right-nav-drop  dropdown-item d-flex align-items-center' >
+<div className='right-nav-drop  dropdown-item d-flex align-items-center' onClick={()=>{navigate('/friends')}}>
       <TeamOutlined className='mx-2'/>  
         <div>Friends</div>
       </div>
 {/* Messenger */}
-<div className='right-nav-drop  dropdown-item d-flex align-items-center' >
+<div className='right-nav-drop  dropdown-item d-flex align-items-center' onClick={()=>{setMessengerOn(true)}}>
       <MessageOutlined className='mx-2'/>  
         <div>Messenger</div>
       </div>
