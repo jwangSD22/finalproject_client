@@ -4,6 +4,8 @@ import axios from "axios";
 import Navbar from "../components/navbar/Navbar.js";
 import YouMayKnow from "../components/home/YouMayKnow.js";
 import HomePosts from "../components/home/HomePosts.js";
+import Messenger from "../messenger/Messenger.js";
+
 import './Home.css'
 
 const token = localStorage.getItem("jwt");
@@ -14,6 +16,7 @@ function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState(null);
   const [friends,setFriends] = useState(null)
+  const [messengerOn,setMessengerOn] = useState(true)
   const navigate = useNavigate();
 
 
@@ -55,7 +58,6 @@ function Home() {
     const retrieveFriends = async () => {
       try{
         let response = await axios.get(`/api/user/friends/${username}`)
-        console.log(response.data)
         setFriends(response.data)
       }
       catch(err){
@@ -65,10 +67,36 @@ function Home() {
     retrieveFriends();
   },[username])
 
+  const handleTouchStart = (e) => {
+    e.stopPropagation();
+  }
+
+  const handleTouchMove = (e,messengerDiv) => {
+    if (e.target === messengerDiv || messengerDiv.contains(e.target)) {
+      e.stopPropagation();
+    }
+  }
+
+  useEffect(()=>{
+    
+  const messengerDiv = document.querySelector('.hidden');
+  const postContainer = document.querySelector('.home-post-container');
+  
+  messengerDiv.addEventListener('touchstart', handleTouchStart,  { passive: true });
+  
+  postContainer.addEventListener('touchmove', handleTouchMove,  { passive: true })
+
+    return () => {
+      messengerDiv.removeEventListener('touchstart', handleTouchStart,  { passive: true });
+      postContainer.removeEventListener('touchmove', handleTouchMove,  { passive: true });
+    }
+  },[])
+
 
 
 
   return <>
+
   <Navbar data={data} username={username} />
   <div className="container-fluid">
     <div className="row">
@@ -79,11 +107,16 @@ function Home() {
       </div>
       <div className=" d-none d-xl-flex col-xl-1"></div>
 <div className="col-md-8 col-lg-6 col-xxl-4 home-post-container">
-  <HomePosts  username={username} allUsers={data}/>
+  <HomePosts username={username} allUsers={data}/>
 </div>
 </div>
 
+{messengerOn&&<div className="hidden bg-light border"> <Messenger thisUsername ={username} /> </div>}
+
+
+
   </div>
+
   </>;
 }
 

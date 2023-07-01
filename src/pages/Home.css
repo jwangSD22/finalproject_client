@@ -1,0 +1,21 @@
+.hidden{
+    overflow-y: auto;
+    max-width: 500px;
+    min-width: 375px;
+    min-height:667px;
+    max-height:800px;
+    position:sticky;
+    left: calc(100%);
+    bottom:0px;
+}
+
+@media (max-width: 575.98px) {
+    .hidden {
+        left:0px;
+        top:47px;
+        position:fixed;
+        min-width: 100%;
+        min-height: 100%;
+
+    }
+}

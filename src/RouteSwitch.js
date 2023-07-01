@@ -10,7 +10,6 @@ import App from './App'
 import NewPost from './modules/NewPost'
 import ChatRoom from './modules/ChatRoom'
 import Users from './modules/Users'
-import Test from './Test'
 
 
 function RouteSwitch() {
@@ -48,7 +47,6 @@ function RouteSwitch() {
       <Route path='/users/' element = {<Users />} />
 
 
-      <Route path='/test/' element = {<Test />} />
 
 
     </Routes>
