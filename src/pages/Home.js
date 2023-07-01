@@ -98,7 +98,7 @@ function Home() {
 
   return <>
 
-  <Navbar data={data} username={username} />
+  <Navbar data={data} username={username} setMessengerOn={setMessengerOn} messengerOn={messengerOn} />
   <div className="container-fluid">
     <div className="row">
       <div className="col-md-3 d-none d-md-block">
@@ -112,7 +112,7 @@ function Home() {
 </div>
 </div>
 
-{messengerOn&&<div className="hidden bg-light border"> <Messenger thisUsername ={username} /> </div>}
+{messengerOn&&<div className="hidden bg-light border"> <Messenger thisUsername ={username} setMessengerOn={setMessengerOn}/> </div>}
 
 
 

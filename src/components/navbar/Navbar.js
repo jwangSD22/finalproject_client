@@ -5,7 +5,7 @@ import { HomeOutlined, MessageOutlined, TeamOutlined } from "@ant-design/icons";
 import Searchbar from "./Searchbar";
 import RightNav from "./RightNav";
 
-const Navbar = ({ data, username }) => {
+const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
   const [path, setPath] = useState(null);
 
   //sets current path to alter css for center icons
@@ -78,9 +78,10 @@ const Navbar = ({ data, username }) => {
 
         {/* messenger */}
         <div
-          className="d-flex align-items-center"
+          className="d-flex align-items-center nav-messenger"
           data-tooltip-id="right-tooltip"
           data-tooltip-content="Messenger"
+          onClick={()=>{setMessengerOn(true)}}
         >
           <div className="center-nav-container mx-1">
             <MessageOutlined className="messenger-icon mx-2" />
