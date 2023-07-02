@@ -2,24 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import emptyAvatar from '../../src/images/empty_avatar.png'
 import './messenger.css'
-import {format,isToday,isThisWeek } from 'date-fns'
-
-function formatTimestamp(timestamp) {
-  const date = new Date(timestamp);
-
-  if (isToday(date)) {
-    return format(date, 'p'); // Format time (e.g., 10:30 AM)
-  }
-
-  if (isThisWeek(date)) {
-    return format(date, 'EEE'); // Format day abbreviation (e.g., Mon, Tue)
-  }
-
-  return format(date, 'MMM d'); // Format month abbreviation and date (e.g., Jan 15)
-}
+import formatTimestamp from '../helper/formatTimestampMessenger'
 
 
-function MainPreview() {
+//data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected}
+
+function MainPreview({data,setUsername2,chatConnected,setChatConnected}) {
   const [previewData, setPreviewData] = useState([]);
 
 
@@ -31,6 +19,7 @@ function MainPreview() {
    
       console.log(response.data)
     };
+
     getPreview();
 
   },[]);
@@ -42,7 +31,7 @@ function MainPreview() {
     <>
       <div className="previewField"> 
 
-      {previewData.length?previewData.map(data=><GeneratePreview data={data}/>):<div>NO MESSAGES YET</div>}
+      {previewData.length?previewData.map(data=><GeneratePreview key={data._id} data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected}/>):<div>NO MESSAGES YET</div>}
 
        </div>
     </>
@@ -51,7 +40,7 @@ function MainPreview() {
 
 
 
-function GeneratePreview ({data}) {
+function GeneratePreview ({data,setUsername2,chatConnected,setChatConnected}) {
 
   const [pfp,setPfp] = useState(null)
 
@@ -66,7 +55,7 @@ function GeneratePreview ({data}) {
   },[data])
 
   const handlePreviewClick = () => {
-    console.log(data.partnerID)
+    console.log(data)
   }
 
   return (
@@ -92,5 +81,8 @@ function GeneratePreview ({data}) {
 
   )
 }
+
+
+
 
 export default MainPreview;

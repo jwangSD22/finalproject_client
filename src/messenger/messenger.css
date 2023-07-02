@@ -2,3 +2,24 @@
     width:35px;
     height:35px;
 }
+
+.friendList{
+    position:absolute;
+    background:white;
+    overflow: auto;
+    width:60%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index: 10;
+}
+
+.friendOverlay {
+    position:absolute;
+    top:0px;
+    left:0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width:100%;
+    height:100%;
+    z-index: 9;
+}
