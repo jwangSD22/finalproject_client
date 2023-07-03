@@ -13,11 +13,14 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 function Home() {
   const [username, setUsername] = useState(null);
+  const [userID,setUserID] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState(null);
   const [friends, setFriends] = useState(null);
   const [messengerOn, setMessengerOn] = useState(false);
   const navigate = useNavigate();
+
+
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -25,6 +28,7 @@ function Home() {
         let response = await axios.get("/api/users/loginstatus");
         if (response.status) {
           setUsername(response.data.user.jwtusername);
+          setUserID(response.data.user.jwtid)
           setIsLoggedIn(true);
         }
       } catch (err) {
@@ -37,6 +41,7 @@ function Home() {
     const retrieveData = async () => {
       try {
         let response = await axios.get("/api/users");
+        console.log('triggered API call to get data')
 
         setData(response.data);
       } catch (err) {
@@ -46,6 +51,7 @@ function Home() {
 
     checkLogin();
     retrieveData();
+
   }, []);
 
   useEffect(() => {
@@ -57,9 +63,13 @@ function Home() {
         console.log(err);
       }
     };
-    retrieveFriends();
+    if(username){
+      retrieveFriends();
+    }
   }, [username]);
 
+
+//useEffect to prevent touchscrolling in area outside of messenger
   const handleTouchStart = (e) => {
     e.stopPropagation();
   };
@@ -72,6 +82,7 @@ function Home() {
 
   useEffect(() => {
     if (messengerOn) {
+
       const messengerDiv = document.querySelector(".hidden");
       const postContainer = document.querySelector(".home-post-container");
 
@@ -100,7 +111,6 @@ function Home() {
         data={data}
         username={username}
         setMessengerOn={setMessengerOn}
-        messengerOn={messengerOn}
       />
       <div className="container-fluid">
         <div className="row">
@@ -115,12 +125,13 @@ function Home() {
 
         {messengerOn && (
           <div className="hidden bg-light border">
-            {" "}
+ 
             <Messenger
               friends={friends}
               thisUsername={username}
               setMessengerOn={setMessengerOn}
-            />{" "}
+              userID = {userID}
+            />
           </div>
         )}
       </div>

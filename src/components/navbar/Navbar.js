@@ -5,7 +5,7 @@ import { HomeOutlined, MessageOutlined, TeamOutlined } from "@ant-design/icons";
 import Searchbar from "./Searchbar";
 import RightNav from "./RightNav";
 
-const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
+const Navbar = ({ data, username,setMessengerOn}) => {
   const [path, setPath] = useState(null);
 
   //sets current path to alter css for center icons
@@ -14,7 +14,7 @@ const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
   }, [path]);
 
   return (
-    <nav className="top-navbar container-fluid bg-light vw-100 sticky-top">
+    <nav className="top-navbar container-fluid bg-light sticky-top">
       <div className="row">
       {/* start-elements brand logo and search bar */}
       <div className="left-nav col-6 col-md-4 d-flex justify-content-start align-items-center">

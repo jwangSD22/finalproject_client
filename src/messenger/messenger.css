@@ -3,6 +3,10 @@
     height:35px;
 }
 
+.msger-preview-container:hover{
+    cursor:pointer;
+}
+
 .friendList{
     position:absolute;
     background:white;
@@ -12,6 +16,11 @@
     top:0px;
     left:0px;
     z-index: 10;
+}
+
+.friendInList:hover{
+    cursor:pointer;
+    background:lightblue
 }
 
 .friendOverlay {

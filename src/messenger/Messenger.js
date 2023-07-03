@@ -1,17 +1,25 @@
 import React , {useState,useEffect,useRef} from 'react'
-import ChatRoom from '../modules/ChatRoom'
 import MainPreview from './MainPreview'
 import ConnectedChat from './ConnectedChat'
 import FriendList from './FriendList'
 
-function Messenger({thisUsername,setMessengerOn,data,friends}) {
+
+function Messenger({thisUsername,setMessengerOn,data,friends,userID}) {
 
     const [chatConnected,setChatConnected] = useState(false)
     const [displayFriends,setDisplayFriends] = useState(false)
-    const [username1, setUsername1] = useState("");
-    const [username2, setUsername2] = useState("");
+    const [username1, setUsername1] = useState(thisUsername);
+    const [username2, setUsername2] = useState(null);
+    const [socket, setSocket] = useState(null);
+
+
 
     const divRef = useRef(null);
+
+    useEffect(()=>{
+      console.log('this remounts MESSENGER')
+    })
+
 
     useEffect(() => {
       const handleClickOutside = (event) => {
@@ -21,7 +29,7 @@ function Messenger({thisUsername,setMessengerOn,data,friends}) {
       };
       if(displayFriends){
         setTimeout(()=>{        document.addEventListener('click', handleClickOutside);
-      },1200)
+      },500)
       }
   
       return () => {
@@ -44,13 +52,16 @@ function Messenger({thisUsername,setMessengerOn,data,friends}) {
 
         <div> 
             <div className='friendList animate__animated animate__slideInLeft animate__faster' ref={divRef} style={displayFriends?{display:'block'}:{display:'none'}} >
-              <FriendList friends={friends} setUsername2={setUsername2} setChatConnected={setChatConnected}/>
+              <FriendList friends={friends} setUsername2={setUsername2} setChatConnected={setChatConnected} setDisplayFriends={setDisplayFriends}/>
             </div>
 
-  
+
+    
 
             
-            {chatConnected?<><ChatRoom /><ConnectedChat /></>:<MainPreview data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected}/>}
+            {chatConnected?<><ConnectedChat username1={username1} userID={userID} username2={username2} setChatConnected={setChatConnected} chatConnected={chatConnected} socket={socket} setSocket={setSocket}/></>
+            :
+            <MainPreview data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected} />}
             
              </div>
        

@@ -19,6 +19,8 @@ const Login = () => {
 
 
   useEffect(()=>{
+    console.log('component mount')
+
     const checkLogin = async () => {
       try{
         let response = await axios.get('/api/users/loginstatus')
@@ -31,11 +33,10 @@ const Login = () => {
       catch(err){
         console.log(err)
       }
-
-
-
  }
     checkLogin()
+
+    
  },[])
 
  const handleSubmit = async (event) => {

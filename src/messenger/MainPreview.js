@@ -16,8 +16,6 @@ function MainPreview({data,setUsername2,chatConnected,setChatConnected}) {
     const getPreview = async () => {
       const response = await axios.get("/api/chats/user");
       setPreviewData(response.data);
-   
-      console.log(response.data)
     };
 
     getPreview();
@@ -54,12 +52,15 @@ function GeneratePreview ({data,setUsername2,chatConnected,setChatConnected}) {
     getPfp()
   },[data])
 
-  const handlePreviewClick = () => {
-    console.log(data)
+  const handleConnectFromPreview = () => {
+    setUsername2(data.partnerUsername)
+    setChatConnected(true)
+
   }
 
+
   return (
-  <div className="container border" onClick={handlePreviewClick}>
+  <div className="container border msger-preview-container" onClick={handleConnectFromPreview}>
   <div className="row my-2">
   <div className="col-2"><img className='pfp-msger-preview' src={pfp?pfp:emptyAvatar} /></div>
   <div className="col-7 d-flex flex-column">
