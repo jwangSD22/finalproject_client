@@ -79,7 +79,7 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID}) {
     
 
             
-            {chatConnected?<><ConnectedChat username1={username1} userID={userID} username2={username2} setChatConnected={setChatConnected} chatConnected={chatConnected} roomID={roomID}/></>
+            {chatConnected?<><ConnectedChat username1={username1} userID={userID} username2={username2} setChatConnected={setChatConnected} chatConnected={chatConnected} roomID={roomID} setRoomID={setRoomID}/></>
             :
             <MainPreview data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected} setRoomID={setRoomID} username1={username1}  />}
             
