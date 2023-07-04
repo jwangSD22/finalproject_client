@@ -7,7 +7,7 @@ import formatTimestamp from '../helper/formatTimestampMessenger'
 
 //data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected}
 
-function MainPreview({data,setUsername2,chatConnected,setChatConnected}) {
+function MainPreview({setUsername2,chatConnected,setChatConnected,setRoomID,username1}) {
   const [previewData, setPreviewData] = useState([]);
 
 
@@ -29,7 +29,7 @@ function MainPreview({data,setUsername2,chatConnected,setChatConnected}) {
     <>
       <div className="previewField"> 
 
-      {previewData.length?previewData.map(data=><GeneratePreview key={data._id} data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected}/>):<div>NO MESSAGES YET</div>}
+      {previewData.length?previewData.map(data=><GeneratePreview key={data._id} data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected} setRoomID={setRoomID} username1={username1}/>):<div>NO MESSAGES YET</div>}
 
        </div>
     </>
@@ -38,7 +38,7 @@ function MainPreview({data,setUsername2,chatConnected,setChatConnected}) {
 
 
 
-function GeneratePreview ({data,setUsername2,chatConnected,setChatConnected}) {
+function GeneratePreview ({data,setUsername2,setChatConnected,setRoomID,username1}) {
 
   const [pfp,setPfp] = useState(null)
 
@@ -52,11 +52,37 @@ function GeneratePreview ({data,setUsername2,chatConnected,setChatConnected}) {
     getPfp()
   },[data])
 
-  const handleConnectFromPreview = () => {
-    setUsername2(data.partnerUsername)
-    setChatConnected(true)
+  const handleConnectFromPreview = async () => {
+
+
+    const username2 = data.partnerUsername
+
+    const findRoom = async () => {
+      try {
+      if (username1 && username2) {
+        let response = await axios.post("/api/chats", {
+          username2,
+        });
+        setRoomID(response.data.chatid);
+        return response.data.chatid;
+      }
+    } catch (err) {
+      if (err.response.status === 400) {
+        console.log(err.response)
+        return null;
+      }
+    }
+  };
+
+
+    setUsername2(data.partnerUsername);
+    setChatConnected(true);
+
+    await findRoom();
 
   }
+
+
 
 
   return (

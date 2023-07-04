@@ -20,7 +20,7 @@ function formatTimestamp(timestamp) {
     return format(date, 'MMM d'); // Format month abbreviation and date (e.g., Jan 15)
   }
   else{
-    return 'Error'
+    return ''
   }
 
 

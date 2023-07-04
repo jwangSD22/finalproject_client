@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react'
 
 import emptyAvatar from '../../src/images/empty_avatar.png'
-import { connect } from 'socket.io-client'
+import axios from 'axios'
 
-function FriendList({friends,setUsername2,setChatConnected,setDisplayFriends}) {
+
+function FriendList({friends,setUsername2,setChatConnected,setDisplayFriends,setRoomID,username1}) {
 
 
 
@@ -17,12 +18,32 @@ function FriendList({friends,setUsername2,setChatConnected,setDisplayFriends}) {
 
 
 
+    const connectFriend = async (data) => {
 
-    const connectFriend = (data) => {
+      const username2 = data.username
+
+      const findRoom = async () => {
+        try {
+        if (username1 && username2) {
+          let response = await axios.post("/api/chats", {
+            username2,
+          });
+          console.log(response.data.chatid)
+          setRoomID(response.data.chatid);
+          return response.data.chatid;
+        }
+      } catch (err) {
+        if (err.response.status === 400) {
+          console.log(err.response)
+          return null;
+        }
+      }
+    };
+
         setUsername2(data.username)
         setChatConnected(true)
         setDisplayFriends(false)
-
+        await findRoom()
     }
     
     

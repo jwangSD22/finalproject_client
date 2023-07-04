@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import io from "socket.io-client";
 
-function ConnectedChat({username1,username2,setChatConnected,chatConnected,userID,socket,setSocket}) {
+function ConnectedChat({username1,username2,setChatConnected,chatConnected,userID,roomID}) {
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [roomID, setRoomID] = useState(null);
+  // const [roomID, setRoomID] = useState(null);
+  const [socket, setSocket] = useState(null);
 
 
   useEffect(()=>{
@@ -22,37 +23,51 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
     }
   }, [socket]);
 
-  useEffect(()=>{
-        // Get UUID of chat room using the two usernames
-        const findRoom = async () => {
+  // useEffect(()=>{
 
-          try {
-            if (username1 && username2) {
-              let response = await axios.post("http://localhost:3000/api/chats", {
-                username2,
-              });
-              setRoomID(response.data.chatid);
-              return response.data.chatid;
-            }
-          } catch (err) {
-            if (err.response.status === 400) {
-              console.log(err.response)
-              return null;
-            }
-          }
-        };
+  //       // Get UUID of chat room using the two usernames
+  //       const findRoom = async () => {
+  //           try {
+  //           if (username1 && username2) {
+  //             let response = await axios.post("/api/chats", {
+  //               username2,
+  //             });
+  //             console.log(response.data.chatid)
+  //             setRoomID(response.data.chatid);
+  //             return response.data.chatid;
+  //           }
+  //         } catch (err) {
+  //           if (err.response.status === 400) {
+  //             console.log(err.response)
+  //             return null;
+  //           }
+  //         }
+  //       };
 
-        findRoom()
+  //       //module is triggering reload twice and i can't figure out why... so how can i prevent this from creating multiple chatrooms 
+  //       // instead you can make find room a non- use effect function, this would prevent triggering multiple reloads --
+  //       // you would have to move setroomid to the parent component tho
+
+  //       //you can figure out why its triggering mutlieplre loads 
+
+
+  //       //is there a way i can alter the backend so it doesn't trigger this twice? 
+
+      
+  //         console.log('triggered FIND ROOM CALLED')
+  //         findRoom();
+ 
+  
+
     
-  },[username2])
+  // })
 
 
     useEffect(()=>{
-        console.log('component TO JOIN SOCKET mounted')
 
       const handleConnect = async () => {
         try {
-          if (roomID === false) {
+          if (roomID === null) {
             return console.log("join room failed");
     
           } else {
@@ -68,9 +83,10 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
     
         //load messages into the message container
         try{
-          console.log('triggering data pull')
+          console.log('this block is being hit')
           const messageData = await axios.get(`/api/chats/${roomID}/messages`)
           //axios GET the convo with a body including the roomid
+
           setMessages(messageData.data)
           
         }
@@ -81,14 +97,11 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
 
 
-      if(roomID){
+      if(!socket&&roomID){
         handleConnect();
 
       }
       
-
-
-
 
     },[roomID])
 
