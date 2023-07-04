@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import io from "socket.io-client";
 
-function ConnectedChat({username1,username2,setChatConnected,chatConnected,userID,roomID,setRoomID}) {
+function ConnectedChat({username1,username2,setChatConnected,chatConnected,userID,roomID,setRoomID,messengerOn,socket,setSocket}) {
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   // const [roomID, setRoomID] = useState(null);
-  const [socket, setSocket] = useState(null);
 
 
   useEffect(()=>{
@@ -106,18 +105,15 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
     },[roomID])
 
 
-    const handleUnmount = () => {
 
+    const handleUnmount = () => {
       if(socket){
         console.log('active socket unmounted and disconnected')
         socket.disconnect();
         setSocket(null)
         setRoomID(null)
       }
-
       setChatConnected(false)
-
-
     }
 
     const handleSubmit = (event) => {

@@ -5,21 +5,20 @@ import FriendList from './FriendList'
 import axios from 'axios'
 
 
-function Messenger({thisUsername,setMessengerOn,data,friends,userID}) {
+function Messenger({thisUsername,setMessengerOn,messengerOn,data,friends,userID}) {
 
     const [chatConnected,setChatConnected] = useState(false)
     const [displayFriends,setDisplayFriends] = useState(false)
     const [username1, setUsername1] = useState(thisUsername);
     const [username2, setUsername2] = useState(null);
     const [roomID,setRoomID] = useState(null)
+    const [socket, setSocket] = useState(null);
+
 
 
 
     const divRef = useRef(null);
 
-    useEffect(()=>{
-      console.log('this remounts MESSENGER')
-    })
 
 
     useEffect(() => {
@@ -38,36 +37,29 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID}) {
       };
     }, [displayFriends]);  
 
-    const findRoom = async () => {
-      try {
-      if (username1 && username2) {
-        let response = await axios.post("/api/chats", {
-          username2,
-        });
-        console.log(response.data.chatid)
-        setRoomID(response.data.chatid);
-        return response.data.chatid;
-      }
-    } catch (err) {
-      if (err.response.status === 400) {
-        console.log(err.response)
-        return null;
-      }
+
+
+  const handleUnmount = () => {
+    if(socket){
+      console.log('active socket unmounted and disconnected')
+      socket.disconnect();
+      setSocket(null)
+      setRoomID(null)
     }
-  };
+    setChatConnected(false)
+  }
 
 
 
     
 
-    //username 1 is ME
-    //username 2 -- if set, should trigger main content to show the chat 
+
 
   return ( 
     <div className='messenger container-fluid overflow-auto'>
                   <div className='friendOverlay animate__animated animate__fadeIn animate__faster' style={displayFriends?{display:'block'}:{display:'none'}}> overlay</div>
 
-        <div className='d-flex justify-content-center'>Messenger //// and maximize button<button className='btn-close' onClick={()=>{setMessengerOn(false)}}></button><button onClick={()=>{setDisplayFriends(!displayFriends)}}>F</button></div>
+        <div className='d-flex justify-content-center'>Messenger //// and maximize button<button className='btn-close' onClick={()=>{setMessengerOn(false);handleUnmount()}}></button><button onClick={()=>{setDisplayFriends(!displayFriends)}}>F</button></div>
         {chatConnected??<div className='d-flex justify-content-center'>USER NAME DIV / shows up if CONNECTED</div>}
 
         <div> 
@@ -79,7 +71,7 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID}) {
     
 
             
-            {chatConnected?<><ConnectedChat username1={username1} userID={userID} username2={username2} setChatConnected={setChatConnected} chatConnected={chatConnected} roomID={roomID} setRoomID={setRoomID}/></>
+            {chatConnected?<><ConnectedChat username1={username1} userID={userID} username2={username2} setChatConnected={setChatConnected} chatConnected={chatConnected} roomID={roomID} setRoomID={setRoomID} socket={socket} setSocket={setSocket} /></>
             :
             <MainPreview data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected} setRoomID={setRoomID} username1={username1}  />}
             

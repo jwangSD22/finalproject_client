@@ -129,6 +129,7 @@ function Home() {
             <Messenger
               friends={friends}
               thisUsername={username}
+              messengerOn={messengerOn}
               setMessengerOn={setMessengerOn}
               userID = {userID}
             />
