@@ -8,9 +8,6 @@ import Messenger from "../messenger/Messenger.js";
 
 import "./Home.css";
 
-const token = localStorage.getItem("jwt");
-axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
 function Home() {
   const [username, setUsername] = useState(null);
   const [userID,setUserID] = useState(null)

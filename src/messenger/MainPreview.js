@@ -94,7 +94,7 @@ function GeneratePreview ({data,setUsername2,setChatConnected,setRoomID,username
       {data.partnerFullName}
       </div>
       <div>
-      {data.preview.message}
+      {data.preview.message.length>25?`${data.preview.message.slice(0,23)}...`:data.preview.message}
       </div>
       
        </div>

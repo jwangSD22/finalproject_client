@@ -9,6 +9,7 @@ import TopBanner from "../components/userPage/TopBanner.js";
 import MiniNav from "../components/userPage/MiniNav.js";
 import MiniFriendContainer from "../components/userPage/MiniFriendContainer.js";
 import FriendContainer from "../components/userPage/FriendContainer.js";
+import Messenger from "../messenger/Messenger.js";
 
 const token = localStorage.getItem("jwt");
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -17,10 +18,10 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 function User() {
   const [thisUsername, setThisUsername] = useState(null);
+  const [thisUserFriends,setThisUserFriends] = useState([])
   const [data, setData] = useState("");
   const [myData, setMyData] = useState(null);
   const [allData, setAllData] = useState(null);
-  const [thisUserFriends, setThisUserFriends] = useState([]);
   const [friends, setFriends] = useState([]);
   const [friendStatus, setFriendStatus] = useState("");
   const [myFriends, setMyFriends] = useState({});
@@ -29,6 +30,10 @@ function User() {
   const [thisUserSameProfile, setThisUserSameProfile] = useState(false);
   const [navbarOffset, setNavbarOffset] = useState(0);
   const [miniOffset, setMiniOffset] = useState(0);
+  const [messengerOn, setMessengerOn] = useState(false);
+  const [userID,setUserID] = useState(null)
+
+
 
   const navigate = useNavigate();
   const { username } = useParams();
@@ -39,6 +44,7 @@ function User() {
         let response = await axios.get("/api/users/loginstatus");
         if (response.status) {
           setThisUsername(response.data.user.jwtusername);
+          setUserID(response.data.user.jwtid)
           setThisUserSameProfile(response.data.user.jwtusername === username);
         }
       } catch (err) {
@@ -72,9 +78,11 @@ function User() {
     retrieveData();
   }, [username]);
 
+
   useEffect(() => {
     const getMyInfo = async () => {
       const response = await axios.get(`/api/users/${thisUsername}`);
+      console.log(response.data)
       setMyData(response.data);
 
       let myHash = {};
@@ -141,6 +149,17 @@ function User() {
     retrieveFriends();
   }, [data]);
 
+  //need to useeffect to retrieve THIS USER's friends because the messenger component requires it unfortuantely..
+  useEffect(() => {
+    const retrieveFriends = async () => {
+      const response = await axios.get(`/api/user/friends/${thisUsername}`);
+      setThisUserFriends(response.data);
+    };
+
+    retrieveFriends();
+  }, [data]);
+
+
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
 
   const pattern = (
@@ -176,7 +195,7 @@ function User() {
   return (
     <>
     
-      <Navbar data={allData} username={thisUsername} />
+      <Navbar data={allData} username={thisUsername} setMessengerOn={setMessengerOn}/>
 
       <div className="container top-container">
         <TopBanner
@@ -226,6 +245,19 @@ function User() {
 </div>
 
       )}
+{messengerOn && (
+          <div className="hidden bg-light border">
+ 
+            <Messenger
+              friends={thisUserFriends}
+              thisUsername={thisUsername}
+              messengerOn={messengerOn}
+              setMessengerOn={setMessengerOn}
+              userID = {userID}
+            />
+          </div>
+        )}
+
     </>
   );
 }

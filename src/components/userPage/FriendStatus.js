@@ -15,6 +15,8 @@ import { useParams } from 'react-router-dom'
 
 // case - 4 - if friend._id is present in myFriends hash and is 'accepted', then it should show we are friends already
 
+// case - 5 - if friend.id is present in myFriends hash and is 'pending', meaning, it's still waiting for your decision
+
 function FriendStatus({friend,myFriends,myData}) {
 
     const { username } = useParams();
@@ -44,6 +46,11 @@ function FriendStatus({friend,myFriends,myData}) {
         //case 4
         if(myFriends[friend._id]==='accepted'){
             return setDisplay(<h2>already friends</h2>)
+        }
+
+        //case 5
+        if(myFriends[friend._id]==='pending'){
+            return setDisplay(<h2>pending approval</h2>)
         }
 
        

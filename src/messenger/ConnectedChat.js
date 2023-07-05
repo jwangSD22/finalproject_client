@@ -22,45 +22,6 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
     }
   }, [socket]);
 
-  // useEffect(()=>{
-
-  //       // Get UUID of chat room using the two usernames
-  //       const findRoom = async () => {
-  //           try {
-  //           if (username1 && username2) {
-  //             let response = await axios.post("/api/chats", {
-  //               username2,
-  //             });
-  //             console.log(response.data.chatid)
-  //             setRoomID(response.data.chatid);
-  //             return response.data.chatid;
-  //           }
-  //         } catch (err) {
-  //           if (err.response.status === 400) {
-  //             console.log(err.response)
-  //             return null;
-  //           }
-  //         }
-  //       };
-
-  //       //module is triggering reload twice and i can't figure out why... so how can i prevent this from creating multiple chatrooms 
-  //       // instead you can make find room a non- use effect function, this would prevent triggering multiple reloads --
-  //       // you would have to move setroomid to the parent component tho
-
-  //       //you can figure out why its triggering mutlieplre loads 
-
-
-  //       //is there a way i can alter the backend so it doesn't trigger this twice? 
-
-      
-  //         console.log('triggered FIND ROOM CALLED')
-  //         findRoom();
- 
-  
-
-    
-  // })
-
 
     useEffect(()=>{
 
@@ -134,7 +95,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
       <div>
         {(messages).map((message) => (
-          <div key={message.messageID}>
+          <div key={message.messageID} style={{wordBreak:'break-all'}}>
             <strong>{message.username}:</strong> {message.text}
           </div>
         ))}
