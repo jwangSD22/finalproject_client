@@ -1,0 +1,36 @@
+.friend-container{
+    cursor:pointer;
+    width:200px;
+    height:250px;
+    border-radius: 9%;
+    z-index: 0;
+
+}
+
+.friend-container-img:hover{
+    opacity: 90%;
+}
+
+.friend-container-img{
+    width:100%;
+    height:80%;
+    object-fit: cover;
+    border-radius: 8% 8% 0px 0px;
+
+}
+
+
+
+.friend-name{
+    display:flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color:black;
+}
+
+.friend-name:hover{
+    cursor:pointer;
+    text-decoration: underline;
+}

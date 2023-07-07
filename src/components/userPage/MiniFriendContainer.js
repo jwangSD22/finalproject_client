@@ -52,7 +52,7 @@ function MiniFriendContainer({allData, data,viewFriendsToggle,setViewFriendsTogg
         </div>
         <div className="container">
 
-<div className="friend-container row">
+<div className="row">
     
 {friendsDiv}
     
