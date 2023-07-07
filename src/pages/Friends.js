@@ -18,6 +18,9 @@ function Friends() {
     const [pending,setPending] = useState([])
     const [friendsGenerated,setFriendsGenerated] = useState([])
     const [pendingGenerated,setPendingGenerated] = useState([])
+    const [pendingActionToggle,setPendingActionToggle] = useState(true)
+    const [acceptFriendToggle,setAcceptFriendToggle] = useState(true)
+
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -35,7 +38,6 @@ function Friends() {
           }
         }
       };
-
  
       const retrieveData = async () => {
         try {
@@ -48,21 +50,27 @@ function Friends() {
         }
       };
       
-      const getPending = async () => {
-        const response = await axios.get('/api/user/pending')
-        setPending(response.data)
-        console.log(['pending',response.data])
 
-      }
 
   
       checkLogin();
       retrieveData();
-      getPending();
     }, []);
+
+    useEffect(()=>{
+      const getPending = async () => {
+        const response = await axios.get('/api/user/pending')
+        setPending(response.data)
+
+      }
+
+      getPending();
+
+    },[pendingActionToggle])
 
 
     useEffect(() => {
+      console.log('triggered to reget friends')
       const retrieveFriends = async () => {
         try {
           let response = await axios.get(`/api/user/friends/${username}`);
@@ -74,11 +82,10 @@ function Friends() {
         }
       };
 
-      if(username){
         retrieveFriends();
-      }
       
-    }, [username]);
+    
+    }, [username,acceptFriendToggle]);
 
     useEffect(()=>{
 
@@ -87,7 +94,7 @@ function Friends() {
         <div className="col-6 col-xs-4 col-lg-4 col-xl-3 col-xxl-3 d-flex flex-column my-2" key={item._id}>
           <div className="friend-container shadow-sm" onClick={()=>{handleNav(item.username)}}>
             <img className="friend-container-img" src={item.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:item.friendPhotoURL}/>
-            <div className="friend-name mt-auto"onClick={()=>{handleNav(item.username)}}>{item.fullName}</div>
+            <div className="friend-name my-2"onClick={()=>{handleNav(item.username)}}>{item.fullName}</div>
             </div>
         </div>)
     
@@ -101,7 +108,13 @@ function Friends() {
       if(pending){
         const finalPending = pending.map(item=>
           
-            <Pending data={item} />
+            <Pending 
+              data={item} 
+              setPendingActionToggle={setPendingActionToggle} 
+              pendingActionToggle={pendingActionToggle}
+              acceptFriendToggle={acceptFriendToggle}
+              setAcceptFriendToggle={setAcceptFriendToggle}
+              />
           )
 
 
@@ -125,16 +138,17 @@ function Friends() {
       <div className="container border mt-4">
         <h2>Friend requests</h2>
         <div className="row">
-{pendingGenerated}
+{pendingGenerated.length?pendingGenerated:<>You have no pending requests</>}
         </div>
       </div>
 
       <div className="container"><hr/></div>
 
-      <div className="container border">
+      <div className="lower-friend-container container border">
         <h2>Friends</h2>
         <div className="row">
-  {friendsGenerated}
+          
+  {friendsGenerated.length>0?friendsGenerated:<div>Add some friends to see them here</div>}
         </div>
       </div>
       
