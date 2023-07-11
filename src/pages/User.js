@@ -39,6 +39,8 @@ function User() {
   const { username } = useParams();
 
   useEffect(() => {
+    console.log('check login triggered')
+
     const checkLogin = async () => {
       try {
         let response = await axios.get("/api/users/loginstatus");
@@ -73,13 +75,16 @@ function User() {
       }
     };
 
-    retrieveAllData();
     checkLogin();
+    retrieveAllData();
     retrieveData();
-  }, [username]);
+  }, []);
 
 
   useEffect(() => {
+
+    console.log('get my info triggered')
+
     const getMyInfo = async () => {
       const response = await axios.get(`/api/users/${thisUsername}`);
       console.log(response.data)
@@ -103,8 +108,10 @@ function User() {
 
     };
 
-    thisUsername && getMyInfo();
-  }, [thisUsername, username]);
+    if(thisUsername!==null){
+      getMyInfo();
+    } 
+  }, []);
 
   useEffect(() => {
 
@@ -138,7 +145,7 @@ function User() {
 
 
 
-  }, [myData, username]);
+  }, [myData]);
 
   useEffect(() => {
     const retrieveFriends = async () => {
@@ -147,17 +154,17 @@ function User() {
     };
 
     retrieveFriends();
-  }, [data]);
+  }, []);
 
   //need to useeffect to retrieve THIS USER's friends because the messenger component requires it unfortuantely..
   useEffect(() => {
-    const retrieveFriends = async () => {
+    const retrieveThisUserFriends = async () => {
       const response = await axios.get(`/api/user/friends/${thisUsername}`);
       setThisUserFriends(response.data);
     };
 
-    retrieveFriends();
-  }, [data]);
+    retrieveThisUserFriends();
+  }, []);
 
 
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
@@ -224,12 +231,8 @@ function User() {
             <div className="col-lg-5 d-none d-lg-block" style={{ zIndex: "0" }}>
               <div className="sticky-top" style={{ top: `${miniOffset}px` }}>
                 <MiniFriendContainer
-                  allData={allData}
-                  data={data}
-                  viewFriendsToggle={viewFriendsToggle}
                   setViewFriendsToggle={setViewFriendsToggle}
                   friends={friends}
-                  setFriends={setFriends}
                 />
               </div>
             </div>

@@ -1,0 +1,35 @@
+.likesLogo{
+    margin-left: 4px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width:18px;
+    height:18px;
+    background-color:blue;
+}
+
+.likeContainer{
+    background-color: lightgray;
+    width:fit-content;
+    border-radius: 40%;
+}
+
+.likeButton {
+    cursor:pointer;
+}
+
+ .btnLiked{
+    color:blue;
+}
+
+
+
+.likeCounter{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-right: 3px;
+    margin-left: 5px;
+}

@@ -2,12 +2,17 @@ import React, {useEffect,useState } from 'react'
 import axios from 'axios'
 import GenerateAvatarFromID from '../../helper/GenerateAvatarFromID'
 import { formatDistanceToNow } from 'date-fns'
+import { LikeFilled } from '@ant-design/icons'
+import './generatecomment.css'
 
 
-function GenerateComment({commentID,pfpHash,setPfpHash}) {
+function GenerateComment({commentID,pfpHash,setPfpHash,thisUser}) {
 
 const [data,setData] = useState(null)
 const [date,setDate] = useState('')
+const [likes,setLikes] = useState(null)
+const [userLiked,setUserLiked] = useState(false)
+const [toggle,setToggle] = useState(false)
 
 
 
@@ -17,16 +22,41 @@ useEffect(()=>{
     const getCommentData = async () => {
         const response = await axios.get(`/api/comments/${commentID}`)
         setData(response.data)
-        setDate(formatDistanceToNow(new Date(response.data.timestamp), { addSuffix: true }))
-
+        
 
     }
 
     commentID&&getCommentData()
 
 
-},[commentID])
+},[toggle])
 
+useEffect(()=>{
+  if(data){
+    setLikes(data.numberOfLikes)
+    setDate(formatDistanceToNow(new Date(data.timestamp), { addSuffix: true }))
+
+    if(data.likes.indexOf(thisUser._id)>=0){
+      setUserLiked(true)
+    }
+    else{
+      setUserLiked(false)
+
+    }
+  }
+
+
+
+
+},[data])
+
+const handleLike = async () => {
+
+  const response = await axios.put(`/api/comments/${commentID}/togglelike`)
+  setToggle(!toggle)
+
+
+}
 
 
 
@@ -37,13 +67,31 @@ useEffect(()=>{
     data&&<div className='d-flex bg-white my-1 border'>
 
 {<GenerateAvatarFromID userID={data.author._id} pfpHash={pfpHash} setPfpHash={setPfpHash}/>}
-<div className='d-flex flex-column'>
+<div className='d-flex flex-grow-1 flex-column'>
   <div><small>{data.author.fullName}</small></div>
-  <div><h3>{data.message}</h3></div>
-  <div className='d-flex'><small className='mx-1'>Like</small>
-        <small className='mx-1 text-muted'>{date}</small>
+  <div className='d-flex flex-grow-1'><h3>{data.message}</h3></div>
+  <div className='d-flex justify-content-between my-1'>
+    <div>
+    <small className={userLiked?'likeButton btnLiked':'likeButton'} onClick={handleLike}>Like</small>
+        <small className='mx-2 text-muted'>{date}</small>
+    </div>
+    {likes>0?<LikeCounter likes={likes} setLikes={setLikes} />:null}
   </div>
+
 </div>
+    </div>
+  )
+}
+
+function LikeCounter ({likes,setLikes}){
+  return (
+    <div className='likeContainer mx-2 d-flex align-items-center justify-content-center'> 
+    <div className="likesLogo">
+      <LikeFilled style={{color:'white', fontSize:'12px'}}/> 
+    </div>
+    <div className='likeCounter'>
+    {likes}
+    </div>
     </div>
   )
 }

@@ -49,7 +49,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
       setComments(
         [...post.comments]
           .reverse()
-          .map((item) => <GenerateComment key={item} commentID={item} pfpHash={pfpHash} setPfpHash={setPfpHash} />)
+          .map((item) => <GenerateComment key={item} commentID={item} pfpHash={pfpHash} setPfpHash={setPfpHash} thisUser={thisUser} />)
       );
   }, [post,post.comments]);
 

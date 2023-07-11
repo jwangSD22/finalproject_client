@@ -4,7 +4,7 @@ import emptyAvatar from '../../images/empty_avatar.png'
 import './minifriendcontainer.css'
 import { useNavigate } from "react-router-dom";
 
-function MiniFriendContainer({allData, data,viewFriendsToggle,setViewFriendsToggle,friends,setFriends}) {
+function MiniFriendContainer({setViewFriendsToggle,friends}) {
 
   const navigate = useNavigate()
   const [friendsDiv,setFriendsDiv] = useState([])
