@@ -43,7 +43,6 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
     
         //load messages into the message container
         try{
-          console.log('this block is being hit')
           const messageData = await axios.get(`/api/chats/${roomID}/messages`)
           //axios GET the convo with a body including the roomid
 
@@ -67,15 +66,15 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
 
 
-    const handleUnmount = () => {
-      if(socket){
-        console.log('active socket unmounted and disconnected')
-        socket.disconnect();
-        setSocket(null)
-        setRoomID(null)
-      }
-      setChatConnected(false)
-    }
+    // const handleUnmount = () => {
+    //   if(socket){
+    //     console.log('active socket unmounted and disconnected')
+    //     socket.disconnect();
+    //     setSocket(null)
+    //     setRoomID(null)
+    //   }
+    //   setChatConnected(false)
+    // }
 
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -89,9 +88,15 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
 
   return (
-    <div>ConnectedChat
+    <div>
+      
+      {/* ConnectedChat testing buttons
       <button onClick={handleUnmount}>Disconnect</button>
-      <button onClick={()=>{console.log(socket)}}>See socket</button>
+      <button onClick={()=>{console.log(socket)}}>See socket</button> */}
+
+      <div className="container bg-success shadow-sm">
+        
+      </div>
 
       <div>
         {(messages).map((message) => (

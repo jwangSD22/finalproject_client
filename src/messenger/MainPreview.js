@@ -86,7 +86,7 @@ function GeneratePreview ({data,setUsername2,setChatConnected,setRoomID,username
 
 
   return (
-  <div className="container border msger-preview-container" onClick={handleConnectFromPreview}>
+  <div className="container border msger-preview-container animate__animated animate__slideInRight" onClick={handleConnectFromPreview}>
   <div className="row my-2">
   <div className="col-2"><img className='pfp-msger-preview' src={pfp?pfp:emptyAvatar} /></div>
   <div className="col-7 d-flex flex-column">
