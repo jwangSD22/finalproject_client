@@ -16,7 +16,7 @@ import FriendStatus from "./FriendStatus";
 // figure out the status of the relationship of my friends to their friends
 // generate their photo -- the URL link will be under friends."friendPhotoURL"
 
-function FriendContainer({ friends, myFriends, theirFriends,myData}) {
+function FriendContainer({ friends, myFriends,myData}) {
   const navigate = useNavigate()
 
   const calculateMutual = (friendInMap) => {

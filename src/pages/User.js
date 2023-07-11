@@ -39,7 +39,6 @@ function User() {
   const { username } = useParams();
 
   useEffect(() => {
-    console.log('check login triggered')
 
     const checkLogin = async () => {
       try {
@@ -75,19 +74,19 @@ function User() {
       }
     };
 
-    checkLogin();
-    retrieveAllData();
-    retrieveData();
-  }, []);
+      checkLogin();
+      retrieveAllData();
+      retrieveData();
+
+
+  }, [username]);
 
 
   useEffect(() => {
 
-    console.log('get my info triggered')
 
     const getMyInfo = async () => {
       const response = await axios.get(`/api/users/${thisUsername}`);
-      console.log(response.data)
       setMyData(response.data);
 
       let myHash = {};
@@ -108,10 +107,14 @@ function User() {
 
     };
 
-    if(thisUsername!==null){
+    if(thisUsername){
       getMyInfo();
-    } 
-  }, []);
+
+    }
+  
+
+    
+  }, [thisUsername,username]);
 
   useEffect(() => {
 
@@ -145,7 +148,7 @@ function User() {
 
 
 
-  }, [myData]);
+  }, [myData, username]);
 
   useEffect(() => {
     const retrieveFriends = async () => {
@@ -154,7 +157,7 @@ function User() {
     };
 
     retrieveFriends();
-  }, []);
+  }, [data]);
 
   //need to useeffect to retrieve THIS USER's friends because the messenger component requires it unfortuantely..
   useEffect(() => {
@@ -164,7 +167,7 @@ function User() {
     };
 
     retrieveThisUserFriends();
-  }, []);
+  }, [data]);
 
 
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
@@ -243,7 +246,7 @@ function User() {
         </div>
       ) : (
 <div className="container border rounded my-4">
-<FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends} myData={myData}/>
+<FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends} myData={myData} />
 
 </div>
 

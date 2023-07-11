@@ -12,9 +12,3 @@ const formattedDate = formatDistanceToNow(time, { addSuffix: true });
 console.log(formattedDate)
 
 //returns over 1 year ago
-
-const myArray = ['booty','ass','jiggle']
-
-const booty = myArray.indexOf('booty')
-
-console.log(booty)

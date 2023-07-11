@@ -38,7 +38,6 @@ function Home() {
     const retrieveData = async () => {
       try {
         let response = await axios.get("/api/users");
-        console.log('triggered API call to get data')
 
         setData(response.data);
       } catch (err) {
