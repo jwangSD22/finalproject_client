@@ -100,3 +100,7 @@ nav{
     transform: none !important;
   }
 }
+
+.resultBox {
+  border: 8% 8% 8% 8%;
+}

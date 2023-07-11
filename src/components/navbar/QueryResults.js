@@ -17,9 +17,9 @@ function QueryResults({id,fullName,profilePhotoURL,username,setSearchValue,setFo
 
   return (
 
-    <div onClick={onClickHandler} className='query-container container d-flex flex-row '>
+    <div onClick={onClickHandler} className='query-container container d-flex flex-row my-2'>
         <div ><img src={profilePhotoURL==='NO PROFILE PHOTO'?emptyAvatar:profilePhotoURL} width="30px" height="30px"></img></div>
-        <div >{fullName}</div>
+        <div className='mx-2 d-flex align-items-center'  >{fullName}</div>
         </div>
                 
   

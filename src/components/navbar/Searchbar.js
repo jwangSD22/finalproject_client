@@ -52,7 +52,7 @@ const getQueryResults = () => {
             setFocus = {setFocus}
             />)
             :
-            <div><p>Start typing to find friends!</p></div>
+            <div className='container d-flex align-items-center justify-content-center my-2'>Start typing to find friends!</div>
     )
 }
 
@@ -84,9 +84,9 @@ else{
       value={searchValue}
       onChange={searchHandler}
       onFocus={()=>setFocus(true)}
-      style={focus?{width: 250}:{width: 200}}
+      style={focus?{width: 280}:{width: 200}}
      />
-     {focus&&<div className='resultBox animate__animated animate__fadeIn'>{getQueryResults()}</div>}
+     {focus&&<div className='resultBox animate__animated animate__fadeIn shadow'>{getQueryResults()}</div>}
     </div>
 
 
