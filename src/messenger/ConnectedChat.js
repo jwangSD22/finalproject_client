@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import axios from "axios";
 import io from "socket.io-client";
+import './messenger.css'
+import formatTimestamp from "../helper/formatTimestampMessenger";
+
+
 
 function ConnectedChat({username1,username2,setChatConnected,chatConnected,userID,roomID,setRoomID,messengerOn,socket,setSocket}) {
 
@@ -9,18 +13,25 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
   // const [roomID, setRoomID] = useState(null);
 
 
-  useEffect(()=>{
-  })
+  const messageContainerRef = useRef(null);
+
+
 
   useEffect(() => {
     if (socket) {
-      console.log('triggers a new socket sense')
       // Listen for new messages from the server and update the state
       socket.on("newMessage", (message) => {
         setMessages((prevMessages) => [...prevMessages, message]);
       });
     }
   }, [socket]);
+
+  useEffect(()=>{
+
+          messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+
+
+  },[messages])
 
 
     useEffect(()=>{
@@ -45,7 +56,6 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
         try{
           const messageData = await axios.get(`/api/chats/${roomID}/messages`)
           //axios GET the convo with a body including the roomid
-
           setMessages(messageData.data)
           
         }
@@ -58,25 +68,15 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
       if(!socket&&roomID){
         handleConnect();
-
       }
+
       
 
     },[roomID])
 
 
 
-    // const handleUnmount = () => {
-    //   if(socket){
-    //     console.log('active socket unmounted and disconnected')
-    //     socket.disconnect();
-    //     setSocket(null)
-    //     setRoomID(null)
-    //   }
-    //   setChatConnected(false)
-    // }
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault();
   
       // Send the new message to the server and update the state
@@ -84,35 +84,58 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
         socket.emit("sendMessage", { roomID: roomID, userid:userID, username:username1, text: newMessage });
         setNewMessage("");
       }
+
+    
     };
 
 
   return (
-    <div>
+    <div className="connected-chat-container container-fluid">
       
       {/* ConnectedChat testing buttons
       <button onClick={handleUnmount}>Disconnect</button>
       <button onClick={()=>{console.log(socket)}}>See socket</button> */}
 
-      <div className="container bg-success shadow-sm">
-        
-      </div>
 
-      <div>
+      <div className="row">
+      <div className="message-container d-flex flex-column" ref={messageContainerRef}>
         {(messages).map((message) => (
-          <div key={message.messageID} style={{wordBreak:'break-all'}}>
-            <strong>{message.username}:</strong> {message.text}
+          <div key={message.messageID} 
+          className={`${username1===message.username?'right-message':'left-message'}`}
+          style={{wordBreak:'break-all'}}>
+             {message.text} 
+             <small className={`mx-2 ${username1===message.username?'right-ts':'left-ts'}`} style={{wordBreak:'keep-all'}}>{formatTimestamp(message.timestamp)}</small>
           </div>
         ))}
       </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(event) => setNewMessage(event.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+      </div>
+
+      <div className="row">
+        <form 
+        onSubmit={handleSubmit}>
+        <div className="row input-text-bar">
+          <input
+            className=" col-11"
+            type="text"
+            value={newMessage}
+            onChange={(event) => setNewMessage(event.target.value)}
+            style={{
+              border: 'none',
+              outline: 'none',
+              paddingLeft:'20px',
+              margin: '0',
+              height: '40px',
+            }}
+            placeholder="Message"
+          />
+          <div className="col-1 d-flex align-items-center justify-content-center">
+          <button type="submit">S</button>
+          </div>
+        
+        </div>
+        </form>
+      </div>
+
     </div>
   )
 }

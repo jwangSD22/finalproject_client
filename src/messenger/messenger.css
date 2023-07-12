@@ -1,3 +1,4 @@
+
 .pfp-msger-preview{
     width:35px;
     height:35px;
@@ -34,7 +35,83 @@
 
 }
 
-.messenger-top{
-    background-color: aquamarine;
+.input-text-bar {
+    padding-top:10px;
+    padding-bottom:10px;
+    position:absolute;
+    background-color: white;
+    bottom:0px;
+    left:12px;
+    width:100%;
+
 }
 
+.message-container{
+    max-height: 550px;
+    overflow: auto;
+
+
+}
+
+
+
+
+.friends-menu{
+    width:50px;
+}
+
+.friends-menu:hover{
+    cursor:pointer;
+}
+
+@media (max-width: 575.98px) {
+    .message-container{
+        max-height: calc(100vh - 155px)
+
+    }
+}
+
+@media (max-width: 575.98px) {
+    .input-text-bar {
+        bottom:47px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .friendList{
+        width:80%;
+    }
+}
+
+
+.left-message{
+    background-color: white;
+    max-width: 85%;
+    align-self: flex-start;
+    padding:5px;
+    margin-top: 3.5px;
+    margin-bottom:3.5px;
+    border-radius: 6px;
+    
+
+}
+
+.right-message{
+    background-color: rgb(211, 248, 180);
+    max-width: 85%;
+    align-self: flex-end;
+    padding:5px;
+    margin-top: 3.5px;
+    margin-bottom:3.5px;
+    border-radius: 6px;
+
+}
+
+.left-ts{
+    color:gray
+}
+
+.right-ts{
+    color:green
+
+}

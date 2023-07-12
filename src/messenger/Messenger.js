@@ -4,24 +4,33 @@ import ConnectedChat from "./ConnectedChat";
 import FriendList from "./FriendList";
 import { MenuOutlined,ArrowLeftOutlined } from "@ant-design/icons";
 import "./messenger.css";
-import axios from "axios";
+import emptyAvatar from '../../src/images/empty_avatar.png'
 
-function Messenger({
-  thisUsername,
-  setMessengerOn,
-  messengerOn,
-  data,
-  friends,
-  userID,
-}) {
+
+function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
+
   const [chatConnected, setChatConnected] = useState(false);
   const [displayFriends, setDisplayFriends] = useState(false);
   const [username1, setUsername1] = useState(thisUsername);
   const [username2, setUsername2] = useState(null);
+  const [connectedFriendData,setConnectedFriendData] = useState(null)
   const [roomID, setRoomID] = useState(null);
   const [socket, setSocket] = useState(null);
 
   const divRef = useRef(null);
+
+  useEffect( () => {
+
+    if(friends){
+      const filteredArray = friends.filter(item=>item.username===username2)
+      console.log(filteredArray[0])
+      setConnectedFriendData(filteredArray[0])
+    }
+
+
+  },[friends,username2]) 
+
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -60,45 +69,57 @@ function Messenger({
         overlay
       </div>
 
-      <div className="messenger-top row">
-        <div className="col-1">
-          {!chatConnected?
-          <MenuOutlined
-            className="m-2"
+
+
+        <div className=" row">
+          <div className="col-1"
+           >
+            {!chatConnected?
+            <div className="friends-menu"
             onClick={() => {
               setDisplayFriends(!displayFriends);
-            }}/>
-          :
-          <ArrowLeftOutlined 
-          className="m-2"
-          style={{fontSize:'20px'}}
-          onClick={() => {
-            handleUnmount();
-          }}
-          
-          />
-          
+            }}>
+              <MenuOutlined
+              className="m-2"/>
+              </div>
 
-          }
-        </div>
-
-        <div className="col-10 my-1 d-flex justify-content-center align-items-center">
-          Messenger{" "}
-        </div>
-
-        <div className="col-1 d-flex justify-content-center align-items-center">
-          <button
-            className="btn-close"
+            :
+            <div className="friends-menu "
             onClick={() => {
-              setMessengerOn(false);
               handleUnmount();
-            }}
-          ></button>
-        </div>
+            }}>
+               <ArrowLeftOutlined
+            className="m-2"
+            style={{fontSize:'20px'}}
+
+        
+            />
+              </div>
+           
+            }
+          </div>
+          <div className="col-10 my-1 d-flex justify-content-center align-items-center">
+            {chatConnected&&connectedFriendData?
+            <div className="d-flex align-items-center justify-content-center">
+              <div className=""><img className='pfp-msger-preview' src={connectedFriendData.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:connectedFriendData.friendPhotoURL} /></div>
+              <div className="mx-3">{connectedFriendData.fullName}</div>
+              </div>
+              :
+              'Messenger'}
+          </div>
+          <div className="col-1 d-flex justify-content-center align-items-center">
+            <button
+              className="btn-close"
+              onClick={() => {
+                setMessengerOn(false);
+                handleUnmount();
+              }}
+            ></button>
+          </div>
       </div>
 
 
-      <div>
+
         <div
           className="friendList animate__animated animate__slideInLeft animate__faster"
           ref={divRef}
@@ -115,7 +136,7 @@ function Messenger({
         </div>
 
         {chatConnected ? (
-          <>
+     
             <ConnectedChat
               username1={username1}
               userID={userID}
@@ -127,7 +148,7 @@ function Messenger({
               socket={socket}
               setSocket={setSocket}
             />
-          </>
+   
         ) : (
           <MainPreview
             data={data}
@@ -138,7 +159,7 @@ function Messenger({
             username1={username1}
           />
         )}
-      </div>
+ 
     </div>
   );
 }
