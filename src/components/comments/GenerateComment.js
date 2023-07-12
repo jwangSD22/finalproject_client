@@ -1,4 +1,5 @@
 import React, {useEffect,useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import GenerateAvatarFromID from '../../helper/GenerateAvatarFromID'
 import { formatDistanceToNow } from 'date-fns'
@@ -14,6 +15,7 @@ const [likes,setLikes] = useState(null)
 const [userLiked,setUserLiked] = useState(false)
 const [toggle,setToggle] = useState(false)
 
+const navigate = useNavigate()
 
 
 
@@ -21,6 +23,7 @@ useEffect(()=>{
 
     const getCommentData = async () => {
         const response = await axios.get(`/api/comments/${commentID}`)
+        console.log(response.data)
         setData(response.data)
         
 
@@ -58,7 +61,9 @@ const handleLike = async () => {
 
 }
 
-
+const handleNav = (username) => {
+  navigate(`/user/${username}`);window.location.reload()
+}
 
 
 
@@ -68,7 +73,7 @@ const handleLike = async () => {
 
 {<GenerateAvatarFromID userID={data.author._id} pfpHash={pfpHash} setPfpHash={setPfpHash}/>}
 <div className='d-flex flex-grow-1 flex-column'>
-  <div><small>{data.author.fullName}</small></div>
+  <div onClick={()=>handleNav(data.author.username)}><small className='comment-user-name'>{data.author.fullName}</small></div>
   <div className='d-flex flex-grow-1'><h3>{data.message}</h3></div>
   <div className='d-flex justify-content-between my-1'>
     <div>

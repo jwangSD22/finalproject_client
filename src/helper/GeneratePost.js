@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import GenerateAvatar from "./GenerateAvatar";
 import { LikeOutlined, LikeFilled, SendOutlined } from "@ant-design/icons";
@@ -19,6 +20,9 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
   const textareaRef = useRef(null);
   const divRef = useRef(null);
   const postRef = useRef(null)
+
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     const getPostData = async () => {
@@ -170,16 +174,22 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
     }
   }, [message]);
 
+  const handleNav = (username) => {
+    navigate(`/user/${username}`);window.location.reload()
+  }
+
+
+
   return (
     post && (
       <div ref={postRef} className="container-fluid bg-light my-4 p-2 rounded shadow-sm border">
         {/*post header*/}
         <div className="header d-flex">
-          <div>
+          <div className="header-pfp" onClick={()=>handleNav(post.username)} >
             <GenerateAvatar cssClassIdentifier={`gen-post-pfp mx-2`} url={post.authorAvatar} />
-          </div>
+          </div >
           <div className="d-flex flex-column">
-            <div>{post.fullName}</div>
+            <div className="post-header-name" onClick={()=>handleNav(post.username)}>{post.fullName}</div>
             <div><small className="text-muted">{date}</small></div>
           </div>
         </div>

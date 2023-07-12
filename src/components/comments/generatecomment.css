@@ -33,3 +33,13 @@
     margin-right: 3px;
     margin-left: 5px;
 }
+
+.comment-user-name:hover {
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+.header-pfp:hover{
+    cursor:pointer;
+
+}
