@@ -108,10 +108,13 @@
 }
 
 .left-ts{
-    color:gray
+    color:gray;
+    white-space: nowrap;
 }
 
 .right-ts{
-    color:green
+    color:green;
+    white-space: nowrap;
+
 
 }
