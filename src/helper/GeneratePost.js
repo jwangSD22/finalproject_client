@@ -216,7 +216,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
         <div className="d-flex justify-content-between">
           <div className="d-flex align-items-center"> {post.likes.length>0&&<LikeFilled style={{ fontSize: "15px", color: "pink" }} />}<small className="mx-2">{post.likes.length>0&&generateLikeSnippet()}</small></div>
 
-          <div><small>{post.numberOfComments} Comments </small></div>
+          <div className="d-none d-sm-flex"><small>{post.numberOfComments} Comments </small></div>
         </div>
 
         {/*like/comment section*/}
