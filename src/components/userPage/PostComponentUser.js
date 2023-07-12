@@ -64,12 +64,12 @@ function PostComponentUser({thisUser,posts,setPosts,allData}) {
     }, []);
   
     return (
-      <div className='container-fluid '>
+      <>
         {posts.map((data) => (
 <GeneratePost key={data._id} data={data} thisUser={thisUser} allUsers={allData} pfpHash={pfpHash} setPfpHash={setPfpHash}/>
         ))}
         {loading && <p>Loading...</p>}
-      </div>
+      </>
     );
 }
 

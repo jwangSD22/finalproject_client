@@ -35,7 +35,7 @@ setToggleNewPost(!toggleNewPost)
 
 
 
-const newPost = <div className="container box-styling d-flex  align-items-center justify-content-center p-2">
+const newPost = <div className="container box-styling d-flex bg-white border shadow-sm  align-items-center justify-content-center p-2">
     {thisUser&&<GenerateAvatar cssClassIdentifier={`create-post-pfp mx-2`} url={thisUser.profilePhotoURL} />}
   <div className='inputBox box-styling flex-grow-1' onClick={formClickHandler}> What's on your mind? </div>
   </div>

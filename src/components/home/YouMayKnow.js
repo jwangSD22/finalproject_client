@@ -6,6 +6,7 @@ import GenerateAvatar from "../../helper/GenerateAvatar";
 
 function YouMayKnow({ data, friends, username }) {
   const [nonFriends, setNonFriends] = useState(null);
+  const [thisUser,setThisUser] = useState(null)
   const [height, setHeight] = useState(0);
 
 
@@ -27,6 +28,11 @@ function YouMayKnow({ data, friends, username }) {
       let friendsFiltered = data
         .filter((user) => !hash.has(user.username))
         .slice(0, 10);
+
+        let thisUserFiltered = data.filter((user=>user.username===username))
+        console.log(thisUserFiltered)
+        setThisUser(thisUserFiltered[0])
+
       setNonFriends(friendsFiltered);
     }
   }, [data, friends, username]);
@@ -65,7 +71,18 @@ function YouMayKnow({ data, friends, username }) {
 
   return (
     <div className="ymk d-none d-sm-flex flex-column mt-4" style={{top:`${height}px`}}>
-      <div > People you may know</div>
+{thisUser&&<div key={thisUser._id} className=" d-flex my-2">
+        <div
+          className="ymk-listItem box-styling d-flex my-1"
+          onClick={() => {
+            linkHandler(thisUser.username);
+          }}
+        >
+          <GenerateAvatar cssClassIdentifier={`create-post-pfp`} url={thisUser.profilePhotoURL} />
+          <div className="mx-2">{thisUser.fullName}</div>
+        </div>
+      </div>}
+      <div className="m-2" > <h3>People you may know</h3></div>
       <div>{nonFriendsList}</div>
     </div>
   );

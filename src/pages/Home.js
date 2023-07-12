@@ -108,7 +108,7 @@ function Home() {
         username={username}
         setMessengerOn={setMessengerOn}
       />
-      <div className="container-fluid">
+      <div className="container-fluid bg-light">
         <div className="row">
           <div className="col-md-3 d-none d-md-block">
             <YouMayKnow data={data} friends={friends} username={username} />

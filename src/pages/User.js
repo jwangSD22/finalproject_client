@@ -207,7 +207,7 @@ function User() {
     
       <Navbar data={allData} username={thisUsername} setMessengerOn={setMessengerOn}/>
 
-      <div className="container top-container">
+      <div className="top-container bg-white">
         <TopBanner
           thisUserSameProfile={thisUserSameProfile}
           data={data}
@@ -217,35 +217,31 @@ function User() {
         />
       </div>
 
-      <div className="container ">
-        <hr />
-      </div>
-
-      <div className="mini-nav " style={{ top: `${navbarOffset}px` }}>
-        <MiniNav
-          viewFriendsToggle={viewFriendsToggle}
-          setViewFriendsToggle={setViewFriendsToggle}
-        />
+      <div className="mini-nav bg-white" style={{ top: `${navbarOffset}px` }}>
+        <MiniNav viewFriendsToggle={viewFriendsToggle} setViewFriendsToggle={setViewFriendsToggle}/>
       </div>
 
       {!viewFriendsToggle ? (
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-5 d-none d-lg-block" style={{ zIndex: "0" }}>
-              <div className="sticky-top" style={{ top: `${miniOffset}px` }}>
-                <MiniFriendContainer
-                  setViewFriendsToggle={setViewFriendsToggle}
-                  friends={friends}
-                />
+        <div className="main-container bg-light">
+
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-5 d-none d-lg-block" style={{ zIndex: "0" }}>
+                <div className="sticky-top" style={{ top: `${miniOffset}px` }}>
+                  <MiniFriendContainer
+                    setViewFriendsToggle={setViewFriendsToggle}
+                    friends={friends}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="col-lg-7">
-              <UserPosts thisUsername={thisUsername} allData={allData} />
+              <div className="col-lg-7">
+                <UserPosts thisUsername={thisUsername} allData={allData} />
+              </div>
             </div>
           </div>
         </div>
       ) : (
-<div className="container border rounded my-4">
+<div className="container-fluid bg-light p-4">
 <FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends} myData={myData} />
 
 </div>

@@ -66,8 +66,8 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
   return (
   
     <div className="container-fluid my-4">
-        <div className="create-post">
-      <div className="bg-white rounded p-2">
+        <div className="create-post bg-white rounded p-2">
+ 
         <div className="card-header d-flex align-items-center justify-content-between">
           <h5 className="mb-0">Create Post</h5>
           <button
@@ -130,16 +130,13 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
                 />
               </>
             )}
-            <button
-              className="btn btn-success mt-3"
-              onClick={handlePostSubmit}
-              disabled={!postContent}
-            >
+
+            <button className="btn btn-success mt-3" onClick={handlePostSubmit} disabled={!postContent} >
               Post
             </button>
           </div>
         </div>
-      </div>
+
     </div>
     </div>
   );

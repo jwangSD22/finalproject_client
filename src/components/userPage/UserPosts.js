@@ -52,14 +52,14 @@ function UserPosts({thisUsername,allData}) {
     
       return (
 
-        <div className="mt-4 ">
+        <div className={`${sameUser&&'mt-4'}`}>
           {/*hidden div for creating a new post */}
           {toggleNewPost && <div className="overlay" />}
           {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} posts={posts} setPosts={setPosts} />}
     
           <div className="row">
        
-            <div className='container-fluid text-center border rounded shadow-sm'>{sameUser&&newPost}</div>
+            {sameUser&&<div className=' text-center border rounded shadow-sm'>{newPost}</div>}
      
     
            <PostComponentUser thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh} allData={allData}/> 

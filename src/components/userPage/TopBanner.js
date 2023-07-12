@@ -3,6 +3,7 @@ import FriendReqBtns from "./FriendReqBtns"
 import emptyAvatar from '../../images/empty_avatar.png'
 import axios from "axios";
 import { CameraOutlined } from "@ant-design/icons";
+import './topbanner.css'
 
 
 
@@ -90,9 +91,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
 
   return (<>
             {/*BG BANNER CONTAINER */}
-            <div
-            className="container"
-            >
+            <div className="container-sm">
             <div className='background-container' style={{height:'500px'}}>
                 <img className="background-image"  src={bgURL || emptyAvatar}></img>
                 {thisUserSameProfile && 

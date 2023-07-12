@@ -71,7 +71,7 @@ const handleNav = (username) => {
   return (
     data&&<div className='d-flex bg-white my-1 border'>
 
-{<GenerateAvatarFromID userID={data.author._id} pfpHash={pfpHash} setPfpHash={setPfpHash}/>}
+<div className='my-1'><GenerateAvatarFromID userID={data.author._id} pfpHash={pfpHash} setPfpHash={setPfpHash}/></div>
 <div className='d-flex flex-grow-1 flex-column'>
   <div onClick={()=>handleNav(data.author.username)}><small className='comment-user-name'>{data.author.fullName}</small></div>
   <div className='d-flex flex-grow-1'><h3>{data.message}</h3></div>

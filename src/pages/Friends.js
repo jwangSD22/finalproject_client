@@ -134,9 +134,12 @@ function Friends() {
   return (
     <>
     <Navbar data={data} username={username} setMessengerOn={setMessengerOn}/>
-    <div className='container-fluid'>
-      <div className="container border mt-4">
-        <h2>Friend requests</h2>
+    <div className='container-fluid bg-light'>
+      <div className="container">
+
+        <div className="mt-4">
+          <h2>Friend requests</h2>
+        </div>
         <div className="row">
 {pendingGenerated.length?pendingGenerated:<>You have no pending requests</>}
         </div>
@@ -144,7 +147,7 @@ function Friends() {
 
       <div className="container"><hr/></div>
 
-      <div className="lower-friend-container container border">
+      <div className="lower-friend-container container">
         <h2>Friends</h2>
         <div className="row">
           

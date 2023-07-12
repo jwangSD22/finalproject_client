@@ -10,6 +10,8 @@
     background-color: rgb(240, 240, 240);
     border-radius: 50%;
     border:none;
+    border:solid 1px black;
+
 }
 
 
@@ -42,16 +44,16 @@
   border-radius: 50%;
   border:none;
   z-index: 1;
+  border:solid 1px black;
+
 }
 
 .bg-offset:hover{
-  background-color: rgb(200, 200, 200);
-
+  background-color: rgb(220, 220, 220);
 }
 
 .pfp-offset:hover{
-  background-color: rgb(200, 200, 200);
-
+  background-color: rgb(220, 220, 220);
 }
 
 
@@ -101,10 +103,13 @@
 
     .mini-nav{
       
-        margin-top: 10px;
         background-color: white;
         box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
       
     }
 
+
+.main-container {
+  min-height: 40vh;
+}
 

@@ -182,7 +182,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
 
   return (
     post && (
-      <div ref={postRef} className="container-fluid bg-light my-4 p-2 rounded shadow-sm border">
+      <div ref={postRef} className=" bg-white my-4 p-2 rounded shadow-sm border">
         {/*post header*/}
         <div className="header d-flex">
           <div className="header-pfp" onClick={()=>handleNav(post.username)} >

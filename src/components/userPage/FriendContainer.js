@@ -42,8 +42,8 @@ function FriendContainer({ friends, myFriends,myData}) {
 
 
   return (
-    <>
-      <div className="header my-2">
+    <div className="container bg-white  border shadow-sm">
+      <div className="header">
         <h2>ALL FRIENDS</h2>
       </div>
 
@@ -77,7 +77,7 @@ function FriendContainer({ friends, myFriends,myData}) {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
