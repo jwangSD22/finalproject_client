@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FriendReqBtns from "./FriendReqBtns"
 import emptyAvatar from '../../images/empty_avatar.png'
+import emptyBG from '../../images/empty_bg.png'
 import axios from "axios";
 import { CameraOutlined } from "@ant-design/icons";
 import FriendIcons from "./FriendIcons";
@@ -94,7 +95,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
             {/*BG BANNER CONTAINER */}
             <div className="container-sm">
             <div className='background-container' style={{height:'500px'}}>
-                <img className="background-image"  src={bgURL || emptyAvatar}></img>
+                <img className="background-image"  src={bgURL || emptyBG}></img>
                 {thisUserSameProfile && 
                   (<>
                     <label htmlFor="bg-upload" className="file-upload-label" />
