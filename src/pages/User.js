@@ -217,6 +217,7 @@ function User() {
           thisUsername={thisUsername}
           friendStatus={friendStatus}
           setFriendStatus={setFriendStatus}
+          setViewFriendsToggle={setViewFriendsToggle}
         />
       </div>
 

@@ -9,7 +9,7 @@ import './topbanner.css'
 
 
 
-function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriendStatus,friends}) {
+function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriendStatus,friends,setViewFriendsToggle}) {
 
     const [profilePhotoURL, setProfilePhotoURL] = useState(null);
     const [bgURL, setBgURL] = useState(null);
@@ -154,7 +154,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
   
             <div className="col-md-6 col-lg-6 col-xl-8 d-flex flex-column mt-auto">
               <div>{data?.fullName}</div>
-              <div>{data ? `${data.friends.length} Friends` : "0 Friends"}</div>
+              <div>{<span className="friends-counter" onClick={()=>{setViewFriendsToggle(true)}}>{data ? `${data.friends.length} Friends` : "0 Friends"}</span>}</div>
 
               <FriendIcons friends={friends}/>
             </div>
