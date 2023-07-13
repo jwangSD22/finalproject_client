@@ -1,11 +1,25 @@
 .mini-nav-link{
+    border-radius: 5px 5px 0px 0px;
     display:flex;
     position:relative;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     height:40px;
     z-index: 0;
+    transition: all 0.2s;
+    border-bottom:solid 3px rgba(0, 0, 0, 0);
 
+
+}
+
+.mini-nav-link:hover{
+    cursor:pointer;
+    background-color: #E4E6E9;
+}
+
+.nav-link-on{
+    border-bottom:solid 3px blue;
+    color:blue;
 }
 
 .mini-nav {
