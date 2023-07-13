@@ -3,11 +3,12 @@ import FriendReqBtns from "./FriendReqBtns"
 import emptyAvatar from '../../images/empty_avatar.png'
 import axios from "axios";
 import { CameraOutlined } from "@ant-design/icons";
+import FriendIcons from "./FriendIcons";
 import './topbanner.css'
 
 
 
-function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriendStatus}) {
+function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriendStatus,friends}) {
 
     const [profilePhotoURL, setProfilePhotoURL] = useState(null);
     const [bgURL, setBgURL] = useState(null);
@@ -153,7 +154,8 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
             <div className="col-md-6 col-lg-6 col-xl-8 d-flex flex-column mt-auto">
               <div>{data?.fullName}</div>
               <div>{data ? `${data.friends.length} Friends` : "0 Friends"}</div>
-              <div>FRIEND ICON GENERATOR TOP 10</div>
+
+              <FriendIcons friends={friends}/>
             </div>
   
             {/*Friend Req INFO */}

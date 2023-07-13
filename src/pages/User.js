@@ -211,6 +211,7 @@ function User() {
         <TopBanner
           thisUserSameProfile={thisUserSameProfile}
           data={data}
+          friends={friends}
           thisUsername={thisUsername}
           friendStatus={friendStatus}
           setFriendStatus={setFriendStatus}
