@@ -2,7 +2,7 @@ import React from 'react'
 import emptyAvatar from '../images/empty_avatar.png'
 import { useNavigate } from 'react-router-dom'
 
-function GenerateAvatar({url,cssClassIdentifier,username}) {
+function GenerateAvatar({url,cssClassIdentifier,username,toggleHandler}) {
 
   const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ let activeURL = null
 
 
   return (
-<img onClick={()=>handleNav(username)} className={cssClassIdentifier} src={activeURL||emptyAvatar} />  )
+<img onClick={()=>{toggleHandler&&handleNav(username)}} className={cssClassIdentifier} src={activeURL||emptyAvatar} />  )
 }
 
 export default GenerateAvatar

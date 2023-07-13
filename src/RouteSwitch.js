@@ -10,6 +10,7 @@ import App from './App'
 import NewPost from './modules/NewPost'
 import ChatRoom from './modules/ChatRoom'
 import Users from './modules/Users'
+import ErrorPage from './pages/ErrorPage'
 
 
 function RouteSwitch() {
@@ -45,6 +46,7 @@ function RouteSwitch() {
       <Route path ="/createpost" element = {<NewPost />} />
       <Route path='/chatroom/' element = {<ChatRoom />} />
       <Route path='/users/' element = {<Users />} />
+      <Route path ='/error' element = {<ErrorPage />} />
 
 
 

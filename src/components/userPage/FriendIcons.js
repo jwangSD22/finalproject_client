@@ -19,7 +19,7 @@ const handleNav = (username) => {
 
 useEffect(()=>{
   const generateIcons = friends.slice(0,8).map((friend,index)=>
-    <GenerateAvatar url={friend.friendPhotoURL} cssClassIdentifier={`friend-icon friend-layer-${index+1}`} username={friend.username} />
+    <GenerateAvatar url={friend.friendPhotoURL} cssClassIdentifier={`friend-icon friend-layer-${index+1}`} username={friend.username} toggleHandler={true} />
   )
 
 

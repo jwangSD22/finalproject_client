@@ -70,13 +70,15 @@ function User() {
         let response = await axios.get(`/api/users/${username}`);
         setData(response.data);
       } catch (err) {
-        console.log(err);
+
+        navigate('/error')
       }
     };
 
       checkLogin();
-      retrieveAllData();
       retrieveData();
+      retrieveAllData();
+
 
 
   }, [username]);
