@@ -38,10 +38,9 @@ const Navbar = ({ data, username,setMessengerOn}) => {
       {/* CENTER NAVIGATION */}
       <div className="center-nav col-md-4 container d-none d-md-flex justify-content-center align-items-end">
         {/* home */}
-        <a
-          className={
+        <a className={
             path === "/home"
-              ? "center-nav-container mx-1"
+              ? "current-path mx-1"
               : "center-nav-container mx-1"
           }
           href="/home"
@@ -49,11 +48,7 @@ const Navbar = ({ data, username,setMessengerOn}) => {
           data-tooltip-content="Home"
         >
           <div className="d-flex align-items-center">
-            <HomeOutlined
-              className={
-                path === "/home" ? "current-path mx-2" : "friends-icon mx-2"
-              }
-            />
+            <HomeOutlined/>
           </div>
         </a>
 

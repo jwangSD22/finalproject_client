@@ -105,3 +105,8 @@ nav{
 .resultBox {
   border: 8% 8% 8% 8%;
 }
+
+.messenger-icon:hover{
+      color: rgb(0, 68, 255);
+
+}
