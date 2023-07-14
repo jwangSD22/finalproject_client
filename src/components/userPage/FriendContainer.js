@@ -42,7 +42,7 @@ function FriendContainer({ friends, myFriends,myData}) {
 
 
   return (
-    <div className="container bg-white  border shadow-sm">
+    <div className="user-page-friend-container container bg-white  border shadow-sm ">
       <div className="header">
         <h2>ALL FRIENDS</h2>
       </div>

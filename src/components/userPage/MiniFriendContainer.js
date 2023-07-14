@@ -33,6 +33,20 @@ function MiniFriendContainer({setViewFriendsToggle,friends}) {
     navigate(`/user/${username}`);window.location.reload()
   }
 
+  const hasFriends = (
+    <div className="container">
+    <div className="row">   
+      {friendsDiv}  
+    </div>
+  </div>
+  )
+
+  const noFriends = (
+    <div className="noFriends text-muted">
+    No friends found
+    </div>
+    )
+
 
 
 
@@ -41,27 +55,22 @@ function MiniFriendContainer({setViewFriendsToggle,friends}) {
 
 
   return (
-    <div className="container rounded border my-4">
+    <div className="container rounded border my-4 bg-white user-page-mini-friend-container">
       <div className="row">
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between m-2">
           <div>
-            <div><h2>Friends</h2></div>
-            <div>{`${friends.length} friends`}</div>
+            <div><h3>Friends</h3></div>
+            {friends.length>0&&<div>{`${friends.length} friends`}</div>}
           </div>
           <div><div className="see-all-friends" onClick={()=>{setViewFriendsToggle(true)}}>See all friends</div></div>
         </div>
-        <div className="container">
+        
+        {/* friend icons generated from here */}
 
-<div className="row">
-    
-{friendsDiv}
-    
-
-
-</div>
-
-
-        </div>
+      {friends.length>0?hasFriends:noFriends}
+      
+      
+      
       </div>
     </div>
   );
