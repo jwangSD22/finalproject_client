@@ -121,13 +121,15 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
           {/*PFP CONTAINER */}
   
           <div className="container d-flex flex-column-sm">
-            <div className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2" style={{ height: "175px" }}>
-              <button onClick={handlePFPupdateClick} className="pfp-button">
-              <img
-                src={profilePhotoURL || emptyAvatar}
-                className="pfp"     
-              ></img>
-              </button>
+            <div className="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2" style={{ height: "175px" }}>
+              <div className="pfp-container">
+                <button onClick={handlePFPupdateClick} className="pfp-button">
+                <img
+                  src={profilePhotoURL || emptyAvatar}
+                  className="pfp"
+                ></img>
+                </button>
+              </div>
 
               {thisUserSameProfile && (
                 <>
@@ -152,7 +154,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
   
             {/*USER INFO */}
   
-            <div className="col-md-6 col-lg-6 col-xl-8 d-flex flex-column mt-auto">
+            <div className="banner-info-container col-md-6 col-lg-6 col-xl-8 d-flex flex-column mt-auto">
               <div>{data?.fullName}</div>
               <div>{<span className="friends-counter" onClick={()=>{setViewFriendsToggle(true)}}>{data ? `${data.friends.length} Friends` : "0 Friends"}</span>}</div>
 

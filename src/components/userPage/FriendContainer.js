@@ -62,13 +62,12 @@ function FriendContainer({ friends, myFriends,myData}) {
                     url={item.friendPhotoURL}
                   />
                 </div>
-                <div className="col-4 d-flex flex-column justify-content-center">
+                <div className="col-7 d-flex flex-column justify-content-center">
                   <div className="friend-container-username" onClick={()=>handleNav(item.username)}>{item.fullName}</div>
                   <div>{calculateMutual(item)} mutual friends</div>
 
                   {/* this is in a map, need to dynamically generate this when it is created , so use effect doens't make sense here. */}
                 </div>
-                <div className="hiddendiv col-3" />
                 <div className="status col-3 d-none d-md-flex align-items-center ">
                   <FriendStatus friend={item} myFriends={myFriends} myData={myData}/>
                 </div>

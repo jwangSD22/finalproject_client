@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/navbar/Navbar.js";
-import emptyAvatar from "../images/empty_avatar.png";
-import "./Users.css";
+import "./User.css";
 import UserPosts from "../components/userPage/UserPosts.js";
 import TopBanner from "../components/userPage/TopBanner.js";
 import MiniNav from "../components/userPage/MiniNav.js";

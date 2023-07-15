@@ -18,18 +18,28 @@
 
 @media (max-width: 576px) {
   .pfp-offset {
-    top:125px;
-    left:260px;
-  }
-}
+    position:relative;
+    bottom:60px;
+    left:190px;
 
-@media (max-width: 576px) {
+  }
+
   .flex-column-sm {
-      
     flex-direction: column !important;
     align-items: center;
   }
+
+  .banner-info-container{
+    align-items: center;
+  }
+
+  .pfp-container{
+    display:flex;
+    justify-content: center;
+  }
 }
+
+
 
 .bg-offset{
   position:absolute;
