@@ -91,8 +91,8 @@ function Friends() {
 
       if(friends){
         const finalArray = friends.map(item => 
-        <div className="col-6 col-xs-4 col-lg-4 col-xl-3 col-xxl-3 d-flex flex-column my-2" key={item._id}>
-          <div className="friend-container shadow-sm" onClick={()=>{handleNav(item.username)}}>
+        <div className="  col-6 col-xs-4 col-md-4 col-lg-3 col-xxl-2 d-flex flex-column my-2 align-items-center" key={item._id}>
+          <div className=" friend-container shadow-sm" onClick={()=>{handleNav(item.username)}}>
             <img className="friend-container-img" src={item.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:item.friendPhotoURL}/>
             <div className="friend-name my-2"onClick={()=>{handleNav(item.username)}}>{item.fullName}</div>
             </div>
@@ -135,9 +135,9 @@ function Friends() {
     <>
     <Navbar data={data} username={username} setMessengerOn={setMessengerOn}/>
     <div className='container-fluid bg-light'>
-      <div className="container">
+      <div className="container pt-4">
 
-        <div className="mt-4">
+        <div className="">
           <h2>Friend requests</h2>
         </div>
         <div className="row">

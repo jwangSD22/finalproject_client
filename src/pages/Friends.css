@@ -1,7 +1,7 @@
 .friend-container{
     cursor:pointer;
     width:200px;
-    border-radius: 9%;
+    border-radius: 3%;
     z-index: 0;
 
 }
@@ -11,11 +11,30 @@
 }
 
 .friend-container-img{
-    width:100%;
+    width:200px;
     height:200px;
     object-fit: cover;
-    border-radius: 8% 8% 0px 0px;
+    border-radius: 3% 3% 0px 0px;
 
+}
+
+.friend-btn-container{
+    width:200px;
+}
+
+@media (max-width: 450px){
+    .friend-container-img{
+        width:165px;
+        height:165px;
+    }
+
+    .friend-btn-container{
+        width:165px;
+    }
+
+    .friend-container{
+        width:165px;
+    }
 }
 
 
@@ -27,6 +46,7 @@
     justify-content: center;
     align-items: center;
     color:black;
+    overflow: hidden;
 }
 
 .friend-name:hover{
@@ -34,9 +54,7 @@
     text-decoration: underline;
 }
 
-.friend-btn-container{
-    width:200px;
-}
+
 
 .lower-friend-container{
     min-height: 86vh;

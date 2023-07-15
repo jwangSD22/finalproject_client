@@ -15,9 +15,6 @@ let activeURL = null
 
 
 
-
-
-
     const handleNav = (username) => {
       navigate(`/user/${username}`);window.location.reload()
     }

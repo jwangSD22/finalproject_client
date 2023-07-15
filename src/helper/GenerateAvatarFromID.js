@@ -51,7 +51,7 @@ function GenerateAvatarFromID({userID,pfpHash,setPfpHash}) {
 
 
     let style = {
-        border:'solid 1px black',
+        // border:'solid 1px black',
         width:'35px',
         height:'35px',
         borderRadius:'50%'
