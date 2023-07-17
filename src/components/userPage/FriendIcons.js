@@ -29,7 +29,7 @@ useEffect(()=>{
 
   return (
 
-    <div>{friendIcons}</div>
+    <div className='mb-3'>{friendIcons}</div>
   )
 }
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { CheckOutlined,UserDeleteOutlined, UserAddOutlined } from "@ant-design/icons";
+import './friendreqbtns.css'
 
 function FriendReqBtns({
   thisUserSameProfile,
@@ -65,24 +67,24 @@ function FriendReqBtns({
   const generateButtons = (friendStatus) => {
     if (friendStatus === "accepted") {
       return (
-        <>
-          <button className="btn btn-primary">Already friends</button>
-          <button onClick={handleDeleteFriend}>Option to unfriend</button>
-        </>
+        <div className="d-flex justify-content-center justify-content-sm-end">
+          <button className="btn btn-sm btn-outline-primary mx-2 disabled"><span className="friend-req-btns"><CheckOutlined className="mx-1" />Friend</span></button>
+          <button className="btn btn-sm btn-danger" onClick={handleDeleteFriend}><span className="friend-req-btns"><UserDeleteOutlined className="mx-1" />Unfriend</span></button>
+        </div>
       )}
     if (friendStatus === "pending") {
       return (
-        <>
-          <button className="btn btn-primary">WAITING FOR RESPONSE</button>
-          <button className="btn btn-primary" onClick={handleRemoveFriendRequest}>Option to cancel request?</button>
+        <div className="d-flex justify-content-center justify-content-sm-end">
+          <button className="btn btn-sm  btn-primary mx-2" onClick={handleRemoveFriendRequest}><span className="friend-req-btns"><UserDeleteOutlined className="mx-1" />Cancel Request</span></button>
+          <button className="btn btn-sm  btn-secondary disabled"><span className="friend-req-btns"><UserAddOutlined className="mx-1" /> Add Friend</span></button>
 
-        </>
+        </div>
       )}
     else{
       return (
-        <>
-        <button className="btn btn-primary" onClick={handleSendFriendRequest}>send friend request</button>
-         </>
+        <div className=" d-flex justify-content-center justify-content-sm-end">
+        <button className="btn btn-sm  btn-primary" onClick={handleSendFriendRequest}><span className="friend-req-btns"><UserAddOutlined className="mx-1" />Add Friend</span></button>
+         </div>
       )
     }
 
@@ -92,7 +94,7 @@ function FriendReqBtns({
   };
 
   return (
-    <div className="col-6 col-sm-2 mt-auto">
+    <div className=" col-6 col-sm-2 mt-auto">
      {generateButtons(friendStatus)}
     </div>
   );
