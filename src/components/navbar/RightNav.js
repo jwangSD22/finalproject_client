@@ -36,6 +36,7 @@ const handleLogout = () => {
 
     localStorage.removeItem('jwt')
 
+    navigate('/')
     window.location.reload();
 
   }
