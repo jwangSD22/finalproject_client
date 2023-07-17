@@ -67,14 +67,14 @@ function FriendReqBtns({
   const generateButtons = (friendStatus) => {
     if (friendStatus === "accepted") {
       return (
-        <div className="d-flex justify-content-center justify-content-sm-end">
+        <div className="d-flex justify-content-center justify-content-md-end">
           <button className="btn btn-sm btn-outline-primary mx-2 disabled"><span className="friend-req-btns"><CheckOutlined className="mx-1" />Friend</span></button>
           <button className="btn btn-sm btn-danger" onClick={handleDeleteFriend}><span className="friend-req-btns"><UserDeleteOutlined className="mx-1" />Unfriend</span></button>
         </div>
       )}
     if (friendStatus === "pending") {
       return (
-        <div className="d-flex justify-content-center justify-content-sm-end">
+        <div className="d-flex justify-content-center justify-content-md-end">
           <button className="btn btn-sm  btn-primary mx-2" onClick={handleRemoveFriendRequest}><span className="friend-req-btns"><UserDeleteOutlined className="mx-1" />Cancel Request</span></button>
           <button className="btn btn-sm  btn-secondary disabled"><span className="friend-req-btns"><UserAddOutlined className="mx-1" /> Add Friend</span></button>
 
@@ -82,7 +82,7 @@ function FriendReqBtns({
       )}
     else{
       return (
-        <div className=" d-flex justify-content-center justify-content-sm-end">
+        <div className=" d-flex justify-content-center justify-content-md-end">
         <button className="btn btn-sm  btn-primary" onClick={handleSendFriendRequest}><span className="friend-req-btns"><UserAddOutlined className="mx-1" />Add Friend</span></button>
          </div>
       )
@@ -94,7 +94,7 @@ function FriendReqBtns({
   };
 
   return (
-    <div className=" col-6 col-sm-2 mt-auto">
+    <div className=" col-12 col-md-5 col-lg-4 col-xl-4 mt-auto">
      {generateButtons(friendStatus)}
     </div>
   );

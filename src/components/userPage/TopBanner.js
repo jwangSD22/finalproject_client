@@ -120,50 +120,47 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
   
           {/*PFP CONTAINER */}
   
-          <div className="container d-flex flex-column-sm">
-            <div className="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2" style={{ height: "175px" }}>
-              <div className="pfp-container">
-                <button onClick={handlePFPupdateClick} className="pfp-button">
-                <img
-                  src={profilePhotoURL || emptyAvatar}
-                  className="pfp"
-                ></img>
-                </button>
+          <div className="container flex-column-sm">
+            <div className="row">
+              <div className="col-12 col-md-3 col-lg-3 col-xl-2" style={{ height: "175px" }}>
+                <div className="pfp-container d-flex justify-content-center justify-content-md-start">
+                  <button onClick={handlePFPupdateClick} className="pfp-button">
+                  <img
+                    src={profilePhotoURL || emptyAvatar}
+                    className="pfp"
+                  ></img>
+                  </button>
+                </div>
+                {thisUserSameProfile && (
+                  <>
+                    <label htmlFor="pfp-upload" className="file-upload-label" />
+                    <div>
+                      <input
+                        id="pfp-upload"
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={updatePFP}
+                      />
+                      <button
+                        className="icon-button pfp-offset"
+                        onClick={handlePFPupdateClick}
+                      >
+                          <CameraOutlined style={iconStyle} />
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
-
-              {thisUserSameProfile && (
-                <>
-                  <label htmlFor="pfp-upload" className="file-upload-label" />
-                  <div>
-                    <input
-                      id="pfp-upload"
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={updatePFP}
-                    />
-                    <button
-                      className="icon-button pfp-offset"
-                      onClick={handlePFPupdateClick}
-                    >
-                        <CameraOutlined style={iconStyle} />
-                    </button>
-                  </div>
-                </>
-              )}
+              {/*USER INFO */}
+              <div className="banner-info-container col-12 col-md-4 col-lg-5 col-xl-6 d-flex flex-column mt-auto align-items-center align-items-md-start">
+                <div>{data?.fullName}</div>
+                <div>{<span className="friends-counter" onClick={()=>{setViewFriendsToggle(true)}}>{data ? `${data.friends.length} Friends` : "0 Friends"}</span>}</div>
+                <FriendIcons friends={friends}/>
+              </div>
+              {/*Friend Req INFO */}
+                
+                {!thisUserSameProfile&&<FriendReqBtns friendStatus={friendStatus} thisUsername={thisUsername} data={data} setFriendStatus={setFriendStatus}/>}
             </div>
-  
-            {/*USER INFO */}
-  
-            <div className="banner-info-container col-md-6 col-lg-6 col-xl-8 d-flex flex-column mt-auto">
-              <div>{data?.fullName}</div>
-              <div>{<span className="friends-counter" onClick={()=>{setViewFriendsToggle(true)}}>{data ? `${data.friends.length} Friends` : "0 Friends"}</span>}</div>
-
-              <FriendIcons friends={friends}/>
-            </div>
-  
-            {/*Friend Req INFO */}
-  
-  {!thisUserSameProfile&&<FriendReqBtns friendStatus={friendStatus} thisUsername={thisUsername} data={data} setFriendStatus={setFriendStatus}/>}
           </div>
           </>
   )
