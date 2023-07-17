@@ -10,6 +10,7 @@ function PostComponentUser({thisUser,posts,setPosts,allData}) {
     const [maxPage,setMaxPage] = useState(null)
     const [loading, setLoading] = useState(false);
     const [pfpHash, setPfpHash] = useState(new Map())
+    const [postsLoaded,setPostsLoaded] = useState(false)
 
     const { username } = useParams();
 
@@ -39,8 +40,10 @@ function PostComponentUser({thisUser,posts,setPosts,allData}) {
         }
       };
   
-      if(thisUser!==null){
-        fetchPosts()}
+      if(thisUser!==null&&postsLoaded===false){
+        fetchPosts()
+        setPostsLoaded(true)
+      }
 
     }, [thisUser,currentPage]);
   
