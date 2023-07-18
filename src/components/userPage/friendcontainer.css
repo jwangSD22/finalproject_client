@@ -25,3 +25,8 @@
     cursor:pointer;
     text-decoration: underline;
   }
+
+  .header{
+    display:flex;
+    align-items:center;
+  }

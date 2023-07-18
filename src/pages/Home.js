@@ -107,6 +107,7 @@ function Home() {
         data={data}
         username={username}
         setMessengerOn={setMessengerOn}
+        messengerOn={messengerOn}
       />
       <div className="container-fluid bg-light">
         <div className="row">

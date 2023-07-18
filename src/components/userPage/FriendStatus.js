@@ -1,5 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom'
+import { CheckOutlined,UserDeleteOutlined, UserAddOutlined } from "@ant-design/icons";
+import './friendreqbtns.css'
 
 //friend represents the data of the individual friend inside a map of the parent component
 
@@ -35,32 +37,32 @@ function FriendStatus({friend,myFriends,myData}) {
         }
         //case 2
         if(!myFriends[friend._id]){
-            return setDisplay(<h3>ADD FRIEND</h3>)
+            return setDisplay(<button className="btn btn-sm  btn-primary" ><span className="friend-req-btns"><UserAddOutlined className="mx-1" />Add Friend</span></button>)
         }
 
         //case 3
         if(myFriends[friend._id]==='waiting'){
-            return setDisplay(<h2>waiting</h2>)
+            return setDisplay(<button className="btn btn-sm  btn-secondary disabled"><span className="friend-req-btns"><UserAddOutlined className="mx-1" /> Pending</span></button>)
         }
 
         //case 4
         if(myFriends[friend._id]==='accepted'){
-            return setDisplay(<h2>already friends</h2>)
+            return setDisplay(<button className="btn btn-sm btn-outline-primary mx-2 disabled"><span className="friend-req-btns"><CheckOutlined className="mx-1" />Friend</span></button>)
         }
 
         //case 5
         if(myFriends[friend._id]==='pending'){
-            return setDisplay(<h2>pending approval</h2>)
+            return setDisplay(<button className="btn btn-sm  btn-secondary disabled"><span className="friend-req-btns"><UserAddOutlined className="mx-1" /> Pending </span></button>)
         }
 
        
         else{
-            return setDisplay(<h2>error</h2>)
+            return setDisplay(<button className="btn btn-sm btn-danger mx-2 disabled"><span className="friend-req-btns">Status Error</span></button>)
         }
         }
         
         else{
-            return setDisplay (<h2>already friends</h2>)
+            return setDisplay (<button className="btn btn-sm btn-outline-primary mx-2 disabled"><span className="friend-req-btns"><CheckOutlined className="mx-1" />Friend</span></button>)
         }
 
 
@@ -70,7 +72,7 @@ function FriendStatus({friend,myFriends,myData}) {
 
 
   return (
-    <div>{display}</div>
+    <>{display}</>
   )
 }
 

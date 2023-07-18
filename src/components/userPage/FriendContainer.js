@@ -43,8 +43,8 @@ function FriendContainer({ friends, myFriends,myData}) {
 
   return (
     <div className="user-page-friend-container container bg-white  border shadow-sm ">
-      <div className="header">
-        <h2>ALL FRIENDS</h2>
+      <div className="header mt-3">
+        <h3>ALL FRIENDS</h3>
       </div>
 
       <div className="row ">
@@ -62,13 +62,13 @@ function FriendContainer({ friends, myFriends,myData}) {
                     url={item.friendPhotoURL}
                   />
                 </div>
-                <div className="col-7 d-flex flex-column justify-content-center">
+                <div className="col-6 d-flex flex-column justify-content-center">
                   <div className="friend-container-username" onClick={()=>handleNav(item.username)}>{item.fullName}</div>
                   <div>{calculateMutual(item)} mutual friends</div>
 
                   {/* this is in a map, need to dynamically generate this when it is created , so use effect doens't make sense here. */}
                 </div>
-                <div className="status col-3 d-none d-md-flex align-items-center ">
+                <div className="status col-4 d-none d-md-flex align-items-center justify-content-end px-4">
                   <FriendStatus friend={item} myFriends={myFriends} myData={myData}/>
                 </div>
               </div>

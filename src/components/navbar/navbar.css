@@ -15,6 +15,10 @@
   transition: all 0.5s;
 }
 
+.icon-filled{
+  color:rgb(0, 68, 255);
+}
+
 
 .current-path {
     display: flex;

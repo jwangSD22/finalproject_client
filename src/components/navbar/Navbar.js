@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import { Tooltip } from "react-tooltip";
-import { HomeOutlined, MessageOutlined, TeamOutlined } from "@ant-design/icons";
+import { HomeOutlined, MessageOutlined, TeamOutlined,MessageFilled } from "@ant-design/icons";
 import Searchbar from "./Searchbar";
 import RightNav from "./RightNav";
 
-const Navbar = ({ data, username,setMessengerOn}) => {
+const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
   const [path, setPath] = useState(null);
 
   //sets current path to alter css for center icons
@@ -76,10 +76,11 @@ const Navbar = ({ data, username,setMessengerOn}) => {
           className="d-flex align-items-center nav-messenger"
           data-tooltip-id="right-tooltip"
           data-tooltip-content="Messenger"
-          onClick={()=>{setMessengerOn(true)}}
+          onClick={()=>{setMessengerOn(!messengerOn)}}
         >
           <div className="center-nav-container mx-1">
-            <MessageOutlined className="messenger-icon mx-2" />
+            {messengerOn?<MessageFilled className="messenger-icon icon-filled mx-2" />:<MessageOutlined className="messenger-icon mx-2" />}
+
           </div>
         </div>
         
