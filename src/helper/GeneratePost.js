@@ -194,6 +194,8 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
           </div>
         </div>
 
+
+        <div className="my-4 mx-1">
         {/*post message*/}
         <div className="d-flex">
           <div>{post.postMessage}</div>
@@ -211,31 +213,32 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
             ))}
         </div>
 
+        </div>
+
         {/*LIKE COUNT AND COMMENT COUNT */}
 
         <div className="d-flex justify-content-between">
-          <div className="d-flex align-items-center"> {post.likes.length>0&&<LikeFilled style={{ fontSize: "15px", color: "pink" }} />}<small className="mx-2">{post.likes.length>0&&generateLikeSnippet()}</small></div>
+          <div className="d-flex align-items-center"> {post.likes.length>0&&<LikeFilled style={{ fontSize: "15px", color: "#2078F4" }} />}<small className="mx-1">{post.likes.length>0&&generateLikeSnippet()}</small></div>
 
           <div className="d-none d-sm-flex"><small>{post.numberOfComments} Comments </small></div>
         </div>
 
         {/*like/comment section*/}
         <hr className="hr" />
-        <div className="d-flex justify-content-around">
-          <div>
+        <div className="row justify-content-center align-items-center" style={{height:'35px'}}>
+          <div className="post-button col-5 mx-4" onClick={toggleLike}>
             {userLiked ? (
-              <LikeFilled style={{ fontSize: "23px", color: "green" }} />
+              <LikeFilled style={{ fontSize: "23px", color: "#2078F4" }} />
             ) : (
-              <LikeOutlined style={{ fontSize: "23px", color: "red" }} />
+              <LikeOutlined style={{ fontSize: "23px", color: "black" }} />
             )}
-            <button onClick={toggleLike}>LIKE</button>
+            <span className={`mx-2 ${userLiked?'post-liked':null}`}> Like </span>
           </div>
 
-          <div>
-            <button onClick={editCommentHandler}>
-              {" "}
-              Comment{" "}
-            </button>
+          <div className="post-button col-5 mx-4" onClick={editCommentHandler}>
+           
+              <span>Comment</span>
+   
           </div>
         </div>
         <hr className="hr" />

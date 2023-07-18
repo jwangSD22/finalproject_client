@@ -49,3 +49,21 @@
   text-decoration: underline;
   cursor:pointer;
 }
+
+.post-button {
+
+  height:35px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.post-button:hover {
+  cursor:pointer;
+  background: #E4E6E9;
+}
+
+.post-liked{
+  color:#2078F4;
+}
