@@ -71,10 +71,14 @@ const handleNav = (username) => {
   return (
     data&&<div className='d-flex bg-white my-1 border'>
 
-<div className='my-1'><GenerateAvatarFromID userID={data.author._id} pfpHash={pfpHash} setPfpHash={setPfpHash}/></div>
-<div className='d-flex flex-grow-1 flex-column'>
+<div className='my-3'><GenerateAvatarFromID userID={data.author._id} pfpHash={pfpHash} setPfpHash={setPfpHash}/></div>
+<div className='d-flex flex-column' style={{minWidth:'200px'}}>
+  <div className='bg-light p-2 mt-2 rounded'>
   <div onClick={()=>handleNav(data.author.username)}><small className='comment-user-name'>{data.author.fullName}</small></div>
-  <div className='d-flex flex-grow-1'><h3>{data.message}</h3></div>
+  <div className='d-flex flex-grow-1'>{data.message}</div>
+
+  </div>
+  
   <div className='d-flex justify-content-between my-1'>
     <div>
     <small className={userLiked?'likeButton btnLiked':'likeButton'} onClick={handleLike}>Like</small>

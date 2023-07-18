@@ -34,6 +34,10 @@
     margin-left: 5px;
 }
 
+.comment-user-name {
+    font-weight: bolder;
+}
+
 .comment-user-name:hover {
     cursor:pointer;
     text-decoration: underline;

@@ -197,7 +197,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
 
         <div className="my-4 mx-1">
         {/*post message*/}
-        <div className="d-flex">
+        <div className="d-flex mb-2">
           <div>{post.postMessage}</div>
         </div>
 
@@ -226,7 +226,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
         {/*like/comment section*/}
         <hr className="hr" />
         <div className="row justify-content-center align-items-center" style={{height:'35px'}}>
-          <div className="post-button col-5 mx-4" onClick={toggleLike}>
+          <div className="post-button col-5 mx-2" onClick={toggleLike}>
             {userLiked ? (
               <LikeFilled style={{ fontSize: "23px", color: "#2078F4" }} />
             ) : (
@@ -235,7 +235,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
             <span className={`mx-2 ${userLiked?'post-liked':null}`}> Like </span>
           </div>
 
-          <div className="post-button col-5 mx-4" onClick={editCommentHandler}>
+          <div className="post-button col-5 mx-2" onClick={editCommentHandler}>
            
               <span>Comment</span>
    
