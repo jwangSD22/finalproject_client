@@ -1,34 +1,28 @@
-.home-icon {
-    font-size: 30px;
 
-  transition: all 0.5s;
+.top-icon {
+    font-size: 30px;
+    transition: all 0.5s;
 }
 
-.friends-icon {
-    font-size: 30px;
-
-  transition: all 0.5s;
+.top-icon:hover{
+  color: #2078F4
 }
-.messenger-icon {
-    font-size: 30px;
 
-  transition: all 0.5s;
-}
 
 .icon-filled{
-  color:rgb(0, 68, 255);
+  color:#2078F4;
 }
 
 
 .current-path {
     display: flex;
     font-size: 30px;
-    color: rgb(0, 68, 255);
+    color: #2078F4;
     align-items: flex-end;
     justify-content: center;
     height: 45px;
     width: 100px;
-    border-bottom: solid 4px rgba(0, 68, 255, 100);
+    border-bottom: solid 4px #2078F4;
 }
 
 .center-nav-container {
@@ -110,7 +104,3 @@ nav{
   border: 8% 8% 8% 8%;
 }
 
-.messenger-icon:hover{
-      color: rgb(0, 68, 255);
-
-}

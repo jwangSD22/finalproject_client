@@ -271,9 +271,8 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
                 className="mx-2"
                 onClick={commentSubmitHandler}
                 style={{
-                  color: "black",
-                  fontSize: "30px",
-                  borderRadius: "15px",
+                  color: "white",
+                  fontSize: "25px",
                 }}
               />
             </div>

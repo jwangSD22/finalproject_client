@@ -69,7 +69,7 @@ const handleNav = (username) => {
 
 
   return (
-    data&&<div className='d-flex bg-white my-1 border'>
+    data&&<div className='d-flex bg-white my-1'>
 
 <div className='my-3'><GenerateAvatarFromID userID={data.author._id} pfpHash={pfpHash} setPfpHash={setPfpHash}/></div>
 <div className='d-flex flex-column' style={{minWidth:'200px'}}>

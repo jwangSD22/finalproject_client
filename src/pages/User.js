@@ -206,7 +206,12 @@ function User() {
   return (
     <>
     
-      <Navbar data={allData} username={thisUsername} setMessengerOn={setMessengerOn}/>
+      <Navbar
+        data={allData}
+        username={thisUsername}
+        setMessengerOn={setMessengerOn}
+        messengerOn={messengerOn}
+      />
 
       <div className="top-container bg-white">
         <TopBanner

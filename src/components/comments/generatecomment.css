@@ -6,11 +6,10 @@
     border-radius: 50%;
     width:18px;
     height:18px;
-    background-color:blue;
+    background-color:#2078F4;
 }
 
 .likeContainer{
-    background-color: lightgray;
     width:fit-content;
     border-radius: 40%;
 }
@@ -20,7 +19,7 @@
 }
 
  .btnLiked{
-    color:blue;
+    color:#2078F4;
 }
 
 

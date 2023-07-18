@@ -133,7 +133,7 @@ function Friends() {
 
   return (
     <>
-    <Navbar data={data} username={username} setMessengerOn={setMessengerOn}/>
+    <Navbar data={data} username={username} setMessengerOn={setMessengerOn} messengerOn={messengerOn}/>
     <div className='container-fluid bg-light'>
       <div className="container pt-4">
 

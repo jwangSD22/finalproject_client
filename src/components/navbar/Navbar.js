@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./navbar.css";
-import { Tooltip } from "react-tooltip";
 import { HomeOutlined, MessageOutlined, TeamOutlined,MessageFilled } from "@ant-design/icons";
 import Searchbar from "./Searchbar";
 import RightNav from "./RightNav";
@@ -48,7 +47,7 @@ const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
           data-tooltip-content="Home"
         >
           <div className="d-flex align-items-center">
-            <HomeOutlined/>
+            <HomeOutlined className="top-icon"/>
           </div>
         </a>
 
@@ -67,7 +66,7 @@ const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
                 : "center-nav-container mx-1"
             }
           >
-           <TeamOutlined />
+           <TeamOutlined className="top-icon"/>
           </div>
         </a>
 
@@ -79,7 +78,7 @@ const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
           onClick={()=>{setMessengerOn(!messengerOn)}}
         >
           <div className="center-nav-container mx-1">
-            {messengerOn?<MessageFilled className="messenger-icon icon-filled mx-2" />:<MessageOutlined className="messenger-icon mx-2" />}
+            {messengerOn?<MessageFilled className="top-icon icon-filled mx-2" />:<MessageOutlined className="messenger-icon mx-2" />}
 
           </div>
         </div>
