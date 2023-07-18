@@ -159,7 +159,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
       return <div>{`${fullNameArray[0]} and ${fullNameArray[1]}`}</div>;
     } else {
       return (
-        <div>{`${fullNameArray[0]}, ${fullNameArray[1]} and others...`}</div>
+        <div>{`${fullNameArray[0]}, ${fullNameArray[1]} and ${fullNameArray.length>3?fullNameArray.length-2:''} others...`}</div>
       );
     }
   };
