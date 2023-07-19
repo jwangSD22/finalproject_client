@@ -3,6 +3,7 @@ import axios from "axios";
 import io from "socket.io-client";
 import './messenger.css'
 import formatTimestamp from "../helper/formatTimestampMessenger";
+import { SendOutlined } from "@ant-design/icons";
 
 
 
@@ -98,7 +99,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
 
       <div className="row">
-      <div className="message-container d-flex flex-column" ref={messageContainerRef}>
+      <div className="message-container mt-2  d-flex flex-column" ref={messageContainerRef}>
         {(messages).map((message) => (
           <div key={message.messageID} 
           className={`${username1===message.username?'right-message':'left-message'}`}
@@ -108,6 +109,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
           </div>
         ))}
       </div>
+
       </div>
 
       <div className="row">
@@ -115,7 +117,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
         onSubmit={handleSubmit}>
         <div className="row input-text-bar">
           <input
-            className=" col-11"
+            className=" col-9 col-sm-10"
             type="text"
             value={newMessage}
             onChange={(event) => setNewMessage(event.target.value)}
@@ -128,8 +130,14 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
             }}
             placeholder="Message"
           />
-          <div className="col-1 d-flex align-items-center justify-content-center">
-          <button type="submit">S</button>
+          <div className="col-1 mx-3 d-flex align-items-center justify-content-center">
+          <button className="btn" type="submit"> 
+          <SendOutlined
+                style={{
+                  fontSize: "25px",
+                }}
+              />
+              </button>
           </div>
         
         </div>

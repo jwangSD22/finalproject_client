@@ -1,11 +1,27 @@
 
+.messenger-header{
+    background-color: #2078F4;
+    color:white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 .pfp-msger-preview{
     width:35px;
     height:35px;
+    border-radius: 30px;
+}
+
+.msger-preview-container{
+    border-bottom: solid 1px #E4E6E9;
 }
 
 .msger-preview-container:hover{
     cursor:pointer;
+}
+
+.connected-chat-container{
+    margin-bottom: 10px;
 }
 
 .friendList{
@@ -17,6 +33,10 @@
     top:0px;
     left:0px;
     z-index: 10;
+}
+
+.friendInList{
+    border-bottom: black;
 }
 
 .friendInList:hover{
@@ -36,8 +56,8 @@
 }
 
 .input-text-bar {
-    padding-top:10px;
-    padding-bottom:10px;
+    padding-bottom: 5px;
+    padding-top:5px;
     position:absolute;
     background-color: white;
     bottom:0px;
@@ -49,15 +69,13 @@
 .message-container{
     max-height: 550px;
     overflow: auto;
-
-
 }
-
-
 
 
 .friends-menu{
     width:50px;
+    display:flex;
+    align-items: center;
 }
 
 .friends-menu:hover{
@@ -108,13 +126,23 @@
 }
 
 .left-ts{
+    font-size:small;
+
     color:gray;
     white-space: nowrap;
 }
 
 .right-ts{
+    font-size:small;
+
     color:green;
     white-space: nowrap;
 
 
+}
+
+
+.msg-timestamp {
+    font-size:small;
+    color: gray;
 }

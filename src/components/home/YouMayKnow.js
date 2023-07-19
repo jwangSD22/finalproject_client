@@ -30,7 +30,6 @@ function YouMayKnow({ data, friends, username }) {
         .slice(0, 10);
 
         let thisUserFiltered = data.filter((user=>user.username===username))
-        console.log(thisUserFiltered)
         setThisUser(thisUserFiltered[0])
 
       setNonFriends(friendsFiltered);
@@ -82,7 +81,7 @@ function YouMayKnow({ data, friends, username }) {
           <div className="mx-2">{thisUser.fullName}</div>
         </div>
       </div>}
-      <div className="m-2" > <h3>People you may know</h3></div>
+      <div className="m-1" > <h4>People you may know</h4></div>
       <div>{nonFriendsList}</div>
     </div>
   );

@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 
 import emptyAvatar from '../../src/images/empty_avatar.png'
 import axios from 'axios'
+import './messenger.css'
 
 
 function FriendList({friends,setUsername2,setChatConnected,setDisplayFriends,setRoomID,username1}) {
@@ -49,9 +50,11 @@ function FriendList({friends,setUsername2,setChatConnected,setDisplayFriends,set
     
   return (
     <div className="container-fluid">
+              <div className=' row messenger-header p-2'>Contacts</div>
+
         <div className='row'>
             {friends&&friends.length?friends.map(friend=>
-              <div className="friendInList col-12 border d-flex" key={friend._id} onClick={()=>{connectFriend(friend)}} >
+              <div className="friendInList border-bottom py-1 col-12 d-flex" key={friend._id} onClick={()=>{connectFriend(friend)}} >
               <div className="col-2"><img className='pfp-msger-preview' src={friend.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:friend.friendPhotoURL} /></div>
               <div className="col-7">
  
@@ -59,12 +62,17 @@ function FriendList({friends,setUsername2,setChatConnected,setDisplayFriends,set
 
         
                    </div>
-        
+      
         
                 </div>
         
             ):<div> Add some friends to begin chatting! </div>}
         </div>
+
+        
+
+        
+
     </div>
   )
 }

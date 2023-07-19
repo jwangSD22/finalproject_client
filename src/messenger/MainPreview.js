@@ -86,9 +86,9 @@ function GeneratePreview ({data,setUsername2,setChatConnected,setRoomID,username
 
 
   return (
-  <div className="container border msger-preview-container" onClick={handleConnectFromPreview}>
+  <div className="container msger-preview-container" onClick={handleConnectFromPreview}>
   <div className="row my-2">
-  <div className="col-2"><img className='pfp-msger-preview' src={pfp?pfp:emptyAvatar} /></div>
+  <div className="col-2 d-flex justify-content-center align-items-center"><img className='pfp-msger-preview' src={pfp?pfp:emptyAvatar} /></div>
   <div className="col-7 d-flex flex-column">
     <div>
       {data.partnerFullName}
@@ -99,7 +99,7 @@ function GeneratePreview ({data,setUsername2,setChatConnected,setRoomID,username
       
        </div>
 
-  <div className="col-3">
+  <div className="msg-timestamp col-3">
     {formatTimestamp(data.preview.timestamp)}
   </div>
  

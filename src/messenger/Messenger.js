@@ -23,7 +23,6 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
 
     if(friends){
       const filteredArray = friends.filter(item=>item.username===username2)
-      console.log(filteredArray[0])
       setConnectedFriendData(filteredArray[0])
     }
 
@@ -51,7 +50,6 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
 
   const handleUnmount = () => {
     if (socket) {
-      console.log("active socket unmounted and disconnected");
       socket.disconnect();
       setSocket(null);
       setRoomID(null);
@@ -61,17 +59,16 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
 
   return (
     <div className="messenger container-fluid overflow-auto">
+
       <div
         className="friendOverlay animate__animated animate__fadeIn animate__faster"
-        style={displayFriends ? { display: "block" } : { display: "none" }}
-      >
-        {" "}
-        overlay
+        style={displayFriends ? { display: "block" } : { display: "none" }}>
+        
+        {/* Overlay when friend-list is active */}
+      
       </div>
 
-
-
-        <div className=" row">
+        <div className="messenger-header row">
           <div className="col-1"
            >
             {!chatConnected?
@@ -109,7 +106,7 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
           </div>
           <div className="col-1 d-flex justify-content-center align-items-center">
             <button
-              className="btn-close"
+              className="btn-close btn-close-white"
               onClick={() => {
                 setMessengerOn(false);
                 handleUnmount();

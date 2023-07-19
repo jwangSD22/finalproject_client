@@ -46,6 +46,10 @@
   border-radius: 50%;
 }
 
+.post-header-name{
+font-weight: bold;
+}
+
 .post-header-name:hover {
   text-decoration: underline;
   cursor:pointer;
