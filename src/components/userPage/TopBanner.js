@@ -13,7 +13,6 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
 
     const [profilePhotoURL, setProfilePhotoURL] = useState(null);
     const [bgURL, setBgURL] = useState(null);
-    const [icons, setIcons] = useState([])
 
     useEffect(()=>{
         if(data){
@@ -141,10 +140,7 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
                         style={{ display: "none" }}
                         onChange={updatePFP}
                       />
-                      <button
-                        className="icon-button pfp-offset"
-                        onClick={handlePFPupdateClick}
-                      >
+                      <button className="icon-button pfp-offset" onClick={handlePFPupdateClick}>
                           <CameraOutlined style={iconStyle} />
                       </button>
                     </div>
