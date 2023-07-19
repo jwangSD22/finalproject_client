@@ -10,8 +10,8 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 const Login = () => {
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [user,setUser] = useState(null);
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
+  // const [user,setUser] = useState(null);
+  // const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null)
   const [showRegistration, setShowRegistration] = useState(false)
   
@@ -25,8 +25,8 @@ const Login = () => {
       try{
         let response = await axios.get('/api/users/loginstatus')
         if(response.status){
-            setUser(response.data.user.jwtusername)
-            setIsLoggedIn(true)
+            // setUser(response.data.user.jwtusername)
+            // setIsLoggedIn(true)
             navigate('/home')
         }
       }
@@ -49,7 +49,7 @@ const Login = () => {
         const response = await axios.post('/api/users/login',{emailOrUsername,password})
         if(response.status===200){
             localStorage.setItem('jwt',response.data.token)
-            setUser(response.data.jwtusername)
+            // setUser(response.data.jwtusername)
         }
 
 

@@ -14,9 +14,8 @@ const ChatRoom = () => {
   const [roomID, setRoomID] = useState(null);
 
   //from my login component//
-  const [user, setUser] = useState(null);
   const [userID, setUserID] = useState(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,10 +23,10 @@ const ChatRoom = () => {
       try {
         let response = await axios.get("/api/users/loginstatus");
         if (response.status === 200) {
-          setUser(response.data.user.jwtusername);
+          // setUser(response.data.user.jwtusername);
           setUserID(response.data.user.jwtid)
           setUsername1(response.data.user.jwtusername);
-          setIsLoggedIn(true);
+          // setIsLoggedIn(true);
           return true;
         }
       } catch (err) {
@@ -36,7 +35,7 @@ const ChatRoom = () => {
       }
     };
     checkLogin();
-  }, []);
+  });
 
 
   useEffect(() => {

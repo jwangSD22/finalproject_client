@@ -31,7 +31,7 @@ useEffect(()=>{
     commentID&&getCommentData()
 
 
-},[toggle])
+},[toggle,commentID])
 
 useEffect(()=>{
   if(data){
@@ -50,11 +50,11 @@ useEffect(()=>{
 
 
 
-},[data])
+},[data,thisUser])
 
 const handleLike = async () => {
 
-  const response = await axios.put(`/api/comments/${commentID}/togglelike`)
+  await axios.put(`/api/comments/${commentID}/togglelike`)
   setToggle(!toggle)
 
 

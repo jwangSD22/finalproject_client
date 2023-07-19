@@ -14,7 +14,6 @@ function HomePosts({username,allUsers}) {
 const [thisUser,setThisUser] = useState(null)
 const [toggleNewPost, setToggleNewPost] = useState(false)
 const [posts, setPosts] = useState([]);
-const [triggerPostDataRefresh, setTriggerPostDataRefresh] = useState(false)
 
 
 useEffect(()=>{
@@ -50,7 +49,7 @@ const newPost = <div className="container box-styling d-flex bg-white border sha
         <div className='container-fluid text-center'>{newPost}</div>
  
 
-       <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} triggerPostDataRefresh={triggerPostDataRefresh} allUsers={allUsers}/> 
+       <PostComponent thisUser={thisUser} posts={posts} setPosts={setPosts} allUsers={allUsers}/> 
       </div>
 
     </div>

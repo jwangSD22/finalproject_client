@@ -7,7 +7,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 
 const SignupPage = () => {
-  const [profilePhoto,setProfilePhoto] = useState(null)
+  // const [profilePhoto,setProfilePhoto] = useState(null)
   const [formData, setFormData] = useState({
     fullName: '',
     username: '',
@@ -24,8 +24,7 @@ const SignupPage = () => {
 //handles display of image after selection, and also sending to s3 bucket
   async function handleProfilePhotoChange (event) {
     const file = event.target.files[0]
-    const fileName = file.name
-    setProfilePhoto(file);
+    // setProfilePhoto(file);
     setTempImageUrl(URL.createObjectURL(file))
 
     const imgFormData = new FormData();

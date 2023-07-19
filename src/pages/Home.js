@@ -11,7 +11,7 @@ import "./Home.css";
 function Home() {
   const [username, setUsername] = useState(null);
   const [userID,setUserID] = useState(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState(null);
   const [friends, setFriends] = useState(null);
   const [messengerOn, setMessengerOn] = useState(false);
@@ -26,7 +26,7 @@ function Home() {
         if (response.status) {
           setUsername(response.data.user.jwtusername);
           setUserID(response.data.user.jwtid)
-          setIsLoggedIn(true);
+          // setIsLoggedIn(true);
         }
       } catch (err) {
         if (err.response.status === 401) {

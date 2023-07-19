@@ -12,7 +12,7 @@ function Friends() {
     const [username, setUsername] = useState(null);
     const [friends, setFriends] = useState(null);
     const [messengerOn, setMessengerOn] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userID,setUserID] = useState(null)
     const [data, setData] = useState(null);
     const [pending,setPending] = useState([])
@@ -30,7 +30,7 @@ function Friends() {
           if (response.status) {
             setUsername(response.data.user.jwtusername);
             setUserID(response.data.user.jwtid)
-            setIsLoggedIn(true);
+            // setIsLoggedIn(true);
           }
         } catch (err) {
           if (err.response.status === 401) {
@@ -70,13 +70,11 @@ function Friends() {
 
 
     useEffect(() => {
-      console.log('triggered to reget friends')
       const retrieveFriends = async () => {
         try {
           let response = await axios.get(`/api/user/friends/${username}`);
           setFriends(response.data);
 
-          console.log(response.data)
         } catch (err) {
           console.log(err);
         }
@@ -93,7 +91,7 @@ function Friends() {
         const finalArray = friends.map(item => 
         <div className="  col-6 col-xs-4 col-md-4 col-lg-3 col-xxl-2 d-flex flex-column my-2 align-items-center" key={item._id}>
           <div className=" friend-container shadow-sm" onClick={()=>{handleNav(item.username)}}>
-            <img className="friend-container-img" src={item.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:item.friendPhotoURL}/>
+            <img className="friend-container-img" alt='friend-container-img' src={item.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:item.friendPhotoURL}/>
             <div className="friend-name my-2"onClick={()=>{handleNav(item.username)}}>{item.fullName}</div>
             </div>
         </div>)
@@ -141,7 +139,7 @@ function Friends() {
           <h2>Friend requests</h2>
         </div>
         <div className="row">
-{pendingGenerated.length?pendingGenerated:<>You have no pending requests</>}
+{pendingGenerated.length?pendingGenerated:<div>You have no pending requests</div>}
         </div>
       </div>
 

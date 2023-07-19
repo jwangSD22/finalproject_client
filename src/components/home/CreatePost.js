@@ -10,7 +10,6 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
 
   async function handleImageUpload(event) {
     const file = event.target.files[0];
-    const fileName = file.name;
     setTempImageURL(URL.createObjectURL(file));
 
     const imgFormData = new FormData();
@@ -106,7 +105,7 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
                 className="card-img-top"
                 style={tempImgStyling}
                 src={tempImageURL}
-                alt="Post Image"
+                alt="Post-img"
               />
               <button
                 className="btn-close position-absolute top-0 end-0 m-2"

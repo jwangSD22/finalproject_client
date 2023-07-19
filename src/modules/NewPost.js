@@ -11,7 +11,7 @@ function NewPost() {
   const [body, setBody] = useState("");
   const [images, setImages] = useState([]);
   const [carouselURLs, setCarouselURLs] = useState([]);
-  const [finalPostKeys, setFinalPostKeys] = useState(null);
+  // const [finalPostKeys, setFinalPostKeys] = useState(null);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -94,7 +94,7 @@ function NewPost() {
         "/api/posts/imageupload",
         photoFormData
       );
-      setFinalPostKeys(response.data.finalObjectKeys);
+      // setFinalPostKeys(response.data.finalObjectKeys);
       return response.data.finalObjectKeys;
     } catch (error) {
       console.error(error);

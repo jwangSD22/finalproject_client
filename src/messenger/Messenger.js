@@ -11,7 +11,6 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
 
   const [chatConnected, setChatConnected] = useState(false);
   const [displayFriends, setDisplayFriends] = useState(false);
-  const [username1, setUsername1] = useState(thisUsername);
   const [username2, setUsername2] = useState(null);
   const [connectedFriendData,setConnectedFriendData] = useState(null)
   const [roomID, setRoomID] = useState(null);
@@ -98,7 +97,7 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
           <div className="col-10 my-1 d-flex justify-content-center align-items-center">
             {chatConnected&&connectedFriendData?
             <div className="d-flex align-items-center justify-content-center">
-              <div className=""><img className='pfp-msger-preview' src={connectedFriendData.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:connectedFriendData.friendPhotoURL} /></div>
+              <div className=""><img className='pfp-msger-preview' alt='pfp-msger-preview' src={connectedFriendData.friendPhotoURL==='NO PROFILE PHOTO'?emptyAvatar:connectedFriendData.friendPhotoURL} /></div>
               <div className="mx-3">{connectedFriendData.fullName}</div>
               </div>
               :
@@ -128,14 +127,14 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
             setChatConnected={setChatConnected}
             setDisplayFriends={setDisplayFriends}
             setRoomID={setRoomID}
-            username1={username1}
+            username1={thisUsername}
           />
         </div>
 
         {chatConnected ? (
      
             <ConnectedChat
-              username1={username1}
+              username1={thisUsername}
               userID={userID}
               username2={username2}
               setChatConnected={setChatConnected}
@@ -153,7 +152,7 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
             chatConnected={chatConnected}
             setChatConnected={setChatConnected}
             setRoomID={setRoomID}
-            username1={username1}
+            username1={thisUsername}
           />
         )}
  

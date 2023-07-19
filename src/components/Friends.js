@@ -1,8 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-function Friends({thisUser,thisUserFriends}) {
+function Friends({thisUserFriends}) {
 
 
   
