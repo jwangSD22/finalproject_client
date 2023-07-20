@@ -2,6 +2,7 @@ import Footer from '../components/footer/Footer';
 import React, { useState,useEffect } from 'react';import './Login.css';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import config from '../helper/config.js'
 import Registration from '../components/registration/Registration';
 const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -23,7 +24,7 @@ const Login = () => {
 
     const checkLogin = async () => {
       try{
-        let response = await axios.get('/api/users/loginstatus')
+        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`)
         if(response.status){
             // setUser(response.data.user.jwtusername)
             // setIsLoggedIn(true)
@@ -46,7 +47,7 @@ const Login = () => {
     try{
 
         
-        const response = await axios.post('/api/users/login',{emailOrUsername,password})
+        const response = await axios.post(`${config.backendServer}/api/users/login`,{emailOrUsername,password})
         if(response.status===200){
             localStorage.setItem('jwt',response.data.token)
             // setUser(response.data.jwtusername)

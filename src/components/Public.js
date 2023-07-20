@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import config from '../helper/config.js'
 
 function Public({thisUser, publicUsers, thisUserPending, thisUserFriends,toggle,setToggle}) {
 
@@ -24,7 +25,7 @@ function Public({thisUser, publicUsers, thisUserPending, thisUserFriends,toggle,
 
     //axios info to backend to handle logic for adding friend requests      
 
-    const response = await axios.post('/api/user/friendrequest',{
+    const response = await axios.post(`${config.backendServer}/api/user/friendrequest`,{
       usernameOrigin:usernameOrigin,
       userIDEnd: userIDEnd
     })

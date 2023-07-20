@@ -5,6 +5,7 @@ import GenerateAvatarFromID from '../../helper/GenerateAvatarFromID'
 import { formatDistanceToNow } from 'date-fns'
 import { LikeFilled } from '@ant-design/icons'
 import './generatecomment.css'
+import config from '../../helper/config.js'
 
 
 function GenerateComment({commentID,pfpHash,setPfpHash,thisUser}) {
@@ -22,7 +23,7 @@ const navigate = useNavigate()
 useEffect(()=>{
 
     const getCommentData = async () => {
-        const response = await axios.get(`/api/comments/${commentID}`)
+        const response = await axios.get(`${config.backendServer}/api/comments/${commentID}`)
         setData(response.data)
         
 
@@ -54,7 +55,7 @@ useEffect(()=>{
 
 const handleLike = async () => {
 
-  await axios.put(`/api/comments/${commentID}/togglelike`)
+  await axios.put(`${config.backendServer}/api/comments/${commentID}/togglelike`)
   setToggle(!toggle)
 
 

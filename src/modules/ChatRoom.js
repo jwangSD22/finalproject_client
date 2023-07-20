@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import config from '../helper/config.js'
 import io from "socket.io-client";
 const token = localStorage.getItem("jwt");
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -21,7 +22,7 @@ const ChatRoom = () => {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        let response = await axios.get("/api/users/loginstatus");
+        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`);
         if (response.status === 200) {
           // setUser(response.data.user.jwtusername);
           setUserID(response.data.user.jwtid)
@@ -52,7 +53,7 @@ const ChatRoom = () => {
   const findRoom = async () => {
     try {
       if (username1 && username2) {
-        let response = await axios.post("http://localhost:3000/api/chats", {
+        let response = await axios.post(`${config.backendServer}/api/chats`, {
           username2,
         });
         console.log(response.data);
@@ -90,7 +91,7 @@ const ChatRoom = () => {
 
     //load messages into the message container
     try{
-      const messageData = await axios.get(`/api/chats/${temproomID}/messages`)
+      const messageData = await axios.get(`${config.backendServer}/api/chats/${temproomID}/messages`)
       //axios GET the convo with a body including the roomid
       setMessages(messageData.data)
       

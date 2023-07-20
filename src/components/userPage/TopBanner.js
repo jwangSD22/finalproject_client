@@ -3,6 +3,7 @@ import FriendReqBtns from "./FriendReqBtns"
 import emptyAvatar from '../../images/empty_avatar.png'
 import emptyBG from '../../images/empty_bg.png'
 import axios from "axios";
+import config from '../../helper/config.js'
 import { CameraOutlined } from "@ant-design/icons";
 import FriendIcons from "./FriendIcons";
 import './topbanner.css'
@@ -29,19 +30,19 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
         imgFormData.append("profilePhoto", file);
     
         //upload to server to get object key
-        const response = await axios.post(`/api/users/imageUpload`, imgFormData);
+        const response = await axios.post(`${config.backendServer}/api/users/imageUpload`, imgFormData);
         const key = response.data.objectKey;
     
         // update user in mongodb with new objectkey
     
-        const updateResponse = await axios.put(`/api/users/${thisUsername}`, {
+        const updateResponse = await axios.put(`${config.backendServer}/api/users/${thisUsername}`, {
           pfpKey: key,
         });
     
         // get new URL to display on page
     
         if (updateResponse.status === 200) {
-          const getPFP = await axios.get(`/api/users/pfp/${data._id}`);
+          const getPFP = await axios.get(`${config.backendServer}/api/users/pfp/${data._id}`);
           console.log(getPFP);
           setProfilePhotoURL(getPFP.data.profilePhotoURL);
         }
@@ -53,19 +54,19 @@ function TopBanner({thisUserSameProfile,data,thisUsername,friendStatus,setFriend
         imgFormData.append("bgPhoto", file);
     
         //upload to server to get object key
-        const response = await axios.post(`/api/users/bgUpload`, imgFormData);
+        const response = await axios.post(`${config.backendServer}/api/users/bgUpload`, imgFormData);
         const key = response.data.objectKey;
     
         // update user in mongodb with new objectkey
     
-        const updateResponse = await axios.put(`/api/users/${thisUsername}`, {
+        const updateResponse = await axios.put(`${config.backendServer}/api/users/${thisUsername}`, {
           bgKey: key,
         });
     
         // get new URL to display on page
     
         if (updateResponse.status === 200) {
-          const getBG = await axios.get(`/api/users/bg/${data._id}`);
+          const getBG = await axios.get(`${config.backendServer}/api/users/bg/${data._id}`);
           setBgURL(getBG.data.bgPhotoURL);
         }
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import config from '../helper/config'
 
 // Set token to the header
 const token = localStorage.getItem('jwt');
@@ -31,7 +32,7 @@ const SignupPage = () => {
     imgFormData.append('profilePhoto', file);
 
     try{
-        const response = await axios.post('/api/users/imageUpload',imgFormData)
+        const response = await axios.post(`${config.backendServer}/api/users/imageUpload`,imgFormData)
         setFormData({...formData,profilePhotoKey:response.data.objectKey})
 
     }
@@ -55,7 +56,7 @@ const SignupPage = () => {
     event.preventDefault();
     console.log('submission')
 
-    axios.post('/api/users', formData)
+    axios.post(`${config.backendServer}/api/users`, formData)
     .then(response=>{
       console.log(response.data.token)
       localStorage.setItem('jwt',response.data.token)

@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 import Pending from '../components/friendsPage/Pending.js';
 import axios from 'axios';
+import config from '../helper/config.js'
 import Navbar from '../components/navbar/Navbar.js'
 import Messenger from '../messenger/Messenger.js';
 import emptyAvatar from '../images/empty_avatar.png'
@@ -26,7 +27,7 @@ function Friends() {
     useEffect(() => {
       const checkLogin = async () => {
         try {
-          let response = await axios.get("/api/users/loginstatus");
+          let response = await axios.get(`${config.backendServer}/api/users/loginstatus`);
           if (response.status) {
             setUsername(response.data.user.jwtusername);
             setUserID(response.data.user.jwtid)
@@ -41,7 +42,7 @@ function Friends() {
  
       const retrieveData = async () => {
         try {
-          let response = await axios.get("/api/users");
+          let response = await axios.get(`${config.backendServer}/api/users`);
   
           setData(response.data);
 
@@ -59,7 +60,7 @@ function Friends() {
 
     useEffect(()=>{
       const getPending = async () => {
-        const response = await axios.get('/api/user/pending')
+        const response = await axios.get(`${config.backendServer}/api/user/pending`)
         setPending(response.data)
 
       }
@@ -72,7 +73,7 @@ function Friends() {
     useEffect(() => {
       const retrieveFriends = async () => {
         try {
-          let response = await axios.get(`/api/user/friends/${username}`);
+          let response = await axios.get(`${config.backendServer}/api/user/friends/${username}`);
           setFriends(response.data);
 
         } catch (err) {

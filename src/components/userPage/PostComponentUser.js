@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../../helper/config.js'
 import GeneratePost from '../../helper/GeneratePost';
 import { useParams } from 'react-router-dom';
 
@@ -20,7 +21,7 @@ function PostComponentUser({thisUser,posts,setPosts,allData}) {
       const fetchPosts = async () => {
         try {
           setLoading(true);
-          const response = await axios.get(`/api/users/${username}/posts`, {
+          const response = await axios.get(`${config.backendServer}/api/users/${username}/posts`, {
             //have to use params for this from react router dom
             params: {
               page: currentPage,

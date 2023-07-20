@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../../helper/config.js'
 import GeneratePost from '../../helper/GeneratePost';
 
 
@@ -15,7 +16,7 @@ const PostComponent = ({thisUser,posts,setPosts,allUsers}) => {
       const fetchPosts = async () => {
         try {
           setLoading(true);
-          const response = await axios.get(`/api/users/${thisUser.username}/homeposts`, {
+          const response = await axios.get(`${config.backendServer}/api/users/${thisUser.username}/homeposts`, {
             params: {
               page: currentPage,
               limit: 10

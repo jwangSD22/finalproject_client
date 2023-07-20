@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react'
 
 import axios from 'axios'
+import config from '../../helper/config.js'
 import GenerateAvatar from '../../helper/GenerateAvatar'
 import CreatePost from '../home/CreatePost'
 import PostComponentUser from './PostComponentUser'
@@ -20,7 +21,7 @@ function UserPosts({thisUsername,allData}) {
     
     useEffect(()=>{
       const getThisUser = async () => {
-        let response = await axios.get(`/api/users/${thisUsername}`)
+        let response = await axios.get(`${config.backendServer}/api/users/${thisUsername}`)
         setThisUser(response.data)
         if(response.data.username===username){
           setSameUser(true)

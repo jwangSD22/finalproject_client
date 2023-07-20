@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import config from '../helper/config.js'
 const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
@@ -13,7 +14,7 @@ const Login = () => {
 
     useEffect(()=>{
        const checkLogin = async () => {
-        let response = await axios.get('/api/users/loginstatus')
+        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`)
         console.log('checking logged in status')
         if(response.status){
             setUser(response.data.user.jwtusername)
@@ -28,7 +29,7 @@ const Login = () => {
 
       //axios the submission, if verfiied, then server will send back something and then use react to set USER
         try{
-            const response = await axios.post('/api/users/login',{emailOrUsername,password})
+            const response = await axios.post(`${config.backendServer}/api/users/login`,{emailOrUsername,password})
             if(response.status===200){
                 console.log(response)
                 localStorage.setItem('jwt',response.data.token)
@@ -62,7 +63,7 @@ const Login = () => {
     // testing GET /api/users  --> gets all users
     const getUsers = async () => {
         try{
-            let response = await axios.get('api/users')
+            let response = await axios.get(`${config.backendServer}/api/users`)
             console.log(response.data)
         }
         catch(err){

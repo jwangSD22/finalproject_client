@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 
 import axios from 'axios'
+import config from '../helper/config'
 import Public from '../components/Public'
 import Friends from '../components/Friends'
 import Pending from '../components/Pending'
@@ -31,7 +32,7 @@ function Users() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        let response = await axios.get("/api/users/loginstatus");
+        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`);
         if (response.status === 200) {
           setIsLoggedIn(true);
 
@@ -41,11 +42,11 @@ function Users() {
           let getPublicUsersResponse = await axios.get("api/users");
           setPublicUsers(getPublicUsersResponse.data);
 
-          let getFriendsResponse = await axios.get(`api/user/friends/${user.username}`)
+          let getFriendsResponse = await axios.get(`${config.backendServer}/api/user/friends/${user.username}`)
           console.log(getFriendsResponse.data)
           setThisUserFriends(getFriendsResponse.data)
 
-          let getPendingResponse = await axios.get('api/user/pending')
+          let getPendingResponse = await axios.get(`${config.backendServer}/api/user/pending`)
           setThisUserPending(getPendingResponse.data)
         
 

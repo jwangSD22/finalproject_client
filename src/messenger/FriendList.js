@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 
 import emptyAvatar from '../../src/images/empty_avatar.png'
 import axios from 'axios'
+import config from  '../helper/config.js'
 import './messenger.css'
 
 
@@ -26,7 +27,7 @@ function FriendList({friends,setUsername2,setChatConnected,setDisplayFriends,set
       const findRoom = async () => {
         try {
         if (username1 && username2) {
-          let response = await axios.post("/api/chats", {
+          let response = await axios.post(`${config.backendServer}/api/chats`, {
             username2,
           });
           console.log(response.data.chatid)

@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios'
+import config from '../helper/config'
 import emptyAvatar from '../images/empty_avatar.png'
 
 
@@ -18,7 +19,7 @@ function GenerateAvatarFromID({userID,pfpHash,setPfpHash}) {
                 if(!pfpHash.get(userID)){
         
 
-                    const response = await axios.get(`/api/users/pfp/${userID}`)
+                    const response = await axios.get(`${config.backendServer}/api/users/pfp/${userID}`)
                     setPfpHash(pfpHash.set(userID,response.data.profilePhotoURL))
                     setData(response.data.profilePhotoURL)
                 }

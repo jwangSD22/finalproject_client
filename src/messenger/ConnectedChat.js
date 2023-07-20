@@ -1,5 +1,6 @@
 import React, { useState, useEffect,useRef } from "react";
 import axios from "axios";
+import config from '../helper/config.js'
 import io from "socket.io-client";
 import './messenger.css'
 import formatTimestamp from "../helper/formatTimestampMessenger";
@@ -43,7 +44,12 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
             return console.log("join room failed");
     
           } else {
-            const socket = io("http://localhost:3000/", {
+
+            const socketAddress = process.env.NODE_ENV === 'production'
+        ? "https://final-project-server-cd99c81ac602.herokuapp.com/"  // Replace with your actual production server address
+        : "http://localhost:3000/";
+
+            const socket = io(socketAddress, {
               path: "/socketio"
             });
             setSocket(socket);
@@ -55,7 +61,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
     
         //load messages into the message container
         try{
-          const messageData = await axios.get(`/api/chats/${roomID}/messages`)
+          const messageData = await axios.get(`${config.backendServer}/api/chats/${roomID}/messages`)
           //axios GET the convo with a body including the roomid
           setMessages(messageData.data)
           

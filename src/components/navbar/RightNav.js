@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Tooltip} from 'react-tooltip'
 import axios from 'axios'
+import config from '../../helper/config.js'
 import { HomeOutlined,MessageOutlined,TeamOutlined,LogoutOutlined, SettingOutlined } from '@ant-design/icons'
 import GenerateAvatar from '../../helper/GenerateAvatar'
 import './navbar.css'
@@ -16,7 +17,7 @@ function RightNav({username, collapseState,setMessengerOn}) {
 useEffect(()=>{
     const getThisUserInfo = async () => {
 
-        let response = await axios.get(`/api/users/${username}`)
+        let response = await axios.get(`${config.backendServer}/api/users/${username}`)
 
         setThisUser(response.data)
 

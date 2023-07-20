@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import config from '../helper/config.js'
 import Navbar from "../components/navbar/Navbar.js";
 import "./User.css";
 import UserPosts from "../components/userPage/UserPosts.js";
@@ -41,7 +42,7 @@ function User() {
 
     const checkLogin = async () => {
       try {
-        let response = await axios.get("/api/users/loginstatus");
+        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`);
         if (response.status) {
           setThisUsername(response.data.user.jwtusername);
           setUserID(response.data.user.jwtid)
@@ -57,7 +58,7 @@ function User() {
     //need to retrieve all data for navbar
     const retrieveAllData = async () => {
       try {
-        let response = await axios.get(`/api/users/`);
+        let response = await axios.get(`${config.backendServer}/api/users/`);
         setAllData(response.data);
       } catch (err) {
         console.log(err);
@@ -66,7 +67,7 @@ function User() {
 
     const retrieveData = async () => {
       try {
-        let response = await axios.get(`/api/users/${username}`);
+        let response = await axios.get(`${config.backendServer}/api/users/${username}`);
         setData(response.data);
       } catch (err) {
 
@@ -87,7 +88,7 @@ function User() {
 
 
     const getMyInfo = async () => {
-      const response = await axios.get(`/api/users/${thisUsername}`);
+      const response = await axios.get(`${config.backendServer}/api/users/${thisUsername}`);
       setMyData(response.data);
 
       let myHash = {};
@@ -153,7 +154,7 @@ function User() {
 
   useEffect(() => {
     const retrieveFriends = async () => {
-      const response = await axios.get(`/api/user/friends/${data.username}`);
+      const response = await axios.get(`${config.backendServer}/api/user/friends/${data.username}`);
       setFriends(response.data);
     };
 
@@ -163,7 +164,7 @@ function User() {
   //need to useeffect to retrieve THIS USER's friends because the messenger component requires it unfortuantely..
   useEffect(() => {
     const retrieveThisUserFriends = async () => {
-      const response = await axios.get(`/api/user/friends/${thisUsername}`);
+      const response = await axios.get(`${config.backendServer}api/user/friends/${thisUsername}`);
       setThisUserFriends(response.data);
     };
 

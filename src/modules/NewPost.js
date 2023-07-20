@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import config from '../helper/config'
 import MiniCarousel from "../components/MiniCarousel";
 
 function NewPost() {
@@ -16,7 +17,7 @@ function NewPost() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        let response = await axios.get("/api/users/loginstatus");
+        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`);
         console.log(response);
 
         if (response.status === 200) {
@@ -75,7 +76,7 @@ function NewPost() {
 
     try {
       console.log(uploadContent);
-      const response = await axios.post("/api/posts", uploadContent);
+      const response = await axios.post(`${config.backendServer}/api/posts`, uploadContent);
       console.log(response);
     } catch (err) {
       console.log(err);
@@ -91,7 +92,7 @@ function NewPost() {
 
     try {
       const response = await axios.post(
-        "/api/posts/imageupload",
+        `${config.backendServer}/api/posts/imageupload`,
         photoFormData
       );
       // setFinalPostKeys(response.data.finalObjectKeys);

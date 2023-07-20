@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import { CheckOutlined,UserDeleteOutlined, UserAddOutlined } from "@ant-design/icons";
+import { CheckOutlined, UserAddOutlined } from "@ant-design/icons";
 import './friendreqbtns.css'
 
 //friend represents the data of the individual friend inside a map of the parent component

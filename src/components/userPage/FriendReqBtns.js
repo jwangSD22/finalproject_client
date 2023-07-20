@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import config from '../../helper/config.js'
 import { CheckOutlined,UserDeleteOutlined, UserAddOutlined } from "@ant-design/icons";
 import './friendreqbtns.css'
 
@@ -31,7 +32,7 @@ function FriendReqBtns({
 
   const handleSendFriendRequest = async () => {
     try{
-      const response = await axios.post(`/api/user/friendrequest`,{endUserID:data._id})
+      const response = await axios.post(`${config.backendServer}api/user/friendrequest`,{endUserID:data._id})
       setFriendStatus('pending')
     }
     catch(err)
@@ -43,7 +44,7 @@ function FriendReqBtns({
 
   const handleRemoveFriendRequest = async () => {
     try{
-      const response = await axios.post(`/api/user/removefriendrequest`,{endUserID:data._id})
+      const response = await axios.post(`${config.backendServer}/api/user/removefriendrequest`,{endUserID:data._id})
       setFriendStatus('')
     }
     catch(err)
@@ -54,7 +55,7 @@ function FriendReqBtns({
 
   const handleDeleteFriend = async () => {
     try{
-      const response = await axios.post(`/api/user/removefriend`,{endUserID:data._id})
+      const response = await axios.post(`${config.backendServer}/api/user/removefriend`,{endUserID:data._id})
       setFriendStatus('')
     }
     catch(err)

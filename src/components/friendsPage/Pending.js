@@ -2,7 +2,7 @@ import emptyAvatar from '../../images/empty_avatar.png'
 import axios from 'axios'
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-
+import config from '../../helper/config'
 import '../../pages/Friends.css'
 
 function Pending ({data,setPendingActionToggle,pendingActionToggle,setAcceptFriendToggle,acceptFriendToggle}){
@@ -17,7 +17,7 @@ function Pending ({data,setPendingActionToggle,pendingActionToggle,setAcceptFrie
 
         const handleUpdate = async (decision) => {
        
-                await axios.post(`/api/user/handlerequest`,{param:decision,endUserID:endUserID})
+                await axios.post(`${config.backendServer}/api/user/handlerequest`,{param:decision,endUserID:endUserID})
   
                 setPendingActionToggle(!pendingActionToggle)
 
@@ -27,7 +27,7 @@ function Pending ({data,setPendingActionToggle,pendingActionToggle,setAcceptFrie
         }
 
         const handleRemoveRequest = async () => {
-                await axios.post(`/api/user/removefriendrequest`,{endUserID:endUserID})
+                await axios.post(`${config.backendServer}/api/user/removefriendrequest`,{endUserID:endUserID})
                 setPendingActionToggle(!pendingActionToggle)
 
         }

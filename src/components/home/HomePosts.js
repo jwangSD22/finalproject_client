@@ -3,6 +3,7 @@ import axios from 'axios'
 import GenerateAvatar from '../../helper/GenerateAvatar'
 import CreatePost from './CreatePost'
 import PostComponent from './PostComponent'
+import config from '../../helper/config.js'
 import './home.css'
 
 
@@ -18,7 +19,7 @@ const [posts, setPosts] = useState([]);
 
 useEffect(()=>{
   const getThisUser = async () => {
-    let response = await axios.get(`/api/users/${username}`)
+    let response = await axios.get(`${config.backendServer}/api/users/${username}`)
     setThisUser(response.data)
   }
 

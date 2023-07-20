@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import config from '../../helper/config.js'
 import SuccessContainer from "./SuccessContainer";
 
 const Registration = ({ showRegistration, setShowRegistration }) => {
@@ -44,7 +45,7 @@ const Registration = ({ showRegistration, setShowRegistration }) => {
 
     //first check with API if user already exists in DB and post error message accordingly
     try {
-      const findUser = await axios.post("/api/user/", {
+      const findUser = await axios.post(`${config.backendServer}/api/user/`, {
         username: username,
         email: email,
       });
@@ -64,7 +65,7 @@ const Registration = ({ showRegistration, setShowRegistration }) => {
     //handle registration
     try {
       axios
-        .post("/api/users", formData)
+        .post(`${config.backendServer}/api/users`, formData)
         .then((response) => {
           if(response.data.success){
             setSuccess(true);

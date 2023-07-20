@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import config from '../helper/config'
 
 function Pending({thisUserPending,handleRemovePending,setToggle,toggle}) {
 
@@ -12,7 +13,7 @@ function Pending({thisUserPending,handleRemovePending,setToggle,toggle}) {
 
     const handlePendingAction = async (param) => {
 
-      const response = await axios.post('/api/user/handlerequest',{param:param,endUserID:userid})
+      const response = await axios.post(`${config.backendServer}/api/user/handlerequest`,{param:param,endUserID:userid})
 
 
       if (param === 'reject') {

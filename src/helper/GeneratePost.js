@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import config from '../helper/config'
 import GenerateAvatar from "./GenerateAvatar";
 import { LikeOutlined, LikeFilled, SendOutlined } from "@ant-design/icons";
 import format from "date-fns/format";
@@ -26,7 +27,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
 
   useEffect(() => {
     const getPostData = async () => {
-      const response = await axios.get(`/api/posts/${data._id}`);
+      const response = await axios.get(`${config.backendServer}/api/posts/${data._id}`);
       setPost(response.data);
       if (response.data.imageURLs.length > 0) {
         setImageURLs(response.data.imageURLs);
@@ -62,7 +63,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
   };
 
   const toggleLike = async () => {
-    const response = axios.put(`/api/posts/${post._id}/togglelike`);
+    const response = axios.put(`${config.backendServer}/api/posts/${post._id}/togglelike`);
     setUserLiked(!userLiked);
 
     if (post.likes.indexOf(thisUser._id) > -1) {
@@ -77,7 +78,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
 
   const commentSubmitHandler = async () => {
     if (message.length > 0) {
-      const response = await axios.post(`/api/posts/${post._id}/newcomment`, {
+      const response = await axios.post(`${config.backendServer}/api/posts/${post._id}/newcomment`, {
         message: message,
       });
       setMessage("");
@@ -90,7 +91,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
     if (event.key === "Enter") {
       event.preventDefault();
       if (message.length > 0) {
-        const response = await axios.post(`/api/posts/${post._id}/newcomment`, {
+        const response = await axios.post(`${config.backendServer}/api/posts/${post._id}/newcomment`, {
           message: message,
         });
         setMessage("");

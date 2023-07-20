@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GenerateAvatar from "../../helper/GenerateAvatar";
 import axios from "axios";
+import config from '../../helper/config.js'
 import './home.css'
 
 const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts }) => {
@@ -16,7 +17,7 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
     imgFormData.append("files", file);
 
     try {
-      const response = await axios.post("/api/posts/imageupload", imgFormData);
+      const response = await axios.post(`${config.backendServer}/api/posts/imageupload`, imgFormData);
       setImgObjKey(response.data.s3key);
 
 
@@ -44,10 +45,10 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
     }
 
 
-    let response = await axios.post("/api/posts/", postObject);
+    let response = await axios.post(`${config.backendServer}/api/posts/`, postObject);
     
     if(response.data){
-      let temp = await axios.get(`/api/posts/${response.data}`)
+      let temp = await axios.get(`${config.backendServer}/api/posts/${response.data}`)
       setPosts([temp.data,...posts])
       setToggleNewPost(!toggleNewPost);
     }

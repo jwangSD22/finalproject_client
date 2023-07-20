@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import config from  '../helper/config.js'
 import emptyAvatar from '../../src/images/empty_avatar.png'
 import './messenger.css'
 import formatTimestamp from '../helper/formatTimestampMessenger'
@@ -14,7 +15,7 @@ function MainPreview({setUsername2,chatConnected,setChatConnected,setRoomID,user
   //this should happen everytime this component mounts, in order to update any new messages.
   useEffect(() => {
     const getPreview = async () => {
-      const response = await axios.get("/api/chats/user");
+      const response = await axios.get(`${config.backendServer}/api/chats/user`);
       setPreviewData(response.data);
     };
 
@@ -44,7 +45,7 @@ function GeneratePreview ({data,setUsername2,setChatConnected,setRoomID,username
 
   useEffect(()=>{
     const getPfp = async () => {
-      const response = await axios.get(`/api/users/pfp/${data.partnerID}`)
+      const response = await axios.get(`${config.backendServer}/api/users/pfp/${data.partnerID}`)
       if(response.data.profilePhotoURL!=='NO PROFILE PHOTO'){
         setPfp(response.data.profilePhotoURL)
       }
@@ -60,7 +61,7 @@ function GeneratePreview ({data,setUsername2,setChatConnected,setRoomID,username
     const findRoom = async () => {
       try {
       if (username1 && username2) {
-        let response = await axios.post("/api/chats", {
+        let response = await axios.post(`${config.backendServer}/api/chats`, {
           username2,
         });
         setRoomID(response.data.chatid);

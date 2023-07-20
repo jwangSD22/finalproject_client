@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from "react";
-import axios from "axios";
 import emptyAvatar from '../../images/empty_avatar.png'
 import './minifriendcontainer.css'
 import { useNavigate } from "react-router-dom";
