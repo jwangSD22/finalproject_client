@@ -37,6 +37,7 @@ const Login = () => {
  }
     checkLogin()
 
+  console.log(`currently in ${process.env.NODE_ENV} status`)
     
  },[])
 
@@ -104,7 +105,6 @@ const Login = () => {
                 <hr className="my-3" />
 
                 <button type="button" className="btn btn-success mb-2 newuser" onClick={()=>{setShowRegistration(!showRegistration)}}>Register New User</button>
-                
                 
               </form>
             </div>

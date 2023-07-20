@@ -24,8 +24,8 @@
   },
   "scripts": {
     "start": "PORT=3006 react-scripts start",
-    "devstart": "NODE_ENV=development PORT=3006 react-scripts start",
-    "prodstart": "NODE_ENV=production PORT=3006 react-scripts start",
+    "devstart": "REACT_APP_CURR_ENV=development PORT=3006 react-scripts start",
+    "prodstart": "REACT_APP_CURR_ENV=production PORT=3006 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
