@@ -20,9 +20,18 @@
     cursor:pointer;
 }
 
-.connected-chat-container{
-    margin-bottom: 10px;
+.messenger{
+    height:100%
 }
+
+.connected-chat-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 100px)
+}
+
+
 
 .friendList{
     position:absolute;
@@ -60,7 +69,6 @@
     justify-content: space-between;
     align-items: center;
     width:100%;
-
     background-color: white;
 
 
@@ -71,7 +79,7 @@
 }
 
 .message-container{
-    max-height: 550px;
+    max-height: 560px;
     overflow: auto;
 }
 
@@ -88,7 +96,7 @@
 
 @media (max-width: 575.98px) {
     .message-container{
-        max-height: calc(100vh - 155px)
+        max-height: calc(100vh - 169px)
 
     }
 }

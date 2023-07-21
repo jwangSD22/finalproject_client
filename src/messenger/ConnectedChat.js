@@ -120,12 +120,11 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
       <div className="row ">
         <form 
-        
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+        style={{padding:'0px'}}>
 
         <div className="input-text-bar">
           <input
-            className=""
             type="text"
             value={newMessage}
             onChange={(event) => setNewMessage(event.target.value)}
@@ -133,6 +132,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
               border: 'none',
               outline: 'none',
               margin: '0',
+              padding: '10px',
               height: '40px',
             }}
             placeholder="Message"
