@@ -31,7 +31,6 @@ function MainPreview({setUsername2,chatConnected,setChatConnected,setRoomID,user
       <div className="previewField"> 
 
       {previewData.length?previewData.map(data=><GeneratePreview key={data._id} data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected} setRoomID={setRoomID} username1={username1}/>):<div>NO MESSAGES YET</div>}
-
        </div>
     </>
   );

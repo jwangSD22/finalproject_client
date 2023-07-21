@@ -97,7 +97,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
 
   return (
-    <div className="connected-chat-container container-fluid">
+    <div className="connected-chat-container">
       
       {/* ConnectedChat testing buttons
       <button onClick={handleUnmount}>Disconnect</button>
@@ -118,25 +118,28 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
       </div>
 
-      <div className="row">
+      <div className="row ">
         <form 
+        
         onSubmit={handleSubmit}>
-        <div className="row input-text-bar">
+
+        <div className="input-text-bar">
           <input
-            className=" col-9 col-sm-10"
+            className=""
             type="text"
             value={newMessage}
             onChange={(event) => setNewMessage(event.target.value)}
             style={{
               border: 'none',
               outline: 'none',
-              paddingLeft:'20px',
               margin: '0',
               height: '40px',
             }}
             placeholder="Message"
           />
-          <div className="col-1 mx-3 d-flex align-items-center justify-content-center">
+
+
+          <div className=" d-flex align-items-center justify-content-end">
           <button className="btn" type="submit"> 
           <SendOutlined
                 style={{
@@ -148,7 +151,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
         
         </div>
         </form>
-      </div>
+        </div>
 
     </div>
   )

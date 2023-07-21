@@ -56,14 +56,18 @@
 }
 
 .input-text-bar {
-    padding-bottom: 5px;
-    padding-top:5px;
-    position:absolute;
-    background-color: white;
-    bottom:0px;
-    left:12px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
     width:100%;
 
+    background-color: white;
+
+
+}
+
+.input-text-bar input {
+    flex:1
 }
 
 .message-container{
@@ -89,11 +93,7 @@
     }
 }
 
-@media (max-width: 575.98px) {
-    .input-text-bar {
-        bottom:47px;
-    }
-}
+
 
 @media (max-width: 575.98px) {
     .friendList{
@@ -145,4 +145,8 @@
 .msg-timestamp {
     font-size:small;
     color: gray;
+}
+
+.previewField{
+    margin-bottom:50px;
 }
