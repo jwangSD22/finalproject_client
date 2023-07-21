@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "compressorjs": "^1.2.1",
     "gh-pages": "^5.0.0"
   }
 }

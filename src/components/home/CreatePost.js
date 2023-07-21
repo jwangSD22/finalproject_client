@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import GenerateAvatar from "../../helper/GenerateAvatar";
 import axios from "axios";
 import config from '../../helper/config.js'
+import Compressor from 'compressorjs'
 import './home.css'
 
 const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts }) => {
@@ -11,25 +12,55 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
 
   async function handleImageUpload(event) {
     const file = event.target.files[0];
-    setTempImageURL(URL.createObjectURL(file));
 
-    const imgFormData = new FormData();
-    imgFormData.append("files", file);
+    new Compressor(file, {
+      quality: 0.8, // Set the desired image quality (0 to 1)
+      maxHeight: 500, // Set the maximum height of the resized image
+      async success(file) {
+        // The compressed and resized image is available as 'result' here
+        // You can now send it to your backend or perform further actions
+        setTempImageURL(URL.createObjectURL(file));
+        const imgFormData = new FormData();
+        imgFormData.append("files", file);
+    
+        try {
+          const response = await axios.post(`${config.backendServer}/api/posts/imageupload`, imgFormData);
+          console.log(response.data.s3key)
+          setImgObjKey(response.data.s3key);
+    
+    
+        } catch (error) {
+          setImgObjKey(false)
+          console.error(error);
+        }
+    
+    
 
-    try {
-      const response = await axios.post(`${config.backendServer}/api/posts/imageupload`, imgFormData);
-      setImgObjKey(response.data.s3key);
 
 
-    } catch (error) {
-      console.error(error);
-    }
+      },
+      error(err) {
+        // Handle any errors that occur during compression
+        setImgObjKey(false)
+        console.error('Error during image compression:', err.message);
+      },
+    });
+
+
+
+
+
+
+
+
+
   }
 
 
   
   const handleImageRemove = () => {
     setTempImageURL("");
+    setImgObjKey(null)
   };
 
 
@@ -45,13 +76,19 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
     }
 
 
-    let response = await axios.post(`${config.backendServer}/api/posts/`, postObject);
-    
-    if(response.data){
-      let temp = await axios.get(`${config.backendServer}/api/posts/${response.data}`)
-      setPosts([temp.data,...posts])
-      setToggleNewPost(!toggleNewPost);
+    if(imgObjKey!==false){
+      let response = await axios.post(`${config.backendServer}/api/posts/`, postObject);
+
+      if(response.data){
+        let temp = await axios.get(`${config.backendServer}/api/posts/${response.data}`)
+        setPosts([temp.data,...posts])
+        setToggleNewPost(!toggleNewPost);
+      }
     }
+    else{
+      console.log('Error uploading image - retry image submission')
+    }
+    
 
 };
 
