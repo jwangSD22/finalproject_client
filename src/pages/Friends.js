@@ -108,6 +108,7 @@ function Friends() {
         const finalPending = pending.map(item=>
           
             <Pending 
+              key={item._id}
               data={item} 
               setPendingActionToggle={setPendingActionToggle} 
               pendingActionToggle={pendingActionToggle}
