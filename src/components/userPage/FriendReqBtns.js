@@ -32,7 +32,7 @@ function FriendReqBtns({
 
   const handleSendFriendRequest = async () => {
     try{
-      const response = await axios.post(`${config.backendServer}api/user/friendrequest`,{endUserID:data._id})
+      const response = await axios.post(`${config.backendServer}/api/user/friendrequest`,{endUserID:data._id})
       setFriendStatus('pending')
     }
     catch(err)
