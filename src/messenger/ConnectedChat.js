@@ -132,7 +132,6 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
         style={{padding:'0px'}}>
 
         <div className="input-text-bar" ref={inputBox}>
-          <form>
             <input
               type="text"
               value={newMessage}
@@ -148,7 +147,6 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
               placeholder="Message"
               autoComplete="new-password"
             />
-          </form>
 
 
           <div className=" d-flex align-items-center justify-content-end">
