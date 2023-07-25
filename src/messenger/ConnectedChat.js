@@ -132,21 +132,23 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
         style={{padding:'0px'}}>
 
         <div className="input-text-bar" ref={inputBox}>
-          <input
-            type="text"
-            value={newMessage}
+          <form>
+            <input
+              type="text"
+              value={newMessage}
             
-            onChange={(event) => setNewMessage(event.target.value)}
-            style={{
-              border: 'none',
-              outline: 'none',
-              margin: '0',
-              padding: '10px',
-              height: '40px',
-            }}
-            placeholder="Message"
-            autoComplete="off"
-          />
+              onChange={(event) => setNewMessage(event.target.value)}
+              style={{
+                border: 'none',
+                outline: 'none',
+                margin: '0',
+                padding: '10px',
+                height: '40px',
+              }}
+              placeholder="Message"
+              autoComplete="off"
+            />
+          </form>
 
 
           <div className=" d-flex align-items-center justify-content-end">
