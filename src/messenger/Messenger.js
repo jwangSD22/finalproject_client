@@ -57,7 +57,7 @@ function Messenger({thisUsername,setMessengerOn,data,friends,userID,}) {
   };
 
   return (
-    <div className="messenger container-fluid overflow-auto">
+    <div className="messenger container-fluid overflow-hidden">
 
       <div
         className="friendOverlay animate__animated animate__fadeIn animate__faster"
