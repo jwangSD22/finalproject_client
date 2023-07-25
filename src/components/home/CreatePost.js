@@ -113,7 +113,7 @@ const CreatePost = ({
               />
             )}
             <div>
-              <div className="text-muted"><small>Posting as:</small></div>
+              <div className="text-muted"><small>posting as:</small></div>
               <div>{`${thisUser && thisUser.fullName}`}</div>
             </div>
           </div>
