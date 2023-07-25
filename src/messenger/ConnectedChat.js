@@ -16,6 +16,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
 
 
   const messageContainerRef = useRef(null);
+  const inputBox = useRef(null)
 
 
 
@@ -95,6 +96,12 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
     
     };
 
+    const handleScroll = () => {
+      if (inputBox.current&&window.innerWidth<576){
+        inputBox.current.scrollIntoView({behavior:'smooth'})
+      }
+    }
+
 
   return (
     <div className="connected-chat-container">
@@ -109,7 +116,8 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
         {(messages).map((message) => (
           <div key={message.messageID} 
           className={`${username1===message.username?'right-message':'left-message'}`}
-          style={{wordBreak:'break-all'}}>
+          style={{wordBreak:'break-all'}}
+          onClick={handleScroll}>
              {message.text} 
              <small className={`mx-2 ${username1===message.username?'right-ts':'left-ts'}`} style={{wordBreak:'keep-all'}}>{formatTimestamp(message.timestamp)}</small>
           </div>
@@ -123,10 +131,11 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
         onSubmit={handleSubmit}
         style={{padding:'0px'}}>
 
-        <div className="input-text-bar">
+        <div className="input-text-bar" ref={inputBox}>
           <input
             type="text"
             value={newMessage}
+            
             onChange={(event) => setNewMessage(event.target.value)}
             style={{
               border: 'none',
