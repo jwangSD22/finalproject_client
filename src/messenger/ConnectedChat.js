@@ -146,7 +146,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
                 height: '40px',
               }}
               placeholder="Message"
-              autoComplete="off"
+              autoComplete="new-password"
             />
           </form>
 
