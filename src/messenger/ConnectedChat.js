@@ -136,7 +136,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
               height: '40px',
             }}
             placeholder="Message"
-            autocomplete="off"
+            autoComplete="off"
           />
 
 
