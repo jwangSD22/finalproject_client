@@ -46,6 +46,17 @@
     transform: translate(-50%, -50%);
   
   }
+
+  .create-post-tag{
+    font-weight: bold;
+    font-size: 1.5rem;;
+
+  }
+
+  .add-img-btn:hover{
+    cursor:pointer;
+    background-color:#F0F2F5;
+  }
   
   @media (max-width: 576px) {
     .create-post {
@@ -54,7 +65,7 @@
       right: 0;
       bottom: 0;
       width: 100vw;
-      height: 100vh;
+      height: fit-content;
       transform: none;
     }
   }

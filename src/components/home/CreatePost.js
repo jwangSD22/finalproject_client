@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import GenerateAvatar from "../../helper/GenerateAvatar";
 import axios from "axios";
-import config from '../../helper/config.js'
-import Compressor from 'compressorjs'
-import './home.css'
+import config from "../../helper/config.js";
+import Compressor from "compressorjs";
+import { FileImageOutlined } from "@ant-design/icons";
+import "./home.css";
 
-const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts }) => {
+const CreatePost = ({
+  thisUser,
+  setToggleNewPost,
+  toggleNewPost,
+  posts,
+  setPosts,
+}) => {
   const [tempImageURL, setTempImageURL] = useState("");
   const [postContent, setPostContent] = useState("");
   const [imgObjKey, setImgObjKey] = useState(null);
@@ -22,75 +29,59 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
         setTempImageURL(URL.createObjectURL(file));
         const imgFormData = new FormData();
         imgFormData.append("files", file);
-    
+
         try {
-          const response = await axios.post(`${config.backendServer}/api/posts/imageupload`, imgFormData);
-          console.log(response.data.s3key)
+          const response = await axios.post(
+            `${config.backendServer}/api/posts/imageupload`,
+            imgFormData
+          );
+          console.log(response.data.s3key);
           setImgObjKey(response.data.s3key);
-    
-    
         } catch (error) {
-          setImgObjKey(false)
+          setImgObjKey(false);
           console.error(error);
         }
-    
-    
-
-
-
       },
       error(err) {
         // Handle any errors that occur during compression
-        setImgObjKey(false)
-        console.error('Error during image compression:', err.message);
+        setImgObjKey(false);
+        console.error("Error during image compression:", err.message);
       },
     });
-
-
-
-
-
-
-
-
-
   }
 
-
-  
   const handleImageRemove = () => {
     setTempImageURL("");
-    setImgObjKey(null)
+    setImgObjKey(null);
   };
-
-
 
   // Logic to handle post submission
   const handlePostSubmit = async () => {
-      //conditionally add the imageKeyArray to the post only if there's an img. 
-      let postObject = {
-        postMessage:postContent
+    //conditionally add the imageKeyArray to the post only if there's an img.
+    let postObject = {
+      postMessage: postContent,
+    };
+    if (imgObjKey) {
+      postObject.imageKeyArray = [imgObjKey];
     }
-    if(imgObjKey){
-        postObject.imageKeyArray=[imgObjKey]
-    }
 
+    if (imgObjKey !== false) {
+      let response = await axios.post(
+        `${config.backendServer}/api/posts/`,
+        postObject
+      );
 
-    if(imgObjKey!==false){
-      let response = await axios.post(`${config.backendServer}/api/posts/`, postObject);
-
-      if(response.data){
-        let temp = await axios.get(`${config.backendServer}/api/posts/${response.data}`)
-        setPosts([temp.data,...posts])
+      if (response.data) {
+        let temp = await axios.get(
+          `${config.backendServer}/api/posts/${response.data}`
+        );
+        setPosts([temp.data, ...posts]);
         setToggleNewPost(!toggleNewPost);
       }
+    } else {
+      console.log("Error uploading image - retry image submission");
     }
-    else{
-      console.log('Error uploading image - retry image submission')
-    }
-    
-
-};
+  };
 
   const tempImgStyling = {
     maxHeight: "500px",
@@ -101,31 +92,33 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
   };
 
   return (
-  
     <div className="container-fluid my-4">
-        <div className="create-post bg-white rounded p-2">
- 
-        <div className="card-header d-flex align-items-center justify-content-between">
-          <h5 className="mb-0">Create Post</h5>
-          <button
-            className="btn-close"
-            onClick={() => {
-              setToggleNewPost(!toggleNewPost);
-            }}
-            aria-label="Close"
-          ></button>
+      <div className="create-post bg-white rounded p-2">
+
+        <div className="row justify-content-between mb-2">
+          <div className="empty-div col-2"></div>
+          <div className="col-8 d-flex justify-content-center mt-2"> <span className="create-post-tag mb-2">Create post</span> </div>
+          <div className="col-2 d-flex justify-content-end align-items-center"><button className="btn-close mx-3" onClick={() => {setToggleNewPost(!toggleNewPost);}}aria-label="Close"/></div>
+       <hr className="my-0" />
         </div>
-        <div className="card-body">
-          <div className="d-flex align-items-start">
-            {thisUser && <GenerateAvatar cssClassIdentifier={`create-post-pfp mx-2`} url={thisUser.profilePhotoURL} />}
+
+
+
+
+          <div className="d-flex align-items-center">
+            {thisUser && (
+              <GenerateAvatar
+                cssClassIdentifier={`create-post-pfp mx-2`}
+                url={thisUser.profilePhotoURL}
+              />
+            )}
             <div>
-              <p className="mb-0">{`Posting as: ${
-                thisUser && thisUser.fullName
-              }`}</p>
+              <div className="text-muted"><small>Posting as:</small></div>
+              <div>{`${thisUser && thisUser.fullName}`}</div>
             </div>
           </div>
           <textarea
-            className="form-control my-3 border-0"
+            className="form-control my-2 border-0"
             rows="4"
             style={{
               resize: "none",
@@ -146,7 +139,7 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
                 alt="Post-img"
               />
               <button
-                className="btn-close position-absolute top-0 end-0 m-2"
+                className="btn-close bg-white position-absolute top-0 end-0 m-2"
                 onClick={handleImageRemove}
                 aria-label="Close"
               ></button>
@@ -154,10 +147,12 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
           )}
           <div className="d-grid">
             {!tempImageURL && (
-              <>
-                <label htmlFor="photo-upload" className="btn btn-primary">
-                  Add Photo
-                </label>
+              <label htmlFor="photo-upload">
+                <div className="add-img-btn container d-flex justify-content-center align-items-center border py-2 rounded" >
+                <FileImageOutlined className="mx-2" style={{fontSize:'25px',color:'#2078F4'}} />
+                
+                  Add a photo to your post
+            
                 <input
                   type="file"
                   id="photo-upload"
@@ -165,16 +160,20 @@ const CreatePost = ({ thisUser, setToggleNewPost, toggleNewPost,posts, setPosts 
                   className="d-none"
                   onChange={handleImageUpload}
                 />
-              </>
+              </div>
+              </label>
             )}
 
-            <button className="btn btn-success mt-3" onClick={handlePostSubmit} disabled={!postContent} >
+            <button
+              className={`btn mt-3 ${(postContent.length>0)?'bg-primary text-white':null}`}
+              onClick={handlePostSubmit}
+              disabled={!postContent}
+            >
               Post
             </button>
           </div>
-        </div>
 
-    </div>
+      </div>
     </div>
   );
 };

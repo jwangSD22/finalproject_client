@@ -158,18 +158,20 @@ function User() {
       setFriends(response.data);
     };
 
+    const retrieveThisUserFriends = async () => {
+      const response = await axios.get(`${config.backendServer}/api/user/friends/${thisUsername}`);
+      setThisUserFriends(response.data);
+      console.log(response.data)
+
+    };
+
     retrieveFriends();
+    retrieveThisUserFriends();
+
   }, [data]);
 
   //need to useeffect to retrieve THIS USER's friends because the messenger component requires it unfortuantely..
-  useEffect(() => {
-    const retrieveThisUserFriends = async () => {
-      const response = await axios.get(`${config.backendServer}api/user/friends/${thisUsername}`);
-      setThisUserFriends(response.data);
-    };
 
-    retrieveThisUserFriends();
-  }, [data]);
 
 
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
