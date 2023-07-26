@@ -16,6 +16,8 @@ function Home() {
   const [data, setData] = useState(null);
   const [friends, setFriends] = useState(null);
   const [messengerOn, setMessengerOn] = useState(false);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+
   const navigate = useNavigate();
 
 
@@ -101,8 +103,23 @@ function Home() {
     }
   }, [messengerOn]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
   return (
     <>
+    <div className={`top-home-layer ${screenSize<576?'stop-scroll':null}`}>
       <Navbar
         data={data}
         username={username}
@@ -110,7 +127,7 @@ function Home() {
         messengerOn={messengerOn}
       />
       
-      <div className="container-fluid bg-light">
+      <div className="container-fluid bg-light" >
         <div className="row">
           <div className="col-md-3 d-none d-md-block">
             <YouMayKnow data={data} friends={friends} username={username} />
@@ -121,19 +138,21 @@ function Home() {
           </div>
         </div>
 
-        {messengerOn && (
-          <div className="hidden bg-light border">
- 
-            <Messenger
-              friends={friends}
-              thisUsername={username}
-              messengerOn={messengerOn}
-              setMessengerOn={setMessengerOn}
-              userID = {userID}
-            />
-          </div>
-        )}
+        
       </div>
+    </div>
+    {messengerOn && (
+      <div className="hidden bg-light border">
+
+        <Messenger
+          friends={friends}
+          thisUsername={username}
+          messengerOn={messengerOn}
+          setMessengerOn={setMessengerOn}
+          userID = {userID}
+        />
+      </div>
+    )}
     </>
   );
 }

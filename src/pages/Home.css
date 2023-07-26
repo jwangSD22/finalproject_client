@@ -1,24 +1,36 @@
-.hidden{
-    overflow-y: auto;
-    max-width: 500px;
-    min-width: 375px;
-    min-height:667px;
-    max-height:800px;
-    position:sticky;
-    left: calc(100%);
-    bottom:5px;
-    border-radius: 1%;
-
+.hidden {
+  overflow-y: auto;
+  max-width: 500px;
+  min-width: 375px;
+  min-height: 667px;
+  max-height: 800px;
+  position: sticky;
+  left: calc(100%);
+  bottom: 5px;
+  border-radius: 1%;
 }
 
 @media (max-width: 575.98px) {
-    .hidden {
-        left:0px;
-        top:47px;
-        position:fixed;
-        min-width: 100%;
-        min-height: 80%;
-        max-height:100%
+  .hidden {
+    left: 0px;
+    top: 0px;
+    z-index: 99;
+    position: fixed;
+    min-width: 100%;
+    max-height: 100%;
+  }
+}
 
-    }
+.top-home-layer {
+  height: 100vh;
+}
+
+.stop-scroll {
+  overflow: hidden;
+}
+
+.top-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 98;
 }

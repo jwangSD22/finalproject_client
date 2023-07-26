@@ -33,7 +33,7 @@
 
 @media (max-width: 575.98px) {
     .connected-chat-container{
-        height:calc(100% - 110px);
+        height:calc(100% - 60px);
 
     }
 }

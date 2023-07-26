@@ -13,7 +13,7 @@ const Navbar = ({ data, username,setMessengerOn,messengerOn}) => {
   }, [path]);
 
   return (
-    <nav className="top-navbar container-fluid bg-white sticky-top">
+    <nav className="top-navbar container-fluid bg-white ">
       <div className="row">
       {/* start-elements brand logo and search bar */}
       <div className="left-nav col-6 col-md-4 d-flex justify-content-start align-items-center">

@@ -46,9 +46,7 @@ function ConnectedChat({username1,username2,setChatConnected,chatConnected,userI
     
           } else {
 
-            const socketAddress = process.env.NODE_ENV === 'production'
-        ? "https://final-project-server-cd99c81ac602.herokuapp.com/"  // Replace with your actual production server address
-        : "http://localhost:3000/";
+            const socketAddress = config.backendServer;
 
             const socket = io(socketAddress, {
               path: "/socketio"
