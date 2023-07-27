@@ -122,3 +122,10 @@
   min-height: 40vh;
 }
 
+.top-home-layer {
+  height: 100vh;
+}
+
+.stop-scroll {
+  overflow: hidden;
+}

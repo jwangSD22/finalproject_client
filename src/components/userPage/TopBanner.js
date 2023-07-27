@@ -63,10 +63,10 @@ function TopBanner({
           const getPFP = await axios.get(
             `${config.backendServer}/api/users/pfp/${data._id}`
           );
-          console.log(getPFP);
           setProfilePhotoURL(getPFP.data.profilePhotoURL);
         }
-      },
+      }
+      ,
       error(err) {
         // Handle any errors that occur during compression
         console.error("Error during image compression:", err.message);

@@ -32,6 +32,8 @@ function User() {
   const [miniOffset, setMiniOffset] = useState(0);
   const [messengerOn, setMessengerOn] = useState(false);
   const [userID,setUserID] = useState(null)
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+
 
 
 
@@ -161,7 +163,6 @@ function User() {
     const retrieveThisUserFriends = async () => {
       const response = await axios.get(`${config.backendServer}/api/user/friends/${thisUsername}`);
       setThisUserFriends(response.data);
-      console.log(response.data)
 
     };
 
@@ -206,9 +207,22 @@ function User() {
     }
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
-    
+    <div className={`top-home-layer ${screenSize<576&&messengerOn?'stop-scroll':null}`}>
       <Navbar
         data={allData}
         username={thisUsername}
@@ -258,6 +272,7 @@ function User() {
 </div>
 
       )}
+      </div>
 {messengerOn && (
           <div className="hidden bg-light border">
  

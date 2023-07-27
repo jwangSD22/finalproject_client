@@ -59,3 +59,11 @@
 .lower-friend-container{
     min-height: 86vh;
 }
+
+.top-home-layer {
+    height: 100vh;
+  }
+
+  .stop-scroll {
+    overflow: hidden;
+  }

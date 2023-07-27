@@ -119,7 +119,7 @@ function Home() {
 
   return (
     <>
-    <div className={`top-home-layer ${screenSize<576?'stop-scroll':null}`}>
+    <div className={`top-home-layer ${screenSize<576&&messengerOn?'stop-scroll':null}`}>
       <Navbar
         data={data}
         username={username}
