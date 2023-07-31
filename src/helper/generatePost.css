@@ -72,3 +72,7 @@ font-weight: bold;
 .post-liked{
   color:#2078F4;
 }
+
+.commentListDrop:hover{
+  cursor:pointer;
+}

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from '../helper/config'
 import GenerateAvatar from "./GenerateAvatar";
-import { LikeOutlined, LikeFilled, SendOutlined } from "@ant-design/icons";
+import { LikeOutlined, LikeFilled, SendOutlined, EditOutlined, EditFilled } from "@ant-design/icons";
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import "./generatePost.css";
@@ -238,17 +238,19 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
 
           <div className="post-button col-5 mx-2" onClick={editCommentHandler}>
            
-              <span>Comment</span>
+              {editComment?
+              <span style={{color: "#2078F4"}}><EditFilled className="mx-2" style={{ fontSize: "23px" }} />Comment</span>:
+              <span><EditOutlined className="mx-2" style={{ fontSize: "23px"}} />Comment</span>}
    
           </div>
         </div>
         <hr className="hr" />
 
         {post.comments.length > 1 && (
-          <div onClick={()=>{toggleCommentListHandler()}}>
+          <div  onClick={()=>{toggleCommentListHandler()}}>
             {toggleCommentList
-              ? "Close comment list"
-              : `View previous ${post.numberOfComments - 1} comments`}
+              ? <span className="commentListDrop">Close comment list</span>
+              : <span className="commentListDrop">{`View previous ${post.numberOfComments - 1} comments`}</span>}
           </div>
         )}
 

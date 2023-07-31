@@ -44,6 +44,8 @@ const handleLogout = () => {
 
 const handleUserNav = () => {
   navigate(`/user/${thisUser.username}`)
+  window.location.reload();
+
 }
 
 const photoURL = '';
