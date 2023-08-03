@@ -11,6 +11,7 @@ import NewPost from './modules/NewPost'
 import ChatRoom from './modules/ChatRoom'
 import Users from './modules/Users'
 import ErrorPage from './pages/ErrorPage'
+import Stormdoor from './modules/Stormdoor'
 
 
 function RouteSwitch() {
@@ -31,14 +32,14 @@ function RouteSwitch() {
       {/*Friend Route will display all friends and pending requests */}      
       <Route path = "/friends" element={<Friends />} /> 
 
-      <Route path = "/user/:username" element = {<User />}>
+      <Route path = "/user/:username" element = {<User />}/>
       
 
       
-
+      <Route path ="/stormdoor" element = {<Stormdoor />} />
       {/* use outlet from react router dom to handle nav between posts and friends? */}
 
-        </Route>
+        
 
 
 

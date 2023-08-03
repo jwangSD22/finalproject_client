@@ -76,3 +76,7 @@ font-weight: bold;
 .commentListDrop:hover{
   cursor:pointer;
 }
+
+.small-date{
+  margin-top: -6px;
+}

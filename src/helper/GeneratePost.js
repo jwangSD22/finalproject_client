@@ -191,7 +191,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
           </div >
           <div className="d-flex flex-column">
             <div className="post-header-name" onClick={()=>handleNav(post.username)}>{post.fullName}</div>
-            <div><small className="text-muted">{date}</small></div>
+            <div className="small-date"><small className="text-muted">{date}</small></div>
           </div>
         </div>
 
