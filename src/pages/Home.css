@@ -6,7 +6,7 @@
   max-height: 800px;
   position: sticky;
   left: calc(100%);
-  bottom: 5px;
+  bottom: 0px;
   border-radius: 1%;
 }
 
