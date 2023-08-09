@@ -1,12 +1,12 @@
 .hidden {
   overflow-y: auto;
   max-width: 500px;
-  min-width: 375px;
+  min-width: 500px;
   min-height: 667px;
   max-height: 800px;
-  position: sticky;
-  left: calc(100%);
-  bottom: 0px;
+  position: fixed;
+  right:3px;
+  bottom: 0;
   border-radius: 1%;
 }
 
