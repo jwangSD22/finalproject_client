@@ -11,7 +11,6 @@ import NewPost from "./modules/NewPost";
 import ChatRoom from "./modules/ChatRoom";
 import Users from "./modules/Users";
 import ErrorPage from "./pages/ErrorPage";
-import Stormdoor from "./modules/Stormdoor";
 
 function RouteSwitch() {
   return (
@@ -31,13 +30,13 @@ function RouteSwitch() {
 
         <Route path="/user/:username" element={<User />} />
 
-        {/* use outlet from react router dom to handle nav between posts and friends? */}
 
+{/*     OLD ROUTES USED FOR TESTING
         <Route path="/app" element={<App />} />
         <Route path="/createpost" element={<NewPost />} />
         <Route path="/chatroom/" element={<ChatRoom />} />
         <Route path="/users/" element={<Users />} />
-        <Route path="/error" element={<ErrorPage />} />
+        <Route path="/error" element={<ErrorPage />} /> */}
       </Routes>
     </BrowserRouter>
   );
