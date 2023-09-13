@@ -1,6 +1,10 @@
 import {faker} from '@faker-js/faker'
 import axios from 'axios'
 import config from '../../helper/config.js'
+import Compressor from 'compressorjs'
+
+
+
 
 let userArray = []
 
@@ -43,10 +47,11 @@ async function createRandomUser(){
 // }
 
 
-let headers = {}
+
 
 
 async function loginme(emailOrUsername,password){
+    let headers = {}
 
     emailOrUsername = 'monster'
     password = 'woofwoof'
@@ -61,22 +66,31 @@ async function loginme(emailOrUsername,password){
     }
 
 
+    return headers
 
 }
 
-// async function makePost() {
-//     let data = {
-//         'postMessage':'test message'
-//     }
+
+
+
+
+
+
+
+async function makePost(headers) {
+    let data = {
+        'postMessage':'new test message 9/12'
+    }
 
     
-//     let post = await axios.post(`${config.backendServer}/api/posts`,data,{headers})
+    let post = await axios.post(`${config.backendServer}/api/posts`,data,{headers})
 
-//     console.log(post.data)
+    console.log(post.data)
 
-//     //post data holds the id of the post
+    //post data holds the id of the post
 
-// }
+}
+
 
 
 async function likePost(id){
@@ -106,9 +120,12 @@ async function loginandcheck() {
 
     
 
-    await loginme()
+    let headers = await loginme()
+
+    await makePost(headers)
     // await makePost()
-    await likePost('64ff9e75e93ded9445114d78')
+
+
 
 }
 
@@ -118,3 +135,5 @@ loginandcheck()
 
 //create 10 users.. i need all of their login info, username/passwords..
 // 64ff9e75e93ded9445114d78
+
+
