@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import FriendReqBtns from "./FriendReqBtns";
+import FriendReqBtns from "./FriendReqBtns.js";
 import emptyAvatar from "../../images/empty_avatar.png";
 import emptyBG from "../../images/empty_bg.png";
 import axios from "axios";
 import config from "../../helper/config.js";
 import { CameraOutlined } from "@ant-design/icons";
-import FriendIcons from "./FriendIcons";
+import FriendIcons from "./FriendIcons.js";
 import Compressor from "compressorjs";
 import "./topbanner.css";
 

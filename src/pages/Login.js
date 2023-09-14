@@ -1,9 +1,9 @@
-import Footer from '../components/footer/Footer';
+import Footer from '../components/footer/Footer.js';
 import React, { useState,useEffect } from 'react';import './Login.css';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import config from '../helper/config.js'
-import Registration from '../components/registration/Registration';
+import Registration from '../components/registration/Registration.js';
 const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 

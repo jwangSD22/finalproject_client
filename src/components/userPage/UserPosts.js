@@ -2,9 +2,9 @@ import React, {useState,useEffect} from 'react'
 
 import axios from 'axios'
 import config from '../../helper/config.js'
-import GenerateAvatar from '../../helper/GenerateAvatar'
-import CreatePost from '../home/CreatePost'
-import PostComponentUser from './PostComponentUser'
+import GenerateAvatar from '../../helper/GenerateAvatar.js'
+import CreatePost from '../home/CreatePost.js'
+import PostComponentUser from './PostComponentUser.js'
 import { useParams } from 'react-router-dom'
 import './userposts.css'
 

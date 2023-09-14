@@ -1,0 +1,8 @@
+{
+    "65035e176de748270a12c70c": {
+        "id": "65035e176de748270a12c70c",
+        "username": "Franco.Buckridge",
+        "password": "tMu7cxNWKyySpEKYcRCU",
+        "fullName": "Melinda Schowalter"
+    }
+}

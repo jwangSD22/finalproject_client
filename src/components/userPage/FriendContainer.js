@@ -1,8 +1,8 @@
 import React from "react";
 import "./friendcontainer.css";
-import GenerateAvatar from "../../helper/GenerateAvatar";
+import GenerateAvatar from "../../helper/GenerateAvatar.js";
 import { useNavigate } from "react-router-dom";
-import FriendStatus from "./FriendStatus";
+import FriendStatus from "./FriendStatus.js";
 //need to add logic to calculate mutual friends
 
 //state of myFriends will be a dictionary to calculate mutual friends.

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import config from '../../helper/config.js'
-import SuccessContainer from "./SuccessContainer";
+import SuccessContainer from "./SuccessContainer.js";
 
 const Registration = ({ showRegistration, setShowRegistration }) => {
   const [firstName, setFirstName] = useState("");

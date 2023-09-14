@@ -4,7 +4,7 @@ import {Tooltip} from 'react-tooltip'
 import axios from 'axios'
 import config from '../../helper/config.js'
 import { HomeOutlined,MessageOutlined,TeamOutlined,LogoutOutlined, SettingOutlined } from '@ant-design/icons'
-import GenerateAvatar from '../../helper/GenerateAvatar'
+import GenerateAvatar from '../../helper/GenerateAvatar.js'
 import './navbar.css'
 
 
@@ -47,8 +47,6 @@ const handleUserNav = () => {
   window.location.reload();
 
 }
-
-const photoURL = '';
 
 // thisUser.profilePhotoURL==='NO PROFILE PHOTO'?emptyAvatar:thisUser.profilePhotoURL
 

@@ -1,8 +1,8 @@
 import React, {useState,useEffect} from 'react'
 import axios from 'axios'
-import GenerateAvatar from '../../helper/GenerateAvatar'
-import CreatePost from './CreatePost'
-import PostComponent from './PostComponent'
+import GenerateAvatar from '../../helper/GenerateAvatar.js'
+import CreatePost from './CreatePost.js'
+import PostComponent from './PostComponent.js'
 import config from '../../helper/config.js'
 import './home.css'
 

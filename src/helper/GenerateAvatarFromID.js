@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios'
-import config from '../helper/config'
+import config from '../helper/config.js'
 import emptyAvatar from '../images/empty_avatar.png'
 
 

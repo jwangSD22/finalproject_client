@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import config from '../helper/config'
+import config from '../helper/config.js'
 
 // Set token to the header
 const token = localStorage.getItem('jwt');

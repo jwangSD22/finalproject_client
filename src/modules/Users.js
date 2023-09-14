@@ -3,10 +3,10 @@ import { useState,useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 
 import axios from 'axios'
-import config from '../helper/config'
-import Public from '../components/Public'
-import Friends from '../components/Friends'
-import Pending from '../components/Pending'
+import config from '../helper/config.js'
+import Public from '../components/Public.js'
+import Friends from '../components/Friends.js'
+import Pending from '../components/Pending.js'
 
 const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

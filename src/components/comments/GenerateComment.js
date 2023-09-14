@@ -1,7 +1,7 @@
 import React, {useEffect,useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import GenerateAvatarFromID from '../../helper/GenerateAvatarFromID'
+import GenerateAvatarFromID from '../../helper/GenerateAvatarFromID.js'
 import { formatDistanceToNow } from 'date-fns'
 import { LikeFilled } from '@ant-design/icons'
 import './generatecomment.css'

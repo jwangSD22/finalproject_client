@@ -1,19 +1,18 @@
 import './searchbar.css'
 import React,{useEffect,useState,useRef} from 'react'
-import { AudioOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
-import QueryResults from './QueryResults';
+import QueryResults from './QueryResults.js';
 
 const { Search } = Input;
 
-const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: '#1677ff',
-    }}
-  />
-);
+// const suffix = (
+//   <AudioOutlined
+//     style={{
+//       fontSize: 16,
+//       color: '#1677ff',
+//     }}
+//   />
+// );
 
 
 

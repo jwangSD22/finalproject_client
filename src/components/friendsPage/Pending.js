@@ -2,7 +2,7 @@ import emptyAvatar from '../../images/empty_avatar.png'
 import axios from 'axios'
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-import config from '../../helper/config'
+import config from '../../helper/config.js'
 import '../../pages/Friends.css'
 
 function Pending ({data,setPendingActionToggle,pendingActionToggle,setAcceptFriendToggle,acceptFriendToggle}){

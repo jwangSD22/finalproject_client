@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GenerateAvatar from "../../helper/GenerateAvatar";
+import GenerateAvatar from "../../helper/GenerateAvatar.js";
 import axios from "axios";
 import config from "../../helper/config.js";
 import Compressor from "compressorjs";

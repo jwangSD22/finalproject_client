@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import config from '../helper/config'
-import GenerateAvatar from "./GenerateAvatar";
+import config from '../helper/config.js'
+import GenerateAvatar from "./GenerateAvatar.js";
 import { LikeOutlined, LikeFilled, SendOutlined, EditOutlined, EditFilled } from "@ant-design/icons";
-import format from "date-fns/format";
-import parseISO from "date-fns/parseISO";
+import format from "date-fns/format/index.js";
+import parseISO from "date-fns/parseISO/index.js";
 import "./generatePost.css";
-import GenerateComment from "../components/comments/GenerateComment";
+import GenerateComment from "../components/comments/GenerateComment.js";
 
 function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
   const [post, setPost] = useState('');

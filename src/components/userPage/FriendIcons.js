@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
-import GenerateAvatar from '../../helper/GenerateAvatar'
+import GenerateAvatar from '../../helper/GenerateAvatar.js'
 import './friendicons.css'
 
 function FriendIcons({friends}) {

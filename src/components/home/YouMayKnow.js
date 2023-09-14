@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./home.css";
-import GenerateAvatar from "../../helper/GenerateAvatar";
+import GenerateAvatar from "../../helper/GenerateAvatar.js";
 
 function YouMayKnow({ data, friends, username }) {
   const [nonFriends, setNonFriends] = useState(null);

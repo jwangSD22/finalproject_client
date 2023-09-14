@@ -1,7 +1,9 @@
 import {faker} from '@faker-js/faker'
 import axios from 'axios'
-import config from '../../helper/config.js'
-import Compressor from 'compressorjs'
+import config from '../helper/config.js'
+import fs from 'fs'
+
+
 
 
 
@@ -10,7 +12,7 @@ let userArray = []
 
 let server = `${config.backendServer}/api`
 
-async function createRandomUser(){
+async function createRandomUser(map){
 
     let fullName,username,password,email,dob
 
@@ -31,7 +33,9 @@ async function createRandomUser(){
 
     try{
         let response = await axios.post(`${config.backendServer}/api/users`, formData)
-        console.log(response)
+        //response.data.id will have the user's new id
+        map.set(response.data.id,{id:response.data.id,username:username,password:password,fullName:fullName})
+
     }
     catch(err){
         console.log(err)
@@ -41,10 +45,51 @@ async function createRandomUser(){
 
 }
 
+const delay = (ms) => new Promise(resolve=> {setTimeout(resolve,ms);console.log(`delayed ${ms}ms`)})
 
-// for(let i = 0 ;i<10;i++){
-//     createRandomUser()
-// }
+
+
+let testCreate = async() => {
+
+    let userMap = new Map()
+    let posts = []
+    let comments = []
+
+
+    for(let i = 0 ;i<1;i++){
+        await delay(500)
+        await createRandomUser(userMap)
+
+
+    }
+
+    for(let [k,v] of userMap){
+        let headers
+        await delay(500)
+        headers = await loginme(v.username,v.password)
+        console.log(headers)
+        await delay(500)
+        await makePost(headers)
+
+
+    }
+
+
+
+
+
+    let convert = Object.fromEntries(userMap)
+    let final = JSON.stringify(convert,undefined,4)
+
+    fs.writeFile('./users.txt', final, (err) => {
+        if (err) throw err;
+        console.log('Results Received');
+    })
+
+    
+}
+
+await testCreate()
 
 
 
@@ -53,8 +98,6 @@ async function createRandomUser(){
 async function loginme(emailOrUsername,password){
     let headers = {}
 
-    emailOrUsername = 'monster'
-    password = 'woofwoof'
 
     let response = await axios.post(`${config.backendServer}/api/users/login`,{emailOrUsername,password})
 
@@ -78,14 +121,29 @@ async function loginme(emailOrUsername,password){
 
 
 async function makePost(headers) {
+
+ try{
+    let postPhoto = await axios.get(`${config.backendServer}/api/seed/randomimg/post-photos`)
+
+
     let data = {
-        'postMessage':'new test message 9/12'
+        'postMessage':'new test message 9/14',
+        'imageKeyArray':[postPhoto.data]
     }
+
+ 
+
+
 
     
     let post = await axios.post(`${config.backendServer}/api/posts`,data,{headers})
 
     console.log(post.data)
+
+ }
+ catch(err){
+    console.log(err)
+ }
 
     //post data holds the id of the post
 
@@ -116,24 +174,7 @@ async function likePost(id){
 
 }
 
-async function loginandcheck() {
-
-    
-
-    let headers = await loginme()
-
-    await makePost(headers)
-    // await makePost()
 
 
-
-}
-
-
-
-loginandcheck()
-
-//create 10 users.. i need all of their login info, username/passwords..
-// 64ff9e75e93ded9445114d78
 
 

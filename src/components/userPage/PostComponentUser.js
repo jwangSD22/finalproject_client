@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import config from '../../helper/config.js'
-import GeneratePost from '../../helper/GeneratePost';
+import GeneratePost from '../../helper/GeneratePost.js';
 import { useParams } from 'react-router-dom';
 
 

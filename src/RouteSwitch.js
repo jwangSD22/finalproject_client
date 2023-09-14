@@ -1,16 +1,16 @@
 import React from "react";
 import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Friends from "./pages/Friends";
-import User from "./pages/User";
+import Login from "./pages/Login.js";
+import Home from "./pages/Home.js";
+import Friends from "./pages/Friends.js";
+import User from "./pages/User.js";
 
 //all of the below were used in backend testing//
-import App from "./App";
-import NewPost from "./modules/NewPost";
-import ChatRoom from "./modules/ChatRoom";
-import Users from "./modules/Users";
-import ErrorPage from "./pages/ErrorPage";
+import App from "./App.js";
+import NewPost from "./modules/NewPost.js";
+import ChatRoom from "./modules/ChatRoom.js";
+import Users from "./modules/Users.js";
+import ErrorPage from "./pages/ErrorPage.js";
 
 function RouteSwitch() {
   return (

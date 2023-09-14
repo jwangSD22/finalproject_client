@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "../helper/config.js";
 import emptyAvatar from "../../src/images/empty_avatar.png";
 import "./messenger.css";
-import formatTimestamp from "../helper/formatTimestampMessenger";
+import formatTimestamp from "../helper/formatTimestampMessenger.js";
 
 //data={data} setUsername2={setUsername2} chatConnected={chatConnected} setChatConnected={setChatConnected}
 

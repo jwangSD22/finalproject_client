@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "../helper/config.js";
 import io from "socket.io-client";
 import "./messenger.css";
-import formatTimestamp from "../helper/formatTimestampMessenger";
+import formatTimestamp from "../helper/formatTimestampMessenger.js";
 import { SendOutlined } from "@ant-design/icons";
 
 function ConnectedChat({

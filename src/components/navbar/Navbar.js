@@ -6,8 +6,8 @@ import {
   TeamOutlined,
   MessageFilled,
 } from "@ant-design/icons";
-import Searchbar from "./Searchbar";
-import RightNav from "./RightNav";
+import Searchbar from "./Searchbar.js";
+import RightNav from "./RightNav.js";
 
 const Navbar = ({ data, username, setMessengerOn, messengerOn }) => {
   const [path, setPath] = useState(null);

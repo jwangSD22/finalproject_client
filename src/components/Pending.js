@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import config from '../helper/config'
+import config from '../helper/config.js'
 
 function Pending({thisUserPending,handleRemovePending,setToggle,toggle}) {
 

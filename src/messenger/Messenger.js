@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import MainPreview from "./MainPreview";
-import ConnectedChat from "./ConnectedChat";
-import FriendList from "./FriendList";
+import MainPreview from "./MainPreview.js";
+import ConnectedChat from "./ConnectedChat.js";
+import FriendList from "./FriendList.js";
 import { MenuOutlined,ArrowLeftOutlined } from "@ant-design/icons";
 import "./messenger.css";
 import emptyAvatar from '../../src/images/empty_avatar.png'
