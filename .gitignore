@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# logs
+/src/seeder/comments.txt
+/src/seeder/posts.txt
+/src/seeder/users.txt
+
+
