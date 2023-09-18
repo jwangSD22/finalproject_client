@@ -2,6 +2,9 @@ import { faker } from "@faker-js/faker";
 import axios from "axios";
 import config from "../helper/config.js";
 import fs from "fs";
+import { json } from "react-router-dom";
+import { log } from "console";
+import { connect } from "http2";
 
 
 let server = `${config.backendServer}/api`;
@@ -9,8 +12,17 @@ let server = `${config.backendServer}/api`;
 //helper function to delay load on API/database
 const delay = (ms) =>
   new Promise((resolve) => {
+
     setTimeout(resolve, ms);
-    console.log(`-`);
+
+  });
+
+  const superDelay = (ms) =>
+  new Promise((resolve) => {
+
+    setTimeout(resolve, ms);
+    console.log('Finished seeding friends, ready to connect')
+    
   });
 
 async function createRandomUser(map) {
@@ -42,6 +54,8 @@ async function createRandomUser(map) {
       password: password,
       fullName: fullName,
     });
+
+    console.log(`user: ${username} created`)
   } catch (err) {
     
   }
@@ -49,9 +63,9 @@ async function createRandomUser(map) {
 
 let testCreate = async () => {
   //configuration here
-  let numberOfUsers = 2;
-  let numberOfPosts = 3;
-  let numberOfComments = 3
+  let numberOfUsers = 50;
+  let numberOfPosts = 10;
+  let numberOfComments = 50
 
   let userMap = new Map();
   let posts = [];
@@ -69,11 +83,12 @@ let testCreate = async () => {
     headers = await loginme(v.username, v.password);
 
     await seedPFPandBG(v.username,headers)
-    await delay(250);
+    await delay(50);
 
     for (let i = 0; i < numberOfPosts; i++) {
-      await delay(250);
+      await delay(50);
       await makePost(headers, posts);
+
     }
   }
 
@@ -112,7 +127,7 @@ let testCreate = async () => {
   try{
     for (let [k, v] of userMap) {
         let headers;
-        await delay(250);
+        await delay(50);
         headers = await loginme(v.username, v.password);
         
         let randomlySelectedComments = new Set();
@@ -121,7 +136,6 @@ let testCreate = async () => {
           randomlySelectedComments.add(comments[randomindex]);
         }
 
-        console.log(randomlySelectedComments)
     
         for (let comment of randomlySelectedComments) {
             if(comment===undefined){
@@ -203,6 +217,7 @@ async function makePost(headers, postArray) {
 
     //post.data holds the id of the post
     postArray.push(post.data);
+    console.log(`Post -> ${post.data} created`)
   } catch (err) {
     console.log('error making post')
   }
@@ -227,10 +242,11 @@ let commentID
   let comment = await axios.post(`${server}/posts/${id}/newcomment`, data, {
     headers,});
 
-  console.log(`COMMENT ID HERE --> ${comment.data}`)
 
 
   commentID = comment.data
+
+  console.log(`Comment -> ${commentID} created/liked`)
 
 
 
@@ -269,6 +285,8 @@ async function seedPFPandBG(username,headers){
         }
     
         let response = await axios.put(`${server}/users/${username}`,data,{headers})
+
+        console.log(`${username} pfp and bg updated`)
     }
     catch(err){
 
@@ -278,6 +296,105 @@ async function seedPFPandBG(username,headers){
 
 }
 
-//running code to seed
-await testCreate();
+
+//6508c48938a9635940c7f59e
+
+
+
+
+async function makeFriends(endUserID,headers){
+
+  if(endUserID===undefined){
+    return 
+  }
+
+  try{
+    //need to async login first to provide headers for this function to work
+    let response = await axios.post(`${server}/user/seedfriend/${endUserID}`,null,{headers})
+    console.log('friend added')
+   }
+  catch(err){
+    console.log('error making friends')
+  }
+}
+
+
+//helper function to generate 10 indices
+let gen10indices = () =>{
+  let array = []
+  for(let i = 0 ;i<10;i++){
+    array.push(Math.floor(Math.random()*51))
+  }
+  return array
+}
+
+
+//helper function to convert users.txt from json to usable JS Map object
+let pulljson = async () => {
+  try{
+    let content = fs.readFileSync('users.txt', 'utf8',)
+  
+      return new Map(Object.entries(JSON.parse(content)))
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
+
+async function connectFriends () {
+  let userarray = [] 
+  let allusermap = await pulljson()
+  
+  for( let [k,v] of allusermap){
+    userarray.push(k)
+  }
+  
+  for( let [k,v] of allusermap){
+  
+    let randomIndices = gen10indices()
+    let headers = await loginme (v.username,v.password)
+  
+    for (let indexValue of randomIndices){
+
+  
+      await makeFriends(userarray[indexValue],headers)
+    }
+  
+  }
+    
+}
+
+//helper function for deleting improperly seeded friend
+async function deleteUser (endUserID) {
+  let allusermap = await pulljson()
+  for( let [k,v] of allusermap){
+    let headers = await loginme (v.username,v.password)
+    let response = await axios.post(`${server}/user/removeseeded/${endUserID}`,null,{headers})
+    console.log(response.data)
+  }
+
+}
+
+
+//helper function for seeding a friend to user map
+async function addUser (endUserID) {
+  let allusermap = await pulljson()
+  for( let [k,v] of allusermap){
+    let headers = await loginme (v.username,v.password)
+    let response = await makeFriends(endUserID,headers)
+  }
+
+}
+
+
+
+// // seeds users posts comments
+// await testCreate();
+
+// await superDelay(10000)
+// // makes friend connections
+// await connectFriends()
+
+
 
