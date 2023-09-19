@@ -40,11 +40,13 @@ const PostComponent = ({thisUser,posts,setPosts,allUsers}) => {
 
     }, [thisUser,currentPage]);
   
+
+
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
      
         if(currentPage!==maxPage){
-            if (scrollHeight - scrollTop === clientHeight && !loading) {
+            if (scrollHeight - scrollTop <= clientHeight+70 && !loading) {
             setCurrentPage((prevPage) => prevPage + 1);
         }
     }
