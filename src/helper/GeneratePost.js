@@ -17,6 +17,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
   const [userLiked, setUserLiked] = useState(false);
   const [imageURLs, setImageURLs] = useState([]);
   const [comments, setComments] = useState([]);
+  const [newCommentTog,setNewCommentTog] = useState(false)
   const [date,setDate] = useState('')
   const textareaRef = useRef(null);
   const divRef = useRef(null);
@@ -53,10 +54,10 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
     post &&
       setComments(
         [...post.comments]
-          .reverse()
-          .map((item) => <GenerateComment key={item} commentID={item} pfpHash={pfpHash} setPfpHash={setPfpHash} thisUser={thisUser} />)
+          
+          .map((item) => <GenerateComment key={item} commentID={item} pfpHash={pfpHash} setPfpHash={setPfpHash} thisUser={thisUser} newCommentTog={newCommentTog}/>)
       );
-  }, [post,post.comments]);
+  }, [post,post.comments,newCommentTog]);
 
   const handleChange = (event) => {
     setMessage(event.target.value);
@@ -77,15 +78,26 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
   };
 
   const commentSubmitHandler = async () => {
+
     if (message.length > 0) {
       const response = await axios.post(`${config.backendServer}/api/posts/${post._id}/newcomment`, {
         message: message,
       });
-      setMessage("");
-      post.numberOfComments++;
-      post.comments = [...post.comments, response.data._id];
+      
+
+      if(response.status===200){
+        setMessage("");
+        post.numberOfComments++;
+        post.comments = [...post.comments, response.data];
+
+        // setPost(post)
+        // setNewCommentTog(!newCommentTog)
+        // console.log(post)
+      }
     }
   };
+
+
 
   const handleKeyDown = async (event) => {
     if (event.key === "Enter") {
@@ -96,7 +108,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
         });
         setMessage("");
         post.numberOfComments++;
-        post.comments = [...post.comments, response.data._id];
+        post.comments = [...post.comments, response.data];
       }
     }
   };

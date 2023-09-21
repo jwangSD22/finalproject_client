@@ -8,7 +8,7 @@ import './generatecomment.css'
 import config from '../../helper/config.js'
 
 
-function GenerateComment({commentID,pfpHash,setPfpHash,thisUser}) {
+function GenerateComment({commentID,pfpHash,setPfpHash,thisUser,newCommentTog}) {
 
 const [data,setData] = useState(null)
 const [date,setDate] = useState('')
@@ -32,7 +32,7 @@ useEffect(()=>{
     commentID&&getCommentData()
 
 
-},[toggle,commentID])
+},[newCommentTog,toggle,commentID])
 
 useEffect(()=>{
   if(data){
@@ -56,8 +56,8 @@ useEffect(()=>{
 const handleLike = async () => {
 
   await axios.put(`${config.backendServer}/api/comments/${commentID}/togglelike`)
-  setToggle(!toggle)
 
+  setToggle(!toggle)
 
 }
 
