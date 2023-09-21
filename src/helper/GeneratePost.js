@@ -266,7 +266,7 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
           </div>
         )}
 
-        <div>{toggleCommentList ? comments : comments[0]}</div>
+        <div>{toggleCommentList ? comments : comments[comments.length-1]}</div>
 
         {editComment && (
           <div className="d-flex align-items-center animate__animated animate__fadeIn">
