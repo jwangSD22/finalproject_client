@@ -4,15 +4,16 @@ import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import config from '../helper/config.js'
 import Registration from '../components/registration/Registration.js';
+import wave from '../images/wave.png'
+
 const token = localStorage.getItem('jwt');
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
 
 
 const Login = () => {
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
-  // const [user,setUser] = useState(null);
-  // const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null)
   const [showRegistration, setShowRegistration] = useState(false)
   
@@ -20,14 +21,10 @@ const Login = () => {
 
 
   useEffect(()=>{
-    console.log('component mount')
-
     const checkLogin = async () => {
       try{
         let response = await axios.get(`${config.backendServer}/api/users/loginstatus`)
         if(response.status){
-            // setUser(response.data.user.jwtusername)
-            // setIsLoggedIn(true)
             navigate('/home')
         }
       }
@@ -37,7 +34,6 @@ const Login = () => {
  }
     checkLogin()
 
-  console.log(`currently in ${process.env.NODE_ENV} status`)
     
  },[])
 
@@ -82,9 +78,14 @@ const Login = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6 d-flex flex-column brand-message mb-5">
-              <h1>WaveLink $</h1>
+              <div className="waveContainer" style={{fontFamily:'Impact',fontSize:'52px',fontStyle:'bold',color:'#2078F4'}}>
+              <div className='wave_logo'><img src={wave} alt='wave png Designed by brgfx / Freepik'></img></div>
+              <div className='mx-3'>Sharewave</div> 
+             
+                </div>
+  
               <div className='col-lg-10'>
-              <h2>Connect, share, and inspire with friends and the rest of the world.</h2>
+              <h2>Surf on the Sharewave to connect with friends around the world</h2>
 
               </div>
             </div>

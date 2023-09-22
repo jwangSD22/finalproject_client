@@ -134,14 +134,14 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
 
     if(toggleCommentList===false){
       setEditComment(true);
-      setTimeout(()=>{ const windowHeight = window.innerHeight;
-        const divBottomPosition = postRef.current.getBoundingClientRect().bottom;
-        const scrollOffset = divBottomPosition - windowHeight / 2;
+      // setTimeout(()=>{ const windowHeight = window.innerHeight;
+      //   const divBottomPosition = postRef.current.getBoundingClientRect().bottom;
+      //   const scrollOffset = divBottomPosition - windowHeight / 2;
     
-        window.scrollTo({
-          top: window.scrollY + scrollOffset,
-          behavior: 'smooth'
-        });  },500)
+      //   window.scrollTo({
+      //     top: window.scrollY + scrollOffset,
+      //     behavior: 'smooth'
+      //   });  },500)
      
     }
   };
@@ -184,8 +184,13 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
       textarea.style.height = "auto"; // Reset the height to calculate the new height
       textarea.style.height = `${textarea.scrollHeight}px`; // Set the new height of the textarea
       div.style.height = `${textarea.scrollHeight + 15}px`; // Set the height of the surrounding div
+      console.log('triggered')
+      if(!toggleCommentList){
+        textarea.focus()
+      }
+
     }
-  }, [message]);
+  }, [message,editComment]);
 
   const handleNav = (username) => {
     navigate(`/user/${username}`);window.location.reload()

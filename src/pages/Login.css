@@ -4,6 +4,7 @@
     padding-top: 15%;
     justify-content: center;
     height: 100vh;
+    background-color:#f5f6f7
   }
 
 h1{
@@ -77,4 +78,25 @@ form {
   position:absolute;
   bottom:5px;
   width:100vw;
+}
+
+.waveContainer{
+  display:flex;
+  align-items: center;
+}
+
+.wave_logo {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:50px;
+  height:50px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: solid 1px #2078F4
+}
+
+.wave_logo img{
+max-width:100%;
+height:auto;
 }

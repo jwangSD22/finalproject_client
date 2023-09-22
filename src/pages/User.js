@@ -177,22 +177,6 @@ function User() {
 
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
 
-  const pattern = (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 500">
-      <defs>
-        <pattern
-          id="pattern"
-          width="50"
-          height="50"
-          patternUnits="userSpaceOnUse"
-        >
-          <circle cx="25" cy="25" r="10" fill="#3498db" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#pattern)" />
-    </svg>
-  );
-
   useEffect(() => {
     const navbar = document.querySelector(".top-navbar");
 

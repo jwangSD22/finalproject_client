@@ -12,6 +12,7 @@ const CreatePost = ({
   toggleNewPost,
   posts,
   setPosts,
+  textareaRef
 }) => {
   const [tempImageURL, setTempImageURL] = useState("");
   const [postContent, setPostContent] = useState("");
@@ -119,6 +120,7 @@ const CreatePost = ({
           </div>
           <textarea
             className="form-control my-2 border-0"
+            ref={textareaRef}
             rows="4"
             style={{
               resize: "none",

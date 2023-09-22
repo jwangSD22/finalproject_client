@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect,useRef} from 'react'
 
 import axios from 'axios'
 import config from '../../helper/config.js'
@@ -15,6 +15,7 @@ function UserPosts({thisUsername,allData}) {
     const [posts, setPosts] = useState([]);
     const [triggerPostDataRefresh, setTriggerPostDataRefresh] = useState(false)
     const [sameUser, setSameUser] = useState(false)
+    const textareaRef = useRef(null)
 
     const {username} = useParams()
     
@@ -37,11 +38,26 @@ function UserPosts({thisUsername,allData}) {
 
     
     },[thisUsername,username])
+
+    useEffect(()=>{
+      console.log('triggered my effect')
+      if(textareaRef.current){
+        textareaRef.current.focus()
+      }
+    },[toggleNewPost])
     
     
     
     const formClickHandler = () => {
+      
+            window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });  
+
     setToggleNewPost(!toggleNewPost)
+
+
     }
     
     
@@ -56,7 +72,7 @@ function UserPosts({thisUsername,allData}) {
         <div className={`${sameUser&&'mt-4'}`}>
           {/*hidden div for creating a new post */}
           {toggleNewPost && <div className="overlay" />}
-          {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} posts={posts} setPosts={setPosts} />}
+          {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} posts={posts} setPosts={setPosts} textareaRef={textareaRef} />}
     
           <div className="row">
        

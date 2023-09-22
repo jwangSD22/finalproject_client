@@ -2,10 +2,6 @@ import { faker } from "@faker-js/faker";
 import axios from "axios";
 import config from "../helper/config.js";
 import fs from "fs";
-import { json } from "react-router-dom";
-import { log } from "console";
-import { connect } from "http2";
-
 
 let server = `${config.backendServer}/api`;
 

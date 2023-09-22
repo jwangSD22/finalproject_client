@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import Searchbar from "./Searchbar.js";
 import RightNav from "./RightNav.js";
+import wave from '../../images/wave.png'
 
 const Navbar = ({ data, username, setMessengerOn, messengerOn }) => {
   const [path, setPath] = useState(null);
@@ -23,13 +24,7 @@ const Navbar = ({ data, username, setMessengerOn, messengerOn }) => {
         {/* start-elements brand logo and search bar */}
         <div className="left-nav col-6 col-md-4 d-flex justify-content-start align-items-center">
           <div className="navbar-brand me-2 mb-1 d-none d-sm-flex align-items-center">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-              height="20"
-              alt="MDB Logo"
-              loading="lazy"
-              style={{ marginTop: "2px" }}
-            />
+<div className="wavelogo"> <img src={wave} alt='wave png Designed by brgfx / Freepik'></img></div>
           </div>
           {/* Search form */}
           <Searchbar data={data} />

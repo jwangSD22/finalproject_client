@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect,useRef} from 'react'
 import axios from 'axios'
 import GenerateAvatar from '../../helper/GenerateAvatar.js'
 import CreatePost from './CreatePost.js'
@@ -15,6 +15,8 @@ function HomePosts({username,allUsers}) {
 const [thisUser,setThisUser] = useState(null)
 const [toggleNewPost, setToggleNewPost] = useState(false)
 const [posts, setPosts] = useState([]);
+const textareaRef = useRef(null)
+
 
 
 useEffect(()=>{
@@ -26,6 +28,13 @@ useEffect(()=>{
   username&&getThisUser()
 
 },[username])
+
+useEffect(()=>{
+  if(textareaRef.current){
+    textareaRef.current.focus()
+  }
+},[toggleNewPost])
+
 
 
 
@@ -43,7 +52,7 @@ const newPost = <div className="container box-styling d-flex bg-white border sha
   return (
     <div className="mt-4 ">
       {toggleNewPost && <div className="overlay" />}
-      {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} posts={posts} setPosts={setPosts} />}
+      {toggleNewPost&&<CreatePost thisUser={thisUser} toggleNewPost={toggleNewPost} setToggleNewPost={setToggleNewPost} posts={posts} setPosts={setPosts} textareaRef={textareaRef}/>}
 
       <div className="row">
    
