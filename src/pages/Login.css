@@ -4,7 +4,9 @@
     padding-top: 15%;
     justify-content: center;
     height: 100vh;
-    background-color:#f5f6f7
+
+    /* background-color:#f5f6f7 */
+    background-color:#007bff
   }
 
 h1{

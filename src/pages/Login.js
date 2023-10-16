@@ -42,22 +42,15 @@ const Login = () => {
 
   //axios the submission, if verfiied, then server will send back something and then use react to set USER
     try{
-
-        
+       
         const response = await axios.post(`${config.backendServer}/api/users/login`,{emailOrUsername,password})
         if(response.status===200){
             localStorage.setItem('jwt',response.data.token)
             // setUser(response.data.jwtusername)
         }
-
-
-//force reload to trigger useEffect auto navigate logged-in users to /home
         window.location.reload();
-
-        
-    }
-
-    
+        }
+  
     catch (err){
       if(err.response.status===401){
         setEmailOrUsername('')
@@ -67,6 +60,19 @@ const Login = () => {
     }
 
 };
+
+
+
+const loadDemoUser = async () => {
+  setEmailOrUsername("Abner92")
+  setPassword("H4yns8hGuZgjvdOE6u1T")
+
+  setTimeout(()=>document.getElementById("loginform").requestSubmit()
+    ,250)
+
+
+}
+
 
     return (
         <div>
@@ -78,20 +84,20 @@ const Login = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6 d-flex flex-column brand-message mb-5">
-              <div className="waveContainer" style={{fontFamily:'Impact',fontSize:'52px',fontStyle:'bold',color:'#2078F4'}}>
+              <div className="waveContainer" style={{fontFamily:'Impact',fontSize:'52px',fontStyle:'bold',color:'white'}}>
               <div className='wave_logo'><img src={wave} alt='wave png Designed by brgfx / Freepik'></img></div>
               <div className='mx-3'>Sharewave</div> 
              
                 </div>
   
               <div className='col-lg-10'>
-              <h2>Surf on the Sharewave to connect with friends around the world</h2>
+              <h2 style={{color:'#ededed'}}>Surf on the Sharewave to connect with friends around the world</h2>
 
               </div>
             </div>
             <div className="col-lg-4 login-box">
  
-              <form onSubmit={handleSubmit}>
+              <form id="loginform" onSubmit={handleSubmit}>
                 <div className="form-group mb-2">
                   <input type="text" id="username" className="form-control" placeholder='Username or Email' autoComplete='username'
                   value={emailOrUsername} onChange={e => setEmailOrUsername(e.target.value)}/>
@@ -102,7 +108,7 @@ const Login = () => {
                 </div>
                 {error&&<div display="none" className='text-danger  mb-2'><em>{error}</em></div>}
                 <button type="submit" className="btn btn-primary mb-2">Login</button>
-                <button type="button" className="btn btn-secondary ">Login with Demo User</button>
+                <button type="button" className="btn btn-secondary" onClick={loadDemoUser}>Login with Demo User</button>
                 <hr className="my-3" />
 
                 <button type="button" className="btn btn-success mb-2 newuser" onClick={()=>{setShowRegistration(!showRegistration)}}>Register New User</button>
