@@ -16,9 +16,7 @@ function RightNav({username, collapseState,setMessengerOn}) {
 
 useEffect(()=>{
     const getThisUserInfo = async () => {
-
         let response = await axios.get(`${config.backendServer}/api/users/${username}`)
-
         setThisUser(response.data)
 
     }
@@ -47,8 +45,6 @@ const handleUserNav = () => {
   window.location.reload();
 
 }
-
-// thisUser.profilePhotoURL==='NO PROFILE PHOTO'?emptyAvatar:thisUser.profilePhotoURL
 
 
   return (

@@ -3,12 +3,6 @@ import './mininav.css'
 
 function MiniNav({viewFriendsToggle,setViewFriendsToggle}) {
 
-  //set an event listener for any back-navigation attempt if current status of viewfriendstoggle is true. instead of navigating back in the history, force setViewFriendsToggle to false, and reload window
-
-
-
-
-
 
   return (
     <div className="container mini-nav-box">

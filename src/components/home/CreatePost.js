@@ -21,12 +21,12 @@ const CreatePost = ({
   async function handleImageUpload(event) {
     const file = event.target.files[0];
 
+    //compress image file 
     new Compressor(file, {
       quality: 0.8, // Set the desired image quality (0 to 1)
       maxHeight: 500, // Set the maximum height of the resized image
       async success(file) {
-        // The compressed and resized image is available as 'result' here
-        // You can now send it to your backend or perform further actions
+
         setTempImageURL(URL.createObjectURL(file));
         const imgFormData = new FormData();
         imgFormData.append("files", file);
@@ -102,9 +102,6 @@ const CreatePost = ({
           <div className="col-2 d-flex justify-content-end align-items-center"><button className="btn-close mx-3" onClick={() => {setToggleNewPost(!toggleNewPost);}}aria-label="Close"/></div>
        <hr className="my-0" />
         </div>
-
-
-
 
           <div className="d-flex align-items-center">
             {thisUser && (

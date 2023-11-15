@@ -36,8 +36,7 @@ function TopBanner({
       maxHeight: 500, // Set the maximum height of the resized image
       maxWidth: 500,
       async success(file) {
-        // The compressed and resized image is available as 'result' here
-        // You can now send it to your backend or perform further actions
+
         const imgFormData = new FormData();
         imgFormData.append("profilePhoto", file);
 

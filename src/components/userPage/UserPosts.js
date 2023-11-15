@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 import './userposts.css'
 
 function UserPosts({thisUsername,allData}) {
-  {
+  
     const [thisUser,setThisUser] = useState(null)
     const [toggleNewPost, setToggleNewPost] = useState(false)
     const [posts, setPosts] = useState([]);
@@ -84,7 +84,7 @@ function UserPosts({thisUsername,allData}) {
     
         </div>
       )
-    }
+    
 }
 
 export default UserPosts

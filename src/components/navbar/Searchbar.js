@@ -5,19 +5,6 @@ import QueryResults from './QueryResults.js';
 
 const { Search } = Input;
 
-// const suffix = (
-//   <AudioOutlined
-//     style={{
-//       fontSize: 16,
-//       color: '#1677ff',
-//     }}
-//   />
-// );
-
-
-
-
-
 function Searchbar({data}) {
 const [focus,setFocus] = useState(false)
 const [searchValue,setSearchValue] = useState('')

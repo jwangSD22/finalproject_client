@@ -175,12 +175,13 @@ async function loginme(emailOrUsername, password) {
     password,
   });
 
-  (headers["Authorization"] = `Bearer ${response.data.token}`),
-    (headers["user"] = {
+  headers["Authorization"] = `Bearer ${response.data.token}`
+
+    headers["user"] = {
       jwtid: response.data.jwtid,
       jwtusername: response.data.jwtusername,
       jwtemail: response.data.jwtemail,
-    });
+    };
 
   return headers;
 }
@@ -293,7 +294,6 @@ async function seedPFPandBG(username,headers){
 }
 
 
-//6508c48938a9635940c7f59e
 
 
 

@@ -6,18 +6,11 @@ import PostComponent from './PostComponent.js'
 import config from '../../helper/config.js'
 import './home.css'
 
-
-
-
-
-
 function HomePosts({username,allUsers}) {
 const [thisUser,setThisUser] = useState(null)
 const [toggleNewPost, setToggleNewPost] = useState(false)
 const [posts, setPosts] = useState([]);
 const textareaRef = useRef(null)
-
-
 
 useEffect(()=>{
   const getThisUser = async () => {
@@ -34,8 +27,6 @@ useEffect(()=>{
     textareaRef.current.focus()
   }
 },[toggleNewPost])
-
-
 
 
 const formClickHandler = () => {

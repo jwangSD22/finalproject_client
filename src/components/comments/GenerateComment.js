@@ -18,22 +18,17 @@ const [toggle,setToggle] = useState(false)
 
 const navigate = useNavigate()
 
-
-
+// retrieve comment data
 useEffect(()=>{
-
     const getCommentData = async () => {
         const response = await axios.get(`${config.backendServer}/api/comments/${commentID}`)
-        setData(response.data)
-        
-
+        setData(response.data)      
     }
-
     commentID&&getCommentData()
-
 
 },[newCommentTog,toggle,commentID])
 
+// set like counter and if logged in user is one of the likes
 useEffect(()=>{
   if(data){
     setLikes(data.numberOfLikes)
@@ -44,28 +39,19 @@ useEffect(()=>{
     }
     else{
       setUserLiked(false)
-
     }
   }
-
-
-
-
 },[data,thisUser])
 
+//toggles like status with backend
 const handleLike = async () => {
-
   await axios.put(`${config.backendServer}/api/comments/${commentID}/togglelike`)
-
   setToggle(!toggle)
-
 }
 
 const handleNav = (username) => {
   navigate(`/user/${username}`);window.location.reload()
 }
-
-
 
 
   return (

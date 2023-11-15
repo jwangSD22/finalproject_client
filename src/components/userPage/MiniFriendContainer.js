@@ -46,13 +46,6 @@ function MiniFriendContainer({setViewFriendsToggle,friends}) {
     </div>
     )
 
-
-
-
-
-
-
-
   return (
     <div className="container rounded border my-4 bg-white user-page-mini-friend-container">
       <div className="row">

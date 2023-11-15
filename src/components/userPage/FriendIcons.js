@@ -9,9 +9,6 @@ const [friendIcons,setFriendIcons] = useState(null)
 
 const navigate = useNavigate()
 
-
-
-
 const handleNav = (username) => {
   navigate(`/user/${username}`);window.location.reload()
 }
