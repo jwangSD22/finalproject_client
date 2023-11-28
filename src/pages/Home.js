@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import config from '../helper/config.js'
+import config from "../helper/config.js";
 import Navbar from "../components/navbar/Navbar.js";
 import YouMayKnow from "../components/home/YouMayKnow.js";
 import HomePosts from "../components/home/HomePosts.js";
@@ -11,7 +11,7 @@ import "./Home.css";
 
 function Home() {
   const [username, setUsername] = useState(null);
-  const [userID,setUserID] = useState(null)
+  const [userID, setUserID] = useState(null);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [data, setData] = useState(null);
   const [friends, setFriends] = useState(null);
@@ -20,15 +20,15 @@ function Home() {
 
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`);
+        let response = await axios.get(
+          `${config.backendServer}/api/users/loginstatus`
+        );
         if (response.status) {
           setUsername(response.data.user.jwtusername);
-          setUserID(response.data.user.jwtid)
+          setUserID(response.data.user.jwtid);
           // setIsLoggedIn(true);
         }
       } catch (err) {
@@ -49,25 +49,25 @@ function Home() {
 
     checkLogin();
     retrieveData();
-
   }, []);
 
   useEffect(() => {
     const retrieveFriends = async () => {
       try {
-        let response = await axios.get(`${config.backendServer}/api/user/friends/${username}`);
+        let response = await axios.get(
+          `${config.backendServer}/api/user/friends/${username}`
+        );
         setFriends(response.data);
       } catch (err) {
         console.log(err);
       }
     };
-    if(username){
+    if (username) {
       retrieveFriends();
     }
   }, [username]);
 
-
-//useEffect to prevent touchscrolling in area outside of messenger
+  //useEffect to prevent touchscrolling in area outside of messenger
   const handleTouchStart = (e) => {
     e.stopPropagation();
   };
@@ -80,7 +80,6 @@ function Home() {
 
   useEffect(() => {
     if (messengerOn) {
-
       const messengerDiv = document.querySelector(".hidden");
       const postContainer = document.querySelector(".home-post-container");
 
@@ -108,51 +107,51 @@ function Home() {
       setScreenSize(window.innerWidth);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup the event listener when the component is unmounted
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-
   return (
     <>
-    <div className={`top-home-layer ${screenSize<576&&messengerOn?'stop-scroll':null}`}>
-      <Navbar
-        data={data}
-        username={username}
-        setMessengerOn={setMessengerOn}
-        messengerOn={messengerOn}
-      />
-      
-      <div className="container-fluid bg-light" >
-        <div className="row">
-          <div className="col-md-3 d-none d-md-block">
-            <YouMayKnow data={data} friends={friends} username={username} />
-          </div>
-          <div className=" d-none d-xl-flex col-xl-1"></div>
-          <div className="col-md-8 col-lg-6 col-xxl-4 home-post-container">
-            <HomePosts username={username} allUsers={data} />
+      <div
+        className={`top-home-layer ${
+          screenSize < 576 && messengerOn ? "stop-scroll" : null
+        }`}
+      >
+        <Navbar
+          data={data}
+          username={username}
+          setMessengerOn={setMessengerOn}
+          messengerOn={messengerOn}
+        />
+
+        <div className="container-fluid bg-light">
+          <div className="row">
+            <div className="col-md-3 d-none d-md-block">
+              <YouMayKnow data={data} friends={friends} username={username} />
+            </div>
+            <div className=" d-none d-xl-flex col-xl-1"></div>
+            <div className="col-md-8 col-lg-6 col-xxl-4 home-post-container">
+              <HomePosts username={username} allUsers={data} />
+            </div>
           </div>
         </div>
-
-        
       </div>
-    </div>
-    {messengerOn && (
-      <div className="hidden bg-light border">
-
-        <Messenger
-          friends={friends}
-          thisUsername={username}
-          messengerOn={messengerOn}
-          setMessengerOn={setMessengerOn}
-          userID = {userID}
-        />
-      </div>
-    )}
+      {messengerOn && (
+        <div className="hidden bg-light border">
+          <Messenger
+            friends={friends}
+            thisUsername={username}
+            messengerOn={messengerOn}
+            setMessengerOn={setMessengerOn}
+            userID={userID}
+          />
+        </div>
+      )}
     </>
   );
 }

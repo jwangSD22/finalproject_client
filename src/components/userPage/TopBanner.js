@@ -36,7 +36,6 @@ function TopBanner({
       maxHeight: 500, // Set the maximum height of the resized image
       maxWidth: 500,
       async success(file) {
-
         const imgFormData = new FormData();
         imgFormData.append("profilePhoto", file);
 
@@ -64,8 +63,7 @@ function TopBanner({
           );
           setProfilePhotoURL(getPFP.data.profilePhotoURL);
         }
-      }
-      ,
+      },
       error(err) {
         // Handle any errors that occur during compression
         console.error("Error during image compression:", err.message);

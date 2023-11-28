@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import config from '../helper/config.js'
+import config from "../helper/config.js";
 import Navbar from "../components/navbar/Navbar.js";
 import "./User.css";
 import UserPosts from "../components/userPage/UserPosts.js";
@@ -18,7 +18,7 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 function User() {
   const [thisUsername, setThisUsername] = useState(null);
-  const [thisUserFriends,setThisUserFriends] = useState([])
+  const [thisUserFriends, setThisUserFriends] = useState([]);
   const [data, setData] = useState("");
   const [myData, setMyData] = useState(null);
   const [allData, setAllData] = useState(null);
@@ -31,23 +31,21 @@ function User() {
   const [navbarOffset, setNavbarOffset] = useState(0);
   const [miniOffset, setMiniOffset] = useState(0);
   const [messengerOn, setMessengerOn] = useState(false);
-  const [userID,setUserID] = useState(null)
+  const [userID, setUserID] = useState(null);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
-
-
-
 
   const navigate = useNavigate();
   const { username } = useParams();
 
   useEffect(() => {
-
     const checkLogin = async () => {
       try {
-        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`);
+        let response = await axios.get(
+          `${config.backendServer}/api/users/loginstatus`
+        );
         if (response.status) {
           setThisUsername(response.data.user.jwtusername);
-          setUserID(response.data.user.jwtid)
+          setUserID(response.data.user.jwtid);
           setThisUserSameProfile(response.data.user.jwtusername === username);
         }
       } catch (err) {
@@ -69,63 +67,53 @@ function User() {
 
     const retrieveData = async () => {
       try {
-        let response = await axios.get(`${config.backendServer}/api/users/${username}`);
+        let response = await axios.get(
+          `${config.backendServer}/api/users/${username}`
+        );
         setData(response.data);
       } catch (err) {
-
-        navigate('/error')
+        navigate("/error");
       }
     };
 
-      checkLogin();
-      retrieveData();
-      retrieveAllData();
-
-
-
+    checkLogin();
+    retrieveData();
+    retrieveAllData();
   }, [username]);
 
-
   useEffect(() => {
-
-
     const getMyInfo = async () => {
-      const response = await axios.get(`${config.backendServer}/api/users/${thisUsername}`);
+      const response = await axios.get(
+        `${config.backendServer}/api/users/${thisUsername}`
+      );
       setMyData(response.data);
 
       let myHash = {};
       for (let i = 0; i < response.data.friendRequests.length; i++) {
         if (!myFriends[response.data.friendRequests[i].friend]) {
           myHash[response.data.friendRequests[i].friend] =
-          response.data.friendRequests[i].status;
+            response.data.friendRequests[i].status;
         }
       }
 
       for (let i = 0; i < response.data.friends.length; i++) {
         if (!myFriends[response.data.friends[i].friend]) {
-          myHash[response.data.friends[i].friend] = response.data.friends[i].status;
+          myHash[response.data.friends[i].friend] =
+            response.data.friends[i].status;
         }
       }
-      
-      setMyFriends(myHash);
 
+      setMyFriends(myHash);
     };
 
-    if(thisUsername){
+    if (thisUsername) {
       getMyInfo();
-
     }
-  
-
-    
-  }, [thisUsername,username]);
+  }, [thisUsername, username]);
 
   useEffect(() => {
-
-    if (!thisUserSameProfile&&myData) {
-
+    if (!thisUserSameProfile && myData) {
       let theirHash = {};
-     
 
       for (let i = 0; i < data.friends.length; i++) {
         if (!theirHash[data.friends[i].friend]) {
@@ -141,7 +129,6 @@ function User() {
 
       let myID = myData._id;
 
-
       if (theirHash.hasOwnProperty(myID)) {
         setFriendStatus(theirHash[myID]);
       } else {
@@ -149,31 +136,28 @@ function User() {
       }
       setTheirFriends(theirHash);
     }
-
-
-
   }, [myData, username]);
 
   useEffect(() => {
     const retrieveFriends = async () => {
-      const response = await axios.get(`${config.backendServer}/api/user/friends/${data.username}`);
+      const response = await axios.get(
+        `${config.backendServer}/api/user/friends/${data.username}`
+      );
       setFriends(response.data);
     };
 
     const retrieveThisUserFriends = async () => {
-      const response = await axios.get(`${config.backendServer}/api/user/friends/${thisUsername}`);
+      const response = await axios.get(
+        `${config.backendServer}/api/user/friends/${thisUsername}`
+      );
       setThisUserFriends(response.data);
-
     };
 
     retrieveFriends();
     retrieveThisUserFriends();
-
   }, [data]);
 
   //need to useeffect to retrieve THIS USER's friends because the messenger component requires it unfortuantely..
-
-
 
   //need to create a use effect that will capture changes to 'data' and then create or set a hash table  to better access the friends information
 
@@ -196,80 +180,93 @@ function User() {
       setScreenSize(window.innerWidth);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup the event listener when the component is unmounted
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return (
     <>
-    <div className={`top-home-layer ${screenSize<576&&messengerOn?'stop-scroll':null}`}>
-      <Navbar
-        data={allData}
-        username={thisUsername}
-        setMessengerOn={setMessengerOn}
-        messengerOn={messengerOn}
-      />
-
-      <div className="top-container bg-white">
-        <TopBanner
-          thisUserSameProfile={thisUserSameProfile}
-          data={data}
-          friends={friends}
-          thisUsername={thisUsername}
-          friendStatus={friendStatus}
-          setFriendStatus={setFriendStatus}
-          setViewFriendsToggle={setViewFriendsToggle}
+      <div
+        className={`top-home-layer ${
+          screenSize < 576 && messengerOn ? "stop-scroll" : null
+        }`}
+      >
+        <Navbar
+          data={allData}
+          username={thisUsername}
+          setMessengerOn={setMessengerOn}
+          messengerOn={messengerOn}
         />
-      </div>
 
-      <div className="mini-nav bg-white" style={{ top: `${navbarOffset}px` }}>
-        <MiniNav viewFriendsToggle={viewFriendsToggle} setViewFriendsToggle={setViewFriendsToggle}/>
-      </div>
+        <div className="top-container bg-white">
+          <TopBanner
+            thisUserSameProfile={thisUserSameProfile}
+            data={data}
+            friends={friends}
+            thisUsername={thisUsername}
+            friendStatus={friendStatus}
+            setFriendStatus={setFriendStatus}
+            setViewFriendsToggle={setViewFriendsToggle}
+          />
+        </div>
 
-      {!viewFriendsToggle ? (
-        <div className="main-container bg-light">
+        <div className="mini-nav bg-white" style={{ top: `${navbarOffset}px` }}>
+          <MiniNav
+            viewFriendsToggle={viewFriendsToggle}
+            setViewFriendsToggle={setViewFriendsToggle}
+          />
+        </div>
 
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-5 d-none d-lg-block" style={{ zIndex: "0" }}>
-                <div className="sticky-top" style={{ top: `${miniOffset}px` }}>
-                  <MiniFriendContainer
-                    setViewFriendsToggle={setViewFriendsToggle}
-                    friends={friends}
-                  />
+        {!viewFriendsToggle ? (
+          <div className="main-container bg-light">
+            <div className="container">
+              <div className="row">
+                <div
+                  className="col-lg-5 d-none d-lg-block"
+                  style={{ zIndex: "0" }}
+                >
+                  <div
+                    className="sticky-top"
+                    style={{ top: `${miniOffset}px` }}
+                  >
+                    <MiniFriendContainer
+                      setViewFriendsToggle={setViewFriendsToggle}
+                      friends={friends}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="col-lg-7">
-                <UserPosts thisUsername={thisUsername} allData={allData} />
+                <div className="col-lg-7">
+                  <UserPosts thisUsername={thisUsername} allData={allData} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ) : (
-<div className="container-fluid bg-light p-4">
-<FriendContainer friends={friends} myFriends={myFriends} theirFriends={theirFriends} myData={myData} />
-
-</div>
-
-      )}
-      </div>
-{messengerOn && (
-          <div className="hidden bg-light border">
- 
-            <Messenger
-              friends={thisUserFriends}
-              thisUsername={thisUsername}
-              messengerOn={messengerOn}
-              setMessengerOn={setMessengerOn}
-              userID = {userID}
+        ) : (
+          <div className="container-fluid bg-light p-4">
+            <FriendContainer
+              friends={friends}
+              myFriends={myFriends}
+              theirFriends={theirFriends}
+              myData={myData}
             />
           </div>
         )}
-
+      </div>
+      {messengerOn && (
+        <div className="hidden bg-light border">
+          <Messenger
+            friends={thisUserFriends}
+            thisUsername={thisUsername}
+            messengerOn={messengerOn}
+            setMessengerOn={setMessengerOn}
+            userID={userID}
+          />
+        </div>
+      )}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 function MiniCarousel({ images }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,10 +14,14 @@ function MiniCarousel({ images }) {
   return (
     <div>
       <button onClick={handlePrevClick}>Prev</button>
-      <img src={images[currentIndex]} alt="Carousel" style={{ maxWidth: '600', maxHeight: '600px' }} />
+      <img
+        src={images[currentIndex]}
+        alt="Carousel"
+        style={{ maxWidth: "600", maxHeight: "600px" }}
+      />
       <button onClick={handleNextClick}>Next</button>
     </div>
   );
 }
 
-export default MiniCarousel
+export default MiniCarousel;

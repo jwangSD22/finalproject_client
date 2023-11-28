@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import config from '../../helper/config.js'
+import config from "../../helper/config.js";
 import SuccessContainer from "./SuccessContainer.js";
 
 const Registration = ({ showRegistration, setShowRegistration }) => {
@@ -14,7 +14,7 @@ const Registration = ({ showRegistration, setShowRegistration }) => {
   const [passError, setPassError] = useState(null);
   const [usernameError, setUsernameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
-  const [success,setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false);
 
   let formData = {
     fullName: `${firstName} ${lastName}`,
@@ -67,9 +67,9 @@ const Registration = ({ showRegistration, setShowRegistration }) => {
       axios
         .post(`${config.backendServer}/api/users`, formData)
         .then((response) => {
-          if(response.data.success){
+          if (response.data.success) {
             setSuccess(true);
-          };
+          }
         })
         .catch((error) => {
           if (error.response.status === 400) {
@@ -113,9 +113,10 @@ const Registration = ({ showRegistration, setShowRegistration }) => {
     <div className="container-fluid">
       <div className="row">
         <div className=" d-flex align-items-center justify-content-center">
-        {success&&<SuccessContainer setShowRegistration = {setShowRegistration} />}
+          {success && (
+            <SuccessContainer setShowRegistration={setShowRegistration} />
+          )}
           <div className="registration-box bg-white">
-         
             <div className="d-flex justify-content-center">
               <div className="reg-box-header d-flex flex-column">
                 <h1>Register new user</h1>

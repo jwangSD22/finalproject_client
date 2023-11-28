@@ -1,69 +1,63 @@
-.friend-container{
-    cursor:pointer;
-    width:200px;
-    border-radius: 3%;
-    z-index: 0;
-
+.friend-container {
+  cursor: pointer;
+  width: 200px;
+  border-radius: 3%;
+  z-index: 0;
 }
 
-.friend-container-img:hover{
-    opacity: 90%;
+.friend-container-img:hover {
+  opacity: 90%;
 }
 
-.friend-container-img{
-    width:200px;
-    height:200px;
-    object-fit: cover;
-    border-radius: 3% 3% 0px 0px;
-
+.friend-container-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 3% 3% 0px 0px;
 }
 
-.friend-btn-container{
-    width:200px;
+.friend-btn-container {
+  width: 200px;
 }
 
-@media (max-width: 450px){
-    .friend-container-img{
-        width:165px;
-        height:165px;
-    }
+@media (max-width: 450px) {
+  .friend-container-img {
+    width: 165px;
+    height: 165px;
+  }
 
-    .friend-btn-container{
-        width:165px;
-    }
+  .friend-btn-container {
+    width: 165px;
+  }
 
-    .friend-container{
-        width:165px;
-    }
+  .friend-container {
+    width: 165px;
+  }
 }
 
-
-
-.friend-name{
-    display:flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    color:black;
-    overflow: hidden;
+.friend-name {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  overflow: hidden;
 }
 
-.friend-name:hover{
-    cursor:pointer;
-    text-decoration: underline;
+.friend-name:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-
-
-.lower-friend-container{
-    min-height: 86vh;
+.lower-friend-container {
+  min-height: 86vh;
 }
 
 .top-home-layer {
-    height: 100vh;
-  }
+  height: 100vh;
+}
 
-  .stop-scroll {
-    overflow: hidden;
-  }
+.stop-scroll {
+  overflow: hidden;
+}

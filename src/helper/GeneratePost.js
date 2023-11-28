@@ -1,34 +1,41 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import config from '../helper/config.js'
+import config from "../helper/config.js";
 import GenerateAvatar from "./GenerateAvatar.js";
-import { LikeOutlined, LikeFilled, SendOutlined, EditOutlined, EditFilled } from "@ant-design/icons";
+import {
+  LikeOutlined,
+  LikeFilled,
+  SendOutlined,
+  EditOutlined,
+  EditFilled,
+} from "@ant-design/icons";
 import format from "date-fns/format/index.js";
 import parseISO from "date-fns/parseISO/index.js";
 import "./generatePost.css";
 import GenerateComment from "../components/comments/GenerateComment.js";
 
-function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
-  const [post, setPost] = useState('');
+function GeneratePost({ data, thisUser, allUsers, pfpHash, setPfpHash }) {
+  const [post, setPost] = useState("");
   const [message, setMessage] = useState("");
   const [editComment, setEditComment] = useState(false);
   const [toggleCommentList, setToggleCommentList] = useState(false);
   const [userLiked, setUserLiked] = useState(false);
   const [imageURLs, setImageURLs] = useState([]);
   const [comments, setComments] = useState([]);
-  const [newCommentTog,setNewCommentTog] = useState(false)
-  const [date,setDate] = useState('')
+  const [newCommentTog, setNewCommentTog] = useState(false);
+  const [date, setDate] = useState("");
   const textareaRef = useRef(null);
   const divRef = useRef(null);
-  const postRef = useRef(null)
+  const postRef = useRef(null);
 
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getPostData = async () => {
-      const response = await axios.get(`${config.backendServer}/api/posts/${data._id}`);
+      const response = await axios.get(
+        `${config.backendServer}/api/posts/${data._id}`
+      );
       setPost(response.data);
       if (response.data.imageURLs.length > 0) {
         setImageURLs(response.data.imageURLs);
@@ -36,7 +43,9 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
       if (response.data.likes.indexOf(thisUser._id) > -1) {
         setUserLiked(true);
       }
-      setDate(format(parseISO(response.data.timestamp),`MMMM d, yyyy 'at' hh:mm a`))
+      setDate(
+        format(parseISO(response.data.timestamp), `MMMM d, yyyy 'at' hh:mm a`)
+      );
     };
 
     getPostData();
@@ -53,18 +62,27 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
   useEffect(() => {
     post &&
       setComments(
-        [...post.comments]
-          
-          .map((item) => <GenerateComment key={item} commentID={item} pfpHash={pfpHash} setPfpHash={setPfpHash} thisUser={thisUser} newCommentTog={newCommentTog}/>)
+        [...post.comments].map((item) => (
+          <GenerateComment
+            key={item}
+            commentID={item}
+            pfpHash={pfpHash}
+            setPfpHash={setPfpHash}
+            thisUser={thisUser}
+            newCommentTog={newCommentTog}
+          />
+        ))
       );
-  }, [post,post.comments,newCommentTog]);
+  }, [post, post.comments, newCommentTog]);
 
   const handleChange = (event) => {
     setMessage(event.target.value);
   };
 
   const toggleLike = async () => {
-    const response = axios.put(`${config.backendServer}/api/posts/${post._id}/togglelike`);
+    const response = axios.put(
+      `${config.backendServer}/api/posts/${post._id}/togglelike`
+    );
     setUserLiked(!userLiked);
 
     if (post.likes.indexOf(thisUser._id) > -1) {
@@ -74,18 +92,18 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
       post.likes.unshift(thisUser._id);
       post.numberOfLikes++;
     }
-
   };
 
   const commentSubmitHandler = async () => {
-
     if (message.length > 0) {
-      const response = await axios.post(`${config.backendServer}/api/posts/${post._id}/newcomment`, {
-        message: message,
-      });
-      
+      const response = await axios.post(
+        `${config.backendServer}/api/posts/${post._id}/newcomment`,
+        {
+          message: message,
+        }
+      );
 
-      if(response.status===200){
+      if (response.status === 200) {
         setMessage("");
         post.numberOfComments++;
         post.comments = [...post.comments, response.data];
@@ -97,15 +115,16 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
     }
   };
 
-
-
   const handleKeyDown = async (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       if (message.length > 0) {
-        const response = await axios.post(`${config.backendServer}/api/posts/${post._id}/newcomment`, {
-          message: message,
-        });
+        const response = await axios.post(
+          `${config.backendServer}/api/posts/${post._id}/newcomment`,
+          {
+            message: message,
+          }
+        );
         setMessage("");
         post.numberOfComments++;
         post.comments = [...post.comments, response.data];
@@ -114,35 +133,33 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
   };
 
   const editCommentHandler = () => {
-    setEditComment(!editComment)
+    setEditComment(!editComment);
 
-    if(editComment===false){
+    if (editComment === false) {
       const windowHeight = window.innerHeight;
       const divBottomPosition = postRef.current.getBoundingClientRect().bottom;
       const scrollOffset = divBottomPosition - windowHeight / 2;
-  
+
       window.scrollTo({
         top: window.scrollY + scrollOffset,
-        behavior: 'smooth'
-      });  
+        behavior: "smooth",
+      });
     }
-
-  }
+  };
 
   const toggleCommentListHandler = () => {
     setToggleCommentList(!toggleCommentList);
 
-    if(toggleCommentList===false){
+    if (toggleCommentList === false) {
       setEditComment(true);
       // setTimeout(()=>{ const windowHeight = window.innerHeight;
       //   const divBottomPosition = postRef.current.getBoundingClientRect().bottom;
       //   const scrollOffset = divBottomPosition - windowHeight / 2;
-    
+
       //   window.scrollTo({
       //     top: window.scrollY + scrollOffset,
       //     behavior: 'smooth'
       //   });  },500)
-     
     }
   };
 
@@ -172,7 +189,9 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
       return <div>{`${fullNameArray[0]} and ${fullNameArray[1]}`}</div>;
     } else {
       return (
-        <div>{`${fullNameArray[0]}, ${fullNameArray[1]} and ${fullNameArray.length>3?fullNameArray.length-2:''} others...`}</div>
+        <div>{`${fullNameArray[0]}, ${fullNameArray[1]} and ${
+          fullNameArray.length > 3 ? fullNameArray.length - 2 : ""
+        } others...`}</div>
       );
     }
   };
@@ -184,98 +203,147 @@ function GeneratePost({ data, thisUser, allUsers,pfpHash,setPfpHash }) {
       textarea.style.height = "auto"; // Reset the height to calculate the new height
       textarea.style.height = `${textarea.scrollHeight}px`; // Set the new height of the textarea
       div.style.height = `${textarea.scrollHeight + 15}px`; // Set the height of the surrounding div
-      console.log('triggered')
-      if(!toggleCommentList){
-        textarea.focus()
+      console.log("triggered");
+      if (!toggleCommentList) {
+        textarea.focus();
       }
-
     }
-  }, [message,editComment]);
+  }, [message, editComment]);
 
   const handleNav = (username) => {
-    navigate(`/user/${username}`);window.location.reload()
-  }
-
-
+    navigate(`/user/${username}`);
+    window.location.reload();
+  };
 
   return (
     post && (
-      <div ref={postRef} className=" bg-white my-4 p-2 rounded shadow-sm border">
+      <div
+        ref={postRef}
+        className=" bg-white my-4 p-2 rounded shadow-sm border"
+      >
         {/*post header*/}
         <div className="header d-flex">
-          <div className="header-pfp" onClick={()=>handleNav(post.username)} >
-            <GenerateAvatar cssClassIdentifier={`gen-post-pfp mx-2`} url={post.authorAvatar} />
-          </div >
+          <div className="header-pfp" onClick={() => handleNav(post.username)}>
+            <GenerateAvatar
+              cssClassIdentifier={`gen-post-pfp mx-2`}
+              url={post.authorAvatar}
+            />
+          </div>
           <div className="d-flex flex-column">
-            <div className="post-header-name" onClick={()=>handleNav(post.username)}>{post.fullName}</div>
-            <div className="small-date"><small className="text-muted">{date}</small></div>
+            <div
+              className="post-header-name"
+              onClick={() => handleNav(post.username)}
+            >
+              {post.fullName}
+            </div>
+            <div className="small-date">
+              <small className="text-muted">{date}</small>
+            </div>
           </div>
         </div>
 
-
         <div className="my-4 mx-1">
-        {/*post message*/}
-        <div className="d-flex mb-2">
-          <div>{post.postMessage}</div>
-        </div>
+          {/*post message*/}
+          <div className="d-flex mb-2">
+            <div>{post.postMessage}</div>
+          </div>
 
-        {/*post image conditionally rendered*/}
-        <div className="image-container d-flex justify-content-center" >
-          {imageURLs.length > 0 &&
-            imageURLs.map((data) => (
-              <img
-                key={data}
-                src={data}
-                style={{ maxWidth:"100%", width: "100%", maxHeight:'500px',objectFit: "contain" }}
-              ></img>
-            ))}
-        </div>
-
+          {/*post image conditionally rendered*/}
+          <div className="image-container d-flex justify-content-center">
+            {imageURLs.length > 0 &&
+              imageURLs.map((data) => (
+                <img
+                  key={data}
+                  src={data}
+                  style={{
+                    maxWidth: "100%",
+                    width: "100%",
+                    maxHeight: "500px",
+                    objectFit: "contain",
+                  }}
+                ></img>
+              ))}
+          </div>
         </div>
 
         {/*LIKE COUNT AND COMMENT COUNT */}
 
         <div className="d-flex justify-content-between">
-          <div className="d-flex align-items-center"> {post.likes.length>0&&<LikeFilled style={{ fontSize: "15px", color: "#2078F4" }} />}<small className="mx-1">{post.likes.length>0&&generateLikeSnippet()}</small></div>
+          <div className="d-flex align-items-center">
+            {" "}
+            {post.likes.length > 0 && (
+              <LikeFilled style={{ fontSize: "15px", color: "#2078F4" }} />
+            )}
+            <small className="mx-1">
+              {post.likes.length > 0 && generateLikeSnippet()}
+            </small>
+          </div>
 
-          <div className="d-none d-sm-flex"><small>{post.numberOfComments} Comments </small></div>
+          <div className="d-none d-sm-flex">
+            <small>{post.numberOfComments} Comments </small>
+          </div>
         </div>
 
         {/*like/comment section*/}
         <hr className="hr" />
-        <div className="row justify-content-center align-items-center" style={{height:'35px'}}>
+        <div
+          className="row justify-content-center align-items-center"
+          style={{ height: "35px" }}
+        >
           <div className="post-button col-5 mx-2" onClick={toggleLike}>
             {userLiked ? (
               <LikeFilled style={{ fontSize: "23px", color: "#2078F4" }} />
             ) : (
               <LikeOutlined style={{ fontSize: "23px", color: "black" }} />
             )}
-            <span className={`mx-2 ${userLiked?'post-liked':null}`}> Like </span>
+            <span className={`mx-2 ${userLiked ? "post-liked" : null}`}>
+              {" "}
+              Like{" "}
+            </span>
           </div>
 
           <div className="post-button col-5 mx-2" onClick={editCommentHandler}>
-           
-              {editComment?
-              <span style={{color: "#2078F4"}}><EditFilled className="mx-2" style={{ fontSize: "23px" }} />Comment</span>:
-              <span><EditOutlined className="mx-2" style={{ fontSize: "23px"}} />Comment</span>}
-   
+            {editComment ? (
+              <span style={{ color: "#2078F4" }}>
+                <EditFilled className="mx-2" style={{ fontSize: "23px" }} />
+                Comment
+              </span>
+            ) : (
+              <span>
+                <EditOutlined className="mx-2" style={{ fontSize: "23px" }} />
+                Comment
+              </span>
+            )}
           </div>
         </div>
         <hr className="hr" />
 
         {post.comments.length > 1 && (
-          <div  onClick={()=>{toggleCommentListHandler()}}>
-            {toggleCommentList
-              ? <span className="commentListDrop">Close comment list</span>
-              : <span className="commentListDrop">{`View previous ${post.numberOfComments - 1} comments`}</span>}
+          <div
+            onClick={() => {
+              toggleCommentListHandler();
+            }}
+          >
+            {toggleCommentList ? (
+              <span className="commentListDrop">Close comment list</span>
+            ) : (
+              <span className="commentListDrop">{`View previous ${
+                post.numberOfComments - 1
+              } comments`}</span>
+            )}
           </div>
         )}
 
-        <div>{toggleCommentList ? comments : comments[comments.length-1]}</div>
+        <div>
+          {toggleCommentList ? comments : comments[comments.length - 1]}
+        </div>
 
         {editComment && (
           <div className="d-flex align-items-center animate__animated animate__fadeIn">
-            <GenerateAvatar cssClassIdentifier={`gen-post-pfp mx-2`} url={thisUser.profilePhotoURL} />
+            <GenerateAvatar
+              cssClassIdentifier={`gen-post-pfp mx-2`}
+              url={thisUser.profilePhotoURL}
+            />
             <div ref={divRef} className="bubble flex-grow-1">
               <textarea
                 ref={textareaRef}

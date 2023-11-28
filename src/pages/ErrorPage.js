@@ -22,7 +22,11 @@ function ErrorPage() {
     }
   }, [time]);
 
-  return <div><h3>User does not exist - redirecting home in {time} seconds...</h3></div>;
+  return (
+    <div>
+      <h3>User does not exist - redirecting home in {time} seconds...</h3>
+    </div>
+  );
 }
 
 export default ErrorPage;

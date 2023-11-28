@@ -63,7 +63,7 @@ function FriendList({
               <div className="col-2">
                 <img
                   className="pfp-msger-preview"
-                  alt='profile pic preview'
+                  alt="profile pic preview"
                   src={
                     friend.friendPhotoURL === "NO PROFILE PHOTO"
                       ? emptyAvatar

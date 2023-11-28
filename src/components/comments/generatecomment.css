@@ -1,48 +1,45 @@
-.likesLogo{
-    margin-left: 4px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    width:18px;
-    height:18px;
-    background-color:#2078F4;
+.likesLogo {
+  margin-left: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  background-color: #2078f4;
 }
 
-.likeContainer{
-    width:fit-content;
-    border-radius: 40%;
+.likeContainer {
+  width: fit-content;
+  border-radius: 40%;
 }
 
 .likeButton {
-    cursor:pointer;
+  cursor: pointer;
 }
 
- .btnLiked{
-    color:#2078F4;
+.btnLiked {
+  color: #2078f4;
 }
 
-
-
-.likeCounter{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    margin-right: 3px;
-    margin-left: 5px;
+.likeCounter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  margin-right: 3px;
+  margin-left: 5px;
 }
 
 .comment-user-name {
-    font-weight: bolder;
+  font-weight: bolder;
 }
 
 .comment-user-name:hover {
-    cursor:pointer;
-    text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-.header-pfp:hover{
-    cursor:pointer;
-
+.header-pfp:hover {
+  cursor: pointer;
 }

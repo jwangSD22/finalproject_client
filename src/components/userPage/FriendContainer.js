@@ -16,8 +16,8 @@ import FriendStatus from "./FriendStatus.js";
 // figure out the status of the relationship of my friends to their friends
 // generate their photo -- the URL link will be under friends."friendPhotoURL"
 
-function FriendContainer({ friends, myFriends,myData}) {
-  const navigate = useNavigate()
+function FriendContainer({ friends, myFriends, myData }) {
+  const navigate = useNavigate();
 
   const calculateMutual = (friendInMap) => {
     //refers back to myFriends hashtable
@@ -37,9 +37,9 @@ function FriendContainer({ friends, myFriends,myData}) {
   };
 
   const handleNav = (username) => {
-    navigate(`/user/${username}`);window.location.reload()
-  }
-
+    navigate(`/user/${username}`);
+    window.location.reload();
+  };
 
   return (
     <div className="user-page-friend-container container bg-white  border shadow-sm ">
@@ -55,7 +55,10 @@ function FriendContainer({ friends, myFriends,myData}) {
           >
             <div className="bg-light border">
               <div className="row">
-                <div className="responsive-pfp-img-cont col-2 my-2" onClick={()=>handleNav(item.username)}>
+                <div
+                  className="responsive-pfp-img-cont col-2 my-2"
+                  onClick={() => handleNav(item.username)}
+                >
                   {/* this component uses classname -> responsive-pfp-img */}
                   <GenerateAvatar
                     cssClassIdentifier={"responsive-pfp-img mx-2"}
@@ -63,13 +66,22 @@ function FriendContainer({ friends, myFriends,myData}) {
                   />
                 </div>
                 <div className="col-6 d-flex flex-column justify-content-center">
-                  <div className="friend-container-username" onClick={()=>handleNav(item.username)}>{item.fullName}</div>
+                  <div
+                    className="friend-container-username"
+                    onClick={() => handleNav(item.username)}
+                  >
+                    {item.fullName}
+                  </div>
                   <div>{calculateMutual(item)} mutual friends</div>
 
                   {/* this is in a map, need to dynamically generate this when it is created , so use effect doens't make sense here. */}
                 </div>
                 <div className="status col-4 d-none d-md-flex align-items-center justify-content-end px-4">
-                  <FriendStatus friend={item} myFriends={myFriends} myData={myData}/>
+                  <FriendStatus
+                    friend={item}
+                    myFriends={myFriends}
+                    myData={myData}
+                  />
                 </div>
               </div>
             </div>

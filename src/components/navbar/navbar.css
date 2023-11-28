@@ -1,28 +1,25 @@
-
 .top-icon {
-    font-size: 30px;
-    transition: all 0.5s;
+  font-size: 30px;
+  transition: all 0.5s;
 }
 
-.top-icon:hover{
-  color: #2078F4
+.top-icon:hover {
+  color: #2078f4;
 }
 
-
-.icon-filled{
-  color:#2078F4;
+.icon-filled {
+  color: #2078f4;
 }
-
 
 .current-path {
-    display: flex;
-    font-size: 30px;
-    color: #2078F4;
-    align-items: flex-end;
-    justify-content: center;
-    height: 45px;
-    width: 100px;
-    border-bottom: solid 4px #2078F4;
+  display: flex;
+  font-size: 30px;
+  color: #2078f4;
+  align-items: flex-end;
+  justify-content: center;
+  height: 45px;
+  width: 100px;
+  border-bottom: solid 4px #2078f4;
 }
 
 .center-nav-container {
@@ -38,11 +35,10 @@
 }
 
 .center-nav-container:hover {
-  cursor:pointer;
+  cursor: pointer;
   background-color: rgb(211, 211, 211);
   border-radius: 8px 8px 0px 0px;
 }
-
 
 /* all right-nav CSS */
 @media (max-width: 768px) {
@@ -64,33 +60,30 @@
 }
 
 .right-nav-drop:hover {
-cursor:pointer;
+  cursor: pointer;
 }
 
 .dropdown-menu {
-  width:300px;
+  width: 300px;
 }
 
-.dropdown-item{
-    border:solid 1px red;
-    margin: 7px;
+.dropdown-item {
+  border: solid 1px red;
+  margin: 7px;
 }
 
-nav{
-  box-shadow:  0 5px 5px -5px rgba(0, 0, 0, 0.5);
+nav {
+  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
 
-.nav-pfp{
-  border:solid 1px black;
-  width:35px;
-  height:35px;
+.nav-pfp {
+  border: solid 1px black;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
 }
 
-
-
-  
 @media (max-width: 576px) {
   .dropdown-menu {
     width: 100vw;
@@ -104,19 +97,18 @@ nav{
   border: 8% 8% 8% 8%;
 }
 
-
 .wavelogo {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  width:40px;
-  height:40px;
+  width: 40px;
+  height: 40px;
   overflow: hidden;
   border-radius: 50%;
-  border: solid 1px #2078F4
+  border: solid 1px #2078f4;
 }
 
-.wavelogo img{
-max-width:100%;
-height:auto;
+.wavelogo img {
+  max-width: 100%;
+  height: auto;
 }

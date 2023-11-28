@@ -30,8 +30,7 @@ function RouteSwitch() {
 
         <Route path="/user/:username" element={<User />} />
 
-
-{/*     OLD ROUTES USED FOR TESTING
+        {/*     OLD ROUTES USED FOR TESTING
         <Route path="/app" element={<App />} />
         <Route path="/createpost" element={<NewPost />} />
         <Route path="/chatroom/" element={<ChatRoom />} />

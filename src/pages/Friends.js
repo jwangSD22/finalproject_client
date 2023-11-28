@@ -199,9 +199,6 @@ function Friends() {
               )}
             </div>
           </div>
-
-
-
         </div>
       </div>
       {messengerOn && (

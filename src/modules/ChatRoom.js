@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import config from '../helper/config.js'
+import config from "../helper/config.js";
 import io from "socket.io-client";
 const token = localStorage.getItem("jwt");
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -15,17 +15,19 @@ const ChatRoom = () => {
   const [roomID, setRoomID] = useState(null);
 
   //from my login component//
-  const [userID, setUserID] = useState(null)
+  const [userID, setUserID] = useState(null);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        let response = await axios.get(`${config.backendServer}/api/users/loginstatus`);
+        let response = await axios.get(
+          `${config.backendServer}/api/users/loginstatus`
+        );
         if (response.status === 200) {
           // setUser(response.data.user.jwtusername);
-          setUserID(response.data.user.jwtid)
+          setUserID(response.data.user.jwtid);
           setUsername1(response.data.user.jwtusername);
           // setIsLoggedIn(true);
           return true;
@@ -38,12 +40,11 @@ const ChatRoom = () => {
     checkLogin();
   });
 
-
   useEffect(() => {
     if (socket) {
       // Listen for new messages from the server and update the state
       socket.on("newMessage", (message) => {
-        console.log(message)
+        console.log(message);
         setMessages((prevMessages) => [...prevMessages, message]);
       });
     }
@@ -69,35 +70,34 @@ const ChatRoom = () => {
 
   //Connect to that private room using the ID from findRoom()
   const handleConnectClick = async () => {
-    let temproomID = null
+    let temproomID = null;
     try {
       const room = await findRoom();
-      temproomID = room
-      setRoomID(room)
+      temproomID = room;
+      setRoomID(room);
       if (room === false) {
         return console.log("join room failed");
-
       } else {
         const socket = io("http://localhost:3000/", {
-          path: "/socketio"
+          path: "/socketio",
         });
         setSocket(socket);
         socket.emit("join-room", room);
-        console.log(socket)
+        console.log(socket);
       }
     } catch (err) {
       console.log(err);
     }
 
     //load messages into the message container
-    try{
-      const messageData = await axios.get(`${config.backendServer}/api/chats/${temproomID}/messages`)
+    try {
+      const messageData = await axios.get(
+        `${config.backendServer}/api/chats/${temproomID}/messages`
+      );
       //axios GET the convo with a body including the roomid
-      setMessages(messageData.data)
-      
-    }
-    catch(err){
-      console.log(err)
+      setMessages(messageData.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -106,7 +106,12 @@ const ChatRoom = () => {
 
     // Send the new message to the server and update the state
     if (newMessage) {
-      socket.emit("sendMessage", { roomID: roomID, userid:userID, username:username1, text: newMessage });
+      socket.emit("sendMessage", {
+        roomID: roomID,
+        userid: userID,
+        username: username1,
+        text: newMessage,
+      });
       setNewMessage("");
     }
   };
@@ -130,18 +135,21 @@ const ChatRoom = () => {
           value={username2}
           onChange={(event) => setUsername2(event.target.value)}
         />
-        <button disabled={!!socket} onClick={handleConnectClick}>Connect</button>
+        <button disabled={!!socket} onClick={handleConnectClick}>
+          Connect
+        </button>
 
-        <button disabled={!socket}
+        <button
+          disabled={!socket}
           onClick={() => {
-            if(!socket){
-             return console.log('currently not connected')
+            if (!socket) {
+              return console.log("currently not connected");
             }
             //disconnect and remove socket to stop the connection from frontend
             //disconnect accepts a parameter as a message to the backend
             socket.disconnect();
-            setSocket(null)
-            setMessages([])
+            setSocket(null);
+            setMessages([]);
             console.log("disconnected from socketio");
           }}
         >
@@ -149,7 +157,7 @@ const ChatRoom = () => {
         </button>
       </div>
       <div>
-        {(messages).map((message) => (
+        {messages.map((message) => (
           <div key={message.messageID}>
             <strong>{message.username}:</strong> {message.text}
           </div>
